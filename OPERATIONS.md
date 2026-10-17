@@ -1,6 +1,6 @@
 # OPERATIONS: GameDev AI Tools
 
-Live: https://gamedevaitools.com (Vercel). Old GitHub Pages URL redirects there.
+Live: https://gamedevaitools.com (Vercel, Git-connected: pushes to `main` deploy production). Old GitHub Pages URL redirects there.
 
 Owner: Mike Paul (Brisbane, Australia/Brisbane). Budget: $0. This business is separate from Klieg: no shared repos, accounts or services.
 
