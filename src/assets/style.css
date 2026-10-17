@@ -482,3 +482,56 @@ form.submit button:hover,.newsletter button:not([disabled]):hover{filter:brightn
 .rank-chip span{font-size:.8rem;color:var(--dim)}
 .rank-chip span a{color:var(--muted)}
 @media (max-width:720px){.cat-filters+.rank-switch{margin-top:12px}.rank-switch{justify-content:flex-start}}
+
+/* ===== Guides v2: pick your path + step cards ===== */
+.g2 .guide-hero-body .lead{color:#dfe3ee}
+.g-meta{margin:2px 0 0}
+.g2>.flow{margin:16px 0 10px}
+.g-costs{margin:0 0 6px;padding:12px 16px;gap:10px;border-color:var(--line)}
+.g-costs summary{cursor:pointer;color:var(--muted);font-size:.9rem;font-weight:500}
+.g-costs[open] summary{margin-bottom:10px}
+.g-h{font-size:1.2rem;margin:30px 0 12px}
+.g-steps{list-style:none;margin:0;padding:0;position:relative}
+.g-steps:before{content:"";position:absolute;left:19px;top:24px;bottom:24px;width:2px;background:linear-gradient(180deg,rgba(124,58,237,.7),rgba(8,145,178,.5));border-radius:2px}
+.g-step{position:relative;display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;margin:0 0 16px}
+.g-num{position:relative;z-index:1;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;font-weight:800;color:#fff;background:linear-gradient(135deg,#7c3aed,#0891b2);box-shadow:0 0 0 6px var(--bg)}
+.g-card{gap:12px;padding:20px 22px}
+.g-card h3{font-size:1.15rem}
+.g-do{margin:0;padding-left:20px;color:#dfe3ee;display:grid;gap:6px}
+.g-do li::marker{color:#a78bfa;font-weight:700}
+.g-see,.g-gotcha{margin:0;padding:10px 12px;border-radius:10px;font-size:.9rem;line-height:1.5}
+.g-see{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);color:#d1fae5}
+.g-see b{color:#6ee7b7}
+.g-gotcha{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);color:#fde9c4}
+.g-gotcha b{color:#fcd34d}
+.g-src{margin:0;font-size:.8rem;color:var(--dim)}
+.g-src a{color:var(--muted)}
+.g-img,.g-video{margin:4px 0 0}
+.g-img img{display:block;max-width:100%;height:auto;border-radius:10px;border:1px solid var(--line2);background:#fff}
+.g-img figcaption,.g-video figcaption{font-size:.78rem;color:var(--dim);margin-top:6px}
+.g-video figcaption a{color:var(--muted)}
+button.yt{position:relative;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:4px;width:100%;aspect-ratio:16/9;padding:18px;border-radius:12px;border:1px solid var(--line2);background:radial-gradient(circle at 50% 42%,rgba(139,92,246,.35),transparent 55%),linear-gradient(160deg,#151a2a,#0b0d14);color:var(--text);font:inherit;text-align:left;cursor:pointer;overflow:hidden;transition:border-color .15s}
+button.yt:hover{border-color:var(--accent)}
+.yt-play{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.95);color:#0b0d14;font-size:1.4rem;padding-left:5px;box-shadow:0 10px 30px -10px rgba(0,0,0,.8)}
+button.yt:hover .yt-play{background:#fff;transform:translate(-50%,-50%) scale(1.06)}
+.yt-title{font-weight:600;font-size:.98rem}
+.yt-meta{font-size:.78rem;color:var(--muted)}
+.yt-frame{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:12px}
+.g-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:-2px 0 16px}
+.g-tabs .chip{font-size:.92rem;padding:7px 16px}
+.g-tabs .chip[aria-selected=true]{border-color:var(--accent);background:rgba(139,92,246,.22);color:#fff}
+.g-path-h{font-size:1.05rem;margin:18px 0 10px;color:var(--muted)}
+@media (max-width:720px){
+ .g-step{grid-template-columns:32px minmax(0,1fr);gap:10px}
+ .g-num{width:32px;height:32px;border-radius:10px;font-size:.9rem}
+ .g-steps:before{left:15px}
+ .g-card{padding:16px}
+}
+.g-alt{margin:8px 0 0;gap:6px;border-color:var(--line2)}.g-alt p{margin:0;color:#c9cfdd;font-size:.92rem}
+/* compact click-to-load video bar (no third-party thumbnail until play) */
+button.yt{aspect-ratio:auto;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:4px 14px;padding:14px 16px 14px 74px;min-height:72px;background:linear-gradient(90deg,rgba(139,92,246,.16),rgba(20,24,36,.6))}
+.yt-play{left:16px;top:50%;width:44px;height:44px;font-size:1rem;padding-left:3px}
+button.yt:hover .yt-play{transform:translate(-50%,-50%) scale(1.06)}
+.yt-play{transform:translate(0,-50%)}
+button.yt:hover .yt-play{transform:translate(0,-50%) scale(1.06)}
+.yt-title{flex:1 1 100%}

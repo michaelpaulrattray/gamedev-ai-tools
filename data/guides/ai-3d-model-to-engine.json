@@ -1,0 +1,139 @@
+{
+  "_doc": "Guide v2 content for /guides/ai-3d-model-to-engine/. Every step is written from the linked official docs (checked 2026-10-17). Videos must be from the vendor's/project's own YouTube channel (verified via oEmbed). Images only with a clear reuse licence, stored in src/assets/guides/<slug>/.",
+  "result": "A clean, game-ready mesh (right scale, fixed normals, sensible polycount, baked normal map) in Unreal, Unity or Godot with its textures intact.",
+  "flow": [{ "label": "Generate", "ai": true }, { "label": "Export GLB/FBX" }, { "label": "Clean up in Blender" }, { "label": "Reduce + bake" }, { "label": "Into your engine" }],
+  "shared": [
+    {
+      "h": "Check your plan's licence",
+      "do": [
+        "Before generating, look up what your generator plan lets you do with the output.",
+        "Meshy Free: CC BY 4.0, so you can sell games using it if you credit Meshy. Paid Meshy plans give you private, customer-owned assets.",
+        "Tripo Free: Tripo keeps the rights and doesn't grant commercial use. A paid plan gives you commercial rights."
+      ],
+      "see": "You know whether you can ship the model and what credit line, if any, it needs.",
+      "gotcha": "Summaries of Tripo's free tier online contradict each other, so go by Tripo's own help centre and terms.",
+      "source": { "label": "Tripo: can I use models commercially?", "url": "https://www.tripo3d.ai/help/privacy-policy/can-i-use-models-commercially" }
+    },
+    {
+      "h": "Generate and export GLB or FBX",
+      "do": [
+        "In Meshy, click Download and pick GLB (one file with textures inside) or FBX (better for rigs and animation).",
+        "Turn on Quad Mesh in Meshy if you'll retopologise or rig, and set a target polycount with Remesh if you want.",
+        "In Tripo, export GLB or FBX the same way."
+      ],
+      "see": "A single .glb file, or an .fbx with its texture files.",
+      "gotcha": "GLB stores triangles, so quads are lost. Export FBX or OBJ if you need to keep quads.",
+      "source": { "label": "Meshy: make models game-ready", "url": "https://help.meshy.ai/en/articles/15723950-how-to-make-meshy-models-game-ready" }
+    },
+    {
+      "h": "Import into Blender and clean up",
+      "do": [
+        "Use File > Import > glTF 2.0 (.glb/.gltf), or File > Import > FBX.",
+        "In Object Mode, apply rotation and scale with Object > Apply > Rotation & Scale (Ctrl-A).",
+        "In Edit Mode, select everything and run Mesh > Merge > By Distance to weld duplicate vertices.",
+        "Run Mesh > Normals > Recalculate Outside (Shift-N)."
+      ],
+      "see": "Scale reads 1, 1, 1, and the Face Orientation overlay shows no red (back-facing) patches.",
+      "gotcha": "Applying a negative scale flips faces; tick Corrective Flip Normals in the Apply options to fix it.",
+      "source": { "label": "Blender Manual: Apply", "url": "https://docs.blender.org/manual/en/latest/scene_layout/object/editing/apply.html" }
+    },
+    {
+      "h": "Reduce the polycount",
+      "do": [
+        "Add a Decimate modifier in Collapse mode and lower Ratio until you reach the face count you want.",
+        "For cleaner, even topology, use Properties > Data > Remesh in Voxel or Quad (QuadriFlow) mode instead.",
+        "Keep a copy of the original high-poly mesh: you'll bake its detail in the next step."
+      ],
+      "see": "The modifier shows the new face count and the silhouette still looks right.",
+      "gotcha": "Remesh ignores modifiers and won't run on an object with a Multiresolution modifier.",
+      "source": { "label": "Blender Manual: Decimate modifier", "url": "https://docs.blender.org/manual/en/latest/modeling/modifiers/generate/decimate.html" }
+    },
+    {
+      "h": "UV unwrap and bake the detail",
+      "do": [
+        "Remeshing removes the original UVs, so in Edit Mode run UV > Unwrap > Smart UV Project on the low-poly mesh.",
+        "In the low-poly material, add an Image Texture node with a new image and leave it selected.",
+        "Switch to Cycles, and under Render > Bake set Bake Type to Normal and turn on Selected to Active.",
+        "Select the high-poly mesh, then Shift-select the low-poly one so it's active, and click Bake."
+      ],
+      "see": "A normal map on the low-poly mesh that brings back the high-poly detail.",
+      "gotcha": "If parts of the bake come out blank, raise Extrusion or Max Ray Distance, or use a cage.",
+      "source": { "label": "Blender Manual: render baking", "url": "https://docs.blender.org/manual/en/latest/render/cycles/baking.html" }
+    },
+    {
+      "h": "Export from Blender",
+      "do": [
+        "For glTF: File > Export > glTF 2.0, Format glTF Binary (.glb), with Selected Objects, Apply Modifiers and +Y Up on.",
+        "For FBX: File > Export > FBX (.fbx) with Selected Objects and Apply Modifiers on.",
+        "For engines that expect Y-up FBX, set Forward to -Z and Up to Y."
+      ],
+      "see": "One file that re-imports at the right size and facing the right way.",
+      "gotcha": "The FBX exporter's Apply Transform option is experimental and can break rigs and animation.",
+      "source": { "label": "Blender Manual: glTF 2.0", "url": "https://docs.blender.org/manual/en/latest/addons/scene_gltf2.html" }
+    }
+  ],
+  "paths": [
+    {
+      "key": "unreal",
+      "label": "Unreal Engine",
+      "steps": [
+        {
+          "h": "Import into Unreal",
+          "do": [
+            "Drag the .glb or .fbx into the Content Browser, or click Import there.",
+            "In the import options, enable Build Nanite under Static Meshes if you want Nanite.",
+            "Click Import."
+          ],
+          "see": "A static mesh asset with its materials and textures in the Content Browser.",
+          "gotcha": "If it arrives the wrong size or rotated, adjust the uniform scale or rotation offset in the import options.",
+          "source": { "label": "Unreal: Interchange import reference", "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/interchange-import-reference-in-unreal-engine" }
+        }
+      ]
+    },
+    {
+      "key": "unity",
+      "label": "Unity",
+      "steps": [
+        {
+          "h": "Import into Unity",
+          "do": [
+            "FBX is Unity's main model format: drag it into your Assets folder.",
+            "For GLB, first install glTFast: in Package Manager, add a package by name and enter com.unity.cloud.gltfast.",
+            "Select the model and set Scale Factor or Convert Units on the Inspector's Model tab.",
+            "On the Materials tab, choose a material creation mode and extract textures if you need to edit them."
+          ],
+          "see": "A model prefab at 1 unit = 1 metre with its materials applied.",
+          "gotcha": "For .gltf (not .glb), copy the .bin and image files too and don't rename them, or the references break.",
+          "source": { "label": "Unity: glTFast installation", "url": "https://docs.unity3d.com/Packages/com.unity.cloud.gltfast@6.14/manual/installation.html" }
+        }
+      ]
+    },
+    {
+      "key": "godot",
+      "label": "Godot",
+      "steps": [
+        {
+          "h": "Import into Godot",
+          "do": [
+            "Copy the .glb into your project folder; glTF 2.0 is Godot's recommended 3D format and imports natively.",
+            "Select it in the FileSystem dock, then set Root Scale, Generate LODs and Ensure Tangents in the Import dock and click Reimport.",
+            "Double-click the file for the Advanced Import Settings window."
+          ],
+          "see": "An imported scene you can drag straight into the 3D view.",
+          "gotcha": "Import settings don't change the source file, so fix geometry problems in Blender instead.",
+          "source": { "label": "Godot: import configuration", "url": "https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/import_configuration.html" }
+        }
+      ]
+    }
+  ],
+  "videos": [
+    { "step": "Import into Blender and clean up", "youtube_id": "kz1SpbKQ5OE", "title": "Meshy to Blender: Quick Guide to Auto-Import 3D Models & Animations", "channel": "MeshyAI", "url": "https://www.youtube.com/watch?v=kz1SpbKQ5OE" },
+    { "step": "Import into Unity", "youtube_id": "D0qUIOGyjgM", "title": "Meshy to Unity: Quick Guide to Import 3D Models & Animations", "channel": "MeshyAI", "url": "https://www.youtube.com/watch?v=D0qUIOGyjgM" },
+    { "step": "Import into Unreal", "youtube_id": "-5gDmCFXx0A", "title": "Meshy to Unreal Engine 5: Fast 3D Character & Animation Import", "channel": "MeshyAI", "url": "https://www.youtube.com/watch?v=-5gDmCFXx0A" }
+  ],
+  "images": [
+    { "step": "Reduce the polycount", "file": "decimate-panel.png", "alt": "Blender's Decimate modifier panel in Collapse mode", "caption": "The Decimate modifier in Collapse mode.", "licence": "CC BY-SA 4.0", "credit": "Blender Manual, Blender Documentation Team", "source_page": "https://docs.blender.org/manual/en/latest/modeling/modifiers/generate/decimate.html" },
+    { "step": "UV unwrap and bake the detail", "file": "smart-uv-project.png", "alt": "Blender's Smart UV Project options", "caption": "Smart UV Project options.", "licence": "CC BY-SA 4.0", "credit": "Blender Manual, Blender Documentation Team", "source_page": "https://docs.blender.org/manual/en/latest/modeling/meshes/editing/uv.html" },
+    { "step": "Import into Godot", "file": "godot-import-dock.webp", "alt": "Godot's Import dock for a 3D scene", "caption": "Godot's Import dock.", "licence": "CC BY 3.0", "credit": "Juan Linietsky, Ariel Manzur and the Godot community", "source_page": "https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/import_configuration.html" }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "_doc": "Guide v2 content for /guides/ai-voice-to-lip-sync/. Every step is written from the linked official docs (checked 2026-10-17). Videos must be from the vendor's/project's own YouTube channel (verified via oEmbed). Images only with a clear reuse licence, stored in src/assets/guides/<slug>/.",
+  "result": "A voice line you're licensed to ship, plus matching lip-sync: mouth-shape cues for 2D sprites, baked blendshape clips in Unity, or MetaHuman facial animation in Unreal.",
+  "flow": [{ "label": "Voice line (TTS)", "ai": true }, { "label": "Export WAV" }, { "label": "Lip-sync tool" }, { "label": "Play in engine" }],
+  "shared": [
+    {
+      "h": "Pick a TTS plan that allows commercial use",
+      "do": [
+        "Use a paid ElevenLabs plan: paid plans include a commercial licence.",
+        "Don't ship lines made on the Free plan; Free-plan audio isn't licensed for commercial use.",
+        "Avoid Beta features for lines you'll ship, as ElevenLabs excludes Beta output from commercial and production use."
+      ],
+      "see": "Your plan's feature list includes a commercial licence (Starter and above).",
+      "gotcha": "Free-plan audio stays non-commercial even if you credit ElevenLabs, so regenerate those lines on a paid plan before release.",
+      "source": { "label": "ElevenLabs: can I publish what I generate?", "url": "https://elevenlabs.io/docs/help-center/legal/can-i-publish-the-content-i-generate-on-the-platform" }
+    },
+    {
+      "h": "Generate and export the voice line",
+      "do": [
+        "Generate the line and choose a WAV output format (for example wav_24000) instead of the default MP3.",
+        "Use WAV because Rhubarb reads WAV or Ogg Vorbis, and Unity and Unreal import WAV directly.",
+        "Save one file per line with a stable name, and keep the script text next to it."
+      ],
+      "see": "One clean .wav file per line that plays back without clicks or silence at the ends.",
+      "gotcha": "The 44.1 kHz WAV/PCM formats need a higher-tier plan; a lower rate like wav_24000 is fine for lip-sync.",
+      "source": { "label": "ElevenLabs API: create speech", "url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert" }
+    }
+  ],
+  "paths": [
+    {
+      "key": "2d",
+      "label": "2D characters",
+      "steps": [
+        {
+          "h": "Run Rhubarb on the line",
+          "do": [
+            "Download Rhubarb Lip Sync from its GitHub releases page.",
+            "Run: rhubarb -o line01.tsv line01.wav (the audio file goes last).",
+            "Add -d line01.txt with the line's script so recognition follows your words."
+          ],
+          "see": "A TSV file with one timestamp and one mouth-shape letter per row.",
+          "gotcha": "Without -d, recognition is less reliable, so always pass the script text.",
+          "source": { "label": "Rhubarb Lip Sync README", "url": "https://github.com/DanielSWolf/rhubarb-lip-sync" }
+        },
+        {
+          "h": "Choose the recognizer and output format",
+          "do": [
+            "Keep the default recognizer (-r pocketSphinx) for English lines.",
+            "Use -r phonetic for other languages.",
+            "Set -f to tsv, xml, json or dat to match what your engine or animation tool reads."
+          ],
+          "see": "The output file is in a format your engine or tool can import.",
+          "gotcha": "The phonetic recognizer works for any language but is less precise on English, so only switch when you need to.",
+          "source": { "label": "Rhubarb Lip Sync README", "url": "https://github.com/DanielSWolf/rhubarb-lip-sync" }
+        },
+        {
+          "h": "Map mouth shapes to sprites",
+          "do": [
+            "Draw the six basic mouths A to F (A is closed for P, B and M; D is wide open; F is puckered).",
+            "Optionally add G (F/V sounds), H (long L) and X (rest), or limit them with --extendedShapes.",
+            "In game, read each row and show that letter's sprite until the next timestamp."
+          ],
+          "see": "The mouth changes in time with the audio and rests on X during pauses.",
+          "source": { "label": "Rhubarb README: mouth shapes", "url": "https://github.com/DanielSWolf/rhubarb-lip-sync" }
+        }
+      ]
+    },
+    {
+      "key": "unity",
+      "label": "Unity 3D",
+      "steps": [
+        {
+          "h": "Install uLipSync",
+          "do": [
+            "In Package Manager, choose Add package from git URL and enter https://github.com/hecomi/uLipSync.git#upm.",
+            "Or add the npm scoped registry (scope com.hecomi), or import the .unitypackage together with Burst and Mathematics."
+          ],
+          "see": "uLipSync shows up in Package Manager and under Window > uLipSync.",
+          "gotcha": "If you use the .unitypackage with VRM models, add USE_VRM0X or USE_VRM10 as a scripting define symbol yourself.",
+          "source": { "label": "uLipSync README", "url": "https://github.com/hecomi/uLipSync" }
+        },
+        {
+          "h": "Add the components",
+          "do": [
+            "Put an AudioSource and a uLipSync component on the character.",
+            "Add uLipSyncBlendShape for the face's SkinnedMeshRenderer and map phonemes (A, I, U, E, O, N) to blendshapes.",
+            "Connect uLipSync's On Lip Sync Updated event to uLipSyncBlendShape.OnLipSyncUpdate."
+          ],
+          "see": "The face blendshapes move while the clip plays in Play mode.",
+          "source": { "label": "uLipSync README", "url": "https://github.com/hecomi/uLipSync" }
+        },
+        {
+          "h": "Create and calibrate a Profile",
+          "do": [
+            "Create a Profile and register the A, I, U, E, O vowels plus a breath phoneme.",
+            "Calibrate with a microphone (hold Calib while saying each vowel), or loop vowel clips with the calibration audio player.",
+            "Assign the Profile to the uLipSync component."
+          ],
+          "see": "Each vowel lights up its own phoneme in the inspector.",
+          "gotcha": "Profiles made in uLipSync v2 don't work in v3, so recalibrate after upgrading.",
+          "source": { "label": "uLipSync README", "url": "https://github.com/hecomi/uLipSync" }
+        },
+        {
+          "h": "Bake to an AnimationClip",
+          "do": [
+            "Open Window > uLipSync > Baked Data Generator and convert your voice clips to baked data.",
+            "Open Window > uLipSync > Animation Clip Generator to turn the baked data into keyframed clips.",
+            "Adjust Sample Frame Rate and Threshold to control how many keys are written."
+          ],
+          "see": "AnimationClips with blendshape curves that play without real-time analysis.",
+          "gotcha": "Real-time analysis is slow on WebGL builds, so bake clips there.",
+          "source": { "label": "uLipSync README", "url": "https://github.com/hecomi/uLipSync" }
+        }
+      ]
+    },
+    {
+      "key": "metahuman",
+      "label": "Unreal MetaHuman",
+      "steps": [
+        {
+          "h": "Prepare the project and audio",
+          "do": [
+            "Use Unreal Engine 5.6 or later and enable the MetaHuman Animator plugin.",
+            "Import the WAV so it becomes a SoundWave asset."
+          ],
+          "see": "A SoundWave asset in the Content Browser.",
+          "source": { "label": "Epic: audio-driven animation", "url": "https://dev.epicgames.com/documentation/en-us/metahuman/audio-driven-animation" }
+        },
+        {
+          "h": "Process the audio in a MetaHuman Performance",
+          "do": [
+            "Create a MetaHuman Performance asset and open it.",
+            "Set Input Type to Audio, choose the SoundWave, and set the Visualization Mesh to your MetaHuman face.",
+            "Optionally set head movement, blinks, the process mask (full face or mouth only) and mood, then click Process."
+          ],
+          "see": "Facial animation tracks appear in Sequencer.",
+          "gotcha": "Turning on Realtime Audio removes head motion and hides the other solve options.",
+          "source": { "label": "Epic: audio-driven animation", "url": "https://dev.epicgames.com/documentation/en-us/metahuman/audio-driven-animation" }
+        },
+        {
+          "h": "Export, or drive it live",
+          "do": [
+            "Use Export Animation for an Animation Sequence, or Export Level Sequence with your MetaHuman Blueprint assigned.",
+            "For live speech, add a MetaHuman (Audio) Live Link source and set it as your character Blueprint's Live Link subject."
+          ],
+          "see": "An Animation Sequence that plays on the face, or lips that follow a microphone live.",
+          "gotcha": "Processing in a Performance asset is offline even with the realtime solver; use the Live Link source for true real-time.",
+          "source": { "label": "Epic: using a MetaHuman audio source", "url": "https://dev.epicgames.com/documentation/en-us/metahuman/using-a-metahuman-audio-source" }
+        }
+      ]
+    }
+  ],
+  "alternative": {
+    "name": "NVIDIA Audio2Face-3D",
+    "note": "Another option for 3D faces. The SDK and Unreal plugin are MIT-licensed, but the models and services use separate NVIDIA licences, so check each part before you ship.",
+    "url": "https://github.com/NVIDIA/Audio2Face-3D"
+  },
+  "videos": [
+    { "step": "Generate and export the voice line", "youtube_id": "HSJLQFzgNYo", "title": "Create Realistic Text to Speech in 111 Seconds with AI", "channel": "ElevenLabs", "url": "https://www.youtube.com/watch?v=HSJLQFzgNYo" },
+    { "step": "Run Rhubarb on the line", "youtube_id": "zzdPSFJRlEo", "title": "Rhubarb Lip Sync 1.4.1 demo", "channel": "Rhubarb Lip Sync", "url": "https://www.youtube.com/watch?v=zzdPSFJRlEo" }
+  ],
+  "images": []
+}

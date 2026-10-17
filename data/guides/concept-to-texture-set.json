@@ -1,0 +1,141 @@
+{
+  "_doc": "Guide v2 content for /guides/concept-to-texture-set/. Every step is written from the linked official docs (checked 2026-10-17). Videos must be from the vendor's/project's own YouTube channel (verified via oEmbed) and show a current version. Images only with a clear reuse licence, stored in src/assets/guides/<slug>/.",
+  "result": "A tileable AI-generated colour texture plus height, normal, roughness and AO maps, checked in Blender and set up as a material in Unreal, Unity or Godot.",
+  "flow": [{ "label": "Tileable image", "ai": true }, { "label": "Check tiling" }, { "label": "Make the maps" }, { "label": "Check in Blender" }, { "label": "Engine material" }],
+  "shared": [
+    {
+      "h": "Generate a flat, tileable source texture",
+      "do": [
+        "In Scenario, open Scenario Texture (the Textures flow).",
+        "Describe only the material, like \"wet sand, ripple marks\", with no scene or perspective.",
+        "Set the size (default 1024 x 1024, in multiples of 16) and turn on Erase Seam.",
+        "If seams remain, raise Overlap for big features or lower it for fine detail, then generate again."
+      ],
+      "see": "A flat, top-down material image that repeats without a visible edge.",
+      "gotcha": "Scenario's pricing page says free-plan output is for personal and evaluation use only; paid plans include a commercial licence.",
+      "source": { "label": "Scenario Texture: the essentials", "url": "https://help.scenario.com/articles/3312894507-scenario-texture-the-essentials" }
+    },
+    {
+      "h": "Check that it tiles",
+      "do": [
+        "In Scenario's 3D viewer, set Geometry to Plane and raise the Tiling slider.",
+        "Or in Blender, open the image in the Image Editor and turn on Repeat Image in the sidebar's Display panel.",
+        "On a Blender Image Texture node, keep Extension set to Repeat."
+      ],
+      "see": "No seams, and no obvious repeating blotches across several tiles.",
+      "source": { "label": "Blender Manual: Image Editor sidebar", "url": "https://docs.blender.org/manual/en/latest/editors/image/sidebar.html" }
+    },
+    {
+      "h": "Turn the image into material maps",
+      "do": [
+        "In Scenario's 3D viewer, click Generate Maps to get height, normal, metallic, edge and AO maps.",
+        "Adjust the Raised, Shiny, Polished and Angular sliders, and invert the height map if the relief looks backwards.",
+        "For a roughness map, run Scenario's Texture Converter on the colour texture; it outputs normal, roughness, height and metallic maps."
+      ],
+      "see": "A matching set of greyscale maps plus a purple-blue normal map.",
+      "gotcha": "Generate Maps doesn't produce a roughness map; use the Texture Converter for that.",
+      "source": { "label": "Scenario: texture generation basics", "url": "https://help.scenario.com/articles/5486933912-texture-generation-basics" }
+    },
+    {
+      "h": "Hook up and check the maps in Blender",
+      "do": [
+        "Add an Image Texture node for each map and connect the colour texture to Base Color on the Principled BSDF.",
+        "Set the normal, roughness, AO and height images to Color Space: Non-Color.",
+        "Send the normal map through a Normal Map node (Tangent space) into the BSDF's Normal input.",
+        "If the bumps look inverted, switch the Normal Map node's convention (Blender uses OpenGL by default)."
+      ],
+      "see": "Light catches the relief correctly as you orbit the view.",
+      "gotcha": "Normal maps must not get colour conversion, so always set them to Non-Color.",
+      "source": { "label": "Blender Manual: Normal Map node", "url": "https://docs.blender.org/manual/en/latest/render/shader_nodes/displacement/normal_map.html" }
+    }
+  ],
+  "paths": [
+    {
+      "key": "unreal",
+      "label": "Unreal Engine",
+      "steps": [
+        {
+          "h": "Set the texture properties",
+          "do": [
+            "Open the normal texture and set Compression Settings to Normalmap; tick Flip Green Channel if the bumps look inverted.",
+            "Open the roughness and AO textures and untick sRGB, because data maps shouldn't be gamma-corrected."
+          ],
+          "see": "Normal shading looks right and the roughness keeps its values.",
+          "gotcha": "After turning sRGB off, set that texture's sampler to Linear Color in the material, or it won't compile.",
+          "source": { "label": "Unreal: using texture masks", "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/using-texture-masks-in-unreal-engine" }
+        },
+        {
+          "h": "Build the material",
+          "do": [
+            "Right-click in the Content Browser, choose Material, and double-click it to open.",
+            "Add one Texture Sample node per map.",
+            "Connect colour to Base Color, roughness to Roughness, normal to Normal and AO to Ambient Occlusion."
+          ],
+          "see": "The preview sphere shows the finished material.",
+          "gotcha": "The Ambient Occlusion input only has an effect with Static or Stationary lights.",
+          "source": { "label": "Unreal: material inputs", "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/material-inputs-in-unreal-engine" }
+        }
+      ]
+    },
+    {
+      "key": "unity",
+      "label": "Unity",
+      "steps": [
+        {
+          "h": "Set the import settings",
+          "do": [
+            "Select the normal map and set Texture Type to Normal map; use Flip Green Channel for DirectX-style maps.",
+            "On data textures (metallic/smoothness, AO, mask maps), turn off sRGB (Color Texture)."
+          ],
+          "see": "The normal map imports as a Normal map texture and shades correctly.",
+          "source": { "label": "Unity: normal map texture type", "url": "https://docs.unity3d.com/6000.2/Documentation/Manual/texture-type-normal-map.html" }
+        },
+        {
+          "h": "Make a URP Lit material",
+          "do": [
+            "Create a material with the Lit shader and set Workflow Mode to Metallic.",
+            "Assign the Base Map, Normal Map, Height Map and Occlusion Map.",
+            "Unity uses smoothness, not roughness: invert the roughness map, put it in the Metallic Map's alpha, and set Smoothness Source to Metallic Alpha."
+          ],
+          "see": "Reflections are sharp where the roughness map was dark.",
+          "gotcha": "HDRP uses a packed Mask Map instead: red = metallic, green = AO, blue = detail mask, alpha = smoothness.",
+          "source": { "label": "Unity: URP Lit shader", "url": "https://docs.unity3d.com/6000.2/Documentation/Manual/urp/lit-shader.html" }
+        }
+      ]
+    },
+    {
+      "key": "godot",
+      "label": "Godot",
+      "steps": [
+        {
+          "h": "Import the normal map",
+          "do": [
+            "Select the normal map, and in the Import dock set Compress > Normal Map to Enable.",
+            "For DirectX-style maps, also enable Process > Normal Map Invert Y, then click Reimport."
+          ],
+          "see": "The texture reimports as a normal map.",
+          "source": { "label": "Godot: importing images", "url": "https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_images.html" }
+        },
+        {
+          "h": "Set up a StandardMaterial3D",
+          "do": [
+            "Add a StandardMaterial3D to the mesh and set Albedo > Texture.",
+            "Set Roughness > Texture (it reads the red channel by default).",
+            "Enable Normal Map and Ambient Occlusion and assign those textures; height is optional.",
+            "Raise UV1 > Scale to repeat the tile across the surface."
+          ],
+          "see": "The surface tiles and reacts properly to light.",
+          "gotcha": "Height is a parallax effect and is fairly expensive on the GPU, so use it only where it shows.",
+          "source": { "label": "Godot: Standard Material 3D", "url": "https://docs.godotengine.org/en/stable/tutorials/3d/standard_material_3d.html" }
+        }
+      ]
+    }
+  ],
+  "videos": [
+    { "step": "Generate a flat, tileable source texture", "youtube_id": "hsvWcT1n-YI", "title": "Generating Seamless Textures - Pt 1.", "channel": "Scenario", "url": "https://www.youtube.com/watch?v=hsvWcT1n-YI" }
+  ],
+  "images": [
+    { "step": "Hook up and check the maps in Blender", "file": "normal-map-node.jpg", "alt": "Example of Blender's Normal Map node in use", "caption": "A normal map applied through the Normal Map node.", "licence": "CC BY-SA 4.0", "credit": "Blender Manual, Blender Documentation Team", "source_page": "https://docs.blender.org/manual/en/latest/render/shader_nodes/displacement/normal_map.html" },
+    { "step": "Set up a StandardMaterial3D", "file": "godot-standard-material.webp", "alt": "A Godot StandardMaterial3D example", "caption": "StandardMaterial3D in Godot.", "licence": "CC BY 3.0", "credit": "Juan Linietsky, Ariel Manzur and the Godot community", "source_page": "https://docs.godotengine.org/en/stable/tutorials/3d/standard_material_3d.html" }
+  ]
+}

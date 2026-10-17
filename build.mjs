@@ -62,6 +62,14 @@ const API_L = { yes: 'Available', no: 'No public API', partner: 'Partner / negot
 const MCP_L = { official: 'Official MCP server', client: 'Connects to MCP servers', community: 'Community server only', preview: 'In preview', 'none-found': 'None found', unverified: NSV_TEXT };
 const COMMERCIAL = { 'yes': 'Commercial use allowed', 'paid-only': 'Commercial on paid plans only', 'restricted': 'Restricted (see notes)', 'no': 'Not allowed', 'unverified': 'Commercial use: not stated by vendor', 'n-a': 'Not applicable' };
 
+// Guides v2 format: { result, shared:[step], paths:[{key,label,steps:[step]}], videos:[...], images:[...] } where
+// step = { h, do:[...], see, gotcha, source:{label,url} }. Normalised here to the v1 `steps` shape (shared + first path)
+// so step counts, HowTo JSON-LD and llms.txt keep working. v1 guides (steps only) still render with the old layout.
+// v2 content lives in data/guides/<slug>.json and is merged over the content.mjs entry.
+for (const g of GUIDES) { const fp = `data/guides/${g.slug}.json`; if (fs.existsSync(fp)) { const d = JSON.parse(fs.readFileSync(fp, 'utf8')); delete d._doc; Object.assign(g, d); } }
+for (const g of GUIDES) if (Array.isArray(g.paths) && g.paths.length) {
+  g.steps = [...(g.shared || []), ...g.paths[0].steps].map(s => ({ h: s.h, p: [{ text: s.do.join(' '), url: s.source && s.source.url }] }));
+}
 const tools = JSON.parse(fs.readFileSync('data/tools.json', 'utf8')).sort((a, b) => a.name.localeCompare(b.name));
 const bySlug = Object.fromEntries(tools.map(t => [t.slug, t]));
 const readJson = (f, d) => fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : d;
@@ -674,6 +682,48 @@ ${flowStrip(FEATURED, { max: 5 })}
 document.querySelectorAll('.chip-filters button').forEach(function(b){b.addEventListener('click',function(){f[b.dataset.group]=b.dataset.value;document.querySelectorAll('.chip-filters button[data-group="'+b.dataset.group+'"]').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});apply();});});
 function apply(){var on=f.task||f.engine,n=0;feat.hidden=!!on;hd.textContent=on?'Matching guides':'More guides';cards.forEach(function(c){var ok=(!f.task||c.dataset.task===f.task)&&(!f.engine||(' '+c.dataset.engines+' ').indexOf(' '+f.engine+' ')!==-1);c.hidden=!(ok&&(on||!c.hasAttribute('data-featured')));if(ok)n++;});cnt.textContent=on?n+(n===1?' guide':' guides'):'';}})();</script>`,
 }));
+// ---------- Guide v2 layout: result up front, pick your path, step cards with do / you should see / watch out / media ----------
+const ytId = s => /^[A-Za-z0-9_-]{11}$/.test(s || '') ? s : null;
+// Click-to-load video: no request to YouTube until the visitor presses play (privacy + speed).
+const videoEmbed = v => ytId(v.youtube_id) ? `<figure class="g-video"><button type="button" class="yt" data-yt="${v.youtube_id}" aria-label="Play video: ${esc(v.title)}"><span class="yt-play" aria-hidden="true">▶</span><span class="yt-title">${esc(v.title)}</span><span class="yt-meta">${esc(v.channel)} · YouTube · loads when you press play</span></button><figcaption>Official video from ${esc(v.channel)}. <a href="${esc(v.url || `https://www.youtube.com/watch?v=${v.youtube_id}`)}" rel="noopener nofollow" target="_blank">Watch on YouTube ↗</a></figcaption></figure>` : '';
+const guideImage = (g, im) => `<figure class="g-img"><img src="${L(`/assets/guides/${g.slug}/${encodeURIComponent(im.file)}`)}" alt="${esc(im.alt || im.step)}" loading="lazy" decoding="async"><figcaption>${esc(im.caption || '')} Image: ${im.source_page ? `<a href="${esc(im.source_page)}" rel="noopener nofollow" target="_blank">${esc(im.credit)}</a>` : esc(im.credit)}, ${esc(im.licence)}.</figcaption></figure>`;
+function stepCard(g, s, n) {
+  const vids = (g.videos || []).filter(v => v.step === s.h).map(videoEmbed).join('');
+  const imgs = (g.images || []).filter(im => im.step === s.h && im.file && fs.existsSync(`src/assets/guides/${g.slug}/${im.file}`)).map(im => guideImage(g, im)).join('');
+  const stt = stepTools({ p: [{ text: `${s.h} ${s.do.join(' ')}` }] });
+  return `<li class="g-step" id="step-${n}"><div class="g-num" aria-hidden="true">${n}</div><div class="card g-card">
+<h3>${esc(s.h)}</h3>${stt.length ? chips(stt.map(t => chip(t.name, { tool: t, href: toolUrl(t) })), 'div') : ''}
+<ol class="g-do">${s.do.map(d => `<li>${esc(d)}</li>`).join('')}</ol>
+${s.see ? `<p class="g-see"><b>You should see:</b> ${esc(s.see)}</p>` : ''}${s.gotcha ? `<p class="g-gotcha"><b>Watch out:</b> ${esc(s.gotcha)}</p>` : ''}
+${imgs}${vids}${s.source && s.source.url ? `<p class="g-src">From the official docs: <a href="${esc(s.source.url)}" rel="noopener nofollow" target="_blank">${esc(s.source.label || 'source')} ↗</a></p>` : ''}
+</div></li>`;
+}
+function guideV2(g, gt) {
+  const shared = g.shared || [];
+  return `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/guides/')}">Guides</a> › ${esc(g.title)}</nav>
+<article class="guide g2">
+<header class="guide-hero"><div class="guide-hero-art">${artImg(guideArtPage(g), { eager: true })}</div><div class="guide-hero-body"><span class="kicker">Workflow guide · ${esc(TASKS[g.task].label)}</span><h1>${esc(g.title)}</h1><p class="lead">${esc(g.result || g.outcome)}</p>
+<p class="g-meta">${chips(gt.map(t => chip(t.name, { tool: t, href: toolUrl(t) })), 'div')}</p></div></header>
+${flowStrip(g, { max: 5 })}
+<details class="card g-costs"><summary>Cost and licences of the AI tools in this guide</summary><ul class="cost-list">${gt.map(t => `<li><a class="tname" href="${toolUrl(t)}">${esc(t.name)}</a>${isNsv(t.commercial) ? '' : licBadge(t)}${isNsv(t.freeTier) ? '' : `<span>${esc(t.freeTier)}</span>`}${srcA(t.pricingSource, 'pricing')}</li>`).join('')}</ul></details>
+${shared.length ? `<h2 class="g-h">Everyone: steps 1–${shared.length}</h2><ol class="g-steps">${shared.map((s, i) => stepCard(g, s, i + 1)).join('\n')}</ol>` : ''}
+<section class="g-paths" aria-labelledby="path-h"><h2 class="g-h" id="path-h">Then pick your path</h2>
+<div class="g-tabs" role="tablist">${g.paths.map((pth, i) => `<button type="button" role="tab" class="chip" id="tab-${pth.key}" aria-controls="path-${pth.key}" aria-selected="${i === 0 ? 'true' : 'false'}" data-path="${pth.key}">${esc(pth.label)}</button>`).join('')}</div>
+${g.paths.map((pth, i) => `<div class="g-path" id="path-${pth.key}" role="tabpanel" aria-labelledby="tab-${pth.key}"${i === 0 ? '' : ' data-hidden'}><h3 class="g-path-h">${esc(pth.label)}</h3><ol class="g-steps">${pth.steps.map((s, j) => stepCard(g, s, shared.length + j + 1)).join('\n')}</ol></div>`).join('\n')}
+</section>
+${g.alternative ? `<aside class="card g-alt"><span class="kicker">Another option</span><p><b>${esc(g.alternative.name)}.</b> ${esc(g.alternative.note)} <a href="${esc(g.alternative.url)}" rel="noopener nofollow" target="_blank">Official repo ↗</a></p></aside>` : ''}
+<p class="note">Written from the official documentation linked on each step and checked ${timeEl(CHECKED)}. Menus and settings change between versions, so follow the linked docs if something looks different. No vendor reviews or pays for these guides.</p>
+</article>
+<section class="related"><div class="sec-head"><h2>Tools for this workflow</h2></div><div class="grid g3">${gt.map(t => toolCard(t, { compact: true })).join('\n')}</div></section>`;
+}
+// Path tabs (all paths are visible without JS) + click-to-load YouTube (youtube-nocookie).
+const GUIDE_V2_JS = `<script>(function(){var tabs=document.querySelectorAll('.g-tabs [data-path]'),panes=document.querySelectorAll('.g-path');
+panes.forEach(function(p){if(p.hasAttribute('data-hidden'))p.hidden=true;});document.querySelectorAll('.g-path-h').forEach(function(h){h.classList.add('sr-only');});
+function show(k){tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.path===k?'true':'false');});panes.forEach(function(p){p.hidden=p.id!=='path-'+k;});}
+tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.path);history.replaceState(null,'','#'+t.dataset.path);});});
+var h=location.hash.slice(1);if(h&&document.getElementById('path-'+h))show(h);
+document.querySelectorAll('button.yt').forEach(function(b){b.addEventListener('click',function(){var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+b.dataset.yt+'?autoplay=1';f.title=b.getAttribute('aria-label');f.allow='autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;f.loading='lazy';f.className='yt-frame';b.replaceWith(f);});});})();</script>`;
+
 for (const g of GUIDES) {
   const p = `/guides/${g.slug}/`;
   const gt = g.tools.map(s => bySlug[s]).filter(Boolean);
@@ -681,7 +731,8 @@ for (const g of GUIDES) {
     title: `${g.title} | ${SITE.name}`, description: g.description, pathname: p,
     og: ogFile(`guides/${g.slug}`, 'page', { kicker: `Workflow guide · ${g.steps.length} steps`, title: g.title, sub: g.outcome, artPage: TASKS[g.task].page }),
     jsonld: [{ '@context': 'https://schema.org', '@type': 'HowTo', name: g.title, description: g.description, step: g.steps.map((st, i) => ({ '@type': 'HowToStep', position: i + 1, name: st.h, text: st.p.map(x => x.text).join(' ') })) }],
-    body: `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/guides/')}">Guides</a> › ${esc(g.title)}</nav>
+    scripts: g.paths ? GUIDE_V2_JS : '',
+    body: g.paths ? guideV2(g, gt) : `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/guides/')}">Guides</a> › ${esc(g.title)}</nav>
 <article class="guide"><header class="guide-hero"><div class="guide-hero-art">${artImg(guideArtPage(g), { eager: true })}</div><div class="guide-hero-body"><span class="kicker">Workflow guide · ${esc(TASKS[g.task].label)}</span><h1>${esc(g.title)}</h1><p class="lead">${esc(g.intro)}</p></div></header>
 ${flowStrip(g, { max: 5 })}
 <section class="card g-summary" aria-labelledby="sum-h">
@@ -1028,6 +1079,7 @@ page('/privacy/', layout({
 <h2 class="sub-h">Browsing</h2>
 <p>The site is hosted on Vercel. Like any web host, Vercel receives technical data such as your IP address, browser user agent and the pages you request, and may keep it in server logs. See <a href="https://vercel.com/legal/privacy-policy" rel="noopener">Vercel's privacy policy</a>.</p>
 <p>The site doesn't set cookies and doesn't use advertising or cross-site tracking. Pages load no third-party fonts. Tool logos are stored on this site.</p>
+<p>Some guides include official tutorial videos from YouTube. Nothing loads from YouTube until you press play; the video then plays from youtube-nocookie.com under Google's privacy policy.</p>
 <h2 class="sub-h">Analytics</h2>
 <p>We use <a href="https://vercel.com/docs/analytics/privacy-policy" rel="noopener">Vercel Web Analytics</a>, which counts page views without cookies or personal identifiers. Its script is served from this site's own domain. We see totals such as page views, referring sites, countries and device types, not individual visitors.</p>
 <h2 class="sub-h">Links to other sites, including affiliate links</h2>
