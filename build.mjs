@@ -97,7 +97,7 @@ function newsletterBlock() {
   return `<section class="newsletter" id="newsletter">
 <h2>Get the newsletter</h2>
 <p>An occasional email about new AI tools for game devs and changes to their pricing and licences. Unsubscribe any time.</p>
-<form method="post" action="/api/subscribe">
+<form method="post" action="/api/subscribe/">
 <input type="email" name="email" required maxlength="254" placeholder="you@example.com" aria-label="Email address">
 ${HONEYPOT}
 <button type="submit">Subscribe</button>
@@ -237,7 +237,7 @@ page('/submit/', layout({
   pathname: '/submit/',
   body: `<h1>Submit a tool</h1>
 <p>Know an AI tool that helps people make games? Send it in. We check every submission against the vendor's own website (what it does, its pricing and its commercial-use terms) before listing it. Submissions are public GitHub issues on <a href="https://github.com/michaelpaulrattray/gamedev-ai-tools/issues?q=label%3Asubmission">our repo</a>.</p>
-<form class="submit" method="post" action="/api/submit">
+<form class="submit" method="post" action="/api/submit/">
 <label>Tool name <input name="name" required maxlength="100"></label>
 <label>Official URL <input name="url" type="url" required maxlength="300" placeholder="https://"></label>
 <label>Category <select name="category" required><option value="">Choose…</option>${Object.values(TASKS).map(c => `<option>${esc(c.label)}</option>`).join('')}<option>Other</option></select></label>
