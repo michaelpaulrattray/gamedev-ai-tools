@@ -384,13 +384,13 @@ page('/privacy/', layout({
 <h2 class="sub-h">Analytics</h2>
 <p>We use <a href="https://vercel.com/docs/analytics/privacy-policy" rel="noopener">Vercel Web Analytics</a>, which counts page views without cookies or personal identifiers. Its script is served from this site's own domain. We see totals such as page views, referring sites, countries and device types, not individual visitors.</p>
 <h2 class="sub-h">Links to other sites, including affiliate links</h2>
-<p>Links to tool vendors take you to their sites, where their own policies apply. Some of those links are affiliate links, which means we may earn a commission if you buy. When you click one, the third-party site may set its own cookies to record that you came from us. Affiliate links never change our listings, their order or their verdicts.</p>
+<p>Links to tool vendors take you to their sites, where their own policies apply. Some of those links may be affiliate links, which means we may earn a commission if you buy. When you click one, the third-party site may set its own cookies to record that you came from us. Affiliate links never change our listings, their order or their verdicts.</p>
 <h2 class="sub-h">Submitting a tool</h2>
 <p>The <a href="${L('/submit/')}">Submit a tool</a> form doesn't store your submission on this site. It sends you to GitHub with a prefilled issue, and nothing is filed until you submit it there with your own GitHub account. GitHub issues are public: anyone can see what you write there, your GitHub username and any email address you choose to include. GitHub's own privacy statement applies.</p>
 <h2 class="sub-h">Newsletter and emails</h2>
 <p>If you sign up, your email address is stored with Resend, our email provider, in our newsletter list. We use it only for the newsletter. When you sign up we send one welcome email with a link to our cheat sheet. We haven't sent a newsletter yet. Every email we send, including the welcome email, includes an unsubscribe link: using it marks your address as unsubscribed in our list, and we stop emailing you. You can also email <a href="${mailto('Newsletter removal')}">${EMAIL}</a> from the address you signed up with to be removed.</p>
 <h2 class="sub-h">Sponsor payments</h2>
-<p>Sponsors will be able to pay through Stripe once payments are enabled (they aren't yet). Stripe processes the payment and card details under <a href="https://stripe.com/privacy" rel="noopener">Stripe's privacy policy</a>; we never see full card numbers. Until then, sponsorship is arranged by email.</p>
+<p>Sponsors pay through Stripe. Stripe processes the payment and card details under <a href="https://stripe.com/privacy" rel="noopener">Stripe's privacy policy</a>; we never see full card numbers. We receive the name, email address and payment details Stripe shares with merchants (such as the amount and date), and use them only to arrange and account for the sponsorship.</p>
 <h2 class="sub-h">Contact</h2>
 <p>Contact us at <a href="${mailto()}">${EMAIL}</a>.</p>`,
 }));
