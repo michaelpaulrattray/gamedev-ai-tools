@@ -415,6 +415,8 @@ page('/subscribe-error/', layout({
 
 // ---------- Static assets, sitemap, robots, 404 ----------
 fs.cpSync('src/assets', path.join(out, 'assets'), { recursive: true });
+// Root-level verification files (e.g. Google Search Console), copied byte-for-byte; never in the sitemap.
+if (fs.existsSync('src/root')) fs.cpSync('src/root', out, { recursive: true });
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages.map(p => `<url><loc>${URL_(p)}</loc><lastmod>${SITE.updated}</lastmod></url>`).join('\n')}
