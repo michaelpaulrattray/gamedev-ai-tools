@@ -93,7 +93,12 @@ Owner: Mike Paul (Brisbane, Australia/Brisbane). Business inbox: hello@gamedevai
 - Every future newsletter must include the sender line and an unsubscribe link (use `link()` from `api/_unsub.js`).
 
 ## Routines
-_Placeholder: Mike will fill in the routines schedule._
+All times Australia/Brisbane.
+- Daily operator, daily about 7:00: QA and rollback, tool/news scan, one page, one SEO fix, capped outreach, 1-2 X posts (once logged in).
+- Weekly checks and newsletter, Thursday about 9:00: re-check the top 20 tools and deals, sponsor price ladder, send the newsletter (copy to Mike).
+- Weekly CEO report, Monday about 8:00: real metrics, top 3 X posts, at most 2 decisions.
+- Monthly review, 1st of the month about 10:00: affiliate applications, full source re-check, traffic review.
+- Retry X login, once on 18 Oct 2026 at 9:00.
 
 Carried over until then:
 - Monthly (first Saturday): re-check every tool's pricing and licence sources; update `lastChecked`; mark `unverified` where unclear; remove dead tools.
