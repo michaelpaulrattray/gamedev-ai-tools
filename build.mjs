@@ -15,6 +15,8 @@ const NEWSLETTER_ON = process.env.NEWSLETTER_ENABLED === '1' && Boolean(process.
 console.log('Newsletter signup enabled:', NEWSLETTER_ON);
 const URL_ = p => SITE.origin + SITE.base + p;
 const L = p => SITE.base + p;
+const EMAIL = 'hello@gamedevaitools.com';
+const mailto = (subject) => `mailto:${EMAIL}${subject ? `?subject=${encodeURIComponent(subject)}` : ''}`;
 
 const TASKS = {
   'concept-art':  { label: 'Concept art & 2D assets', page: 'concept-art', h1: 'AI tools for game concept art, sprites and 2D assets' },
@@ -85,7 +87,7 @@ ${body}
 <footer class="site-footer"><div class="wrap">
 <p class="foot-brand"><a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a></p>
 <p>Facts are taken from each vendor's own website and dated. Pricing and licences change often, so always check the vendor's current terms before you rely on them. This is not legal advice. No affiliate links.</p>
-<p class="foot-links"><a href="${L('/guides/')}">Guides</a> · <a href="${L('/compare/')}">Comparisons</a> · <a href="${L('/new/')}">New this week</a> · <a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a> · <a href="${L('/sponsor/')}">Sponsor</a> · <a href="${L('/get-featured/')}">Get featured</a> · <a href="${L('/privacy/')}">Privacy</a> · <a href="${L('/sitemap.xml')}">Sitemap</a> · Last updated ${SITE.updated}</p>
+<p class="foot-links"><a href="${L('/guides/')}">Guides</a> · <a href="${L('/compare/')}">Comparisons</a> · <a href="${L('/new/')}">New this week</a> · <a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a> · <a href="${L('/sponsor/')}">Sponsor</a> · <a href="${L('/get-featured/')}">Get featured</a> · <a href="${L('/privacy/')}">Privacy</a> · <a href="${mailto()}">Contact</a> · <a href="${L('/sitemap.xml')}">Sitemap</a> · Last updated ${SITE.updated}</p>
 </div></footer>
 ${scripts}
 </body>
@@ -278,7 +280,7 @@ page('/get-featured/', layout({
 <li>We don't publish reviews, ratings or user numbers we can't verify.</li>
 <li>Paid placements are described on the <a href="${L('/sponsor/')}">Sponsor</a> page (pricing on request). None are live yet, and any that go live will be clearly labelled "Sponsored".</li>
 </ul>
-<p>To suggest a tool, use the <a href="${L('/submit/')}">Submit a tool</a> form. For corrections, open an issue on <a href="https://github.com/michaelpaulrattray/gamedev-ai-tools/issues">GitHub</a> with links to your pricing and terms pages.</p>`,
+<p>To suggest a tool, use the <a href="${L('/submit/')}">Submit a tool</a> form. For corrections or sponsorship, email <a href="${mailto('Listing enquiry')}">${EMAIL}</a> with links to your pricing and terms pages.</p>`,
 }));
 
 
@@ -365,11 +367,10 @@ page('/sponsor/', layout({
 <div class="tiers">${SPONSOR_TIERS.map(t => `<div class="tier"><h2>${esc(t.name)}</h2><p>${esc(t.text)}</p><p class="tier-price">Pricing on request</p></div>`).join('')}</div>
 <h2 class="sub-h">Ground rules</h2>
 <ul class="rules"><li>Sponsored placements are always labelled "Sponsored".</li><li>Listings follow the same editorial policy as everyone else: vendor-sourced facts, source links, a last-checked date, and "unverified" where we can't confirm something.</li><li>We don't publish traffic or subscriber numbers we can't verify. We'll share whatever real figures we have when you ask.</li><li>No affiliate links.</li></ul>
-<p>To ask about sponsorship, <a href="https://github.com/michaelpaulrattray/gamedev-ai-tools/issues/new?title=${encodeURIComponent('Sponsorship enquiry: ')}&labels=sponsor">open a GitHub issue</a> with your tool's name and which tier you're interested in (issues are public).</p>`,
+<p>To ask about sponsorship, email <a href="${mailto('Sponsorship enquiry')}">${EMAIL}</a> with your tool's name and which tier you're interested in.</p>`,
 }));
 
 // ---------- Privacy (wording approved by Mike, 2026-10-17) ----------
-const GH_ISSUES = 'https://github.com/michaelpaulrattray/gamedev-ai-tools/issues';
 page('/privacy/', layout({
   title: `Privacy | ${SITE.name}`,
   description: 'What data GameDev AI Tools handles: hosting logs on Vercel, tool submissions via public GitHub issues, and newsletter emails stored with Resend.',
@@ -383,9 +384,9 @@ page('/privacy/', layout({
 <h2 class="sub-h">Submitting a tool</h2>
 <p>The <a href="${L('/submit/')}">Submit a tool</a> form doesn't store your submission on this site. It sends you to GitHub with a prefilled issue, and nothing is filed until you submit it there with your own GitHub account. GitHub issues are public: anyone can see what you write there, your GitHub username and any email address you choose to include. GitHub's own privacy statement applies.</p>
 <h2 class="sub-h">Newsletter</h2>
-<p>If you sign up, your email address is stored with Resend, our email provider, in our newsletter list. We use it only for the newsletter. We haven't sent a newsletter yet. Every newsletter will include a way to unsubscribe. To be removed before then, open a GitHub issue (see below) asking to be removed, without posting your email address, and we'll reply there to arrange it.</p>
+<p>If you sign up, your email address is stored with Resend, our email provider, in our newsletter list. We use it only for the newsletter. We haven't sent a newsletter yet. Every newsletter will include a way to unsubscribe. To be removed before then, email <a href="${mailto('Newsletter removal')}">${EMAIL}</a> from the address you signed up with.</p>
 <h2 class="sub-h">Contact</h2>
-<p>For now, contact us through <a href="${GH_ISSUES}">GitHub issues</a>. Those are public, so please don't post your email address there. A business email address is coming.</p>`,
+<p>Contact us at <a href="${mailto()}">${EMAIL}</a>.</p>`,
 }));
 
 // ---------- Submit a tool ----------
@@ -455,6 +456,7 @@ ${cmpLinks.join('\n')}
 - [Submit a tool](${URL_('/submit/')})
 - [Sponsor](${URL_('/sponsor/')})
 - [Privacy](${URL_('/privacy/')})
+- [Contact](mailto:${EMAIL}): corrections, sponsorship and general enquiries
 `;
 write('llms.txt', llmsHead + llmsLinks);
 const toolMd = t => `### ${t.name}
