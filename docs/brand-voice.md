@@ -156,6 +156,46 @@ Pain points to anchor jokes in: topology and retopo cleanup, inconsistent charac
 4. **Ship one free useful thing a week** (a checklist, comparison or tier note with sources). That's the Scenario lesson.
 5. **Review on Fri:** log what our posts got (likes, replies, profile visits, site clicks) and keep a simple sheet. Double down on formats that beat our median for two weeks running.
 
+### Media playbook (added 2026-10-17)
+
+**Method:** I re-read 35 of the top posts above with media expansions to get the real attachment types (photo, video, animated_gif, or none). "Text/link" means no native media: either plain text or a link card. The samples are small, so read these as directional, not statistical.
+
+**What the data shows**
+| Account | Media posts (examples) | Text/link posts (examples) | Read |
+|---|---|---|---|
+| @MoonPie | [4 photos, Artemis](https://x.com/MoonPie/status/2041640433697124526) L12,044. [1 photo + NASA tag](https://x.com/MoonPie/status/2043138271698395138) L2,410. [Soccer photo](https://x.com/MoonPie/status/2072374172597297506) L306 | [Bald eagle scenario](https://x.com/MoonPie/status/2073409746070012385) L1,588. [Job interview line](https://x.com/MoonPie/status/2102919639433150486) L669. [Bass fishing line](https://x.com/MoonPie/status/2084767221968961659) L253 | The two biggest posts are photo posts **tied to a real moment** (NASA's moon images). Outside moments, text-only lines match or beat the photo posts. |
+| @duolingo | [Animated GIF reply](https://x.com/duolingo/status/2110599384513548424) L647, I145,891. [4-photo DuoTV promo](https://x.com/duolingo/status/2111166022938153065) L116 | ["send me your username…" text](https://x.com/duolingo/status/2111123147189543345) L1,282 | Reaction GIFs and images work **as replies**. The product promo with 4 images was weak, and the text gesture won. |
+| @TheOnion | [Interview photo](https://x.com/TheOnion/status/2011596732543402184) L4,120. Store/ads photos [L425](https://x.com/TheOnion/status/2011526016184041696), [L205](https://x.com/TheOnion/status/2011581645644538254) | [Headline + link card](https://x.com/TheOnion/status/2011513737916625034) L3,812. [Another](https://x.com/TheOnion/status/2011199149400801588) L3,842 | The headline does the work; the article card's image comes free with the link. Native photos only help for exclusives. Promo photos are the weakest posts. |
+| @Wendys | none | ["no happy in your meal" text](https://x.com/Wendys/status/2108299844657750234) L849 | The top post was pure text. |
+| @theresanaiforit | Video on every top post: [motion-reel demo](https://x.com/theresanaiforit/status/2103908433581986254) L23, [sponsored launch](https://x.com/theresanaiforit/status/2110434323899761108) L17 | none in the top set | Video on everything, with flat results (L11–23). Media doesn't rescue ad copy. |
+| @futurepedia_io | 9 of 10 originals have media (photo or video), e.g. [Brand Kit video](https://x.com/futurepedia_io/status/2109773608642072732) L5 | [1 text post](https://x.com/futurepedia_io/status/2110931112130400752) L0 | Median L2 for media posts. Same lesson. |
+| @Scenario_gg | [Blender plugin demo video](https://x.com/Scenario_gg/status/2110705230539006235) L1,442. [Video-editing skill video](https://x.com/Scenario_gg/status/2110020120865313063) L301. [Side-by-side model video](https://x.com/Scenario_gg/status/2109640835323310433) L57 vs a [character-sheet comparison photo](https://x.com/Scenario_gg/status/2108226822160675274) L12 | none | Video **showing a free, real workflow** is the best performer in the niche. |
+| Niche | [Little Prince game video](https://x.com/RoundtableSpace/status/2110177518292779081) L76 | ["Is this a vibe-coded game?" plus a link](https://x.com/ZypherHQ/status/2109640539502948627) L137, Re65 | A provocative line can beat a polished video. |
+
+**Conclusions**
+1. Media isn't a multiplier by itself. The directories put media on almost everything and still get 0–23 likes. Text-only posts top Wendy's, Duolingo's originals and several MoonPie and Onion posts.
+2. Media wins when it **is** the content: a real moment (MoonPie and NASA), a real workflow demo (Scenario), a reaction GIF in a reply (Duolingo).
+3. Stock promo images (store, product tour, sponsored) are the weakest media posts for every account studied.
+
+**Our rules**
+- **Default: text-only** for personality posts, fake headlines and patch notes. The joke should land without a picture.
+- **Attach real screenshots** (not generated ones) when the image is the proof: a licence clause, a Steam disclosure field, a side-by-side of tool outputs we actually ran, a directory page. Crop tight, and keep any text readable on a phone.
+- **Short screen recordings** (≤20 s, no music needed) for the weekly free useful drop, such as filtering the directory by "safe to ship commercially". That's the Scenario format at small scale.
+- **Reaction images and GIFs** only in replies, and only from X's built-in GIF picker or our own art. Never use copyrighted meme templates of real people in a branded post.
+- **Generated images (Higgsfield): sparingly, at most one a week.** Use them only when the joke is visual and the picture is honestly about AI output: a "tool character" portrait (the 3D Generator as a tired knight holding a 2-million-triangle sword), or a deliberately cursed "same character, 40 cousins" grid for the consistency bit. Always label the post or alt text as AI-generated. That's the honest move in a community fighting about disclosure, and it lets the image itself be the self-aware joke.
+- **Never** use generated images to fake a real tool's output, a screenshot, a person, or a news event. Never use them as decoration on a news post.
+- **Alt text on every image** (accessibility, and it can carry a second joke).
+
+**Visual formats to copy**
+| Format | Borrowed from | Our version |
+|---|---|---|
+| Moment photo + one line | MoonPie Artemis | A same-day screenshot of a big launch (an engine or model release) with a deadpan one-liner. |
+| Reaction GIF reply | Duolingo | GIF replies to viral demo posts ("it worked in the demo" energy). |
+| Workflow demo video | Scenario plugin | 15–20 s screen capture of a free directory feature or a real tool comparison we ran. |
+| Side-by-side comparison | Scenario model head-to-heads | Two real outputs from the same prompt, both tools named, with the date and settings in a reply. |
+| Headline-only | The Onion | No image. The words are the asset. |
+| Tool-character portrait (new, generated) | none (gap) | Higgsfield, at most once a week, labelled as AI-generated, and it becomes the recurring cast. |
+
 ### 20 draft posts (DRAFTS, not posted, need owner approval)
 1. the 3D generator made a beautiful sword. it has 2.1 million triangles. it is very proud. we have not told it about mobile.
 2. Report: Local Indie Dev Generates Same Character 40 Times, Receives 40 Distinct Cousins
@@ -180,5 +220,7 @@ Pain points to anchor jokes in: topology and retopo cleanup, inconsistent charac
 18. new model dropped. our 40 bookmarked "best model ever" threads have been notified and are processing their grief.
 19. weekly reminder that "AI for prototyping, cleanup by hand" is a workflow, not a confession.
 20. the voice model read "Sir Gwendolyn of the Ashen Vale" as "sir gwendolyn of the ash envale" and honestly we've adopted it as canon.
+
+Media for drafts: everything is text-only except #2 (optional generated cousins grid, labelled as AI) and #1 (optional generated tool-character portrait, labelled). No media has been generated.
 
 Safety notes on drafts: no real person is quoted, no stats are invented, and no named tool is accused of anything. #14 refers to Steam's real disclosure survey without characterising specifics. Verify the current Steam wording before posting.
