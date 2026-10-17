@@ -368,15 +368,24 @@ page('/sponsor/', layout({
 <p>To ask about sponsorship, <a href="https://github.com/michaelpaulrattray/gamedev-ai-tools/issues/new?title=${encodeURIComponent('Sponsorship enquiry: ')}&labels=sponsor">open a GitHub issue</a> with your tool's name and which tier you're interested in (issues are public).</p>`,
 }));
 
-// ---------- Privacy ----------
+// ---------- Privacy (wording approved by Mike, 2026-10-17) ----------
+const GH_ISSUES = 'https://github.com/michaelpaulrattray/gamedev-ai-tools/issues';
 page('/privacy/', layout({
   title: `Privacy | ${SITE.name}`,
-  description: 'GameDev AI Tools does not collect personal data.',
+  description: 'What data GameDev AI Tools handles: hosting logs on Vercel, tool submissions via public GitHub issues, and newsletter emails stored with Resend.',
   pathname: '/privacy/',
   body: `<h1>Privacy</h1>
-<p>This site doesn't collect any personal data. It has no accounts, cookies, analytics or tracking, and the newsletter form is a placeholder that collects nothing.</p>
-<p>The site is hosted on GitHub Pages. GitHub may process technical data (such as IP addresses) to serve the pages, as described in GitHub's own privacy statement.</p>
-<p>Last updated ${SITE.updated}.</p>`,
+<p>Last updated 17 October 2026.</p>
+<p>This page explains, in plain terms, what happens to data when you use this site.</p>
+<h2 class="sub-h">Browsing</h2>
+<p>The site is hosted on Vercel. Like any web host, Vercel receives technical data such as your IP address, browser user agent and the pages you request, and may keep it in server logs. See <a href="https://vercel.com/legal/privacy-policy" rel="noopener">Vercel's privacy policy</a>.</p>
+<p>We don't use analytics, advertising or tracking scripts, and the site doesn't set cookies. Pages load no third-party scripts or fonts. Tool logos are stored on this site. Links to tool vendors take you to their sites, where their own policies apply.</p>
+<h2 class="sub-h">Submitting a tool</h2>
+<p>The <a href="${L('/submit/')}">Submit a tool</a> form doesn't store your submission on this site. It sends you to GitHub with a prefilled issue, and nothing is filed until you submit it there with your own GitHub account. GitHub issues are public: anyone can see what you write there, your GitHub username and any email address you choose to include. GitHub's own privacy statement applies.</p>
+<h2 class="sub-h">Newsletter</h2>
+<p>If you sign up, your email address is stored with Resend, our email provider, in our newsletter list. We use it only for the newsletter. We haven't sent a newsletter yet. Every newsletter will include a way to unsubscribe. To be removed before then, open a GitHub issue (see below) asking to be removed, without posting your email address, and we'll reply there to arrange it.</p>
+<h2 class="sub-h">Contact</h2>
+<p>For now, contact us through <a href="${GH_ISSUES}">GitHub issues</a>. Those are public, so please don't post your email address there. A business email address is coming.</p>`,
 }));
 
 // ---------- Submit a tool ----------
@@ -413,16 +422,82 @@ page('/subscribe-error/', layout({
   body: `<h1>Signup didn't work</h1><p>Please check your email address and <a href="${L('/#newsletter')}">try again</a>.</p>`,
 }), { sitemap: false });
 
+// ---------- llms.txt / llms-full.txt (https://llmstxt.org) ----------
+const md = s => String(s).replace(/\s+/g, ' ').trim();
+const catLinks = Object.values(TASKS).map(c => `- [${c.label}](${URL_(`/category/${c.page}/`)}): ${c.h1}`);
+const guideLinks = GUIDES.map(g => `- [${md(g.title)}](${URL_(`/guides/${g.slug}/`)}): ${md(g.description)}`);
+const cmpLinks = COMPARE.map(([a, b]) => `- [${bySlug[a].name} vs ${bySlug[b].name}](${URL_(`/compare/${a}-vs-${b}/`)})`);
+const llmsHead = `# ${SITE.name}
+
+> ${SITE.description} Every fact comes from the vendor's own pages, with a source link and a last-checked date (${CHECKED}). Anything we couldn't confirm is marked "unverified". There are no ratings, reviews or user counts.
+
+${tools.length} tools listed. Each tool page covers what it is best for, price and free tier, supported engines, export formats, commercial-use terms and licence (with source), revenue share or caps, and API and MCP server availability.
+`;
+const llmsLinks = `
+## Categories
+${catLinks.join('\n')}
+
+## Guides
+- [All guides](${URL_('/guides/')})
+${guideLinks.join('\n')}
+
+## Store rules
+- [${md(DISCLOSURE.title)}](${URL_('/steam-ai-disclosure/')}): ${md(DISCLOSURE.description)}
+
+## Comparisons
+- [All comparisons](${URL_('/compare/')})
+${cmpLinks.join('\n')}
+
+## Optional
+- [Full directory of tools](${URL_('/')}): searchable and filterable by task, engine, free plan and commercial use
+- [Full text for LLMs](${URL_('/llms-full.txt')}): every listing's sourced facts in one Markdown file
+- [New this week](${URL_('/new/')}): recent, sourced releases
+- [Submit a tool](${URL_('/submit/')})
+- [Sponsor](${URL_('/sponsor/')})
+- [Privacy](${URL_('/privacy/')})
+`;
+write('llms.txt', llmsHead + llmsLinks);
+const toolMd = t => `### ${t.name}
+- Page: ${URL_(`/tools/${t.slug}/`)}
+- Official site: ${t.url}
+- Summary: ${md(t.summary)}
+- Verdict: ${md(t.verdict)}
+- Best for: ${md(t.bestFor || 'unverified')}
+- Tasks: ${t.tasks.map(k => TASKS[k] ? TASKS[k].label : k).join(', ')}
+- Engines: ${engineText(t)}
+- Pricing: ${md(t.pricing)} (source: ${t.pricingSource || 'unverified'})
+- Free plan: ${FREE[t.free] || t.free}. ${md(t.freeTier || '')}
+- Export formats: ${md(t.exportFormats || 'unverified')}${t.exportSource ? ` (source: ${t.exportSource})` : ''}
+- Commercial use: ${COMMERCIAL[t.commercial] || t.commercial}. ${md(t.license)} (source: ${t.licenseSource || 'unverified'})
+- Revenue share / caps: ${md(t.revenue || 'unverified')}
+- API: ${API_L[t.api?.status] || 'Unverified'}${t.api?.note ? `. ${md(t.api.note)}` : ''}${t.api?.source ? ` (source: ${t.api.source})` : ''}
+- MCP: ${MCP_L[t.mcp?.status] || 'Unverified'}${t.mcp?.note ? `. ${md(t.mcp.note)}` : ''}${t.mcp?.source ? ` (source: ${t.mcp.source})` : ''}
+- Last checked: ${t.lastChecked}
+`;
+const discMd = DISCLOSURE.sections.map(sec => `### ${sec.h}\n${sec.items.map(i => `- ${md(i.text)}${i.url ? ` (source: ${i.url.startsWith('/') ? URL_(i.url) : i.url})` : ''}`).join('\n')}`).join('\n\n');
+const newsMd = NEWS.map(n => `- ${n.date}: ${md(n.title)}. ${md(n.text)} (source: ${n.source})`).join('\n');
+write('llms-full.txt', `${llmsHead}${llmsLinks}
+## Tools
+${tools.map(toolMd).join('\n')}
+## ${md(DISCLOSURE.title)}
+Checked ${CHECKED}. Page: ${URL_('/steam-ai-disclosure/')}
+
+${discMd}
+
+## New this week
+${newsMd}
+`);
+
 // ---------- Static assets, sitemap, robots, 404 ----------
 fs.cpSync('src/assets', path.join(out, 'assets'), { recursive: true });
 // Root-level verification files (e.g. Google Search Console), copied byte-for-byte; never in the sitemap.
 if (fs.existsSync('src/root')) fs.cpSync('src/root', out, { recursive: true });
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.map(p => `<url><loc>${URL_(p)}</loc><lastmod>${SITE.updated}</lastmod></url>`).join('\n')}
+${[...pages, '/llms.txt', '/llms-full.txt'].map(p => `<url><loc>${URL_(p)}</loc><lastmod>${SITE.updated}</lastmod></url>`).join('\n')}
 </urlset>
 `);
-write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${URL_('/sitemap.xml')}\n`);
-write('404.html', layout({ title: `Not found | ${SITE.name}`, description: 'Page not found.', pathname: '/404.html', body: `<h1>Page not found</h1><p><a href="${L('/')}">Back to all tools</a></p>` }));
+write('robots.txt', `User-agent: *\nAllow: /\n\n# LLM-friendly summary (https://llmstxt.org): ${URL_('/llms.txt')} and ${URL_('/llms-full.txt')}\nSitemap: ${URL_('/sitemap.xml')}\n`);
+write('404.html', layout({ title: `Not found | ${SITE.name}`, description: 'Page not found.', pathname: '/404.html', noindex: true, body: `<h1>Page not found</h1><p><a href="${L('/')}">Back to all tools</a></p>` }));
 write('.nojekyll', '');
 console.log(`Built ${pages.length} pages, ${tools.length} tools -> ${out}/`);
