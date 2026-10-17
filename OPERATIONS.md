@@ -1,38 +1,121 @@
 # OPERATIONS: GameDev AI Tools
 
-Live: https://gamedevaitools.com (Vercel, Git-connected: pushes to `main` deploy production). Old GitHub Pages URL redirects there.
+Live: https://gamedevaitools.com (Vercel project `gamedev-ai-tools`, Git-connected: pushes to `main` deploy production). Repo: `michaelpaulrattray/gamedev-ai-tools`. Old GitHub Pages URL redirects there.
 
-Owner: Mike Paul (Brisbane, Australia/Brisbane). Budget: $0. This business is separate from Klieg: no shared repos, accounts or services.
+Owner: Mike Paul (Brisbane, Australia/Brisbane). Business inbox: hello@gamedevaitools.com (Google Workspace). Newsletter sending domain: news.gamedevaitools.com (Resend). This business is separate from Klieg: no shared repos, accounts, Stripe, Notion or email.
 
-## Current goals
-1. v0 live on free GitHub Pages with 25–40 real, sourced tools. **Done 2026-10-17: 31 tools.** v2 (2026-10-17): 40 tools, 12 task categories.
-2. Grow to ~60 tools across all task categories while keeping every listing sourced and dated.
-3. Get indexed: submit the sitemap to search engines once a verification method is approved (see open questions).
-4. Re-verify pricing and licences regularly, since these change often (see routines).
+**Operating mode (since 2026-10-17): autonomous**, within the rules below. Times are AEST (Australia/Brisbane).
+
+## Goals
+1. Be the most trusted directory of AI tools for game developers: every fact vendor-sourced, linked and dated; `unverified` when unclear.
+2. Grow to ~60 tools across all 12 task categories, kept fresh (monthly re-checks).
+3. Grow the newsletter with the lead magnet (/cheat-sheet/: "AI tools you can legally ship in a paid game").
+4. Earn revenue without compromising listings: sponsor strip (US$79/week to start), disclosed affiliate links, real vendor deals.
+5. Get indexed and cited (sitemap, llms.txt, badges from listed tools).
+
+## Operating rules
+
+### Act without asking
+- Add, update or remove tools and facts (sourced, dated); mark `unverified` honestly.
+- Refresh New this week, deals, comparisons, guides and the cheat sheet (all generated from data).
+- Fix bugs, copy, performance, accessibility and SEO; deploy by pushing to `main`; roll back (git revert + push) if anything breaks live.
+- Accept a sponsor booking that meets the auto-accept criteria and put it in `data/sponsor.json`.
+- Add an affiliate link (`affiliateUrl`) for a listed tool when the programme's terms allow disclosure as we do it.
+- Add a deal to `data/deals.json` when it's sourced from the vendor.
+- Send outreach within the limits below; post on X within the X rules.
+- Spend within the US$30/month test budget.
+
+### Ask Mike first
+- Spending beyond the US$30/month test budget. Alert Mike when spend reaches 80% (US$24) in a month.
+- Legal or licence uncertainty (terms we can't interpret confidently, takedown or legal threats, trademark questions).
+- Refunds or payment disputes.
+- Anything that needs Mike's identity (signing up as him, ID checks, contracts in his name).
+- Payout or tax details (bank, ABN/GST, W-8BEN, affiliate payout setup).
+- Deals that need a human reply (negotiated rates, custom campaigns, exclusives).
+- **48-hour default:** when I ask, I give my recommended option. If Mike hasn't answered within 48 hours, I go ahead with that option (except spending over budget, legal, refunds/disputes, identity and payout/tax, which always wait).
+
+### Never
+- Facts and ordering are never bought. Listings are alphabetical; verdicts come only from sourced facts. Sponsors and affiliate status never change a listing, its position or its verdict.
+- Never estimate or invent stats (traffic, subscribers, open rates), testimonials, deals, codes or quotes. Only report real numbers from a named source.
+- Never touch DNS MX/SPF records without Mike. Never use Mike's personal Gmail. Nothing Klieg-related.
+
+## Sponsorship
+- **Offer (one product):** your logo and link in the sponsor strip on every page for 7 days, plus a mention in the next newsletter. **US$79/week.** Page: /sponsor/. Bigger campaigns: email hello@gamedevaitools.com (ask-first if it needs a human negotiation).
+- **Checkout:** Stripe Payment Link https://buy.stripe.com/cNi6oH9KDaWV44P7CO4Vy00 (set as `SPONSOR_PAYMENT_URL` in `config.mjs`). After payment Stripe redirects to `/sponsor/?paid=1`, which shows: "Thanks! Email your logo (SVG or PNG) and link to hello@gamedevaitools.com and we'll add you within a day."
+- **Stripe account:** Webshark (`acct_1OOvVVDWGua6BgHE`), approved by Mike on 2026-10-17. Product `prod_VSJON3EbWlWZbm`, price `price_1UROlXDWGua6BgHEDQx6pPgY` (USD 79), payment link `https://buy.stripe.com/cNi6oH9KDaWV44P7CO4Vy00`.
+- **Strip:** driven by `data/sponsor.json` (`{}` = "Your tool here: Sponsor us"). Filled: logo, name, link with `rel="sponsored noopener"`, labelled "Sponsor". `start`/`end` dates (AEST) are honoured at build time, so rebuild (push) on the start and the day after the end.
+- **Price ladder** (30-day average visitors from Vercel Web Analytics, real numbers only):
+  | 30-day avg visitors | Price per week |
+  |---|---|
+  | under 5k | US$79 |
+  | 5k+ | US$199 |
+  | 20k+ | US$449 |
+  | 50k+ | US$899 |
+  Note: Mike's brief left 1k–5k undefined; we treat everything under 5k as US$79. A price change means a new Stripe price and payment link, then updating `SPONSOR_PAYMENT_URL` and the offer text in `config.mjs`. Existing bookings keep their price.
+- **Auto-accept criteria** (all must hold, otherwise ask Mike): paid in full through Stripe; the sponsor is a real product relevant to game developers or creators; not adult, gambling, crypto/financial speculation, weapons, malware, piracy or "undetectable AI" tools; no misleading claims in the name/link we show; the logo is their own; the week isn't already booked (one sponsor at a time). If we decline after payment, refund in full (refunds are ask-first, so tell Mike the same day).
+
+## Affiliate rules and disclosure
+- Optional `affiliateUrl` per tool in `data/tools.json`. When present, the tool page's Visit button uses it with `rel="sponsored noopener"` and shows "Some links earn us a commission. It never changes our listings." The same sentence is in the footer of every page and in llms.txt.
+- Affiliate status never affects order (alphabetical), facts, verdicts, the cheat sheet or comparisons.
+- Only join programmes whose terms allow this disclosure and don't require ranking, reviews or bidding on their brand name. Payout and tax setup is ask-first.
+- The privacy page already covers affiliate cookies set by third-party sites after a click.
+
+## Outreach limits
+- **"You're listed" emails:** one per tool, max 10/day, from hello@gamedevaitools.com. Factual: what we list, the listing URL, how to correct it, the optional badge (/badge/).
+- **Launch/sales outreach:** max 20 sales emails per month, one follow-up at most, stop on any no, honour unsubscribes immediately, factual only (no invented stats).
+- Every email identifies the sender (GameDev AI Tools, Brisbane, Australia, hello@gamedevaitools.com) and includes an opt-out line ("Reply 'no thanks' and we won't email again").
+- Log every send in the outreach log below.
+
+### Outreach log
+| Tool | Contact | Date sent | Reply |
+|---|---|---|---|
+| _none yet_ | | | |
+
+## X (@gamedevaitools) rules
+- Account labelled as automated (X's automated-account label, managed by Mike's account).
+- 1–2 posts a day. Reply only to people who reply to us.
+- No auto-follow, auto-like, unprompted mentions or unrelated hashtags.
+- Human voice per `docs/brand-voice.md`. No AI-generated images.
+- Facts in posts must be sourced; never invent stats or quotes.
+
+## Deals
+`data/deals.json` drives /deals/ (tool, offer, code, source URL, expiry). The build drops expired entries (compares to the AEST build date). Only real offers, sourced from the vendor page. Empty state is honest.
+
+### Deals log
+| Date added | Tool | Offer | Code | Source | Expires | Removed |
+|---|---|---|---|---|---|---|
+| _none yet_ | | | | | | |
+
+## Newsletter and email
+- Signup: compact form in every page footer, plus a lead-magnet block on home, category, tool, deals and cheat-sheet pages. `/api/subscribe` adds the contact to Resend audience `948e7a35-dcea-4a83-b260-8b68439b25b7`, then sends one welcome email (only for new contacts) from `GameDev AI Tools <hello@news.gamedevaitools.com>`, reply-to hello@gamedevaitools.com, with the cheat-sheet link, the sender line "GameDev AI Tools, Brisbane, Australia", a signed unsubscribe link and List-Unsubscribe (one-click) headers. Signup succeeds even if the email fails (logged only). No welcome email is attempted to reserved test domains (example.com etc.).
+- `/api/unsubscribe?e=…&t=…`: HMAC-signed with `UNSUBSCRIBE_SECRET` (Vercel, sensitive). GET shows a confirm button; POST (button or one-click) sets `unsubscribed=true` on the Resend contact.
+- `/api/ops` (Bearer `OPS_TOKEN`, Vercel sensitive; copy on the agent box at `~/.config/gamedevaitools/ops_token`): `?action=domain` (Resend domain status and records for news.gamedevaitools.com), `?action=contact&email=` and `POST ?action=delete-contact&email=` for example.com test contacts only.
+- Every future newsletter must include the sender line and an unsubscribe link (use `link()` from `api/_unsub.js`).
 
 ## Routines
-- **Monthly (first Saturday):** re-check each tool's pricing and licence source links. Update `pricing`, `license`, `commercial` and `lastChecked` in `data/tools.json`. Mark anything that can't be confirmed as `unverified`. Remove tools that have shut down.
-- **Weekly:** look for new AI game-dev tools and add them only with official-source facts.
-- **Weekly (Saturday):** refresh the "New this week" feed (`NEWS` in `content.mjs`): real releases only, each with a source link and a date (AEST); drop items older than about 4 weeks. Mark launch dates `unverified` if the source does not state them.
-- **Monthly:** re-check the store AI-disclosure page (`DISCLOSURE` in `content.mjs`) and comparison pages, since they derive from tools.json and store policies.
-- **On every change:** push to `main`. Vercel auto-deploys production from `main` (Git-connected). The GitHub Actions Pages workflow only rebuilds the redirect stubs. Then confirm that every URL in https://gamedevaitools.com/sitemap.xml returns 200.
-- **Inbound:** tool suggestions arrive as GitHub issues labelled `submission`. Corrections, sponsorship and newsletter removals arrive at hello@gamedevaitools.com.
+_Placeholder: Mike will fill in the routines schedule._
 
-## Metrics
-No analytics are installed (none approved yet). Trackable right now with no tracking code:
-- Number of tools listed (31 at launch, 40 at v2) and number of category pages.
-- Share of listings checked within the last 30 days.
-- Share of fields marked `unverified` (target: going down).
-- GitHub repo traffic (Insights → Traffic; repo only, not the site).
-- Newsletter subscribers: contact count in the Resend audience.
-- Tool submissions: GitHub issues labelled `submission`.
-Later, if approved: site visits, top tool pages, search queries.
+Carried over until then:
+- Monthly (first Saturday): re-check every tool's pricing and licence sources; update `lastChecked`; mark `unverified` where unclear; remove dead tools.
+- Weekly (Saturday): refresh New this week (`NEWS` in `content.mjs`), check deals for expiry, add sourced new tools.
+- On every change: push to `main`, then confirm every sitemap URL returns 200.
+
+## Metrics (real numbers only, with the source)
+- Visitors and page views: Vercel Web Analytics (cookieless) once enabled. 30-day average visitors sets the sponsor price.
+- Newsletter subscribers: contact count in the Resend audience (exclude unsubscribed).
+- Sponsor revenue: Stripe payments on the sponsor payment link.
+- Affiliate revenue: each programme's dashboard.
+- Tools listed (40 on 2026-10-17), share checked in the last 30 days, share of `unverified` fields (target: down).
+- Tool submissions: GitHub issues labelled `submission`. Outreach replies: outreach log.
+No estimates. If a number isn't available, write "not measured".
 
 ## Decisions log
+- **2026-10-17: Moved to autonomous operation per Mike's policy.** Sponsorship is one US$79/week offer (sponsor strip + newsletter mention) paid via Stripe (Webshark account, approved by Mike); /get-featured/ removed (308 to /sponsor/); affiliate links allowed with disclosure; /deals/ (auto-expiring), /cheat-sheet/ lead magnet, /badge/ added; newsletter signup on every page with a welcome email and signed unsubscribe; privacy page updated first (cookieless Vercel Web Analytics, affiliate cookies, Stripe, emails), then the Vercel Web Analytics script added to every page. New Vercel env vars: `UNSUBSCRIBE_SECRET`, `OPS_TOKEN` (sensitive).
+- **2026-10-17 (14:10 AEST): Live checks after deploy.** Resend domain news.gamedevaitools.com is **verified** (region ap-northeast-1; DKIM TXT `resend._domainkey.news`, SPF CNAMEs `send.news` and `rsend.news`, all verified), so welcome emails can send. Test signup with `delete-me-20261017b@example.com` returned /subscribed/ and created the contact (welcome email deliberately skipped for example.com). The signed unsubscribe link showed the confirm page; one-click POST set `unsubscribed=true` (checked via /api/ops); a tampered token went to /unsubscribe-error/. Both test contacts (`delete-me-20261017b@example.com` and the earlier `test-delete-me-20261017@example.com`) were deleted from the audience (confirmed 404). **Vercel Web Analytics is not enabled:** `/_vercel/insights/script.js` returns 404 and the Vercel connector has no analytics setting. **Mike: Vercel → gamedev-ai-tools → Analytics → Enable.** The script tag is already on every page and starts counting once enabled. No real welcome email has been sent to a real address yet.
 - **2026-10-17:** Chose a directory of AI tools for game developers as the micro-business (per Mike).
 - **2026-10-17:** Hosting on Mike's personal GitHub (`michaelpaulrattray/gamedev-ai-tools`, public) with free GitHub Pages deployed through Actions (per Mike).
 - **2026-10-17:** Stack is plain HTML/CSS/JS from a zero-dependency Node build script (`build.mjs`), with `data/tools.json` as the single source of truth. Chosen for speed, $0 cost and no dependency maintenance.
-- **2026-10-17:** Editorial policy: vendor-sourced facts only, with source links and a last-checked date; `unverified` when unclear; no reviews, ratings or user counts; no affiliate links.
+- **2026-10-17:** Editorial policy: vendor-sourced facts only, with source links and a last-checked date; `unverified` when unclear; no reviews, ratings or user counts; no affiliate links (superseded 2026-10-17: affiliate links allowed with disclosure, see Affiliate rules).
 - **2026-10-17:** The newsletter is a disabled "coming soon" placeholder that collects nothing. The "Get featured" page has no prices.
 - **2026-10-17:** Domain gamedevaitools.com bought by Mike on Vercel; hosting moved to Vercel (project `gamedev-ai-tools` in Mike's Vercel team). Site now builds for the domain root: canonical URLs, sitemap and robots.txt point at https://gamedevaitools.com. www redirects (308) to the apex.
 - **2026-10-17:** Old GitHub Pages URL (michaelpaulrattray.github.io/gamedev-ai-tools/) now serves redirect stubs only (instant meta refresh + JS redirect + canonical to the same path on gamedevaitools.com). Reversible: in `.github/workflows/pages.yml`, switch the build step back to `node build.mjs` with `SITE_ORIGIN`/`SITE_BASE` env and upload `dist`, or disable Pages in repo settings.
@@ -58,16 +141,11 @@ Later, if approved: site visits, top tool pages, search queries.
 - **2026-10-17 (12:50 AEST): Decision: business email live.** hello@gamedevaitools.com on Google Workspace (Mike). MX is smtp.google.com, SPF is Google's, the ImprovMX records were removed by Mike, and Mike is adding DKIM (`google._domainkey`). Site updated: sponsor enquiries (/sponsor/), corrections (/get-featured/), the footer "Contact" link and the llms.txt contact line all use mailto:hello@gamedevaitools.com. The privacy page contact line and the newsletter-removal line now point to that address (Mike approved this as a factual contact change). The Submit-a-tool form still goes to prefilled GitHub issues.
 
 - **2026-10-17:** Brand voice study done (reference brands, X competitors, AI game-dev trends, voice guide, cadence, reply playbook, 20 draft posts): docs/brand-voice.md. Nothing posted.
-## Open questions (need Mike's approval)
-1. ~~Custom domain~~ Resolved 2026-10-17: Mike bought gamedevaitools.com on Vercel.
-1a. ~~Vercel GitHub integration~~ Resolved 2026-10-17: connected by Mike.
-2. ~~Newsletter provider~~ Resolved 2026-10-17: Resend (key provided by Mike).
-3. **Analytics choice:** none, a privacy-friendly option, or Google Search Console only. The privacy note must be updated before adding anything.
-4. ~~Privacy note~~ Resolved 2026-10-17 (rewritten with Mike's approval). Old note: /privacy/ still says no data is collected and that the site is hosted on GitHub Pages. Hosting is now Vercel, tool submissions (public GitHub issues, optional email shown publicly) are live, and newsletter signup (emails stored in Resend) will be once enabled. Please approve new wording, or ask for signup/submissions to be switched off until it's updated.
-4a. **Newsletter sending:** no sending domain is verified in Resend and nothing has been sent. Before the first send we need a verified sending domain (e.g. a DNS record on gamedevaitools.com), double opt-in or not, an unsubscribe flow, and a physical/contact address if required. Each of these needs Mike's decision.
-4b. **Submissions token (optional):** a fine-grained GitHub token for direct issue creation (see decisions log). Without it, submitters need a GitHub account.
-4c. **Abuse protection:** honeypot only, with no rate limiting. Revisit if spam appears.
-5. **Search engine submission:** Google Search Console HTML-file verification chosen by Mike; the file is live. Next (Mike, in Search Console): click Verify, then submit https://gamedevaitools.com/sitemap.xml. Bing Webmaster Tools can import from Search Console (optional).
-6. **Sponsorship (/sponsor/):** confirm the two tiers and the pricing ("on request" for now), and choose a private contact method. Enquiries currently go to public GitHub issues because no business email exists. The Newsletter slot tier is unavailable until the newsletter launches. Sponsored placements would need a visible "Sponsored" label.
-7. ~~Newsletter key~~ Resolved 2026-10-17 (signup live). Mike still needs to delete the test contact.
-8. ~~Business email~~ Resolved 2026-10-17: hello@gamedevaitools.com is live, and contact links are switched. Remaining: confirm the DKIM record passes in Google Admin. Old note: delete the 3 ImprovMX DNS records, add the Workspace MX/SPF/DKIM records, then switch the sponsor and privacy contact from GitHub issues to the new address (the privacy page needs updating when that happens).
+
+## Open questions (need Mike)
+1. **X login:** access to post as @gamedevaitools (and set the automated-account label).
+2. **Affiliate payout and tax details:** bank/ABN/GST and tax forms for affiliate programmes (ask-first; nothing set up yet).
+3. **Analytics enable:** not enabled yet. Mike clicks Enable in Vercel → gamedev-ai-tools → Analytics (script is already on every page).
+4. **Search engine submission:** in Search Console, click Verify and submit https://gamedevaitools.com/sitemap.xml.
+5. **Submissions token (optional):** fine-grained GitHub token for direct issue filing.
+6. **Abuse protection:** honeypot only; no rate limiting on signup (the welcome email goes only to new contacts). Revisit if spam appears.
