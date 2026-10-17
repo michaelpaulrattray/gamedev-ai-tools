@@ -38,3 +38,12 @@ nav a:hover{color:var(--text)}
 .catlist li{margin:6px 0}.catlist span{color:var(--muted)}
 .site-footer{border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;margin-top:30px;padding:10px 0 24px}
 @media (max-width:600px){.facts{grid-template-columns:1fr}}
+.verdict{color:var(--text)!important;font-size:.9rem}
+.verdict.big{font-size:1.02rem;background:var(--panel);border-left:3px solid var(--accent);padding:10px 12px;border-radius:6px}
+.hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+form.submit{display:grid;gap:12px;max-width:640px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+form.submit label{display:grid;gap:4px;color:var(--muted)}
+form.submit input,form.submit select,form.submit textarea{background:#11131a;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px;font:inherit}
+form.submit small{font-size:.8rem}
+form.submit button,.newsletter button:not([disabled]){background:var(--accent);color:#fff;border:0;border-radius:8px;padding:10px 14px;font:inherit;cursor:pointer}
+.newsletter input:not([disabled]){color:var(--text)}

@@ -16,7 +16,8 @@
   "commercial": "yes",
   "license": "Pricing page lists \"Use generated images commercially\" and says the user owns the rights to generations, except using them to train models. Terms also reference the Open RAIL-M license.",
   "licenseSource": "https://www.pixellab.ai/termsofservice",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For 2D devs who need pixel-art sprites, rotations and animations; outputs are usable commercially on every plan, but its terms bar training other models on them."
  },
  {
   "slug": "retro-diffusion",
@@ -38,7 +39,8 @@
   "commercial": "yes",
   "license": "Official FAQ: \"Everything you generate is yours, for personal and commercial projects alike.\"",
   "licenseSource": "https://www.retrodiffusion.ai/",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For pixel-art devs who want pay-per-image pricing with no subscription; the site says all output is yours for commercial use."
  },
  {
   "slug": "scenario",
@@ -61,7 +63,8 @@
   "commercial": "paid-only",
   "license": "All paid plans include a full commercial license; free plan outputs are for personal and evaluation use only (per pricing FAQ).",
   "licenseSource": "https://www.scenario.com/pricing",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For studios that want custom style models trained on their own art; commercial use needs a paid plan (free output is personal/evaluation only)."
  },
  {
   "slug": "leonardo-ai",
@@ -82,7 +85,8 @@
   "commercial": "yes",
   "license": "Paid subscribers retain full ownership and IP rights. Free tier: Leonardo holds rights to the images but grants you a non-exclusive, royalty-free licence for commercial use; free creations are public.",
   "licenseSource": "https://leonardo.ai/pricing",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For general concept art and icon ideas; free-tier output can be used commercially but is public and Leonardo holds rights to it, while paid plans give you ownership."
  },
  {
   "slug": "layer-ai",
@@ -103,7 +107,8 @@
   "commercial": "yes",
   "license": "Pricing page lists \"Commercial license for all users\". Free-tier scope: unverified.",
   "licenseSource": "https://www.layer.ai/pricing",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For studios that want style-trained generation with no per-seat fees; the pricing page lists a commercial licence for all users."
  },
  {
   "slug": "ludo-ai",
@@ -125,7 +130,8 @@
   "commercial": "yes",
   "license": "FAQ: the person who initiates a generation is recognized as the full owner of that content and can export and use it as they see fit.",
   "licenseSource": "https://ludo.ai/docs/faq",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For Unity devs who want ideation and 2D assets in one place; its FAQ says you own what you generate, but free-plan sprite sheets are watermarked."
  },
  {
   "slug": "meshy",
@@ -148,7 +154,8 @@
   "commercial": "yes",
   "license": "Paid plans: you own the assets you create. Free plan: assets licensed to you under CC BY 4.0 (commercial use with attribution to Meshy).",
   "licenseSource": "https://www.meshy.ai/pricing",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For quick text- or image-to-3D props with Godot/Unity/Unreal bridges; free output is CC BY 4.0, so you must credit Meshy unless you pay."
  },
  {
   "slug": "tripo",
@@ -170,7 +177,8 @@
   "commercial": "paid-only",
   "license": "Pricing page: Free plan = \"Public Models · Non-Commercial Use\"; Pro, Max and Team = \"Private Models · Commercial Use\".",
   "licenseSource": "https://www.tripo3d.ai/pricing",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For 3D models with retopology and engine bridges; the free plan is non-commercial, so shipping assets requires a paid plan."
  },
  {
   "slug": "hyper3d-rodin",
@@ -190,7 +198,8 @@
   "commercial": "unverified",
   "license": "Business plan lists \"Commercial license included\"; FAQ says paid plans include broader export and usage rights. Exact rights on Free and Creator: unverified.",
   "licenseSource": "https://hyper3d.ai/subscribe",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For high-detail 3D generation; commercial rights on the Free and Creator tiers are unverified, so check its terms before you ship."
  },
  {
   "slug": "sloyd",
@@ -210,7 +219,8 @@
   "commercial": "paid-only",
   "license": "Free plan: personal-use license. Plus and Pro include a commercial license (you own what you generate; Pro adds reselling).",
   "licenseSource": "https://www.sloyd.ai/pricing",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For game-ready props from editable templates with Unity/Unreal plugins; the free plan is personal-use only."
  },
  {
   "slug": "hunyuan3d",
@@ -230,7 +240,8 @@
   "commercial": "restricted",
   "license": "Tencent Hunyuan 3D 2.1 Community License: does NOT apply in the EU, UK or South Korea; use of the works or outputs outside the licensed territory is unauthorized; products with over 1 million monthly active users must request a license from Tencent.",
   "licenseSource": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1/blob/main/LICENSE",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For devs who can self-host a 3D model generator at no licence cost; the licence excludes the EU, UK and South Korea, and products over 1 million monthly users must request a licence."
  },
  {
   "slug": "skybox-ai",
@@ -250,7 +261,8 @@
   "commercial": "unverified",
   "license": "Terms: \"You own all Assets You create with the Services, to the extent possible under current law.\" Plans page lists \"Commercial licensing\" on the Business tier; commercial terms for lower tiers: unverified.",
   "licenseSource": "https://www.blockadelabs.com/tos",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For 360° skyboxes and environment backdrops; the terms say you own your assets, but commercial terms below the Business tier are unverified."
  },
  {
   "slug": "cascadeur",
@@ -269,7 +281,8 @@
   "commercial": "paid-only",
   "license": "Free and Educational: no commercial use. Indie: commercial use only if revenue/funding is under $100,000/year. Pro and Teams: full commercial use.",
   "licenseSource": "https://cascadeur.com/plans",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For hand-keyed character animation with AI posing help; free is non-commercial, and Indie only covers studios under $100k a year in revenue/funding."
  },
  {
   "slug": "deepmotion",
@@ -288,7 +301,8 @@
   "commercial": "paid-only",
   "license": "Freemium accounts are for personal, non-commercial use; a premium subscription plan is required for licensed (commercial) animation.",
   "licenseSource": "https://www.deepmotion.com/pricing-animate3d",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For turning reference video into 3D animation cheaply; the free Freemium tier is non-commercial only."
  },
  {
   "slug": "rokoko-vision",
@@ -308,7 +322,8 @@
   "commercial": "unverified",
   "license": "Commercial-use terms for Vision output were not found on the pages checked: unverified.",
   "licenseSource": "https://www.rokoko.com/pricing",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For trying video-based mocap for free (30 seconds a month); commercial terms for its output are unverified."
  },
  {
   "slug": "unity-ai",
@@ -332,7 +347,8 @@
   "commercial": "unverified",
   "license": "Unity's plans FAQ says you own content you create using Unity; AI-output-specific terms were not checked: unverified.",
   "licenseSource": "https://unity.com/products",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For Unity users who want AI inside the editor, with monthly credits included on Personal, Pro and Enterprise plans; AI-output licence terms are unverified."
  },
  {
   "slug": "ludus-ai",
@@ -352,7 +368,8 @@
   "commercial": "unverified",
   "license": "Ownership/commercial terms for generated output: unverified.",
   "licenseSource": "https://ludusengine.com/terms",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For Unreal devs who want a project-aware assistant in the editor; it has no free credits beyond a 14-day trial, and its output licence is unverified."
  },
  {
   "slug": "github-copilot",
@@ -371,7 +388,8 @@
   "commercial": "yes",
   "license": "Copilot Product Specific Terms: \"GitHub does not own Suggestions. You retain ownership of Your Code.\" IP indemnity applies to organization plans, not individual plans.",
   "licenseSource": "https://github.com/features/copilot/plans",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For coding in any engine with a free starting tier; GitHub says it doesn't own suggestions, and IP indemnity only comes with organization plans."
  },
  {
   "slug": "cursor",
@@ -390,7 +408,8 @@
   "commercial": "yes",
   "license": "Terms of Service 5.3: you retain rights in Inputs and Anysphere assigns to you all of its right, title and interest (if any) in Suggestions.",
   "licenseSource": "https://cursor.com/terms-of-service",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For devs who want an AI-first editor with a free tier; its terms assign suggestion rights to you, and third-party model usage is billed separately."
  },
  {
   "slug": "windsurf",
@@ -409,7 +428,8 @@
   "commercial": "yes",
   "license": "Individual terms 3.1: Cognition assigns to you all right, title and interest in Output.",
   "licenseSource": "https://windsurf.com/terms-of-service-individual",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For an AI code editor whose free plan includes unlimited tab completions; its terms assign output rights to you."
  },
  {
   "slug": "elevenlabs",
@@ -429,7 +449,8 @@
   "commercial": "paid-only",
   "license": "Terms: free-plan users may only use the Services for non-commercial purposes; paid-subscription users may use them commercially (subject to the Prohibited Use Policy).",
   "licenseSource": "https://elevenlabs.io/terms-of-use",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For NPC voice lines and SFX; free-plan output is non-commercial, so a paid plan is required to ship."
  },
  {
   "slug": "inworld-ai",
@@ -449,7 +470,8 @@
   "commercial": "yes",
   "license": "Terms: subject to compliance, Inworld assigns to you all of its right, title and interest in Outputs. Pricing page also lists a commercial license.",
   "licenseSource": "https://inworld.ai/terms",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For realtime TTS and LLM-driven characters on pay-as-you-go pricing; its terms assign outputs to you."
  },
  {
   "slug": "convai",
@@ -469,7 +491,8 @@
   "commercial": "yes",
   "license": "Terms of Service: you have ownership over your Customer Content and AI Generated Content.",
   "licenseSource": "https://convai.com/tos",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For conversational NPCs with a free tier to prototype on; its terms give you ownership of AI-generated content."
  },
  {
   "slug": "charisma-ai",
@@ -489,7 +512,8 @@
   "commercial": "yes",
   "license": "Terms: the customer (story owner) is deemed owner of Input and Output and Charisma assigns those rights to the customer, subject to its terms.",
   "licenseSource": "https://charisma.ai/terms",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For story-driven AI character conversations on pay-as-you-go credits; its terms assign input and output rights to the customer."
  },
  {
   "slug": "suno",
@@ -508,7 +532,8 @@
   "commercial": "paid-only",
   "license": "Terms: Pro/Premier subscribers are assigned Suno's rights in their Output; free/basic tier Outputs are for personal, non-commercial use only.",
   "licenseSource": "https://suno.com/terms",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For prototype songs and menu music; free-tier output is personal, non-commercial use only."
  },
  {
   "slug": "udio",
@@ -527,7 +552,8 @@
   "commercial": "no",
   "license": "Current Terms of Service list exploiting the Services or any Output for any commercial purpose among prohibited uses. Not suitable for shipping in commercial games under these terms.",
   "licenseSource": "https://www.udio.com/terms-of-service",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For personal music experiments only; its current terms prohibit commercial use of output, so it isn't suitable for shipped games."
  },
  {
   "slug": "aiva",
@@ -546,7 +572,8 @@
   "commercial": "paid-only",
   "license": "Free: non-commercial, credit AIVA, copyright owned by AIVA. Standard: limited monetization (YouTube, Twitch, TikTok, Instagram only). Pro: copyright owned by you, full monetization.",
   "licenseSource": "https://www.aiva.ai/legal/1",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For soundtrack-style game music; only the Pro plan gives you the copyright, and the free plan is non-commercial."
  },
  {
   "slug": "stable-audio",
@@ -565,7 +592,8 @@
   "commercial": "paid-only",
   "license": "Free plan: personal, non-commercial use. Paid plans list a commercial license.",
   "licenseSource": "https://www.stableaudio.com/pricing",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For generated music and audio clips; the free plan is non-commercial, while paid plans include a commercial licence."
  },
  {
   "slug": "soundraw",
@@ -584,7 +612,8 @@
   "commercial": "yes",
   "license": "License page: \"All Plans: Personal and commercial use in all of your projects.\"",
   "licenseSource": "https://soundraw.io/license",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For editable royalty-free background music; its licence page allows commercial use on all plans (USD pricing unverified)."
  },
  {
   "slug": "mubert",
@@ -603,7 +632,8 @@
   "commercial": "paid-only",
   "license": "Creator plan is non-commercial; commercial use needs Pro or Business, and the pricing FAQ says Business is designed for apps and games. Tracks cannot be redistributed as standalone music.",
   "licenseSource": "https://mubert.com/render/pricing",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For royalty-free background tracks; game use points to the Business plan, and tracks can't be redistributed as standalone music."
  },
  {
   "slug": "beatoven",
@@ -622,6 +652,7 @@
   "commercial": "yes",
   "license": "FAQ: you get a non-exclusive perpetual licence to use and monetise downloaded tracks; Beatoven.ai remains the owner of the tracks.",
   "licenseSource": "https://www.beatoven.ai/",
-  "lastChecked": "2026-10-17"
+  "lastChecked": "2026-10-17",
+  "verdict": "For background music you can monetise; you get a perpetual licence but Beatoven keeps ownership, and pricing is unverified."
  }
 ]

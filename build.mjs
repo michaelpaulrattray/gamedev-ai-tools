@@ -9,6 +9,8 @@ const SITE = {
   description: 'A free directory of AI tools for game developers. Filter by task (pixel art, 3D models, textures, music, voice, NPC dialogue, code), engine, pricing and commercial-use license.',
   updated: '2026-10-17',
 };
+const NEWSLETTER_ON = Boolean(process.env.RESEND_API_KEY && process.env.RESEND_AUDIENCE_ID);
+console.log('Newsletter signup enabled:', NEWSLETTER_ON);
 const URL_ = p => SITE.origin + SITE.base + p;
 const L = p => SITE.base + p;
 
@@ -33,7 +35,7 @@ const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(
 const ld = o => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`;
 const engineText = t => t.engines.filter(e => ENGINES[e]).map(e => ENGINES[e]).join(', ') || 'Any (standard file export / engine-agnostic)';
 
-function layout({ title, description, pathname, body, jsonld = [], scripts = '' }) {
+function layout({ title, description, pathname, body, jsonld = [], scripts = '', noindex = false }) {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -41,7 +43,7 @@ function layout({ title, description, pathname, body, jsonld = [], scripts = '' 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="canonical" href="${URL_(pathname)}">
+<link rel="canonical" href="${URL_(pathname)}">${noindex ? '\n<meta name="robots" content="noindex">' : ''}
 <meta property="og:type" content="website">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
@@ -54,7 +56,7 @@ ${jsonld.map(ld).join('\n')}
 <body>
 <header class="site-header"><div class="wrap">
 <a class="logo" href="${L('/')}">🎮 ${SITE.name}</a>
-<nav><a href="${L('/')}">All tools</a><a href="${L('/category/')}">Categories</a><a href="${L('/get-featured/')}">Get featured</a></nav>
+<nav><a href="${L('/')}">All tools</a><a href="${L('/category/')}">Categories</a><a href="${L('/submit/')}">Submit a tool</a><a href="${L('/get-featured/')}">Get featured</a></nav>
 </div></header>
 <main class="wrap">
 ${body}
@@ -73,6 +75,7 @@ function card(t) {
   return `<article class="card" data-slug="${t.slug}">
 <h3><a href="${L(`/tools/${t.slug}/`)}">${esc(t.name)}</a></h3>
 <p>${esc(t.summary)}</p>
+<p class="verdict"><strong>Verdict:</strong> ${esc(t.verdict)}</p>
 <ul class="tags">${t.tasks.map(k => `<li>${esc(TASKS[k].label)}</li>`).join('')}</ul>
 <p class="meta"><span class="pill price">${esc(PRICING[t.pricingModel])}</span> <span class="pill lic lic-${t.commercial}">${esc(COMMERCIAL[t.commercial])}</span></p>
 </article>`;
@@ -82,7 +85,25 @@ const out = 'dist';
 fs.rmSync(out, { recursive: true, force: true });
 const write = (p, s) => { const f = path.join(out, p); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, s); };
 const pages = [];
-const page = (p, html) => { write(p === '/' ? 'index.html' : p.replace(/^\//, '') + 'index.html', html); pages.push(p); };
+const page = (p, html, { sitemap = true } = {}) => { write(p === '/' ? 'index.html' : p.replace(/^\//, '') + 'index.html', html); if (sitemap) pages.push(p); };
+
+const HONEYPOT = `<div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>`;
+function newsletterBlock() {
+  if (!NEWSLETTER_ON) return `<section class="newsletter" id="newsletter">
+<h2>Newsletter: coming soon</h2>
+<p>We're planning a short email about new AI tools for game devs and changes to their pricing and licences. Signup isn't open yet, and this form collects nothing.</p>
+<form onsubmit="return false"><input type="email" placeholder="you@example.com" disabled aria-label="Email (coming soon)"><button type="button" disabled>Coming soon</button></form>
+</section>`;
+  return `<section class="newsletter" id="newsletter">
+<h2>Get the newsletter</h2>
+<p>An occasional email about new AI tools for game devs and changes to their pricing and licences. Unsubscribe any time.</p>
+<form method="post" action="/api/subscribe">
+<input type="email" name="email" required maxlength="254" placeholder="you@example.com" aria-label="Email address">
+${HONEYPOT}
+<button type="submit">Subscribe</button>
+</form>
+</section>`;
+}
 
 // ---------- Home ----------
 const opts = (o) => Object.entries(o).map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join('');
@@ -112,12 +133,8 @@ page('/', layout({
 <section id="results" class="grid">
 ${tools.map(card).join('\n')}
 </section>
-<section class="newsletter" id="newsletter">
-<h2>Newsletter: coming soon</h2>
-<p>We're planning a short email about new AI tools for game devs and changes to their pricing and licences. Signup isn't open yet, and this form collects nothing.</p>
-<form onsubmit="return false"><input type="email" placeholder="you@example.com" disabled aria-label="Email (coming soon)"><button type="button" disabled>Coming soon</button></form>
-</section>`,
-  scripts: `<script>window.TOOLS=${JSON.stringify(tools.map(t => ({ slug: t.slug, name: t.name, summary: t.summary, tasks: t.tasks, engines: t.engines, pricingModel: t.pricingModel, commercial: t.commercial }))).replace(/</g, '\\u003c')};</script>
+${newsletterBlock()}`,
+  scripts: `<script>window.TOOLS=${JSON.stringify(tools.map(t => ({ slug: t.slug, name: t.name, summary: t.summary + ' ' + t.verdict, tasks: t.tasks, engines: t.engines, pricingModel: t.pricingModel, commercial: t.commercial }))).replace(/</g, '\\u003c')};</script>
 <script src="${L('/assets/app.js')}"></script>`,
 }));
 
@@ -142,6 +159,7 @@ for (const t of tools) {
 <article class="tool">
 <h1>${esc(t.name)}</h1>
 <p class="lead">${esc(t.summary)}</p>
+<p class="verdict big"><strong>Verdict:</strong> ${esc(t.verdict)}</p>
 <p><a class="btn" href="${esc(t.url)}" rel="noopener nofollow" target="_blank">Visit official site ↗</a></p>
 <dl class="facts">
 <dt>Tasks</dt><dd>${t.tasks.map(k => `<a href="${L(`/category/${TASKS[k].page}/`)}">${esc(TASKS[k].label)}</a>`).join(', ')}</dd>
@@ -198,7 +216,7 @@ page('/get-featured/', layout({
 <li>We don't publish reviews, ratings or user numbers we can't verify.</li>
 <li>Featured placements aren't available yet. When they are, they'll be clearly labelled.</li>
 </ul>
-<p>To suggest a tool or a correction, open an issue on <a href="https://github.com/michaelpaulrattray/gamedev-ai-tools/issues">GitHub</a> with links to your pricing and terms pages.</p>`,
+<p>To suggest a tool, use the <a href="${L('/submit/')}">Submit a tool</a> form. For corrections, open an issue on <a href="https://github.com/michaelpaulrattray/gamedev-ai-tools/issues">GitHub</a> with links to your pricing and terms pages.</p>`,
 }));
 
 // ---------- Privacy ----------
@@ -211,6 +229,40 @@ page('/privacy/', layout({
 <p>The site is hosted on GitHub Pages. GitHub may process technical data (such as IP addresses) to serve the pages, as described in GitHub's own privacy statement.</p>
 <p>Last updated ${SITE.updated}.</p>`,
 }));
+
+// ---------- Submit a tool ----------
+page('/submit/', layout({
+  title: `Submit a tool | ${SITE.name}`,
+  description: 'Suggest an AI tool for game developers to be listed on GameDev AI Tools.',
+  pathname: '/submit/',
+  body: `<h1>Submit a tool</h1>
+<p>Know an AI tool that helps people make games? Send it in. We check every submission against the vendor's own website (what it does, its pricing and its commercial-use terms) before listing it. Submissions are public GitHub issues on <a href="https://github.com/michaelpaulrattray/gamedev-ai-tools/issues?q=label%3Asubmission">our repo</a>.</p>
+<form class="submit" method="post" action="/api/submit">
+<label>Tool name <input name="name" required maxlength="100"></label>
+<label>Official URL <input name="url" type="url" required maxlength="300" placeholder="https://"></label>
+<label>Category <select name="category" required><option value="">Choose…</option>${Object.values(TASKS).map(c => `<option>${esc(c.label)}</option>`).join('')}<option>Other</option></select></label>
+<label>Short description <textarea name="description" required maxlength="600" rows="4" placeholder="What does it do for game developers?"></textarea></label>
+<label>Your email (optional) <input name="email" type="email" maxlength="254"><small>It will be shown publicly on the GitHub issue. Leave it blank if you'd rather not share it.</small></label>
+${HONEYPOT}
+<button type="submit">Submit tool</button>
+</form>`,
+}));
+page('/submit/thanks/', layout({
+  title: `Thanks for your submission | ${SITE.name}`, description: 'Submission received.', pathname: '/submit/thanks/', noindex: true,
+  body: `<h1>Thanks! Your submission is in</h1><p>We'll check it against the vendor's website before listing it. You can follow submissions on <a href="https://github.com/michaelpaulrattray/gamedev-ai-tools/issues?q=label%3Asubmission">GitHub</a>.</p><p><a href="${L('/')}">Back to all tools</a></p>`,
+}), { sitemap: false });
+page('/submit/error/', layout({
+  title: `Submission problem | ${SITE.name}`, description: 'There was a problem with your submission.', pathname: '/submit/error/', noindex: true,
+  body: `<h1>Something went wrong</h1><p>Please check the required fields and <a href="${L('/submit/')}">try again</a>, or <a href="https://github.com/michaelpaulrattray/gamedev-ai-tools/issues/new?template=tool-submission.md">open a GitHub issue</a> directly.</p>`,
+}), { sitemap: false });
+page('/subscribed/', layout({
+  title: `You're subscribed | ${SITE.name}`, description: 'Newsletter signup received.', pathname: '/subscribed/', noindex: true,
+  body: `<h1>You're on the list</h1><p>Thanks for signing up. We haven't sent any newsletters yet, and you can unsubscribe from any email we send.</p><p><a href="${L('/')}">Back to all tools</a></p>`,
+}), { sitemap: false });
+page('/subscribe-error/', layout({
+  title: `Signup problem | ${SITE.name}`, description: 'There was a problem with your signup.', pathname: '/subscribe-error/', noindex: true,
+  body: `<h1>Signup didn't work</h1><p>Please check your email address and <a href="${L('/#newsletter')}">try again</a>.</p>`,
+}), { sitemap: false });
 
 // ---------- Static assets, sitemap, robots, 404 ----------
 fs.cpSync('src/assets', path.join(out, 'assets'), { recursive: true });
