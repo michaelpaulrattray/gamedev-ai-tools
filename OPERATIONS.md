@@ -119,7 +119,7 @@ Carried over until then:
 - Newsletter subscribers: contact count in the Resend audience (exclude unsubscribed).
 - Sponsor revenue: Stripe payments on the sponsor payment link.
 - Affiliate revenue: each programme's dashboard.
-- Tools listed (40 on 2026-10-17), share checked in the last 30 days, share of `unverified` fields (target: down).
+- Tools listed (42 on 2026-10-17), share checked in the last 30 days, share of `unverified` fields (target: down).
 - Tool submissions: GitHub issues labelled `submission`. Outreach replies: outreach log.
 No estimates. If a number isn't available, write "not measured".
 
@@ -197,6 +197,11 @@ No estimates. If a number isn't available, write "not measured".
   - **Retro Diffusion Godot tag kept:** homepage says "Export for Godot, Unity, Unreal, Blender, Blockbench or Minecraft" (Low-Poly 3D section) and the FAQ still says "Everything you generate is yours, for personal and commercial projects alike."
   - **Fab wording:** the old Epic marketplacehelp article now 301s to support.fab.com, so the Steam page's Epic line now cites the Fab Distribution Agreement, section 18(k): "CreatedWithAI" is required when a material portion is generated with generative AI; "NoAI" is opt-in and bars buyers from AI datasets, development or inputs. Unreal royalty terms aren't referenced anywhere on the site yet.
   - Fixed open-questions numbering (6 before 7).
+- **2026-10-17 (17:45 AEST): New listings Claude Code and ChatGPT; Suno USD prices corrected** (CEO request; can-i-sell sections dropped because tool pages already answer "Can I use X in a commercial game?"). Tools listed: 42.
+  - **Prices are geo-localised.** From the agent box (Australia) claude.com, chatgpt.com and suno.com show local currency (A$, Claude adds "Prices include 10% GST"). Suno's pricing page embeds its USD plan data (`monthly_price_usd` 10/30, `annual_price_usd` 96/288), so the Suno listing now reads Pro US$10/month or US$96/year (US$8/month), Premier US$30/month or US$288/year (US$24/month); this replaces the A$12/A$35 figures briefly published in the previous commit as "$". The SEO brief's $8/$24 were the USD yearly-billed rates. Rule going forward: listings use USD from the vendor's own page data or help centre; if only a local price is visible, label it with its currency.
+  - **claude-code** (task: code; engines: any; pricingModel paid; free: no). Pricing from claude.com/pricing server-rendered USD (Pro US$20 monthly or US$17/month billed annually, Max from US$100, Team standard seat US$25 monthly or US$20 annually; Free plan has "Claude Code: No"). Commercial: yes (Consumer Terms effective 8 Oct 2025 assign Outputs; Commercial Terms effective 17 Jun 2025: customer owns Outputs, no training on customer content, IP defence in section K). MCP client per code.claude.com/docs/en/mcp. Badge is amber because there's no free plan (existing licTone rule).
+  - **chatgpt** (tasks: concept-art, code; free: yes; commercial: yes). Terms of Use effective 1 Jan 2026 (cover ChatGPT, DALL·E and other individual services): you own Output, OpenAI assigns its rights; output may not be unique. USD: Plus US$20/month (help centre 6950777), Pro US$100/200/500 monthly (help centre 9793128); Go/Business/Enterprise USD not stated on readable pages, so only the Australian page prices are quoted with A$. MCP: Not stated by vendor (pricing page lists "Developer mode (beta)" for Plus/Pro but doesn't say MCP). Export formats and revenue caps: Not stated by vendor.
+  - Rankings untouched: neither tool is in rankings.json evidence, so both sit in tier 2 by the published fit score automatically. No logos stored yet (initials shown).
 ## Open questions (need Mike)
 1. **X login:** access to post as @gamedevaitools (and set the automated-account label).
 2. **Affiliate payout and tax details:** bank/ABN/GST and tax forms for affiliate programmes (ask-first; nothing set up yet).

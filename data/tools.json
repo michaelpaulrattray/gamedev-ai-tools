@@ -906,7 +906,7 @@
   ],
   "pricingModel": "freemium",
   "summary": "Text-to-music generator for full songs and instrumentals; used for prototyping soundtracks and menu music.",
-  "pricing": "Free $0/month (no commercial rights). Pro $15/month billed monthly, or $12/month billed yearly; Premier $45/month billed monthly, or $35/month billed yearly (pricing page, Monthly/Annual toggle). Currency not stated on the page.",
+  "pricing": "Free $0/month (no commercial rights). Pro US$10/month billed monthly, or US$96/year (US$8/month) billed yearly; Premier US$30/month billed monthly, or US$288/year (US$24/month) billed yearly. USD prices from the pricing page's own plan data; the page shows local currency in some regions (Australia: A$15/A$45 monthly, A$12/A$35 a month yearly).",
   "pricingSource": "https://suno.com/pricing",
   "commercial": "paid-only",
   "license": "Terms: Pro/Premier subscribers are assigned Suno's rights in their Output; free/basic tier Outputs are for personal, non-commercial use only. Suno's help centre adds that subscribing after you made a song \"will not give you a retroactive license for the song\", so free-plan songs stay non-commercial after you upgrade; songs made while subscribed keep commercial rights even if you cancel.",
@@ -1463,5 +1463,76 @@
    "source": "https://github.com/lumalabs/luma-api-mcp"
   },
   "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "claude-code",
+  "name": "Claude Code",
+  "url": "https://claude.com/product/claude-code",
+  "tasks": [
+   "code"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "paid",
+  "summary": "Anthropic's coding agent: reads your codebase, edits files and runs commands from the terminal, IDE extensions (VS Code, JetBrains), a desktop app or the browser; usable for gameplay code in any language or engine.",
+  "pricing": "Included in Claude Pro (US$20/month, or US$17/month billed annually at US$200 up front), Max (from US$100/month), Team (standard seat US$25/month, or US$20/month billed annually) and Enterprise; or billed by API token use through an Anthropic Console account.",
+  "pricingSource": "https://claude.com/pricing",
+  "commercial": "yes",
+  "license": "Consumer Terms (individual accounts, effective 8 October 2025): \"we assign to you all of our right, title, and interest—if any—in Outputs.\" Commercial Terms (organisations and API customers, effective 17 June 2025): the customer owns its Outputs, Anthropic assigns its rights (if any), may not train models on customer content, and defends customers against covered third-party claims (section K).",
+  "licenseSource": "https://www.anthropic.com/legal/consumer-terms",
+  "lastChecked": "2026-10-17",
+  "verdict": "For devs who want an agent that edits and runs game code from the terminal or IDE; it needs a paid Claude plan or an API account, and Anthropic's terms assign output rights to you.",
+  "bestFor": "An AI coding agent in your terminal or IDE",
+  "free": "no",
+  "freeTier": "Claude's Free plan doesn't include Claude Code",
+  "exportFormats": "n/a (code in your repo)",
+  "revenue": "unverified",
+  "api": {
+   "status": "yes",
+   "note": "Can run on the Claude API with an Anthropic Console account, billed by token use",
+   "source": "https://code.claude.com/docs/en/costs"
+  },
+  "mcp": {
+   "status": "client",
+   "note": "Connects to MCP servers",
+   "source": "https://code.claude.com/docs/en/mcp"
+  }
+ },
+ {
+  "slug": "chatgpt",
+  "name": "ChatGPT",
+  "url": "https://chatgpt.com/",
+  "tasks": [
+   "concept-art",
+   "code"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "OpenAI's general-purpose assistant: chat, image creation and Codex coding help on the web, desktop and mobile; usable for concept images, placeholder art and gameplay code.",
+  "pricing": "Free $0. Plus US$20/month. Pro: three monthly plans at US$100, US$200 or US$500. Go, Business and Enterprise: USD prices not stated on the pages we could read (the pricing page shows local currency; in Australia Go is A$13 and Plus A$30 a month). USD figures from OpenAI's help centre.",
+  "pricingSource": "https://chatgpt.com/pricing",
+  "commercial": "yes",
+  "license": "Terms of Use (effective 1 January 2026; cover ChatGPT, DALL·E and OpenAI's other services for individuals): you own the Output, and OpenAI assigns to you all its right, title and interest, if any, in Output. Output may not be unique: other users may receive similar output, and the assignment doesn't extend to their output.",
+  "licenseSource": "https://openai.com/policies/row-terms-of-use/",
+  "lastChecked": "2026-10-17",
+  "verdict": "For concept images and coding help on one subscription; OpenAI's terms assign Output to you on every plan, including Free, but similar output can go to other users.",
+  "bestFor": "General-purpose concept images and coding help",
+  "free": "yes",
+  "freeTier": "Free plan with limited image creation and limited Codex access",
+  "exportFormats": "unverified",
+  "revenue": "unverified",
+  "api": {
+   "status": "yes",
+   "note": "The OpenAI API is a separate product, billed independently of ChatGPT plans",
+   "source": "https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus"
+  },
+  "mcp": {
+   "status": "unverified",
+   "note": "unverified",
+   "source": ""
+  }
  }
 ]
