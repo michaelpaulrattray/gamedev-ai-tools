@@ -225,6 +225,7 @@
   "slug": "meshy",
   "name": "Meshy",
   "url": "https://www.meshy.ai/",
+  "affiliateUrl": "https://www.meshy.ai/?utm_medium=affiliate&utm_source=promotekit&via=gamedevaitools",
   "tasks": [
    "3d-models",
    "textures",
@@ -457,6 +458,7 @@
   "slug": "cascadeur",
   "name": "Cascadeur",
   "url": "https://cascadeur.com/",
+  "affiliateUrl": "https://cascadeur.com/?ref=michael9p",
   "tasks": [
    "animation"
   ],
