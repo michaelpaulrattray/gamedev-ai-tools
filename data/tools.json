@@ -1,0 +1,627 @@
+[
+ {
+  "slug": "pixellab",
+  "name": "PixelLab",
+  "url": "https://www.pixellab.ai/",
+  "tasks": [
+   "sprites"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "AI generator for pixel art game assets: characters, 4/8-direction rotations, text- and skeleton-based sprite animations, tilesets, maps and UI elements.",
+  "pricing": "Free trial tier (no credit card). Paid plans listed at $12/month (2,000 generations), $24/month (5,000) and $50/month (10,000). API usage priced separately per call.",
+  "pricingSource": "https://www.pixellab.ai/pricing",
+  "commercial": "yes",
+  "license": "Pricing page lists \"Use generated images commercially\" and says the user owns the rights to generations, except using them to train models. Terms also reference the Open RAIL-M license.",
+  "licenseSource": "https://www.pixellab.ai/termsofservice",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "retro-diffusion",
+  "name": "Retro Diffusion",
+  "url": "https://www.retrodiffusion.ai/",
+  "tasks": [
+   "sprites",
+   "3d-models"
+  ],
+  "engines": [
+   "godot",
+   "unity",
+   "unreal"
+  ],
+  "pricingModel": "pay-as-you-go",
+  "summary": "Pixel-art-specific image models for sprites, tiles, tilesets and animations, plus low-poly 3D model generation with export for Godot, Unity and Unreal. Also sells an Aseprite extension.",
+  "pricing": "Pay per generation from a prepaid balance: images from $0.03 (RD Fast), $0.06, $0.18 (RD Pro); animations from $0.07 per clip. New accounts get a free starting balance.",
+  "pricingSource": "https://www.retrodiffusion.ai/",
+  "commercial": "yes",
+  "license": "Official FAQ: \"Everything you generate is yours, for personal and commercial projects alike.\"",
+  "licenseSource": "https://www.retrodiffusion.ai/",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "scenario",
+  "name": "Scenario",
+  "url": "https://www.scenario.com/",
+  "tasks": [
+   "sprites",
+   "textures",
+   "3d-models",
+   "concept-art"
+  ],
+  "engines": [
+   "unity",
+   "unreal"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Production-focused generative platform for game art: train custom style models on your own assets, generate images, textures, 3D meshes, video and audio. API-first with Unity/Unreal integration.",
+  "pricing": "Free tier with 50 daily credits. Starter $15/month, Pro $45/month, Max $75/month (monthly billing; annual saves 33%). Enterprise custom.",
+  "pricingSource": "https://www.scenario.com/pricing",
+  "commercial": "paid-only",
+  "license": "All paid plans include a full commercial license; free plan outputs are for personal and evaluation use only (per pricing FAQ).",
+  "licenseSource": "https://www.scenario.com/pricing",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "leonardo-ai",
+  "name": "Leonardo.Ai",
+  "url": "https://leonardo.ai/",
+  "tasks": [
+   "sprites",
+   "textures",
+   "concept-art"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "General image and video generation platform with trainable custom models; usable for concept art, item icons and texture ideas.",
+  "pricing": "Free: 150 fast tokens/day (public creations). Essential $12/month, Premium $30/month, Ultimate $60/month (ex. tax). Team and API plans available.",
+  "pricingSource": "https://leonardo.ai/pricing",
+  "commercial": "yes",
+  "license": "Paid subscribers retain full ownership and IP rights. Free tier: Leonardo holds rights to the images but grants you a non-exclusive, royalty-free licence for commercial use; free creations are public.",
+  "licenseSource": "https://leonardo.ai/pricing",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "layer-ai",
+  "name": "Layer",
+  "url": "https://www.layer.ai/",
+  "tasks": [
+   "sprites",
+   "concept-art",
+   "textures"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Generative content platform aimed at game studios: style-trained models, concept art, marketing creatives and asset variations with team workflows.",
+  "pricing": "Start for free. Subscriptions begin at $10/month for 300 Creative Units, increasing by $60 per 1,000 CUs; $0 per seat.",
+  "pricingSource": "https://www.layer.ai/pricing",
+  "commercial": "yes",
+  "license": "Pricing page lists \"Commercial license for all users\". Free-tier scope: unverified.",
+  "licenseSource": "https://www.layer.ai/pricing",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "ludo-ai",
+  "name": "Ludo.ai",
+  "url": "https://ludo.ai/",
+  "tasks": [
+   "sprites",
+   "textures",
+   "concept-art",
+   "design"
+  ],
+  "engines": [
+   "unity"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Game ideation and asset tool: concept generation, sprites and sprite sheets, textures, plus a Unity editor plugin and API.",
+  "pricing": "Free plan (sprite sheets watermarked). Indie $15/month ($180/year), Pro $35/month ($420/year), Studio $300/month ($3,600/year); credit packs from $15.",
+  "pricingSource": "https://ludo.ai/pricing",
+  "commercial": "yes",
+  "license": "FAQ: the person who initiates a generation is recognized as the full owner of that content and can export and use it as they see fit.",
+  "licenseSource": "https://ludo.ai/docs/faq",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "meshy",
+  "name": "Meshy",
+  "url": "https://www.meshy.ai/",
+  "tasks": [
+   "3d-models",
+   "textures",
+   "animation"
+  ],
+  "engines": [
+   "godot",
+   "unity",
+   "unreal"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Text-to-3D and image-to-3D model generation with AI texturing; paid plans add animation with 600+ motions. DCC bridge listed for Roblox, Blender, Godot, Unity and Unreal.",
+  "pricing": "Free: 100 monthly credits. Pro $20/month (1,000 credits). Higher tiers listed at $40 and $70 (Studio, team) per month; Enterprise custom.",
+  "pricingSource": "https://www.meshy.ai/pricing",
+  "commercial": "yes",
+  "license": "Paid plans: you own the assets you create. Free plan: assets licensed to you under CC BY 4.0 (commercial use with attribution to Meshy).",
+  "licenseSource": "https://www.meshy.ai/pricing",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "tripo",
+  "name": "Tripo AI",
+  "url": "https://www.tripo3d.ai/",
+  "tasks": [
+   "3d-models",
+   "textures"
+  ],
+  "engines": [
+   "godot",
+   "unity",
+   "unreal"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Text/image/multi-view to 3D model generation with retopology, segmentation and up to 4K/8K texture generation. DCC bridge lists Blender, Unity, Unreal, Godot and others.",
+  "pricing": "Free: 200 monthly credits. Pro $20/month billed annually ($240/yr). Max $90/month billed annually. Team $55/seat/month billed annually.",
+  "pricingSource": "https://www.tripo3d.ai/pricing",
+  "commercial": "paid-only",
+  "license": "Pricing page: Free plan = \"Public Models · Non-Commercial Use\"; Pro, Max and Team = \"Private Models · Commercial Use\".",
+  "licenseSource": "https://www.tripo3d.ai/pricing",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "hyper3d-rodin",
+  "name": "Hyper3D Rodin",
+  "url": "https://hyper3d.ai/",
+  "tasks": [
+   "3d-models",
+   "textures"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Rodin generates 3D models from text or images, with options like high-poly quad meshes; the platform also lists HDRI and texture generators.",
+  "pricing": "Free tier ($0; direct credits $1.5 each). Creator $30/month ($24/month yearly). Business $120/month ($96/month yearly). Enterprise custom.",
+  "pricingSource": "https://hyper3d.ai/subscribe",
+  "commercial": "unverified",
+  "license": "Business plan lists \"Commercial license included\"; FAQ says paid plans include broader export and usage rights. Exact rights on Free and Creator: unverified.",
+  "licenseSource": "https://hyper3d.ai/subscribe",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "sloyd",
+  "name": "Sloyd",
+  "url": "https://www.sloyd.ai/",
+  "tasks": [
+   "3d-models"
+  ],
+  "engines": [
+   "unity",
+   "unreal"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Template-based and AI 3D generator for game-ready props and objects, with browser editor and plugins for Unity, Unreal and Blender on paid plans.",
+  "pricing": "Free Guest plan. Plus $15/month ($12.50/month billed yearly). Pro $50/month ($41.67/month billed yearly).",
+  "pricingSource": "https://www.sloyd.ai/pricing",
+  "commercial": "paid-only",
+  "license": "Free plan: personal-use license. Plus and Pro include a commercial license (you own what you generate; Pro adds reselling).",
+  "licenseSource": "https://www.sloyd.ai/pricing",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "hunyuan3d",
+  "name": "Hunyuan3D 2.1 (Tencent)",
+  "url": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1",
+  "tasks": [
+   "3d-models",
+   "textures"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "open-weights",
+  "summary": "Open-weights image-to-3D model with PBR material generation that you can run on your own hardware.",
+  "pricing": "Free to download and self-host (your own GPU/compute costs apply).",
+  "pricingSource": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1",
+  "commercial": "restricted",
+  "license": "Tencent Hunyuan 3D 2.1 Community License: does NOT apply in the EU, UK or South Korea; use of the works or outputs outside the licensed territory is unauthorized; products with over 1 million monthly active users must request a license from Tencent.",
+  "licenseSource": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1/blob/main/LICENSE",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "skybox-ai",
+  "name": "Skybox AI (Blockade Labs)",
+  "url": "https://www.blockadelabs.com/",
+  "tasks": [
+   "textures",
+   "concept-art"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "paid",
+  "summary": "Generates 360° panoramic skyboxes and environments (up to 16K and HDRI on higher tiers), with an API for in-app generation.",
+  "pricing": "Essential $20/month, Standard $48/month per seat, Business $112/month (as listed on the plans page; a second set of prices $24/$140 is also shown, likely monthly vs annual billing: unverified). Free tier details: unverified.",
+  "pricingSource": "https://skybox.blockadelabs.com/plans",
+  "commercial": "unverified",
+  "license": "Terms: \"You own all Assets You create with the Services, to the extent possible under current law.\" Plans page lists \"Commercial licensing\" on the Business tier; commercial terms for lower tiers: unverified.",
+  "licenseSource": "https://www.blockadelabs.com/tos",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "cascadeur",
+  "name": "Cascadeur",
+  "url": "https://cascadeur.com/",
+  "tasks": [
+   "animation"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Physics-based keyframe animation software with AI-assisted autoposing, inbetweening and mocap cleanup; exports FBX, DAE, USD and glTF on paid plans.",
+  "pricing": "Free (non-commercial, .casc export only). Indie $19/month or $8/month billed annually. Pro $49/month or $33/month billed annually. Teams $49/user/month.",
+  "pricingSource": "https://cascadeur.com/plans",
+  "commercial": "paid-only",
+  "license": "Free and Educational: no commercial use. Indie: commercial use only if revenue/funding is under $100,000/year. Pro and Teams: full commercial use.",
+  "licenseSource": "https://cascadeur.com/plans",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "deepmotion",
+  "name": "DeepMotion Animate 3D",
+  "url": "https://www.deepmotion.com/",
+  "tasks": [
+   "animation"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Markerless AI motion capture: turns ordinary video into 3D character animation; sister product SayMotion does text-to-motion.",
+  "pricing": "Freemium (free, no card). Starter $9, Innovator $17, Professional $39, Studio $83 per month, paid annually.",
+  "pricingSource": "https://www.deepmotion.com/pricing-animate3d",
+  "commercial": "paid-only",
+  "license": "Freemium accounts are for personal, non-commercial use; a premium subscription plan is required for licensed (commercial) animation.",
+  "licenseSource": "https://www.deepmotion.com/pricing-animate3d",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "rokoko-vision",
+  "name": "Rokoko Vision",
+  "url": "https://www.rokoko.com/products/vision",
+  "tasks": [
+   "animation"
+  ],
+  "engines": [
+   "unity",
+   "unreal"
+  ],
+  "pricingModel": "freemium",
+  "summary": "AI motion capture from video plus text-to-motion clips, exported via Rokoko Studio as FBX/BVH for Unity, Unreal, Blender and other tools.",
+  "pricing": "Starter free (30 seconds of Vision processing per month). Basic $20/month and Plus $50/month (yearly billing). Pro: contact sales.",
+  "pricingSource": "https://www.rokoko.com/pricing",
+  "commercial": "unverified",
+  "license": "Commercial-use terms for Vision output were not found on the pages checked: unverified.",
+  "licenseSource": "https://www.rokoko.com/pricing",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "unity-ai",
+  "name": "Unity AI",
+  "url": "https://unity.com/features/ai",
+  "tasks": [
+   "code",
+   "sprites",
+   "textures",
+   "3d-models",
+   "audio",
+   "animation"
+  ],
+  "engines": [
+   "unity"
+  ],
+  "pricingModel": "included",
+  "summary": "AI built into the Unity Editor: an Assistant for project questions and code, plus generators for images, textures, materials, sounds, 3D models and animations, metered in Unity Credits.",
+  "pricing": "Unity Personal (free) includes a 1,000 monthly Unity Credit allowance; Pro (from $2,310/yr) includes 2,000; Enterprise 3,000. \"Special terms apply to Unity Credits.\" Credits reset monthly and don't roll over.",
+  "pricingSource": "https://unity.com/products",
+  "commercial": "unverified",
+  "license": "Unity's plans FAQ says you own content you create using Unity; AI-output-specific terms were not checked: unverified.",
+  "licenseSource": "https://unity.com/products",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "ludus-ai",
+  "name": "Ludus AI",
+  "url": "https://ludusengine.com/",
+  "tasks": [
+   "code",
+   "design"
+  ],
+  "engines": [
+   "unreal"
+  ],
+  "pricingModel": "paid",
+  "summary": "AI toolkit that runs inside the Unreal Engine editor: an agent that understands your project's Blueprints, C++, assets and levels and can answer questions and make edits.",
+  "pricing": "14-day Pro trial. Pro $25/month, Studio $80/month, Ultimate $180/month (plus VAT; yearly billing discounted). Free account has no credits.",
+  "pricingSource": "https://ludusengine.com/terms",
+  "commercial": "unverified",
+  "license": "Ownership/commercial terms for generated output: unverified.",
+  "licenseSource": "https://ludusengine.com/terms",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "github-copilot",
+  "name": "GitHub Copilot",
+  "url": "https://github.com/features/copilot",
+  "tasks": [
+   "code"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "AI coding assistant with code completions, chat and agent mode; usable for gameplay code in any engine's scripting language.",
+  "pricing": "Free plan. Paid individual plans listed at $10, $39 and $100 per month; Business and Enterprise plans for organizations.",
+  "pricingSource": "https://github.com/features/copilot/plans",
+  "commercial": "yes",
+  "license": "Copilot Product Specific Terms: \"GitHub does not own Suggestions. You retain ownership of Your Code.\" IP indemnity applies to organization plans, not individual plans.",
+  "licenseSource": "https://github.com/features/copilot/plans",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "cursor",
+  "name": "Cursor",
+  "url": "https://cursor.com/",
+  "tasks": [
+   "code"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "AI-first code editor with agents, chat and codebase-aware edits; usable for gameplay code in any language or engine.",
+  "pricing": "Free $0/month; Plus $8/month; Premium $30/month; Super $100/month; Ultra $200/month; Teams $30+/user/month. Third-party model usage billed separately.",
+  "pricingSource": "https://cursor.com/pricing",
+  "commercial": "yes",
+  "license": "Terms of Service 5.3: you retain rights in Inputs and Anysphere assigns to you all of its right, title and interest (if any) in Suggestions.",
+  "licenseSource": "https://cursor.com/terms-of-service",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "windsurf",
+  "name": "Windsurf",
+  "url": "https://windsurf.com/",
+  "tasks": [
+   "code"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "AI code editor with agentic coding and unlimited tab completions on the free plan.",
+  "pricing": "Free $0/month; Pro $20/month; a $200/month tier; Teams $80/month plus $40/month per full seat.",
+  "pricingSource": "https://windsurf.com/pricing",
+  "commercial": "yes",
+  "license": "Individual terms 3.1: Cognition assigns to you all right, title and interest in Output.",
+  "licenseSource": "https://windsurf.com/terms-of-service-individual",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "elevenlabs",
+  "name": "ElevenLabs",
+  "url": "https://elevenlabs.io/",
+  "tasks": [
+   "voice",
+   "audio"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Text-to-speech, voices, sound effects and music generation; usable for NPC voice lines and SFX.",
+  "pricing": "Free $0 (10,000 credits). Starter $6, Creator $22 ($11 first month), Pro $99, Scale $299, Business $990 per month. Enterprise custom.",
+  "pricingSource": "https://elevenlabs.io/pricing",
+  "commercial": "paid-only",
+  "license": "Terms: free-plan users may only use the Services for non-commercial purposes; paid-subscription users may use them commercially (subject to the Prohibited Use Policy).",
+  "licenseSource": "https://elevenlabs.io/terms-of-use",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "inworld-ai",
+  "name": "Inworld AI",
+  "url": "https://inworld.ai/",
+  "tasks": [
+   "voice",
+   "npc-dialogue"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Realtime text-to-speech and LLM inference platform that can power voiced, interactive characters.",
+  "pricing": "Free pay-as-you-go ($25 per 1M chars TTS). Subscriptions $25, $100, $300 and $1,500 per month with included credits and lower rates.",
+  "pricingSource": "https://inworld.ai/pricing",
+  "commercial": "yes",
+  "license": "Terms: subject to compliance, Inworld assigns to you all of its right, title and interest in Outputs. Pricing page also lists a commercial license.",
+  "licenseSource": "https://inworld.ai/terms",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "convai",
+  "name": "Convai",
+  "url": "https://convai.com/",
+  "tasks": [
+   "npc-dialogue",
+   "voice"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Conversational AI characters for games and virtual worlds: NPCs with voice, knowledge and actions.",
+  "pricing": "Free $0/month (100 interactions quota). Paid tiers listed at $29, $99, $499 and $1,199 per month (lower discounted figures also shown).",
+  "pricingSource": "https://convai.com/pricing",
+  "commercial": "yes",
+  "license": "Terms of Service: you have ownership over your Customer Content and AI Generated Content.",
+  "licenseSource": "https://convai.com/tos",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "charisma-ai",
+  "name": "Charisma.ai",
+  "url": "https://charisma.ai/",
+  "tasks": [
+   "npc-dialogue",
+   "voice"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "pay-as-you-go",
+  "summary": "Platform for building interactive stories and AI character conversations, with script flow tools and AI voices, published to web, VR or game engines via SDKs.",
+  "pricing": "PRO: pay as you go, $5 per 50,000 credits (approx. 200 experience minutes). Enterprise: custom.",
+  "pricingSource": "https://charisma.ai/pricing",
+  "commercial": "yes",
+  "license": "Terms: the customer (story owner) is deemed owner of Input and Output and Charisma assigns those rights to the customer, subject to its terms.",
+  "licenseSource": "https://charisma.ai/terms",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "suno",
+  "name": "Suno",
+  "url": "https://suno.com/",
+  "tasks": [
+   "audio"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Text-to-music generator for full songs and instrumentals; used for prototyping soundtracks and menu music.",
+  "pricing": "Free $0/month (no commercial rights). Paid plans shown at $12 and $35 per month (yearly-billing savings advertised).",
+  "pricingSource": "https://suno.com/pricing",
+  "commercial": "paid-only",
+  "license": "Terms: Pro/Premier subscribers are assigned Suno's rights in their Output; free/basic tier Outputs are for personal, non-commercial use only.",
+  "licenseSource": "https://suno.com/terms",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "udio",
+  "name": "Udio",
+  "url": "https://www.udio.com/",
+  "tasks": [
+   "audio"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "AI music generation and remixing app.",
+  "pricing": "Free $0 (10 credits/day, 100/month). Standard $10/month ($8 billed annually). Pro $30/month ($24 billed annually).",
+  "pricingSource": "https://www.udio.com/pricing",
+  "commercial": "no",
+  "license": "Current Terms of Service list exploiting the Services or any Output for any commercial purpose among prohibited uses. Not suitable for shipping in commercial games under these terms.",
+  "licenseSource": "https://www.udio.com/terms-of-service",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "aiva",
+  "name": "AIVA",
+  "url": "https://www.aiva.ai/",
+  "tasks": [
+   "audio"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "AI composer for soundtrack-style music with MIDI and audio export, editable in its built-in editor.",
+  "pricing": "Free €0 (3 downloads/month). Standard €11/month (15 downloads). Pro €33/month (300 downloads). Prices shown with annual billing.",
+  "pricingSource": "https://www.aiva.ai/pricing",
+  "commercial": "paid-only",
+  "license": "Free: non-commercial, credit AIVA, copyright owned by AIVA. Standard: limited monetization (YouTube, Twitch, TikTok, Instagram only). Pro: copyright owned by you, full monetization.",
+  "licenseSource": "https://www.aiva.ai/legal/1",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "stable-audio",
+  "name": "Stable Audio",
+  "url": "https://www.stableaudio.com/",
+  "tasks": [
+   "audio"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Stability AI's text-to-audio tool for generating music and audio clips.",
+  "pricing": "Free $0 (personal, non-commercial). $12/month (660 credits), $30/month, $90/month, $199/month.",
+  "pricingSource": "https://www.stableaudio.com/pricing",
+  "commercial": "paid-only",
+  "license": "Free plan: personal, non-commercial use. Paid plans list a commercial license.",
+  "licenseSource": "https://www.stableaudio.com/pricing",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "soundraw",
+  "name": "SOUNDRAW",
+  "url": "https://soundraw.io/",
+  "tasks": [
+   "audio"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "paid",
+  "summary": "Royalty-free AI music generator where you set genre, mood, length and structure and then edit the track.",
+  "pricing": "Paid plans shown in AUD from our location: A$9.16, A$16.58, A$19.92 and A$27.42 per month. USD prices and free tier: unverified.",
+  "pricingSource": "https://soundraw.io/pricing",
+  "commercial": "yes",
+  "license": "License page: \"All Plans: Personal and commercial use in all of your projects.\"",
+  "licenseSource": "https://soundraw.io/license",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "mubert",
+  "name": "Mubert Render",
+  "url": "https://mubert.com/render",
+  "tasks": [
+   "audio"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "AI-generated royalty-free music tracks by mood, genre and duration, with a track editor.",
+  "pricing": "Free (non-commercial, 5 downloads/month). Paid plans listed at $14, $39 and $199 per month.",
+  "pricingSource": "https://mubert.com/render/pricing",
+  "commercial": "paid-only",
+  "license": "Creator plan is non-commercial; commercial use needs Pro or Business, and the pricing FAQ says Business is designed for apps and games. Tracks cannot be redistributed as standalone music.",
+  "licenseSource": "https://mubert.com/render/pricing",
+  "lastChecked": "2026-10-17"
+ },
+ {
+  "slug": "beatoven",
+  "name": "Beatoven.ai",
+  "url": "https://www.beatoven.ai/",
+  "tasks": [
+   "audio"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "unverified",
+  "summary": "AI background-music generator; its site lists games among supported uses.",
+  "pricing": "unverified (pricing page could not be loaded when checked).",
+  "pricingSource": "https://www.beatoven.ai/",
+  "commercial": "yes",
+  "license": "FAQ: you get a non-exclusive perpetual licence to use and monetise downloaded tracks; Beatoven.ai remains the owner of the tracks.",
+  "licenseSource": "https://www.beatoven.ai/",
+  "lastChecked": "2026-10-17"
+ }
+]
