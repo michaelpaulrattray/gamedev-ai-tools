@@ -254,3 +254,4 @@ No estimates. If a number isn't available, write "not measured".
 9. **Outreach send path:** the Gmail connector wraps every link in a google.com/url redirect, so recipients see a Google "Redirect Notice" page before ours or Stripe. Options: send through Gmail in the browser as hello@ (recommended), accept the redirect links, or use another sender. Today's 10 emails are held until then.
 
 - **2026-10-18 (06:55 AEST):** /about/ now lists the wide-screen side card in the site-wide sponsor spot (Copy Humanizer Q4). Pitch drafts for 18 and 19 Oct now quote the exact Stripe dropdown labels and say "below the tool list", matching /sponsor/.
+- **2026-10-18 (07:20 AEST):** /sponsor/ intro rewritten as full sentences (Copy Humanizer edit 8).

@@ -1002,7 +1002,7 @@ const spCard = o => {
 page('/sponsor/', layout({
   title: `Sponsor us | ${SITE.name}`, description: SPONSOR_DESC, pathname: '/sponsor/',
   body: `<h1 class="page-h">Sponsor GameDev AI Tools</h1>
-<p class="page-sub">Put your product in front of game developers choosing AI tools. Four kinds of spot, booked by the week (or by the issue for the newsletter). Prices in US$.</p>
+<p class="page-sub">Put your product in front of game developers choosing AI tools. There are four kinds of spot. Each is booked by the week, except the newsletter, which is booked by the issue. Prices are in US$.</p>
 <div class="paid-thanks" id="paid-thanks" role="status" hidden><p><strong>Thanks!</strong> Email your logo (SVG or PNG), your link and which spot you bought (site-wide, which category, which engine page, or newsletter) to <a href="${mailto('Sponsor logo and link')}">${EMAIL}</a> and we'll add you within a day.</p></div>
 <div class="prose">
 ${SPONSOR_OFFERS.map(spCard).join('\n')}
