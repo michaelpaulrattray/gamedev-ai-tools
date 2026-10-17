@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { CHECKED, GUIDES, DISCLOSURE, NEWS, COMPARE } from './content.mjs';
-import { SPONSOR_PAYMENT_URL, SPONSOR_OFFER, BUSINESS_EMAIL, AFFILIATE_NOTE } from './config.mjs';
+import { SPONSOR_PAYMENT_URL, SPONSOR_OFFER, SPONSOR_PRICE, BUSINESS_EMAIL, AFFILIATE_NOTE } from './config.mjs';
 import { createOg, OG_W, OG_H } from './og.mjs';
 
 const SITE = {
@@ -135,11 +135,26 @@ const slugOf = p => p.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'home';
 const stripSite = s => s.replace(/\s*\|\s*GameDev AI Tools$/, '');
 
 function sponsorStrip() {
-  if (!SPONSOR) return ''; // no active paid sponsor: no strip (a small "Sponsor us" link sits below the tool list and in the footer)
+  if (!SPONSOR) return ''; // no active paid sponsor: no strip (the sponsor card shows the empty state instead)
   const img = SPONSOR.logo ? `<img src="${esc(SPONSOR.logo.startsWith('/') ? L(SPONSOR.logo) : SPONSOR.logo)}" alt="" width="20" height="20" loading="lazy" decoding="async">` : '';
   return `<aside class="sponsor-strip" aria-label="Sponsor"><div class="wrap"><span class="sp-label">Sponsor</span><a href="${esc(SPONSOR.url)}" rel="sponsored noopener" target="_blank">${img}<strong>${esc(SPONSOR.name)}</strong></a></div></aside>`;
 }
-const sponsorLink = () => SPONSOR ? '' : `<p class="sponsor-link">Want your tool in front of game devs? <a href="${L('/sponsor/')}">Sponsor us</a>. Sponsors never change listings.</p>`;
+// Sponsor card: same card component as tool cards. Never part of tool lists' order, counts, ItemList JSON-LD or filters
+// (no data-slug, sits outside #results). Active paid sponsor: their logo, name, line and link; otherwise the empty "Your tool here" slot.
+function sponsorCard({ compact = false } = {}) {
+  const S = SPONSOR;
+  const href = S ? S.url : L('/sponsor/');
+  const rel = S ? ' rel="sponsored noopener" target="_blank"' : '';
+  const mark = S && S.logo
+    ? `<img class="tlogo" src="${esc(S.logo.startsWith('/') ? L(S.logo) : S.logo)}" alt="" width="44" height="44" loading="lazy" decoding="async">`
+    : S ? `<span class="tlogo mono" aria-hidden="true" style="--h:${hue(S.name)};width:44px;height:44px">${esc(initials(S.name))}</span>`
+      : `<span class="tlogo sp-ph" aria-hidden="true">+</span>`;
+  const title = S ? S.name : 'Your tool here';
+  const line = S ? (S.line || '') : `Reach game devs choosing AI tools · from ${SPONSOR_PRICE}`;
+  return `<article class="card is-link sp-card${compact ? ' compact' : ''}${S ? '' : ' sp-empty'}" aria-label="Sponsored">
+<div class="card-top">${mark}<div class="card-title"><h3><a class="card-link" href="${esc(href)}"${rel}>${esc(title)}</a></h3><span class="card-sub sp-tag">Sponsored</span></div><span class="arrow" aria-hidden="true">${S ? '↗' : '→'}</span></div>
+${line ? `<p class="summary">${esc(line)}</p>\n` : ''}</article>`;
+}
 const HONEYPOT = `<div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>`;
 function footerSignup() {
   if (!NEWSLETTER_ON) return `<form class="foot-signup" onsubmit="return false"><label for="fs-email">Newsletter (coming soon)</label><input id="fs-email" type="email" placeholder="you@example.com" disabled><button type="button" disabled>Coming soon</button></form>`;
@@ -174,7 +189,7 @@ ${jsonld.map(ld).join('\n')}
 <body>
 <header class="site-header"><div class="wrap">
 <a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a>
-<nav><a href="${L('/#tools')}">Tools</a><a href="${L('/category/')}">Categories</a><a class="hide-sm" href="${L('/guides/')}">Guides</a><a class="hide-sm" href="${L('/compare/')}">Compare</a><a class="hide-sm" href="${L('/new/')}">New</a><a href="${L('/deals/')}">Deals</a><a class="nav-cta" href="${L('/submit/')}">Submit a tool</a></nav>
+<nav><a href="${L('/#tools')}">Tools</a><a href="${L('/category/')}">Categories</a><a class="hide-sm" href="${L('/guides/')}">Guides</a><a class="hide-sm" href="${L('/compare/')}">Compare</a><a class="hide-sm" href="${L('/new/')}">New</a><a href="${L('/deals/')}">Deals</a><a class="nav-cta" href="${L('/submit/')}">Submit a tool</a><a href="${L('/sponsor/')}">Sponsor</a></nav>
 </div></header>
 ${sponsorStrip()}
 <main class="wrap">
@@ -240,6 +255,10 @@ const opts = (o) => Object.entries(o).map(([v, l]) => `<option value="${v}">${es
 // "New & updated this week": tools named in the last 7 days of the /new/ feed (real dated entries only), newest first, one card per tool.
 const newRow = [];
 for (const n of recentNews) if (n.tool && bySlug[n.tool] && !newRow.some(x => x.t.slug === n.tool)) newRow.push({ t: bySlug[n.tool], n });
+// Row = sponsor card + up to 3 tools, laid out so no row has an orphan: 4 cards = 4 columns (2x2 on tablet and mobile),
+// 3 = 3 columns (1 on mobile), 2 = 2 columns.
+const NEW_MAX = newRow.length >= 3 ? 3 : newRow.length;
+const NEW_COLS = { 1: 'g2 m2', 2: 'g3 t3', 3: 'g4 m2' }[NEW_MAX] || 'g4 m2';
 const HOME_TITLE = 'Which AI tools can you legally ship in a paid game?';
 const HOME_SUB = `${tools.length} AI tools for game devs by task and engine, with pricing and commercial-use terms, sourced and dated.`;
 page('/', layout({
@@ -261,7 +280,8 @@ page('/', layout({
 </section>
 ${newRow.length ? `<section aria-labelledby="new-h">
 <div class="sec-head"><h2 id="new-h">New &amp; updated this week</h2><a href="${L('/new/')}">All news →</a></div>
-<div class="grid ${newRow.length >= 4 ? 'g4' : 'g3'}">${newRow.slice(0, 4).map(({ t, n }) => toolCard(t, { compact: true, note: `<p class="card-note">${newsBadge(n)}${timeEl(n.date, true)}</p><p class="note-title">${esc(n.title)}</p>\n` })).join('\n')}</div>
+<div class="grid ${NEW_COLS} new-row">${sponsorCard({ compact: true })}
+${newRow.slice(0, NEW_MAX).map(({ t, n }) => toolCard(t, { compact: true, note: `<p class="card-note">${newsBadge(n)}${timeEl(n.date, true)}</p><p class="note-title">${esc(n.title)}</p>\n` })).join('\n')}</div>
 </section>` : ''}
 <section class="cats" aria-labelledby="cats-h">
 <div class="sec-head"><h2 id="cats-h">Browse by task</h2><a href="${L('/category/')}">All categories →</a></div>
@@ -280,7 +300,6 @@ ${newRow.length ? `<section aria-labelledby="new-h">
 <div id="results" class="grid">
 ${tools.map(t => toolCard(t)).join('\n')}
 </div>
-${sponsorLink()}
 </section>
 <section class="res" aria-labelledby="res-h">
 <div class="sec-head"><h2 id="res-h">Guides and resources</h2><a href="${L('/guides/')}">All guides →</a></div>
@@ -430,8 +449,8 @@ ${list.map(t => `<tr><td><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 24)}
 </tbody></table></div>
 ${cp.length ? `<div class="cmp-row" style="margin-top:6px"><span>Comparisons:</span>${cp.map(cmpChip).join('')}</div>` : ''}
 <h2 class="sub-h">Tool details</h2>
-<div class="grid">${list.map(t => toolCard(t)).join('\n')}</div>
-${sponsorLink()}
+<div class="grid">${list.map(t => toolCard(t)).join('\n')}
+${sponsorCard()}</div>
 ${newsletterBlock()}`,
   }));
 }
@@ -658,7 +677,7 @@ ${ROWS.map(([h, f]) => `<div class="vs-row" role="row"><div role="rowheader" cla
 
 // ---------- Sponsor (one offer; checkout URL lives in config.mjs) ----------
 page('/sponsor/', layout({
-  title: `Sponsor us | ${SITE.name}`, description: 'Sponsor GameDev AI Tools: your logo and link in the sponsor strip on every page for 7 days, plus a mention in the next newsletter. US$79/week.', pathname: '/sponsor/',
+  title: `Sponsor us | ${SITE.name}`, description: `Sponsor GameDev AI Tools: your logo and link in the sponsor strip on every page for 7 days, plus a mention in the next newsletter. ${SPONSOR_PRICE}.`, pathname: '/sponsor/',
   body: `<h1 class="page-h">Sponsor GameDev AI Tools</h1>
 <div class="paid-thanks" id="paid-thanks" role="status" hidden><p><strong>Thanks!</strong> Email your logo (SVG or PNG) and link to <a href="${mailto('Sponsor logo and link')}">${EMAIL}</a> and we'll add you within a day.</p></div>
 <div class="prose">

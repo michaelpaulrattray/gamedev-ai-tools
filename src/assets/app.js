@@ -3,7 +3,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var q = $('q'), ft = $('f-task'), fe = $('f-engine'), fp = $('f-pricing'), fc = $('f-commercial');
   var cards = {};
-  document.querySelectorAll('#results .card').forEach(function (c) { cards[c.dataset.slug] = c; });
+  document.querySelectorAll('#results .card[data-slug]').forEach(function (c) { cards[c.dataset.slug] = c; });
   var params = new URLSearchParams(location.search);
   q.value = params.get('q') || '';
   ft.value = params.get('task') || ''; fe.value = params.get('engine') || '';
