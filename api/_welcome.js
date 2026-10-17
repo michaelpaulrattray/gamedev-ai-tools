@@ -15,7 +15,7 @@ ${sheet}
 
 Licences change, so check the vendor's current terms before you ship. If you spot something out of date, reply to this email.
 
-From now on we'll send an occasional newsletter about new tools and licence changes. Nothing else.
+From now on we'll send a weekly newsletter about new tools and licence changes. Nothing else.
 
 --
 ${SENDER_LINE}
@@ -28,7 +28,7 @@ Unsubscribe: ${unsub}
 <p>Here's the cheat sheet you asked for: for every AI tool we list, whether free-plan output can go in a commercial game, which plan you need, and the catch, with links to each vendor's terms and the date we checked them.</p>
 <p><a href="${sheet}" style="color:#6d28d9;font-weight:600">AI tools you can legally ship in a paid game</a></p>
 <p>Licences change, so check the vendor's current terms before you ship. If you spot something out of date, reply to this email.</p>
-<p>From now on we'll send an occasional newsletter about new tools and licence changes. Nothing else.</p>
+<p>From now on we'll send a weekly newsletter about new tools and licence changes. Nothing else.</p>
 <hr style="border:0;border-top:1px solid #ddd;margin:24px 0">
 <p style="font-size:13px;color:#555">${escH(SENDER_LINE)} · <a href="${SITE_ORIGIN}" style="color:#555">gamedevaitools.com</a><br>
 You're getting this because ${escH(email)} signed up at gamedevaitools.com.<br>

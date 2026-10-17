@@ -83,7 +83,8 @@
   ],
   "engines": [
    "unity",
-   "unreal"
+   "unreal",
+   "blender"
   ],
   "pricingModel": "freemium",
   "summary": "Production-focused generative platform for game art: train custom style models on your own assets, generate images, textures, 3D meshes, video and audio. API-first with Unity/Unreal integration.",
@@ -231,7 +232,9 @@
   "engines": [
    "godot",
    "unity",
-   "unreal"
+   "unreal",
+   "blender",
+   "roblox"
   ],
   "pricingModel": "freemium",
   "summary": "Text-to-3D and image-to-3D model generation with AI texturing; paid plans add animation with 600+ motions. DCC bridge listed for Roblox, Blender, Godot, Unity and Unreal.",
@@ -270,7 +273,8 @@
   "engines": [
    "godot",
    "unity",
-   "unreal"
+   "unreal",
+   "blender"
   ],
   "pricingModel": "freemium",
   "summary": "Text/image/multi-view to 3D model generation with retopology, segmentation and up to 4K/8K texture generation. DCC bridge lists Blender, Unity, Unreal, Godot and others.",
@@ -306,7 +310,10 @@
    "textures"
   ],
   "engines": [
-   "any"
+   "godot",
+   "unity",
+   "unreal",
+   "blender"
   ],
   "pricingModel": "freemium",
   "summary": "Rodin generates 3D models from text or images, with options like high-poly quad meshes; the platform also lists HDRI and texture generators.",
@@ -341,8 +348,11 @@
    "3d-models"
   ],
   "engines": [
+   "godot",
    "unity",
-   "unreal"
+   "unreal",
+   "blender",
+   "roblox"
   ],
   "pricingModel": "freemium",
   "summary": "Template-based and AI 3D generator for game-ready props and objects, with browser editor and plugins for Unity, Unreal and Blender on paid plans.",
@@ -415,7 +425,7 @@
    "concept-art"
   ],
   "engines": [
-   "any"
+   "unity"
   ],
   "pricingModel": "paid",
   "summary": "Generates 360° panoramic skyboxes and environments (up to 16K and HDRI on higher tiers), with an API for in-app generation.",
@@ -450,7 +460,8 @@
    "animation"
   ],
   "engines": [
-   "any"
+   "unreal",
+   "blender"
   ],
   "pricingModel": "freemium",
   "summary": "Physics-based keyframe animation software with AI-assisted autoposing, inbetweening and mocap cleanup; exports FBX, DAE, USD and glTF on paid plans.",
@@ -486,7 +497,8 @@
    "animation"
   ],
   "engines": [
-   "any"
+   "blender",
+   "roblox"
   ],
   "pricingModel": "freemium",
   "summary": "Markerless AI motion capture: turns ordinary video into 3D character animation; sister product SayMotion does text-to-motion.",
@@ -778,7 +790,8 @@
    "npc"
   ],
   "engines": [
-   "any"
+   "unity",
+   "unreal"
   ],
   "pricingModel": "freemium",
   "summary": "Realtime text-to-speech and LLM inference platform that can power voiced, interactive characters.",
@@ -814,7 +827,9 @@
    "voice"
   ],
   "engines": [
-   "any"
+   "unity",
+   "unreal",
+   "roblox"
   ],
   "pricingModel": "freemium",
   "summary": "Conversational AI characters for games and virtual worlds: NPCs with voice, knowledge and actions.",
@@ -850,7 +865,8 @@
    "voice"
   ],
   "engines": [
-   "any"
+   "unity",
+   "unreal"
   ],
   "pricingModel": "pay-as-you-go",
   "summary": "Platform for building interactive stories and AI character conversations, with script flow tools and AI voices, published to web, VR or game engines via SDKs.",
@@ -1205,7 +1221,8 @@
    "localisation"
   ],
   "engines": [
-   "any"
+   "unity",
+   "unreal"
   ],
   "pricingModel": "freemium",
   "summary": "Localisation management platform for translating product strings, with Crowdin AI for translation, context enrichment and proofreading, plus an API and integrations.",
@@ -1241,7 +1258,8 @@
    "voice"
   ],
   "engines": [
-   "any"
+   "unity",
+   "unreal"
   ],
   "pricingModel": "paid",
   "summary": "Content and localisation platform with a game-localisation use case: spreadsheet-style grids for strings, AI translation with linguistic context, AI voiceover files and an API.",
@@ -1276,7 +1294,7 @@
    "qa"
   ],
   "engines": [
-   "any"
+   "unity"
   ],
   "pricingModel": "contact",
   "summary": "AI agents that test game builds without SDK integration: upload a build, describe tests in plain language, and get bug reports with video, logs and severity scores. Supports Android and desktop today; iOS is listed as in development.",
@@ -1311,7 +1329,8 @@
    "qa"
   ],
   "engines": [
-   "any"
+   "unity",
+   "unreal"
   ],
   "pricingModel": "freemium",
   "summary": "AI agents that play and test games on real PC and mobile devices from plain-English instructions, with session recordings, reports and an optional lightweight SDK. Console support is listed as coming soon.",

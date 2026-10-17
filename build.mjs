@@ -20,8 +20,10 @@ console.log('Newsletter signup enabled:', NEWSLETTER_ON);
 // and as "today" for visitor-facing friendly dates. Override with BUILD_DATE=YYYY-MM-DD for testing.
 const TODAY = process.env.BUILD_DATE || new Intl.DateTimeFormat('en-CA', { timeZone: 'Australia/Brisbane', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 const URL_ = p => SITE.origin + SITE.base + p;
+const ORG = { '@type': 'Organization', name: SITE.name, url: URL_('/') };
 const L = p => SITE.base + p;
 const EMAIL = BUSINESS_EMAIL;
+const crumbsLd = items => ({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(([name, p], i) => ({ '@type': 'ListItem', position: i + 1, name, item: URL_(p) })) });
 const mailto = (subject) => `mailto:${EMAIL}${subject ? `?subject=${encodeURIComponent(subject)}` : ''}`;
 const TASKS = {
   'concept-art':  { label: 'Concept art & 2D assets', page: 'concept-art', h1: 'AI tools for game concept art, sprites and 2D assets' },
@@ -37,7 +39,20 @@ const TASKS = {
   'qa':           { label: 'QA & playtesting', page: 'qa-playtesting', h1: 'AI tools for game QA and playtesting' },
   'marketing':    { label: 'Trailers & marketing', page: 'trailers-marketing', h1: 'AI tools for game trailers and marketing' },
 };
-const ENGINES = { unity: 'Unity', godot: 'Godot', unreal: 'Unreal' };
+// Engines and tools a listing can be tagged with (data/tools.json `engines`; 'any' = engine-agnostic file export).
+// Each gets an indexable page at /engine/<page>/, like TASKS make /category/<page>/. Tag only where the vendor's own
+// docs or pages show an official plugin, integration or export target (sources: OPERATIONS.md decisions log, 2026-10-17).
+const ENGINE_PAGES = {
+  unity:   { label: 'Unity', page: 'unity', h1: 'AI tools for Unity developers', what: 'Unity' },
+  unreal:  { label: 'Unreal', page: 'unreal', h1: 'AI tools for Unreal Engine developers', what: 'Unreal Engine' },
+  godot:   { label: 'Godot', page: 'godot', h1: 'AI tools for Godot developers', what: 'Godot' },
+  blender: { label: 'Blender', page: 'blender', h1: 'AI tools with Blender add-ons and integrations', what: 'Blender' },
+  roblox:  { label: 'Roblox', page: 'roblox', h1: 'AI tools for Roblox Studio', what: 'Roblox Studio' },
+};
+const ENGINES = Object.fromEntries(Object.entries(ENGINE_PAGES).map(([k, e]) => [k, e.label]));
+// First publication date of the site's pages (launch, per OPERATIONS.md); used as Article datePublished.
+const PUBLISHED = '2026-10-17';
+
 // Visitor-facing wording: a data value of 'unverified' is shown as "Not stated by vendor" (data itself is unchanged).
 const NSV_TEXT = 'Not stated by vendor';
 const PRICING = { 'freemium': 'Free tier + paid', 'paid': 'Paid', 'pay-as-you-go': 'Pay as you go', 'open-weights': 'Free (open weights)', 'included': 'Included with engine plan', 'contact': 'Contact sales', 'unverified': NSV_TEXT };
@@ -73,16 +88,16 @@ const isNsv = v => v === undefined || v === null || v === '' || v === 'unverifie
 const NSV = `<span class="nsv">${NSV_TEXT}</span>`;
 const val = v => isNsv(v) ? NSV : esc(v); // detail pages: unknown -> muted "Not stated by vendor"
 
-// ---------- Friendly dates (computed at build in Australia/Brisbane; ISO stays in data and in <time datetime>) ----------
+// ---------- Friendly dates (absolute, e.g. "Sat 17 Oct"; year shown only when not the current year; ISO stays in data and in <time datetime>) ----------
 const DAY_MS = 86400000;
 const dayNum = iso => Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10)) / DAY_MS;
 const WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const dateLabel = iso => { const d = new Date(dayNum(iso) * DAY_MS); return `${WD[d.getUTCDay()]} ${d.getUTCDate()} ${MON[d.getUTCMonth()]}${iso.slice(0, 4) !== TODAY.slice(0, 4) ? ' ' + iso.slice(0, 4) : ''}`; };
+// Visible dates are absolute ("Sat 17 Oct", year added when it isn't the build year) so static HTML never goes stale.
+// `cap` is kept for call-site compatibility (labels already start with a capital).
 function friendly(iso, cap = false) {
   if (!/^\d{4}-\d{2}-\d{2}/.test(iso || '')) return esc(iso || '');
-  const d = dayNum(TODAY) - dayNum(iso);
-  const s = d === 0 ? 'today' : d === 1 ? 'yesterday' : d > 1 && d < 7 ? `${d} days ago` : dateLabel(iso);
-  return cap ? s[0].toUpperCase() + s.slice(1) : s;
+  return dateLabel(iso);
 }
 const timeEl = (iso, cap = false) => `<time datetime="${esc(iso)}" title="${esc(iso)}">${friendly(iso, cap)}</time>`;
 
@@ -236,7 +251,7 @@ function newsletterBlock({ heading, text } = {}) {
 </section>`;
   return `<section class="newsletter" id="newsletter">
 <h2>${esc(heading || 'AI tools you can legally ship in a paid game')}</h2>
-<p>${text || `Our cheat sheet: for every tool we list, whether free-plan output can go in a commercial game, which plan you need, and the catch, with sources and check dates. Subscribe and we'll email you the link, plus an occasional newsletter about new tools and licence changes. Unsubscribe any time. (It's also <a href="${L('/cheat-sheet/')}">free to read here</a>.)`}</p>
+<p>${text || `Our free cheat sheet covers every tool we list: whether free-plan output can go in a commercial game, which plan you need, and the catch, with sources and check dates. Subscribe and we'll email you the link, plus a weekly newsletter on new tools and licence changes. Unsubscribe any time. (Or just <a href="${L('/cheat-sheet/')}">read it here</a>.)`}</p>
 <form method="post" action="/api/subscribe/">
 <input type="email" name="email" required maxlength="254" placeholder="you@example.com" aria-label="Email address">
 ${HONEYPOT}
@@ -268,6 +283,27 @@ const weekLabel = iso => { const diff = Math.round((weekStart(TODAY) - weekStart
 const recentNews = NEWS.filter(n => { const d = dayNum(TODAY) - dayNum(n.date); return d >= 0 && d < 7; });
 
 // ---------- Home ----------
+const engineList = Object.entries(ENGINE_PAGES).map(([k, e]) => ({ k, e, list: tools.filter(t => t.engines.includes(k)) })).filter(x => x.list.length).map(x => ({ ...x, n: x.list.length }));
+// Free-plan commercial status (shared with the home answer line, comparisons and the cheat sheet).
+const freeShip = t => {
+  if (t.commercial === 'n-a') return ['na', 'Not applicable'];
+  if (t.free === 'unverified' || t.commercial === 'unverified') return ['unk', NSV_TEXT];
+  if (t.free === 'no') return ['paid', 'No free plan'];
+  if (t.commercial === 'yes') return t.free === 'yes' ? ['yes', 'Yes'] : ['yes', 'Yes (free option is a trial or credits)'];
+  if (t.commercial === 'paid-only') return ['paid', 'No: paid plan needed'];
+  if (t.commercial === 'restricted') return ['check', 'Restricted: read the catch'];
+  if (t.commercial === 'no') return ['no', 'No, on any plan'];
+  return ['unk', NSV_TEXT];
+};
+const SHEET_GROUPS = [
+  ['yes', 'Free-plan output can be shipped commercially'],
+  ['paid', 'You need a paid plan to ship'],
+  ['check', 'Restricted: read the terms'],
+  ['no', 'Not allowed in a commercial game'],
+  ['unk', 'Not stated by vendor: the vendor\'s pages didn\'t clearly answer this'],
+  ['na', 'Not applicable: testing tools that don\'t make assets'],
+];
+const sheetCounts = Object.fromEntries(SHEET_GROUPS.map(([k]) => [k, tools.filter(t => freeShip(t)[0] === k).length]));
 const opts = (o) => Object.entries(o).map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join('');
 // "New & updated this week": tools named in the last 7 days of the /new/ feed (real dated entries only), newest first, one card per tool.
 const newRow = [];
@@ -276,7 +312,14 @@ for (const n of recentNews) if (n.tool && bySlug[n.tool] && !newRow.some(x => x.
 const NEW_MAX = Math.min(newRow.length, SPONSOR ? 3 : 4);
 const NEW_COLS = { 1: 'g2 m2', 2: 'g2 m2', 3: 'g3 t3', 4: 'g4 m2' }[NEW_MAX + (SPONSOR ? 1 : 0)] || 'g4 m2';
 const HOME_TITLE = 'Which AI tools can you legally ship in a paid game?';
-const HOME_SUB = `${tools.length} AI tools for game devs by task and engine, with pricing and commercial-use terms, sourced and dated.`;
+// Direct answer to the H1 (also the og:image sub line), from the same counts as the cheat sheet. Handles 0 and 1.
+const HOME_SUB = (() => {
+  const y = sheetCounts.yes, pd = sheetCounts.paid, n = tools.length;
+  const first = y === 0 ? `none of our ${n} tools let you ship free-plan output in a paid game`
+    : `${y} of our ${n} ${n === 1 ? 'tool' : 'tools'} ${y === 1 ? 'lets' : 'let'} you ship free-plan output in a paid game`;
+  const second = pd ? `, and ${pd} more ${pd === 1 ? 'needs' : 'need'} a paid plan` : '';
+  return `Going by each vendor's published terms, ${first}${second}. Every price and licence term links to the vendor's page, with the date we checked it.`;
+})();
 page('/', layout({
   title: `${SITE.name}: directory of AI tools for game developers`,
   description: SITE.description,
@@ -303,6 +346,10 @@ ${newRow.slice(0, NEW_MAX).map(({ t, n }) => toolCard(t, { compact: true, note: 
 <div class="sec-head"><h2 id="cats-h">Browse by task</h2><a href="${L('/category/')}">All categories →</a></div>
 <div class="tiles">${Object.entries(TASKS).map(([k, c]) => tile(c, tools.filter(t => t.tasks.includes(k)).length)).join('')}</div>
 </section>
+<section id="engines" aria-labelledby="eng-h">
+<div class="sec-head"><h2 id="eng-h">Browse by engine</h2></div>
+<p class="quick"><span>Tools with an official plugin, integration or export for:</span>${engineList.map(({ e, n }) => chip(`${e.label} (${n})`, { href: L(`/engine/${e.page}/`) })).join('')}</p>
+</section>
 <section id="tools" class="tools-sec" aria-labelledby="tools-h">
 <div class="sec-head"><h2 id="tools-h">All tools, A to Z</h2><p id="count" aria-live="polite">${tools.length} tools</p></div>
 <div class="filters" role="group" aria-label="Filters">
@@ -312,7 +359,7 @@ ${newRow.slice(0, NEW_MAX).map(({ t, n }) => toolCard(t, { compact: true, note: 
 <select id="f-commercial" aria-label="Safe to ship commercially"><option value="">Safe to ship commercially?</option>${opts(SHIP)}</select>
 <button id="reset" type="button">Reset</button>
 </div>
-<p class="hint">"Safe to ship commercially" is based only on each vendor's published terms (see the source on each tool page). It is not legal advice. The engine filter shows tools whose vendor states a plugin, integration or export for that engine. Most other tools export standard files (PNG, FBX, GLB, WAV and so on) that work in any engine.</p>
+<p class="hint">"Safe to ship commercially" goes only on what each vendor's published terms say, and every tool page links to them. It isn't legal advice. The engine filter shows tools whose vendor states a plugin, integration or export for that engine. Most other tools export standard files (PNG, FBX, GLB, WAV and so on) that work in any engine.</p>
 <div id="results" class="grid">
 ${tools.map(t => toolCard(t)).join('\n')}
 </div>
@@ -479,6 +526,33 @@ page('/category/', layout({
 ${newsletterBlock()}`,
 }));
 
+// ---------- Engine pages (one per ENGINE_PAGES entry with tagged tools) ----------
+for (const { k, e, list } of engineList) {
+  const p = `/engine/${e.page}/`;
+  const desc = `${list.length} AI ${list.length === 1 ? 'tool' : 'tools'} for game developers whose vendor documents an official ${e.what} plugin, integration or export, with pricing and commercial-use terms from each vendor's site.`;
+  page(p, layout({
+    title: `${e.h1} (${SITE.updated.slice(0, 4)}) | ${SITE.name}`,
+    description: desc,
+    pathname: p,
+    og: ogFile(`engine/${e.page}`, 'page', { kicker: `Engine · ${list.length} ${list.length === 1 ? 'tool' : 'tools'}`, title: e.h1, sub: 'Official plugins, integrations and exports, with pricing and commercial-use terms, sourced and dated.' }),
+    jsonld: [
+      { '@context': 'https://schema.org', '@type': 'ItemList', name: e.h1, itemListElement: list.map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: URL_(`/tools/${t.slug}/`), name: t.name })) },
+      crumbsLd([['All tools', '/'], [e.label, p]]),
+    ],
+    body: `
+<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/#engines')}">Engines</a> › ${esc(e.label)}</nav>
+<h1 class="page-h">${esc(e.h1)}</h1>
+<p class="page-sub">${list.length} ${list.length === 1 ? 'tool whose vendor documents' : 'tools whose vendors document'} an official ${esc(e.what)} plugin, integration or export target, in alphabetical order (this isn't a ranking). Most other tools export standard files (PNG, FBX, GLB, WAV and so on) that work in any engine: see <a href="${L('/#tools')}">all tools</a>. Check each tool's commercial-use notes before you ship.</p>
+<div class="table-wrap"><table class="cmp"><thead><tr><th>Tool</th><th>Main task</th><th>Free plan</th><th>Commercial use</th></tr></thead><tbody>
+${list.map(t => `<tr><td><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 24)}${esc(t.name)}</a></td><td><a href="${L(`/category/${TASKS[t.tasks[0]].page}/`)}">${esc(TASKS[t.tasks[0]].label)}</a></td><td>${isNsv(t.free) ? NSV : esc(FREE[t.free])}</td><td>${licBadge(t)}</td></tr>`).join('\n')}
+</tbody></table></div>
+<p class="quick"><span>Other engines:</span>${engineList.filter(x => x.k !== k).map(x => chip(x.e.label, { href: L(`/engine/${x.e.page}/`) })).join('')}</p>
+<h2 class="sub-h">Tool details</h2>
+<div class="grid">${list.map(t => toolCard(t)).join('\n')}</div>
+${newsletterBlock()}`,
+  }));
+}
+
 // ---------- Guides ----------
 const stmt = x => `${esc(x.text)}${srcA(x.url)}`;
 // Tools named in a step (by listing link or by name), shown as logo chips on that step.
@@ -558,10 +632,17 @@ ${flowStrip(g, { max: 5 })}
 }
 
 // ---------- Store AI disclosure ----------
+const discOg = ogFile('page/steam-ai-disclosure', 'page', { kicker: 'GameDev AI Tools', title: `${DISCLOSURE.title} (${CHECKED.slice(0, 4)})`, sub: DISCLOSURE.description });
 page('/steam-ai-disclosure/', layout({
   title: `${DISCLOSURE.title} (${CHECKED.slice(0, 4)}) | ${SITE.name}`, description: DISCLOSURE.description, pathname: '/steam-ai-disclosure/',
+  og: discOg,
+  jsonld: [
+    { '@context': 'https://schema.org', '@type': 'Article', headline: DISCLOSURE.title, description: DISCLOSURE.description, abstract: DISCLOSURE.answer, url: URL_('/steam-ai-disclosure/'), mainEntityOfPage: URL_('/steam-ai-disclosure/'), datePublished: PUBLISHED, dateModified: CHECKED, inLanguage: 'en-AU', author: ORG, publisher: ORG, ...(discOg ? { image: URL_(discOg) } : {}) },
+    crumbsLd([['All tools', '/'], ['Guides', '/guides/'], ['Store AI disclosure', '/steam-ai-disclosure/']]),
+  ],
   body: `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/guides/')}">Guides</a> › Store AI disclosure</nav>
-<article class="guide"><h1 class="page-h">${esc(DISCLOSURE.title)}</h1><p class="lead">${esc(DISCLOSURE.description)} Checked ${timeEl(CHECKED)}.</p>
+<article class="guide"><h1 class="page-h">${esc(DISCLOSURE.title)}</h1>
+${DISCLOSURE.answer ? `<section class="card qa" aria-label="Short answer"><p class="qa-a"><span><b>Short answer:</b> ${esc(DISCLOSURE.answer)}</span></p></section>` : ''}<p class="lead">${esc(DISCLOSURE.description)} Checked ${timeEl(CHECKED)}.</p>
 ${DISCLOSURE.sections.map(sec => `<section class="card disc"><h2>${esc(sec.h)}</h2><ul>${sec.items.map(x => `<li>${stmt(x)}</li>`).join('')}</ul></section>`).join('')}
 <p class="note">${esc(DISCLOSURE.note)}</p></article>`,
 }));
@@ -614,17 +695,6 @@ const ROWS = [
   ['MCP server', t => `${val(MCP_L[t.mcp.status])}${isNsv(t.mcp.note) ? '' : `. ${esc(t.mcp.note)}`}${srcA(t.mcp.source)}`],
   ['Last checked', t => timeEl(t.lastChecked, true)],
 ];
-// Free-plan commercial status (shared with the cheat sheet).
-const freeShip = t => {
-  if (t.commercial === 'n-a') return ['na', 'Not applicable'];
-  if (t.free === 'unverified' || t.commercial === 'unverified') return ['unk', NSV_TEXT];
-  if (t.free === 'no') return ['paid', 'No free plan'];
-  if (t.commercial === 'yes') return t.free === 'yes' ? ['yes', 'Yes'] : ['yes', 'Yes (free option is a trial or credits)'];
-  if (t.commercial === 'paid-only') return ['paid', 'No: paid plan needed'];
-  if (t.commercial === 'restricted') return ['check', 'Restricted: read the catch'];
-  if (t.commercial === 'no') return ['no', 'No, on any plan'];
-  return ['unk', NSV_TEXT];
-};
 // Difference chips, computed from data fields only (null = not stated or not applicable, so no chip). No ratings or winners.
 // "Cheaper entry plan" is not computed: prices are free text in the data, not directly comparable.
 const FACTS = [
@@ -676,11 +746,18 @@ function bottomLine(A, B) {
 }
 for (const [a, b] of COMPARE) {
   const A = bySlug[a], B = bySlug[b], p = `/compare/${a}-vs-${b}/`;
+  const cmpOg = ogFile(`compare/${a}-vs-${b}`, 'versus', { kicker: 'Comparison · pricing, licence, API', a: { logo: logoData(A), name: A.name }, b: { logo: logoData(B), name: B.name } });
+  const cmpDesc = `${A.name} vs ${B.name} for game developers: free plans, pricing, export formats, commercial-use terms, API and MCP, from each vendor's published pages.`;
+  const modified = [CHECKED, A.lastChecked, B.lastChecked].filter(Boolean).sort().pop();
   const head = t => `<div role="columnheader" class="vs-tool"><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 36, true)}${esc(t.name)}</a>${licBadge(t)}</div>`;
   page(p, layout({
     title: `${A.name} vs ${B.name}: pricing, licence, API compared | ${SITE.name}`,
-    description: `${A.name} vs ${B.name} for game developers: free plans, pricing, export formats, commercial-use terms, API and MCP, from each vendor's published pages.`, pathname: p,
-    og: ogFile(`compare/${a}-vs-${b}`, 'versus', { kicker: 'Comparison · pricing, licence, API', a: { logo: logoData(A), name: A.name }, b: { logo: logoData(B), name: B.name } }),
+    description: cmpDesc, pathname: p,
+    og: cmpOg,
+    jsonld: [
+      { '@context': 'https://schema.org', '@type': 'Article', headline: `${A.name} vs ${B.name}`, description: cmpDesc, url: URL_(p), mainEntityOfPage: URL_(p), datePublished: PUBLISHED, dateModified: modified, inLanguage: 'en-AU', author: ORG, publisher: ORG, about: [A, B].map(t => ({ '@type': 'SoftwareApplication', name: t.name, url: t.url })), ...(cmpOg ? { image: URL_(cmpOg) } : {}) },
+      crumbsLd([['All tools', '/'], ['Comparisons', '/compare/'], [`${A.name} vs ${B.name}`, p]]),
+    ],
     body: `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/compare/')}">Comparisons</a> › ${esc(A.name)} vs ${esc(B.name)}</nav>
 <h1 class="page-h">${esc(A.name)} vs ${esc(B.name)}</h1>
 <p class="page-sub">Facts from each vendor's published pages, checked ${timeEl(CHECKED)}. No scores and no winner: pick based on what you need.</p>
@@ -695,11 +772,11 @@ ${ROWS.map(([h, f]) => `<div class="vs-row" role="row"><div role="rowheader" cla
 
 // ---------- Sponsor (one offer; checkout URL lives in config.mjs) ----------
 page('/sponsor/', layout({
-  title: `Sponsor us | ${SITE.name}`, description: `Sponsor GameDev AI Tools: your logo and link in the sponsored card on the homepage and every category page, plus the strip across the top of every page, for 7 days, and a mention in the next newsletter. ${SPONSOR_PRICE}.`, pathname: '/sponsor/',
+  title: `Sponsor us | ${SITE.name}`, description: SPONSOR_OFFER, pathname: '/sponsor/',
   body: `<h1 class="page-h">Sponsor GameDev AI Tools</h1>
 <div class="paid-thanks" id="paid-thanks" role="status" hidden><p><strong>Thanks!</strong> Email your logo (SVG or PNG) and link to <a href="${mailto('Sponsor logo and link')}">${EMAIL}</a> and we'll add you within a day.</p></div>
 <div class="prose">
-<section class="card"><span class="kicker">One offer</span><p class="offer">${esc(SPONSOR_OFFER)}</p><p><a class="btn" href="${esc(SPONSOR_PAYMENT_URL)}">Sponsor us</a></p></section>
+<section class="card"><span class="kicker">One offer</span><p class="offer">${esc(SPONSOR_OFFER)}</p><p><a class="btn" href="${esc(SPONSOR_PAYMENT_URL)}">Book a week (${esc(SPONSOR_PRICE)})</a></p></section>
 <p class="note">The strip is labelled "Sponsor". Sponsorship never changes our listings, their order or their verdicts. See <a href="${L('/about/')}">how we make money</a>.</p>
 <p>Planning a bigger campaign? Email <a href="${mailto('Campaign enquiry')}">${EMAIL}</a>.</p>
 </div>`,
@@ -754,17 +831,8 @@ const planNeeded = t => ({
   'n-a': 'Not applicable (doesn\'t make shippable assets)',
 }[t.commercial] || NSV_TEXT);
 const catchText = t => [isNsv(t.license) ? '' : t.license, t.revenue && t.revenue !== 'unverified' ? `Caps: ${t.revenue}` : ''].filter(Boolean).join(' ');
-const SHEET_GROUPS = [
-  ['yes', 'Free-plan output can be shipped commercially'],
-  ['paid', 'You need a paid plan to ship'],
-  ['check', 'Restricted: read the terms'],
-  ['no', 'Not allowed in a commercial game'],
-  ['unk', 'Not stated by vendor: the vendor\'s pages didn\'t clearly answer this'],
-  ['na', 'Not applicable: testing tools that don\'t make assets'],
-];
 const SHEET_TONE = { yes: 'ok', paid: 'warn', check: 'warn', no: 'bad', unk: 'unk', na: 'unk' };
 const sheetRow = t => { const [k, label] = freeShip(t); return `<tr><td><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 24)}${esc(t.name)}</a></td><td>${badge(label, SHEET_TONE[k])}</td><td>${planNeeded(t) === NSV_TEXT ? NSV : esc(planNeeded(t))}</td><td>${catchText(t) ? esc(catchText(t)) : NSV}</td><td>${t.licenseSource ? `<a href="${esc(t.licenseSource)}" rel="noopener nofollow" target="_blank">Terms</a>` : NSV}${t.pricingSource ? ` · <a href="${esc(t.pricingSource)}" rel="noopener nofollow" target="_blank">Pricing</a>` : ''}</td><td>${timeEl(t.lastChecked, true)}</td></tr>`; };
-const sheetCounts = Object.fromEntries(SHEET_GROUPS.map(([k]) => [k, tools.filter(t => freeShip(t)[0] === k).length]));
 page('/cheat-sheet/', layout({
   title: `AI tools you can legally ship in a paid game (cheat sheet) | ${SITE.name}`,
   description: `For ${tools.length} AI game-dev tools: can free-plan output go in a commercial game, which plan you need, and the catch. Sourced from each vendor's terms and dated.`,
@@ -884,6 +952,9 @@ ${tools.length} tools listed. Each tool page covers what it is best for, price a
 const llmsLinks = `
 ## Categories
 ${catLinks.join('\n')}
+
+## Engines
+${engineList.map(({ e, n }) => `- [${e.label}](${URL_(`/engine/${e.page}/`)}): ${e.h1} (${n} ${n === 1 ? 'tool' : 'tools'} with an official plugin, integration or export, per the vendor)`).join('\n')}
 
 ## Guides
 - [All guides](${URL_('/guides/')})

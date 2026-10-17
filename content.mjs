@@ -89,6 +89,8 @@ export const GUIDES = [
 export const DISCLOSURE = {
   title: 'Steam AI-content disclosure (and other stores)',
   description: 'What Steam\'s Content Survey asks about generative AI, plus what itch.io, Epic Games Store and Google Play publish. Dated, with source links.',
+  // Direct answer shown right under the headline (and in the Article JSON-LD). Only facts sourced in the Steam section below.
+  answer: 'Yes, Steam asks. Before review you complete a Content Survey with a section on generative AI. Valve says it is concerned with AI-made content that ships with the game and that players consume, such as artwork, sound, narrative and localisation, not efficiency gains from AI dev tools. If your game generates content with AI while it runs, you must also describe the guardrails that stop it generating illegal content.',
   sections: [
     { h: 'Steam (Valve)', items: [
       s('Before review, you complete a Content Survey. Its third section covers generative AI in development or in the product.', 'https://partner.steamgames.com/doc/gettingstarted/contentsurvey'),

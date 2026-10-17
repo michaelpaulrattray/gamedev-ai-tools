@@ -3,7 +3,8 @@
   "private": true,
   "description": "Static site generator for gamedevaitools.com. build.mjs writes ./dist; og.mjs renders 1200x630 share images.",
   "scripts": {
-    "build": "node build.mjs"
+    "build": "node build.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@resvg/resvg-js": "2.6.2",
