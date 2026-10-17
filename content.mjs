@@ -10,6 +10,9 @@ export const GUIDES = [
     title: 'AI 3D model to game engine: generate, clean up in Blender, import',
     description: 'A sourced workflow for taking an AI-generated 3D model through Blender cleanup and retopology into Unity, Godot or Unreal.',
     tools: ['meshy', 'tripo', 'hyper3d-rodin', 'sloyd', 'hunyuan3d'],
+    // Display metadata (summarises the steps below; no new facts): task = category art + filter, engines = engines the steps cover.
+    task: '3d-models', engines: ['unity', 'godot', 'unreal'],
+    outcome: 'An AI-generated 3D model, cleaned up and reduced in Blender, UV-unwrapped with baked detail, and imported into Unity, Godot or Unreal.',
     intro: 'AI 3D generators give you a mesh fast, but it usually needs cleanup before it works well in a game. Here are the steps, each linked to the official documentation for that tool.',
     steps: [
       { h: 'Check the licence before you generate', p: [s('Commercial rights often depend on the plan. For example, Tripo\'s free plan is non-commercial, and Meshy\'s free plan licenses outputs under CC BY 4.0. Check the tool page for the source.', '/tools/tripo/')] },
@@ -37,6 +40,8 @@ export const GUIDES = [
     title: 'AI voice lines to lip-sync: TTS, then mouth animation',
     description: 'A sourced workflow for generating NPC voice lines with AI text-to-speech and driving lip-sync in 2D, Unity or Unreal.',
     tools: ['elevenlabs', 'inworld-ai', 'convai', 'charisma-ai'],
+    task: 'voice', engines: ['unity', 'unreal'],
+    outcome: 'AI text-to-speech voice lines exported as audio, with lip-sync driven from that audio for 2D characters, Unity characters or Unreal MetaHumans.',
     intro: 'Generate the voice line first, then drive the mouth from the audio. Which lip-sync tool fits depends on your art style and engine.',
     steps: [
       { h: 'Use a plan that allows commercial use', p: [s('For example, ElevenLabs\' free plan is for non-commercial use only, and paid plans allow commercial use.', '/tools/elevenlabs/')] },
@@ -55,6 +60,8 @@ export const GUIDES = [
     title: 'Concept art to a PBR texture set',
     description: 'A sourced workflow for turning AI concept or texture images into tileable PBR material maps for Unity, Godot or Unreal.',
     tools: ['scenario', 'layer-ai', 'leonardo-ai', 'meshy', 'unity-ai'],
+    task: 'textures', engines: ['unity', 'godot', 'unreal'],
+    outcome: 'A set of PBR material maps (base colour, normal, roughness or smoothness, metallic, AO) made from an AI image and set up as a material in Unity, Godot or Unreal.',
     intro: 'A concept image is not a material. Engines want a set of maps (albedo/base colour, normal, roughness or smoothness, metallic, AO). Here is a sourced route from an image to those maps.',
     steps: [
       { h: 'Generate a flat, tileable source image', p: [
@@ -97,6 +104,8 @@ export const DISCLOSURE = {
 };
 
 // "New this week": real releases, newest first. Dates are the source's publication date, converted to Australia/Brisbane.
+// Optional per item: type ('Launch' | 'Update' | 'Pricing change' | 'Licence change' | 'Funding'; otherwise inferred from the title,
+// defaulting to 'Update') and why (one sourced line, "Why it matters for game devs"; omitted when not set).
 export const NEWS = [
   { date: '2026-10-15', title: 'ElevenLabs launches Instant Soundtracks', tool: 'elevenlabs',
     text: 'Upload a video in ElevenCreative and get an original score plus sound effects placed at detected timestamps. In the API, separate_tracks returns music and SFX as separate files.',

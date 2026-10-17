@@ -1,0 +1,12 @@
+{
+  "name": "gamedev-ai-tools",
+  "private": true,
+  "description": "Static site generator for gamedevaitools.com. build.mjs writes ./dist; og.mjs renders 1200x630 share images.",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "2.6.2",
+    "satori": "0.62.0"
+  }
+}
