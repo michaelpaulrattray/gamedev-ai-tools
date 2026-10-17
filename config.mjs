@@ -4,6 +4,6 @@
 export const SPONSOR_PAYMENT_URL = 'https://buy.stripe.com/cNi6oH9KDaWV44P7CO4Vy00';
 // Current weekly sponsor price (change here when the price tier changes; the sponsor card, /sponsor/ page and llms.txt read it).
 export const SPONSOR_PRICE = 'US$79/week';
-export const SPONSOR_OFFER = `Your logo and link in the sponsor strip on every page for 7 days, plus a mention in the next newsletter. ${SPONSOR_PRICE}.`;
+export const SPONSOR_OFFER = `Your logo and link in the sponsored card on the homepage and every category page, plus the strip across the top of every page, for 7 days, and a mention in the next newsletter. ${SPONSOR_PRICE}.`;
 export const BUSINESS_EMAIL = 'hello@gamedevaitools.com';
 export const AFFILIATE_NOTE = 'Some links earn us a commission. It never changes our listings.';

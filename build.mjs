@@ -677,7 +677,7 @@ ${ROWS.map(([h, f]) => `<div class="vs-row" role="row"><div role="rowheader" cla
 
 // ---------- Sponsor (one offer; checkout URL lives in config.mjs) ----------
 page('/sponsor/', layout({
-  title: `Sponsor us | ${SITE.name}`, description: `Sponsor GameDev AI Tools: your logo and link in the sponsor strip on every page for 7 days, plus a mention in the next newsletter. ${SPONSOR_PRICE}.`, pathname: '/sponsor/',
+  title: `Sponsor us | ${SITE.name}`, description: `Sponsor GameDev AI Tools: your logo and link in the sponsored card on the homepage and every category page, plus the strip across the top of every page, for 7 days, and a mention in the next newsletter. ${SPONSOR_PRICE}.`, pathname: '/sponsor/',
   body: `<h1 class="page-h">Sponsor GameDev AI Tools</h1>
 <div class="paid-thanks" id="paid-thanks" role="status" hidden><p><strong>Thanks!</strong> Email your logo (SVG or PNG) and link to <a href="${mailto('Sponsor logo and link')}">${EMAIL}</a> and we'll add you within a day.</p></div>
 <div class="prose">
@@ -704,7 +704,7 @@ page('/about/', layout({
 <li><b>Ordering and verdicts are never bought.</b> Tools are listed alphabetically. Each verdict is one line written only from the sourced facts. There are no ratings, reviews or winners, and sponsors and affiliate links never change a listing, its position or its verdict.</li>
 </ul></section>
 <section class="card"><h2>How we make money</h2><ul>
-<li><b>Sponsorship:</b> a labelled sponsor strip on every page for a week, plus a mention in our newsletter. See <a href="${L('/sponsor/')}">Sponsor us</a>.</li>
+<li><b>Sponsorship:</b> a labelled sponsored card on the homepage and every category page, plus the strip across the top of every page, for a week, and a mention in our newsletter. See <a href="${L('/sponsor/')}">Sponsor us</a>.</li>
 <li><b>Affiliate links:</b> some "Visit official site" links may be affiliate links, which earn us a commission if you buy. When a listing uses one, the tool page says so next to the button. ${esc(AFFILIATE_NOTE)}</li>
 </ul></section>
 <section class="card"><h2>Contact</h2><p>Corrections, sponsorship and anything else: <a href="${mailto()}">${EMAIL}</a>. For a correction, please include a link to the vendor's page. To suggest a tool, use <a href="${L('/submit/')}">Submit a tool</a>.</p></section>
