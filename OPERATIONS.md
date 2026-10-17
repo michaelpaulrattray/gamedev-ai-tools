@@ -250,7 +250,7 @@ No estimates. If a number isn't available, write "not measured".
 5. **Submissions token (optional):** fine-grained GitHub token for direct issue filing.
 6. **Abuse protection:** honeypot only; no rate limiting on signup (the welcome email goes only to new contacts). Revisit if spam appears.
 7. **Bing Webmaster Tools:** needs Mike's sign-in (Microsoft account) to verify gamedevaitools.com (or import from Search Console) and submit the sitemap. IndexNow is already set up and accepted (202), but Bing's own dashboard and verification can't be done without Mike.
-9. **Outreach send path:** the Gmail connector wraps every link in a google.com/url redirect, so recipients see a Google "Redirect Notice" page before ours or Stripe. Options: send through Gmail in the browser as hello@ (recommended), accept the redirect links, or use another sender. Today's 10 emails are held until then.
 8. **Sponsor price ladder:** Stripe links are live and the old US$79 link is retired. Pending: a per-spot price ladder (if any) to replace the retired visitor ladder.
+9. **Outreach send path:** the Gmail connector wraps every link in a google.com/url redirect, so recipients see a Google "Redirect Notice" page before ours or Stripe. Options: send through Gmail in the browser as hello@ (recommended), accept the redirect links, or use another sender. Today's 10 emails are held until then.
 
 - **2026-10-18 (06:55 AEST):** /about/ now lists the wide-screen side card in the site-wide sponsor spot (Copy Humanizer Q4). Pitch drafts for 18 and 19 Oct now quote the exact Stripe dropdown labels and say "below the tool list", matching /sponsor/.
