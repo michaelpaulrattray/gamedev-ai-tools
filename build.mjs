@@ -231,6 +231,7 @@ for (const [key, c] of Object.entries(TASKS)) {
 <div class="table-wrap"><table class="cmp"><thead><tr><th>Tool</th><th>Pricing</th><th>Commercial use</th></tr></thead><tbody>
 ${list.map(t => `<tr><td><a class="cmp-tool" href="${L(`/tools/${t.slug}/`)}">${logo(t, 24)}${esc(t.name)}</a></td><td>${esc(PRICING[t.pricingModel])}</td><td><span class="pill lic lic-${t.commercial}">${esc(COMMERCIAL[t.commercial])}</span></td></tr>`).join('\n')}
 </tbody></table></div>
+<h2 class="sub-h">Tool details</h2>
 <div class="grid">${list.map(card).join('\n')}</div>`,
   }));
 }
