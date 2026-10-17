@@ -370,21 +370,27 @@ page('/sponsor/', layout({
 <p>To ask about sponsorship, email <a href="${mailto('Sponsorship enquiry')}">${EMAIL}</a> with your tool's name and which tier you're interested in.</p>`,
 }));
 
-// ---------- Privacy (wording approved by Mike, 2026-10-17) ----------
+// ---------- Privacy (wording approved by Mike 2026-10-17; analytics, affiliate, payments and email sections added 2026-10-17 per Mike's policy) ----------
 page('/privacy/', layout({
   title: `Privacy | ${SITE.name}`,
-  description: 'What data GameDev AI Tools handles: hosting logs on Vercel, tool submissions via public GitHub issues, and newsletter emails stored with Resend.',
+  description: 'What data GameDev AI Tools handles: hosting logs and cookieless Vercel Web Analytics, tool submissions via public GitHub issues, newsletter emails stored with Resend, affiliate links and sponsor payments.',
   pathname: '/privacy/',
   body: `<h1>Privacy</h1>
 <p>Last updated 17 October 2026.</p>
 <p>This page explains, in plain terms, what happens to data when you use this site.</p>
 <h2 class="sub-h">Browsing</h2>
 <p>The site is hosted on Vercel. Like any web host, Vercel receives technical data such as your IP address, browser user agent and the pages you request, and may keep it in server logs. See <a href="https://vercel.com/legal/privacy-policy" rel="noopener">Vercel's privacy policy</a>.</p>
-<p>We don't use analytics, advertising or tracking scripts, and the site doesn't set cookies. Pages load no third-party scripts or fonts. Tool logos are stored on this site. Links to tool vendors take you to their sites, where their own policies apply.</p>
+<p>The site doesn't set cookies and doesn't use advertising or cross-site tracking. Pages load no third-party fonts. Tool logos are stored on this site.</p>
+<h2 class="sub-h">Analytics</h2>
+<p>We use <a href="https://vercel.com/docs/analytics/privacy-policy" rel="noopener">Vercel Web Analytics</a>, which counts page views without cookies or personal identifiers. Its script is served from this site's own domain. We see totals such as page views, referring sites, countries and device types, not individual visitors.</p>
+<h2 class="sub-h">Links to other sites, including affiliate links</h2>
+<p>Links to tool vendors take you to their sites, where their own policies apply. Some of those links are affiliate links, which means we may earn a commission if you buy. When you click one, the third-party site may set its own cookies to record that you came from us. Affiliate links never change our listings, their order or their verdicts.</p>
 <h2 class="sub-h">Submitting a tool</h2>
 <p>The <a href="${L('/submit/')}">Submit a tool</a> form doesn't store your submission on this site. It sends you to GitHub with a prefilled issue, and nothing is filed until you submit it there with your own GitHub account. GitHub issues are public: anyone can see what you write there, your GitHub username and any email address you choose to include. GitHub's own privacy statement applies.</p>
-<h2 class="sub-h">Newsletter</h2>
-<p>If you sign up, your email address is stored with Resend, our email provider, in our newsletter list. We use it only for the newsletter. We haven't sent a newsletter yet. Every newsletter will include a way to unsubscribe. To be removed before then, email <a href="${mailto('Newsletter removal')}">${EMAIL}</a> from the address you signed up with.</p>
+<h2 class="sub-h">Newsletter and emails</h2>
+<p>If you sign up, your email address is stored with Resend, our email provider, in our newsletter list. We use it only for the newsletter. When you sign up we send one welcome email with a link to our cheat sheet. We haven't sent a newsletter yet. Every email we send, including the welcome email, includes an unsubscribe link: using it marks your address as unsubscribed in our list, and we stop emailing you. You can also email <a href="${mailto('Newsletter removal')}">${EMAIL}</a> from the address you signed up with to be removed.</p>
+<h2 class="sub-h">Sponsor payments</h2>
+<p>Sponsors will be able to pay through Stripe once payments are enabled (they aren't yet). Stripe processes the payment and card details under <a href="https://stripe.com/privacy" rel="noopener">Stripe's privacy policy</a>; we never see full card numbers. Until then, sponsorship is arranged by email.</p>
 <h2 class="sub-h">Contact</h2>
 <p>Contact us at <a href="${mailto()}">${EMAIL}</a>.</p>`,
 }));
