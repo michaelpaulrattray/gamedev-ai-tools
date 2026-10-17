@@ -167,7 +167,7 @@ No estimates. If a number isn't available, write "not measured".
 ## Open questions (need Mike)
 1. **X login:** access to post as @gamedevaitools (and set the automated-account label).
 2. **Affiliate payout and tax details:** bank/ABN/GST and tax forms for affiliate programmes (ask-first; nothing set up yet).
-3. **Analytics enable:** not enabled yet. Mike clicks Enable in Vercel → gamedev-ai-tools → Analytics (script is already on every page).
-4. **Search engine submission:** in Search Console, click Verify and submit https://gamedevaitools.com/sitemap.xml.
+3. **Analytics:** done (enabled 2026-10-17, script returns 200).
+4. **Search Console:** verified and sitemap submitted by Mike. Optional: add hello@gamedevaitools.com as a Restricted user so the team can read the data.
 5. **Submissions token (optional):** fine-grained GitHub token for direct issue filing.
 6. **Abuse protection:** honeypot only; no rate limiting on signup (the welcome email goes only to new contacts). Revisit if spam appears.
