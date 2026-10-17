@@ -19,6 +19,9 @@ jobs:
         with:
           node-version: 22
       - run: node build.mjs
+        env:
+          SITE_ORIGIN: https://michaelpaulrattray.github.io
+          SITE_BASE: /gamedev-ai-tools
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

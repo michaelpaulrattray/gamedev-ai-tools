@@ -4,8 +4,8 @@ import path from 'node:path';
 
 const SITE = {
   name: 'GameDev AI Tools',
-  origin: process.env.SITE_ORIGIN || 'https://michaelpaulrattray.github.io',
-  base: process.env.SITE_BASE ?? '/gamedev-ai-tools', // '' when on a custom domain
+  origin: process.env.SITE_ORIGIN || 'https://gamedevaitools.com',
+  base: process.env.SITE_BASE ?? '', // e.g. '/gamedev-ai-tools' for a GitHub Pages project path
   description: 'A free directory of AI tools for game developers. Filter by task (pixel art, 3D models, textures, music, voice, NPC dialogue, code), engine, pricing and commercial-use license.',
   updated: '2026-10-17',
 };
