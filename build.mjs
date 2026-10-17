@@ -997,13 +997,13 @@ const spCard = o => {
   const avail = o.unit === 'issue' ? 'One sponsor per issue' : `${o.slots} ${o.slots === 1 ? 'spot' : 'spots'}${o.slotNote ? ` (${o.slotNote})` : ''} · ${free} free this week`;
   return `<section class="card sp-offer" id="${o.id}"><div class="sp-offer-head"><h2>${esc(o.name)}</h2><span class="sp-price">${esc(o.price)}</span></div>
 <p><b>Where:</b> ${esc(o.where)}</p><p><b>What you get:</b> ${esc(o.gets)}</p><p class="sp-avail">${esc(avail)}</p>
-<p>${o.paymentUrl ? `<a class="btn" href="${esc(o.paymentUrl)}">Book (${esc(o.price)})</a>` : `<a class="btn" href="${esc(spMailto(o))}">Book by email</a>`}</p></section>`;
+<p>${o.paymentUrl ? `<a class="btn" href="${esc(o.paymentUrl)}">${o.unit === 'issue' ? 'Book an issue' : 'Book a week'} (${esc(o.price.replace(/\/.*/, ''))})</a>` : `<a class="btn" href="${esc(spMailto(o))}">Book by email</a>`}</p></section>`;
 };
 page('/sponsor/', layout({
   title: `Sponsor us | ${SITE.name}`, description: SPONSOR_DESC, pathname: '/sponsor/',
   body: `<h1 class="page-h">Sponsor GameDev AI Tools</h1>
 <p class="page-sub">Put your product in front of game developers choosing AI tools. Four kinds of spot, booked by the week (or by the issue for the newsletter). Prices in US$.</p>
-<div class="paid-thanks" id="paid-thanks" role="status" hidden><p><strong>Thanks!</strong> Email your logo (SVG or PNG) and link to <a href="${mailto('Sponsor logo and link')}">${EMAIL}</a> and we'll add you within a day.</p></div>
+<div class="paid-thanks" id="paid-thanks" role="status" hidden><p><strong>Thanks!</strong> Email your logo (SVG or PNG), your link and which spot you bought (site-wide, which category, which engine page, or newsletter) to <a href="${mailto('Sponsor logo and link')}">${EMAIL}</a> and we'll add you within a day.</p></div>
 <div class="prose">
 ${SPONSOR_OFFERS.map(spCard).join('\n')}
 <p class="note">Every paid spot is labelled "Sponsored". Sponsorship never changes our rankings, the order of tools, counts, filters or verdicts. See <a href="${L('/how-we-rank/')}">how we rank</a> and <a href="${L('/about/')}">how we make money</a>.</p>
