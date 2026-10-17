@@ -340,3 +340,51 @@ form.submit button:hover,.newsletter button:not([disabled]):hover{filter:brightn
  .site-header nav a{padding:6px 4px;font-size:.79rem}
  .site-header nav a.nav-cta{padding:6px 7px}
 }
+
+/* ===== Polish pass: calmer cards, pipeline strip, guide hero, vendor line ===== */
+/* Colour is reserved for commercial use (licence badge) and deals; other facts are quiet text. */
+.facts-line{font-size:.78rem;color:var(--dim);letter-spacing:.01em}
+.card-price{font-size:.78rem;color:var(--dim);white-space:nowrap}
+.badge.b-deal{background:rgba(244,114,182,.12);color:#f9a8d4;border-color:rgba(244,114,182,.35)}
+.card .verdict{background:transparent;border:0;border-left:2px solid rgba(139,92,246,.45);border-radius:0;padding:2px 0 2px 10px;color:#c9cfdd}
+.card-foot{align-items:center}
+.card .badges{gap:8px}
+/* vendor line on tool pages */
+.maker{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;margin:18px 0 6px;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--bg2);font-size:.86rem;color:var(--muted)}
+.maker b{color:#dfe3ee;font-weight:600}
+.maker-mail{font-size:.84rem;color:var(--muted);border:1px solid var(--line2);border-radius:9px;padding:5px 12px;text-decoration:none;white-space:nowrap}
+.maker-mail:hover{color:var(--text);border-color:var(--accent)}
+/* pipeline strip */
+.flow{list-style:none;margin:0;padding:0;display:flex;align-items:stretch;gap:0;overflow-x:auto;scrollbar-width:none}
+.flow::-webkit-scrollbar{display:none}
+.flow-node{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0;flex:1 1 0;padding:0 18px 0 0}
+.flow-node:not(:last-child):after{content:"";position:absolute;top:13px;left:0;right:0;height:2px;z-index:0;background:linear-gradient(90deg,rgba(139,92,246,.6),rgba(34,211,238,.35))}
+.flow-num{position:relative;z-index:1;display:grid;place-items:center;width:28px;height:28px;border-radius:8px;font-size:.78rem;font-weight:700;color:#c4b5fd;background:var(--panel2);border:1px solid var(--line2)}
+.flow-logos{position:relative;z-index:1;display:flex;align-items:center}
+.flow-logos .tlogo{width:28px;height:28px;border-radius:8px;border:2px solid var(--panel);background:#1d2232;margin-left:-8px}
+.flow-logos .tlogo:first-child{margin-left:0}
+.flow-logos .tlogo.mono{font-size:.55rem}
+.flow-more{margin-left:4px;font-size:.72rem;color:var(--dim)}
+.flow-label{font-size:.76rem;line-height:1.3;color:var(--muted)}
+.flow-node.is-ai .flow-label{color:#c4b5fd;font-weight:600}
+.card .flow{margin:4px 0 2px}
+.feature .flow{margin:4px 0}
+.guide>.flow{margin:18px 0 6px;padding:16px 18px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r)}
+.guide>.flow .flow-label{font-size:.82rem}
+/* guide hero */
+.guide{max-width:920px}
+.guide-hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:0;margin:8px 0 0;border:1px solid var(--line2);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,var(--panel2),var(--panel))}
+.guide-hero-art{background:var(--bg2);min-height:220px}
+.guide-hero-art img{display:block;width:100%;height:100%;object-fit:cover}
+.guide-hero-body{padding:24px 26px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.guide-hero-body h1{margin:0;font-size:clamp(1.5rem,3.2vw,2.1rem)}
+.guide-hero-body .lead{margin:0;font-size:1rem}
+/* guide card media: wider crop for the generated 16:9 art */
+#guide-grid .card-media,.res .card-media{aspect-ratio:16/8}
+@media (max-width:720px){
+ .guide-hero{grid-template-columns:1fr}
+ .guide-hero-art{min-height:0;aspect-ratio:16/8}
+ .guide-hero-body{padding:18px}
+ .flow-node{flex:0 0 auto;width:96px}
+ .maker{flex-direction:column;align-items:flex-start}
+}

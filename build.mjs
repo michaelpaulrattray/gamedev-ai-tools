@@ -104,18 +104,20 @@ const licBadge = (t, opts) => badge(COMMERCIAL[t.commercial] || NSV_TEXT, licTon
 const toolUrl = t => L(`/tools/${t.slug}/`);
 // Card subtitle: pricing model, or the main task when pricing isn't stated (never "unverified").
 const cardSub = t => isNsv(t.pricingModel) ? TASKS[t.tasks[0]].label : PRICING[t.pricingModel];
-// Card badges: fields whose value is 'unverified' are hidden on cards.
-const cardBadges = t => [
-  isNsv(t.commercial) ? '' : licBadge(t),
-  t.free === 'yes' ? badge('Free plan', 'info') : '',
-  t.mcp.status === 'official' ? badge('MCP', 'accent', { title: 'Official MCP server' }) : '',
-  t.api.status === 'yes' ? badge('API', 'neutral') : '',
-].join('');
+// Card footer: colour is reserved for the one signal that matters (commercial use). Everything else is quiet text.
+// Fields whose value is 'unverified' are hidden on cards.
+const cardFacts = t => [
+  t.free === 'yes' ? 'Free plan' : '',
+  t.api.status === 'yes' ? 'API' : '',
+  t.mcp.status === 'official' ? 'MCP' : '',
+].filter(Boolean);
+const dealFor = slug => DEALS.find(d => d.tool === slug);
+const cardBadges = t => `${isNsv(t.commercial) ? '' : licBadge(t)}${dealFor(t.slug) ? badge('Deal', 'deal') : ''}${cardFacts(t).length ? `<span class="facts-line">${cardFacts(t).join(' · ')}</span>` : ''}`;
 function toolCard(t, { compact = false, note = '' } = {}) {
   return `<article class="card is-link${compact ? ' compact' : ''}" data-slug="${t.slug}">
-<div class="card-top">${logo(t)}<div class="card-title"><h3><a class="card-link" href="${toolUrl(t)}">${esc(t.name)}</a></h3><span class="card-sub">${esc(cardSub(t))}</span></div><span class="arrow" aria-hidden="true">→</span></div>
+<div class="card-top">${logo(t)}<div class="card-title"><h3><a class="card-link" href="${toolUrl(t)}">${esc(t.name)}</a></h3><span class="card-sub">${esc(compact ? cardSub(t) : [TASKS[t.tasks[0]].label, isNsv(t.pricingModel) ? '' : PRICING[t.pricingModel]].filter(Boolean).join(' · '))}</span></div><span class="arrow" aria-hidden="true">→</span></div>
 ${note}<p class="summary">${esc(t.summary)}</p>
-${compact ? '' : `<p class="verdict"><strong>Verdict:</strong> ${esc(t.verdict)}</p>\n`}<div class="card-foot">${compact ? '' : chips(t.tasks.map(k => chip(TASKS[k].label, { muted: true })))}<span class="badges">${cardBadges(t)}</span></div>
+${compact ? '' : `<p class="verdict">${esc(t.verdict)}</p>\n`}<div class="card-foot"><span class="badges">${cardBadges(t)}</span></div>
 </article>`;
 }
 // Generic link card: optional media (img html), kicker, title, description and footer html.
@@ -123,6 +125,17 @@ function linkCard({ href, title, kicker = '', desc = '', media = '', foot = '', 
   return `<article class="card is-link${cls ? ' ' + cls : ''}"${attrs}>${media ? `<div class="card-media">${media}</div>` : ''}${kicker ? `<span class="kicker">${kicker}</span>` : ''}<${h}><a class="card-link" href="${esc(href)}">${esc(title)}</a></${h}>${desc ? `<p class="card-desc">${desc}</p>` : ''}${foot}</article>`;
 }
 const artImg = (page, { eager = false } = {}) => `<img src="${catImg(page)}" alt="" width="640" height="480"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
+// Guide art: a dedicated hero image (src/assets/img/<hero>.webp) when present, otherwise the task's category art.
+const guideArtPage = g => g.hero && fs.existsSync(`src/assets/img/${g.hero}.webp`) ? g.hero : TASKS[g.task].page;
+// Pipeline strip: the guide's stages as connected nodes; AI stages show stacked logos of the guide's tools.
+function flowStrip(g, { max = 3 } = {}) {
+  if (!g.flow) return '';
+  const gt = g.tools.map(s => bySlug[s]).filter(Boolean);
+  const node = (st, i) => `<li class="flow-node${st.ai ? ' is-ai' : ''}">${st.ai
+    ? `<span class="flow-logos">${gt.slice(0, max).map(t => logo(t, 26)).join('')}${gt.length > max ? `<span class="flow-more">+${gt.length - max}</span>` : ''}</span>`
+    : `<span class="flow-num">${i + 1}</span>`}<span class="flow-label">${esc(st.label)}</span></li>`;
+  return `<ol class="flow" aria-label="Workflow stages">${g.flow.map(node).join('')}</ol>`;
+}
 
 // ---------- Share images (og:image) ----------
 const out = 'dist';
@@ -141,8 +154,11 @@ function sponsorStrip() {
 }
 // Sponsor card: same card component as tool cards. Never part of tool lists' order, counts, ItemList JSON-LD or filters
 // (no data-slug, sits outside #results). Active paid sponsor: their logo, name, line and link; otherwise the empty "Your tool here" slot.
+// No active sponsor: render nothing (an empty "your tool here" slot reads as unsold space). Sponsors find the offer via
+// the footer, the Submit page and the "Is this your tool?" line on tool pages.
 function sponsorCard({ compact = false } = {}) {
   const S = SPONSOR;
+  if (!S) return '';
   const href = S ? S.url : L('/sponsor/');
   const rel = S ? ' rel="sponsored noopener" target="_blank"' : '';
   const mark = S && S.logo
@@ -189,7 +205,7 @@ ${jsonld.map(ld).join('\n')}
 <body>
 <header class="site-header"><div class="wrap">
 <a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a>
-<nav><a href="${L('/#tools')}">Tools</a><a href="${L('/category/')}">Categories</a><a class="hide-sm" href="${L('/guides/')}">Guides</a><a class="hide-sm" href="${L('/compare/')}">Compare</a><a class="hide-sm" href="${L('/new/')}">New</a><a href="${L('/deals/')}">Deals</a><a class="nav-cta" href="${L('/submit/')}">Submit a tool</a><a href="${L('/sponsor/')}">Sponsor</a></nav>
+<nav><a href="${L('/#tools')}">Tools</a><a href="${L('/category/')}">Categories</a><a class="hide-sm" href="${L('/guides/')}">Guides</a><a class="hide-sm" href="${L('/compare/')}">Compare</a><a class="hide-sm" href="${L('/new/')}">New</a>${DEALS.length ? `<a href="${L('/deals/')}">Deals</a>` : ''}<a class="nav-cta" href="${L('/submit/')}">Submit a tool</a></nav>
 </div></header>
 ${sponsorStrip()}
 <main class="wrap">
@@ -200,7 +216,7 @@ ${body}
 ${footerSignup()}
 <p>An independent directory. Facts are taken from each vendor's own website and dated. Pricing and licences change often, so always check the vendor's current terms before you rely on them. This is not legal advice.</p>
 <p class="aff-disc">${esc(AFFILIATE_NOTE)}</p>
-<p class="foot-links"><a href="${L('/about/')}">About</a> · <a href="${L('/guides/')}">Guides</a> · <a href="${L('/compare/')}">Comparisons</a> · <a href="${L('/new/')}">New this week</a> · <a href="${L('/deals/')}">Deals</a> · <a href="${L('/cheat-sheet/')}">Cheat sheet</a> · <a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a> · <a href="${L('/badge/')}">Badge</a> · <a href="${L('/sponsor/')}">Sponsor us</a> · <a href="${L('/privacy/')}">Privacy</a> · <a href="${mailto()}">Contact</a> · <a href="${L('/sitemap.xml')}">Sitemap</a> · Last updated ${timeEl(SITE.updated)}</p>
+<p class="foot-links"><a href="${L('/about/')}">About</a> · <a href="${L('/guides/')}">Guides</a> · <a href="${L('/compare/')}">Comparisons</a> · <a href="${L('/new/')}">New this week</a> · <a href="${L('/deals/')}">Deals</a> · <a href="${L('/cheat-sheet/')}">Cheat sheet</a> · <a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a> · <a href="${L('/badge/')}">Badge</a> · <a href="${L('/sponsor/')}">Advertise</a> ·<a href="${L('/privacy/')}">Privacy</a> · <a href="${mailto()}">Contact</a> · <a href="${L('/sitemap.xml')}">Sitemap</a> · Last updated ${timeEl(SITE.updated)}</p>
 </div></footer>
 ${scripts}
 </body>
@@ -241,8 +257,9 @@ function newsType(n) {
   if (/\b(launch(es|ed)?|unveil(s|ed)?|open-sources?|releases?)\b/i.test(s)) return 'Launch';
   return 'Update';
 }
-const NEWS_TONE = { Launch: 'ok', Update: 'info', 'Pricing change': 'warn', 'Licence change': 'warn', Funding: 'accent' };
-const newsBadge = n => badge(newsType(n), NEWS_TONE[newsType(n)] || 'info');
+// News type tags stay neutral so they don't compete with the licence colours; pricing/licence changes get amber because they affect shipping.
+const NEWS_TONE = { 'Pricing change': 'warn', 'Licence change': 'warn' };
+const newsBadge = n => badge(newsType(n), NEWS_TONE[newsType(n)] || 'neutral');
 const newsArt = n => n.tool && bySlug[n.tool] ? TASKS[bySlug[n.tool].tasks[0]].page : null;
 // Monday-start weeks (Australia/Brisbane dates)
 const weekStart = iso => { const d = dayNum(iso), wd = new Date(d * DAY_MS).getUTCDay(); return d - ((wd + 6) % 7); };
@@ -255,10 +272,9 @@ const opts = (o) => Object.entries(o).map(([v, l]) => `<option value="${v}">${es
 // "New & updated this week": tools named in the last 7 days of the /new/ feed (real dated entries only), newest first, one card per tool.
 const newRow = [];
 for (const n of recentNews) if (n.tool && bySlug[n.tool] && !newRow.some(x => x.t.slug === n.tool)) newRow.push({ t: bySlug[n.tool], n });
-// Row = sponsor card + up to 3 tools, laid out so no row has an orphan: 4 cards = 4 columns (2x2 on tablet and mobile),
-// 3 = 3 columns (1 on mobile), 2 = 2 columns.
-const NEW_MAX = newRow.length >= 3 ? 3 : newRow.length;
-const NEW_COLS = { 1: 'g2 m2', 2: 'g3 t3', 3: 'g4 m2' }[NEW_MAX] || 'g4 m2';
+// Row = optional active sponsor card + tools, max 4 cards, column count matched to the card count so there's never a gap.
+const NEW_MAX = Math.min(newRow.length, SPONSOR ? 3 : 4);
+const NEW_COLS = { 1: 'g2 m2', 2: 'g2 m2', 3: 'g3 t3', 4: 'g4 m2' }[NEW_MAX + (SPONSOR ? 1 : 0)] || 'g4 m2';
 const HOME_TITLE = 'Which AI tools can you legally ship in a paid game?';
 const HOME_SUB = `${tools.length} AI tools for game devs by task and engine, with pricing and commercial-use terms, sourced and dated.`;
 page('/', layout({
@@ -304,7 +320,7 @@ ${tools.map(t => toolCard(t)).join('\n')}
 <section class="res" aria-labelledby="res-h">
 <div class="sec-head"><h2 id="res-h">Guides and resources</h2><a href="${L('/guides/')}">All guides →</a></div>
 <div class="grid g3">
-${GUIDES.map(g => linkCard({ href: L(`/guides/${g.slug}/`), kicker: 'Workflow guide', title: g.title, media: artImg(TASKS[g.task].page), foot: `<div class="card-foot"><span class="badges">${badge(`${g.steps.length} steps`, 'accent')}</span></div>` })).join('\n')}
+${GUIDES.map(g => linkCard({ href: L(`/guides/${g.slug}/`), kicker: 'Workflow guide', title: g.title, media: artImg(guideArtPage(g)), foot: `${flowStrip(g)}<div class="card-foot"><span class="facts-line">${g.steps.length} steps</span></div>` })).join('\n')}
 ${linkCard({ href: L('/steam-ai-disclosure/'), kicker: 'Store rules', title: DISCLOSURE.title, desc: esc(DISCLOSURE.description) })}
 ${linkCard({ href: L('/compare/'), kicker: 'Comparisons', title: `${COMPARE.length} side-by-side comparisons`, desc: 'Built only from published pricing, specs and licence terms.' })}
 ${linkCard({ href: L('/cheat-sheet/'), kicker: 'Cheat sheet', title: 'AI tools you can legally ship in a paid game', desc: 'Free-plan commercial use, the plan you need and the catch, for every tool.' })}
@@ -413,6 +429,7 @@ ${media ? `<section class="example" aria-labelledby="ex-h"><h2 id="ex-h" class="
 <div class="media-grid">${media.items.map(i => `<figure><img src="${L(`/media/${t.slug}/${encodeURIComponent(i.file)}`)}" alt="${esc(i.alt)}" loading="lazy" decoding="async">${i.caption ? `<figcaption>${esc(i.caption)}</figcaption>` : ''}</figure>`).join('')}</div>
 <p class="note">Credit: ${media.creditUrl ? `<a href="${esc(media.creditUrl)}" rel="noopener nofollow" target="_blank">${esc(media.credit)}</a>` : esc(media.credit)}</p></section>` : ''}
 <p class="note">We summarise what the vendor's own pages say on the date above. "Not stated by vendor" means we couldn't find that detail on the vendor's pages. Read the vendor's current terms before you ship anything.</p>
+<aside class="maker"><span><b>Work at ${esc(t.name)}?</b> Send a correction, grab a <a href="${L('/badge/')}">"Listed on" badge</a>, or <a href="${L('/sponsor/')}">feature ${esc(t.name)}</a> to game devs browsing this directory.</span><a class="maker-mail" href="${mailto(`Listing: ${t.name}`)}">Contact us</a></aside>
 </article>
 ${alts.length ? `<section class="alts" aria-labelledby="alt-h">
 <div class="sec-head"><h2 id="alt-h">Alternatives</h2><a href="${L(`/category/${TASKS[t.tasks[0]].page}/`)}">More in ${esc(TASKS[t.tasks[0]].label)} →</a></div>
@@ -479,9 +496,9 @@ const guideChips = g => chips(g.tools.map(s => bySlug[s]).filter(Boolean).map(t 
 const engineBadges = g => (g.engines || []).map(e => badge(ENGINES[e], 'neutral')).join('');
 const FEATURED = GUIDES[0];
 const guideCard = g => linkCard({
-  href: L(`/guides/${g.slug}/`), title: g.title, kicker: esc(TASKS[g.task].label), media: artImg(TASKS[g.task].page),
-  desc: `<b>What you'll end up with:</b> ${esc(g.outcome)}`,
-  foot: `<div class="card-foot"><span class="badges">${badge(`${g.steps.length} steps`, 'accent')}${engineBadges(g)}</span></div>`,
+  href: L(`/guides/${g.slug}/`), title: g.title, kicker: esc(TASKS[g.task].label), media: artImg(guideArtPage(g)),
+  desc: esc(g.outcome),
+  foot: `${flowStrip(g)}<div class="card-foot"><span class="facts-line">${g.steps.length} steps${(g.engines || []).length ? ' · ' + g.engines.map(e => ENGINES[e]).join(', ') : ''}</span></div>`,
   attrs: ` data-task="${g.task}" data-engines="${(g.engines || []).join(' ')}"${g === FEATURED ? ' data-featured hidden' : ''}`,
 });
 const guideTasks = [...new Set(GUIDES.map(g => g.task))];
@@ -494,13 +511,13 @@ page('/guides/', layout({
   body: `<h1 class="page-h">Workflow guides</h1><p class="page-sub">Factual steps with a link to the official documentation for each one. Checked ${timeEl(CHECKED)}.</p>
 <section id="featured" aria-label="Featured guide">
 <article class="card is-link feature">
-<div class="card-media">${artImg(TASKS[FEATURED.task].page, { eager: true })}</div>
+<div class="card-media">${artImg(guideArtPage(FEATURED), { eager: true })}</div>
 <div class="feature-body">
 <span class="kicker">Featured guide · ${esc(TASKS[FEATURED.task].label)}</span>
 <h2><a class="card-link" href="${L(`/guides/${FEATURED.slug}/`)}">${esc(FEATURED.title)}</a></h2>
-<p class="outcome"><b>What you'll end up with:</b> ${esc(FEATURED.outcome)}</p>
-${guideChips(FEATURED)}
-<span class="badges">${badge(`${FEATURED.steps.length} steps`, 'accent')}${engineBadges(FEATURED)}</span>
+<p class="outcome">${esc(FEATURED.outcome)}</p>
+${flowStrip(FEATURED, { max: 5 })}
+<span class="facts-line">${FEATURED.steps.length} steps · ${(FEATURED.engines || []).map(e => ENGINES[e]).join(', ')}</span>
 </div>
 </article>
 </section>
@@ -523,12 +540,13 @@ for (const g of GUIDES) {
     og: ogFile(`guides/${g.slug}`, 'page', { kicker: `Workflow guide · ${g.steps.length} steps`, title: g.title, sub: g.outcome, artPage: TASKS[g.task].page }),
     jsonld: [{ '@context': 'https://schema.org', '@type': 'HowTo', name: g.title, description: g.description, step: g.steps.map((st, i) => ({ '@type': 'HowToStep', position: i + 1, name: st.h, text: st.p.map(x => x.text).join(' ') })) }],
     body: `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/guides/')}">Guides</a> › ${esc(g.title)}</nav>
-<article class="guide"><h1 class="page-h">${esc(g.title)}</h1><p class="lead">${esc(g.intro)}</p>
+<article class="guide"><header class="guide-hero"><div class="guide-hero-art">${artImg(guideArtPage(g), { eager: true })}</div><div class="guide-hero-body"><span class="kicker">Workflow guide · ${esc(TASKS[g.task].label)}</span><h1>${esc(g.title)}</h1><p class="lead">${esc(g.intro)}</p></div></header>
+${flowStrip(g, { max: 5 })}
 <section class="card g-summary" aria-labelledby="sum-h">
 <h2 id="sum-h">Summary</h2>
 <dl>
 <dt>What you'll end up with</dt><dd>${esc(g.outcome)}</dd>
-<dt>Steps and engines</dt><dd><span class="badges">${badge(`${g.steps.length} steps`, 'accent')}${engineBadges(g)}</span></dd>
+<dt>Steps and engines</dt><dd><span class="badges">${badge(`${g.steps.length} steps`, 'neutral')}${engineBadges(g)}</span></dd>
 <dt>AI tools in this guide</dt><dd>${chips(gt.map(t => chip(t.name, { tool: t, href: toolUrl(t) })), 'div')}</dd>
 <dt>Cost (from vendor pricing)</dt><dd><ul class="cost-list">${gt.map(t => `<li><a class="tname" href="${toolUrl(t)}">${esc(t.name)}</a>${isNsv(t.free) ? NSV : badge(FREE[t.free], t.free === 'yes' ? 'info' : 'neutral')}${isNsv(t.freeTier) ? '' : `<span>${esc(t.freeTier)}</span>`}${srcA(t.pricingSource, 'pricing')}</li>`).join('')}</ul></dd>
 </dl>
@@ -822,7 +840,8 @@ page('/submit/', layout({
 <label>Your email (optional) <input name="email" type="email" maxlength="254"><small>It will be shown publicly on the GitHub issue. Leave it blank if you'd rather not share it.</small></label>
 ${HONEYPOT}
 <button type="submit">Submit tool</button>
-</form>`,
+</form>
+<p class="note">Listing is free and never paid for. If you'd also like your tool in front of game devs straight away, see <a href="${L('/sponsor/')}">sponsoring</a>.</p>`,
 }));
 page('/submit/thanks/', layout({
   title: `Thanks for your submission | ${SITE.name}`, description: 'Submission received.', pathname: '/submit/thanks/', noindex: true,

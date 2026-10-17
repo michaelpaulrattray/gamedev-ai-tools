@@ -12,6 +12,9 @@ export const GUIDES = [
     tools: ['meshy', 'tripo', 'hyper3d-rodin', 'sloyd', 'hunyuan3d'],
     // Display metadata (summarises the steps below; no new facts): task = category art + filter, engines = engines the steps cover.
     task: '3d-models', engines: ['unity', 'godot', 'unreal'],
+    // flow: short pipeline stages for the visual strip on guide cards/pages; `ai: true` stages show the guide's AI tool logos.
+    hero: 'guide-3d-to-engine',
+    flow: [{ label: 'Generate', ai: true }, { label: 'Export GLB/FBX' }, { label: 'Clean up in Blender' }, { label: 'Retopo + UV bake' }, { label: 'Import to engine' }],
     outcome: 'An AI-generated 3D model, cleaned up and reduced in Blender, UV-unwrapped with baked detail, and imported into Unity, Godot or Unreal.',
     intro: 'AI 3D generators give you a mesh fast, but it usually needs cleanup before it works well in a game. Here are the steps, each linked to the official documentation for that tool.',
     steps: [
@@ -41,6 +44,8 @@ export const GUIDES = [
     description: 'A sourced workflow for generating NPC voice lines with AI text-to-speech and driving lip-sync in 2D, Unity or Unreal.',
     tools: ['elevenlabs', 'inworld-ai', 'convai', 'charisma-ai'],
     task: 'voice', engines: ['unity', 'unreal'],
+    hero: 'guide-voice-lipsync',
+    flow: [{ label: 'Voice lines (TTS)', ai: true }, { label: 'Export audio' }, { label: 'Lip-sync tool' }, { label: 'Animate in engine' }],
     outcome: 'AI text-to-speech voice lines exported as audio, with lip-sync driven from that audio for 2D characters, Unity characters or Unreal MetaHumans.',
     intro: 'Generate the voice line first, then drive the mouth from the audio. Which lip-sync tool fits depends on your art style and engine.',
     steps: [
@@ -61,6 +66,8 @@ export const GUIDES = [
     description: 'A sourced workflow for turning AI concept or texture images into tileable PBR material maps for Unity, Godot or Unreal.',
     tools: ['scenario', 'layer-ai', 'leonardo-ai', 'meshy', 'unity-ai'],
     task: 'textures', engines: ['unity', 'godot', 'unreal'],
+    hero: 'guide-texture-set',
+    flow: [{ label: 'Tileable image', ai: true }, { label: 'Material maps' }, { label: 'Fix in Blender' }, { label: 'Engine material' }],
     outcome: 'A set of PBR material maps (base colour, normal, roughness or smoothness, metallic, AO) made from an AI image and set up as a material in Unity, Godot or Unreal.',
     intro: 'A concept image is not a material. Engines want a set of maps (albedo/base colour, normal, roughness or smoothness, metallic, AO). Here is a sourced route from an image to those maps.',
     steps: [

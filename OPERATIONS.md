@@ -163,6 +163,7 @@ No estimates. If a number isn't available, write "not measured".
 
 - **2026-10-17:** Brand voice study done (reference brands, X competitors, AI game-dev trends, voice guide, cadence, reply playbook, 20 draft posts): docs/brand-voice.md. Nothing posted.
 
+- **2026-10-17: Polish/UX pass by Claude (Mike's request), branch `polish-ux-pass`.** Keep these choices; pull before editing. (1) No empty sponsor card or nav "Sponsor" link: the sponsor card and strip render only for an active paid sponsor; sponsors find the offer via the footer "Advertise" link, a note on /submit/, and a "Work at <tool>?" line on every tool page. (2) Calm cards: colour only for the commercial-use badge (and a "Deal" badge when a live deal exists); free plan / API / MCP are quiet text; price moved into the card subtitle; news type tags neutral except pricing/licence changes. (3) Deals nav link shows only when /deals/ has live deals. (4) Guides: dedicated hero art per guide (`hero` field -> src/assets/img/<hero>.webp, generated with Higgsfield), and a pipeline strip from each guide's `flow` field. New guides should add `hero` and `flow`. No unsourced time/difficulty estimates.
 ## Open questions (need Mike)
 1. **X login:** access to post as @gamedevaitools (and set the automated-account label).
 2. **Affiliate payout and tax details:** bank/ABN/GST and tax forms for affiliate programmes (ask-first; nothing set up yet).
