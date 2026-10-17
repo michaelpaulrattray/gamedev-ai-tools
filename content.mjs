@@ -247,4 +247,47 @@ export const ENGINE_HUBS = {
       { q: 'Can I sell AI-generated assets on the Unity Asset Store?', a: 'Yes, if you disclose it: the "AI description" field must name the AI tools used and what they generated. Follow Unity\'s submission guidelines.', url: 'https://assetstore.unity.com/publishing/submission-guidelines' },
     ],
   },
+  unreal: {
+    checked: '2026-10-17',
+    // Brief: docs/briefs/engine-unreal.md (title and meta from section 6).
+    title: 'AI tools for Unreal Engine (2026) | GameDev AI Tools',
+    description: 'AI tools that work with Unreal Engine 5: Unreal MCP, coding agents, editor plugins and asset generators, with vendor pricing and commercial terms.',
+    answer: 'Unreal Engine 5.8\'s documentation describes Unreal MCP, an experimental Epic plugin that lets agents such as Claude Code, Cursor and Codex drive the editor over a local connection. Beyond that, AI reaches Unreal through editor plugins like Ludus AI and generators whose files Unreal imports. Below: what each tool costs and whether you can ship it.',
+    sections: [
+      { h: 'Unreal MCP: Epic\'s way to let an agent drive the editor', intro: 'Epic lists Claude Code, Cursor, VS Code (GitHub Copilot), Gemini and Codex as clients it can write a config for.', tools: ['claude-code', 'cursor', 'github-copilot'], items: [
+        s('Unreal MCP "embeds an MCP server inside the Unreal Editor process so that any MCP-compatible AI agent, such as Claude Code, Cursor, or the MCP Inspector, can drive the editor over a local HTTP connection."', 'https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-mcp-in-unreal-editor'),
+        s('Setup: enable the Unreal MCP and All Toolsets plugins, turn on Auto Start Server under Editor Preferences > Model Context Protocol (default address http://127.0.0.1:8000/mcp), then run ModelContextProtocol.GenerateClientConfig with ClaudeCode, Cursor, VSCode, Gemini, Codex or All in the editor console. It writes the config file to the project root; start the agent from there.', 'https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-mcp-in-unreal-editor'),
+        s('Limits, in Epic\'s words: it\'s an "Experimental feature" ("use caution when shipping with it"), "many features are incomplete or missing", and by default the server "only accepts connections from the same machine, has no authentication layer". Tool calls run serially on the game thread, so clients shouldn\'t overlap calls.', 'https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-mcp-in-unreal-editor'),
+        s('Epic also publishes an MIT-licensed Claude Code plugin that controls the Unreal Editor via MCP, with "Hundreds of tools" across "30+ toolsets" (actors, Blueprints, materials, Niagara, Sequencer and more). It needs the ModelContextProtocol and AllToolsets plugins enabled.', 'https://github.com/EpicGames/unreal-engine-skills-for-claude-code-plugin') ] },
+      { h: 'AI coding agents and in-editor assistants', intro: 'Claude Code, Cursor and GitHub Copilot aren\'t Unreal plugins, so they aren\'t in the list above; they edit C++ like any other code and connect to Unreal MCP. Ludus AI runs inside the Unreal Editor.', tools: ['claude-code', 'cursor', 'github-copilot', 'ludus-ai'], items: [
+        s('Ludus AI\'s output ownership and commercial terms: Not stated by vendor (see its listing for pricing and the terms we checked).', '/tools/ludus-ai/'),
+        s('Compare the two most-used editors side by side.', '/compare/cursor-vs-github-copilot/') ] },
+      { h: 'Asset generators that export to Unreal', intro: 'Check the plan before you generate: Meshy\'s free plan licenses output under CC BY 4.0 (credit required), Tripo\'s and Scenario\'s free plans aren\'t for commercial use, Sloyd\'s free plan is a personal-use licence, Hyper3D Rodin\'s commercial terms are Not stated by vendor, World Labs Marble lists commercial rights on its Pro plan, Retro Diffusion says everything you generate is yours, and Cascadeur\'s Indie plan allows commercial use only under $100,000 a year in revenue or funding.', tools: ['meshy', 'tripo', 'hyper3d-rodin', 'sloyd', 'world-labs-marble', 'retro-diffusion', 'scenario', 'cascadeur', 'rokoko-vision'], items: [
+        s('Unreal imports FBX through its FBX content pipeline.', 'https://dev.epicgames.com/documentation/en-us/unreal-engine/fbx-content-pipeline'),
+        s('Our 3D guide walks a generated model through Blender cleanup into Unreal.', '/guides/ai-3d-model-to-engine/'),
+        s('For textures, our texture guide covers Unreal\'s texture import settings.', '/guides/concept-to-texture-set/'),
+        s('Meshy and Tripo, compared on price, exports and licence.', '/compare/meshy-vs-tripo/') ] },
+      { h: 'AI NPCs and voice at runtime', intro: 'These run as live services while your game plays, so their terms keep applying after you ship. Each tool page links its pricing and terms.', tools: ['inworld-ai', 'convai', 'charisma-ai'], items: [
+        s('Inworld\'s terms: subject to compliance, Inworld assigns to you all of its right, title and interest in Outputs.', 'https://inworld.ai/terms'),
+        s('Convai\'s terms: you have ownership over your Customer Content and AI Generated Content.', 'https://convai.com/tos'),
+        s('Charisma.ai\'s terms: the customer (story owner) is deemed owner of Input and Output, and Charisma assigns those rights to the customer.', 'https://charisma.ai/terms') ] },
+      { h: 'Localisation and QA', tools: ['crowdin', 'gridly', 'nunu-ai'], items: [
+        s('Crowdin and Gridly process your own text; their ownership terms for AI output are Not stated by vendor in our listings. nunu.ai tests your game and doesn\'t make assets you ship.', '/category/localisation/') ] },
+      { h: 'Selling AI-made assets on Fab', items: [
+        s('Fab\'s Distribution Agreement (section 18(k)): "When your Content is created using Generative AI Programs, you are required to tag the Content as \u201cCreatedWithAI\u201d". That applies "where a material portion of the Content is generated with Generative AI Programs, whether characters, backgrounds, or other material elements", not merely for features that solely operate on your content, such as content-aware fill.', 'https://www.fab.com/distribution-agreement'),
+        s('"NoAI" is opt-in. Buyers of NoAI content may not use it in datasets for generative AI, in developing generative AI, or as inputs to generative AI.', 'https://www.fab.com/distribution-agreement') ] },
+      { h: 'Does AI change the Unreal licence or royalty?', items: [
+        s('Epic\'s licence page: Unreal Engine is free for game developers under US$1 million in gross product revenue. Above that, "All lifetime gross revenue above $1M that is directly attributable to the UE product, regardless of who collects it, will be subject to a 5% royalty. Revenues generated from sales in the Epic Games Store are royalty-free."', 'https://www.unrealengine.com/en-US/license'),
+        s('We didn\'t find anything about AI on that page. What matters for AI-made content is each tool\'s own terms: see the cheat sheet.', '/cheat-sheet/'),
+        s('We didn\'t find a generative-AI disclosure requirement for the Epic Games Store; Steam asks in its Content Survey.', '/steam-ai-disclosure/') ] },
+    ],
+    faq: [
+      { q: 'Does Unreal Engine have MCP support?', a: 'Yes. The Unreal Engine 5.8 documentation describes Unreal MCP, an experimental plugin that runs an MCP server inside the editor on your own machine. Epic says to use caution when shipping with it.', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-mcp-in-unreal-editor' },
+      { q: 'How do I connect Claude Code or Cursor to Unreal?', a: 'Enable the Unreal MCP and All Toolsets plugins, start the server, then run ModelContextProtocol.GenerateClientConfig ClaudeCode (or Cursor) in the editor console to write the config file, and start the agent from the project root.', url: 'https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-mcp-in-unreal-editor' },
+      { q: 'Can I use AI-generated assets in a paid Unreal game?', a: 'We didn\'t find anything about AI on Epic\'s licence page. What matters is each AI tool\'s terms: our cheat sheet lists, for every tool, whether free-plan output can go in a commercial game. This isn\'t legal advice.', url: '/cheat-sheet/' },
+      { q: 'Can I sell AI-generated assets on Fab?', a: 'Yes, tagged: Fab\'s Distribution Agreement requires the CreatedWithAI tag when a material portion of the content is generated with generative AI.', url: 'https://www.fab.com/distribution-agreement' },
+      { q: 'Which AI 3D generators export to Unreal?', a: 'In our listings: Meshy, Tripo, Hyper3D Rodin, Sloyd and World Labs Marble, each with a different licence catch (see above).', url: '/category/3d-models/' },
+      { q: 'Does the Epic Games Store require AI disclosure?', a: 'We didn\'t find a requirement as of the check date. Steam does ask, in its Content Survey.', url: '/steam-ai-disclosure/' },
+    ],
+  },
 };
