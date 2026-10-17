@@ -110,5 +110,33 @@
  "beatoven": {
   "source": "https://cdn.prod.website-files.com/65d772a7cbf713010f7736f6/6663501af2d9db64c264bfce_logo%20(2).png",
   "w": 96
+ },
+ "world-labs-marble": {
+  "source": "https://marble.worldlabs.ai/favicon.ico",
+  "w": 48
+ },
+ "crowdin": {
+  "source": "https://crowdin.com/astro-website/apple-touch-icon.png",
+  "w": 96
+ },
+ "gridly": {
+  "source": "https://www.gridly.com/images/gridly_logo.ico",
+  "w": 96
+ },
+ "nunu-ai": {
+  "source": "https://nunu.ai/icons/icon-512x512.png",
+  "w": 96
+ },
+ "razer-qa-companion": {
+  "source": "https://www.razer.ai/favicon.png",
+  "w": 96
+ },
+ "runway": {
+  "source": "https://runway.com/icon.png?icon.35ps9bmugbe1e.png",
+  "w": 96
+ },
+ "luma-ai": {
+  "source": "https://lumalabs.ai/favicons/favicon-black.ico",
+  "w": 48
  }
 }

@@ -15,8 +15,8 @@
       var ok = terms.every(function (w) { return hay.indexOf(w) !== -1; }) &&
         (!ft.value || t.tasks.indexOf(ft.value) !== -1) &&
         (!fe.value || t.engines.indexOf(fe.value) !== -1) &&
-        (!fp.value || t.pricingModel === fp.value) &&
-        (!fc.value || t.commercial === fc.value);
+        (!fp.value || t.free === fp.value) &&
+        (!fc.value || (fc.value === 'check' ? (t.commercial === 'restricted' || t.commercial === 'unverified') : t.commercial === fc.value));
       if (cards[t.slug]) cards[t.slug].hidden = !ok;
       if (ok) n++;
     });
