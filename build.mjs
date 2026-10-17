@@ -9,7 +9,8 @@ const SITE = {
   description: 'A free directory of AI tools for game developers. Filter by task (pixel art, 3D models, textures, music, voice, NPC dialogue, code), engine, pricing and commercial-use license.',
   updated: '2026-10-17',
 };
-const NEWSLETTER_ON = Boolean(process.env.RESEND_API_KEY && process.env.RESEND_AUDIENCE_ID);
+// Signup form is shown only when explicitly enabled AND both Resend env vars exist.
+const NEWSLETTER_ON = process.env.NEWSLETTER_ENABLED === '1' && Boolean(process.env.RESEND_API_KEY && process.env.RESEND_AUDIENCE_ID);
 console.log('Newsletter signup enabled:', NEWSLETTER_ON);
 const URL_ = p => SITE.origin + SITE.base + p;
 const L = p => SITE.base + p;
