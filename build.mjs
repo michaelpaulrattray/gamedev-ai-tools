@@ -1051,7 +1051,7 @@ page('/about/', layout({
 <li><b>Rankings and verdicts are never bought.</b> Category rankings use independent quality tests (such as public blind-vote leaderboards) where they exist, then a published game-dev fit score; see <a href="${L('/how-we-rank/')}">How we rank</a>. Each verdict is one line written only from the sourced facts. Sponsors and affiliate links never change a listing, its rank or its verdict.</li>
 </ul></section>
 <section class="card"><h2>How we make money</h2><ul>
-<li><b>Sponsorship:</b> labelled "Sponsored" spots booked by the week: site-wide (the top strip and a homepage card), a single category or engine page, or one newsletter issue. Sponsors never change rankings or listings. See <a href="${L('/sponsor/')}">Sponsor us</a>.</li>
+<li><b>Sponsorship:</b> labelled "Sponsored" spots booked by the week: site-wide (the top strip, a homepage card and a side card on wide screens), a single category or engine page, or one newsletter issue. Sponsors never change rankings or listings. See <a href="${L('/sponsor/')}">Sponsor us</a>.</li>
 <li><b>Affiliate links:</b> some "Visit official site" links may be affiliate links, which earn us a commission if you buy. When a listing uses one, the tool page says so next to the button. ${esc(AFFILIATE_NOTE)}</li>
 </ul></section>
 <section class="card"><h2>Contact</h2><p>Corrections, sponsorship and anything else: <a href="${mailto()}">${EMAIL}</a>. For a correction, please include a link to the vendor's page. To suggest a tool, use <a href="${L('/submit/')}">Submit a tool</a>.</p></section>
