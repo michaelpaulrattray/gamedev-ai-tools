@@ -117,6 +117,10 @@ const chips = (arr, tag = 'ul') => arr.length ? (tag === 'ul' ? `<ul class="chip
 const licTone = t => ({ yes: t.free === 'no' ? 'warn' : 'ok', 'paid-only': 'warn', restricted: 'warn', no: 'bad', unverified: 'unk', 'n-a': 'unk' }[t.commercial] || 'unk');
 const licBadge = (t, opts) => badge(COMMERCIAL[t.commercial] || NSV_TEXT, licTone(t), opts);
 const toolUrl = t => L(`/tools/${t.slug}/`);
+// Outbound "Visit" link: uses the affiliate URL when one is approved (rel=sponsored), otherwise the official site.
+const visitHref = t => t.affiliateUrl || t.url;
+const visitRel = t => t.affiliateUrl ? 'sponsored noopener' : 'noopener nofollow';
+const visitBtn = (t, { cls = 'btn', label } = {}) => `<a class="${cls}" href="${esc(visitHref(t))}" rel="${visitRel(t)}" target="_blank">${esc(label || `Visit ${t.name}`)} ↗</a>`;
 // Card subtitle: pricing model, or the main task when pricing isn't stated (never "unverified").
 const cardSub = t => isNsv(t.pricingModel) ? TASKS[t.tasks[0]].label : PRICING[t.pricingModel];
 // Card footer: colour is reserved for the one signal that matters (commercial use). Everything else is quiet text.
@@ -128,8 +132,8 @@ const cardFacts = t => [
 ].filter(Boolean);
 const dealFor = slug => DEALS.find(d => d.tool === slug);
 const cardBadges = t => `${isNsv(t.commercial) ? '' : licBadge(t)}${dealFor(t.slug) ? badge('Deal', 'deal') : ''}${cardFacts(t).length ? `<span class="facts-line">${cardFacts(t).join(' · ')}</span>` : ''}`;
-function toolCard(t, { compact = false, note = '' } = {}) {
-  return `<article class="card is-link${compact ? ' compact' : ''}" data-slug="${t.slug}">
+function toolCard(t, { compact = false, note = '', attrs = '' } = {}) {
+  return `<article class="card is-link${compact ? ' compact' : ''}" data-slug="${t.slug}"${attrs ? ' ' + attrs : ''}>
 <div class="card-top">${logo(t)}<div class="card-title"><h3><a class="card-link" href="${toolUrl(t)}">${esc(t.name)}</a></h3><span class="card-sub">${esc(compact ? cardSub(t) : [TASKS[t.tasks[0]].label, isNsv(t.pricingModel) ? '' : PRICING[t.pricingModel]].filter(Boolean).join(' · '))}</span></div><span class="arrow" aria-hidden="true">→</span></div>
 ${note}<p class="summary">${esc(t.summary)}</p>
 ${compact ? '' : `<p class="verdict">${esc(t.verdict)}</p>\n`}<div class="card-foot"><span class="badges">${cardBadges(t)}</span></div>
@@ -487,6 +491,21 @@ ${newsletterBlock()}`,
   }));
 }
 
+// ---------- Category filters (free plan / commercial use / engine); rows and cards carry data-* for the inline script ----------
+const catAttrs = t => `data-free="${t.free === 'yes' ? 1 : 0}" data-ship="${t.commercial === 'yes' ? 1 : 0}" data-eng="${t.engines.filter(e => ENGINES[e]).join(' ')}"`;
+function catFilters(list) {
+  if (list.length < 3) return '';
+  const engs = Object.keys(ENGINES).filter(e => list.some(t => t.engines.includes(e)));
+  const anyFree = list.some(t => t.free === 'yes'), anyShip = list.some(t => t.commercial === 'yes');
+  return `<div class="chip-filters cat-filters" role="group" aria-label="Filter tools"><div class="chips"><span class="cf-label">Filter</span>${anyFree ? chip('Free plan', { filter: ['free', '1'] }) : ''}${anyShip ? chip('Commercial use allowed', { filter: ['ship', '1'] }) : ''}${engs.map(e => chip(`Works with ${ENGINES[e]}`, { filter: ['eng', e] })).join('')}<span class="cf-count" aria-live="polite"></span></div></div>`;
+}
+const CAT_FILTER_JS = `<script>(function(){var f={free:'',ship:'',eng:''},els=document.querySelectorAll('[data-free]'),cnt=document.querySelector('.cf-count'),empty=document.querySelector('.cat-empty');
+function ok(el){return (!f.free||el.dataset.free==='1')&&(!f.ship||el.dataset.ship==='1')&&(!f.eng||(' '+el.dataset.eng+' ').indexOf(' '+f.eng+' ')!==-1);}
+function apply(){var n=0,on=f.free||f.ship||f.eng;els.forEach(function(el){var y=ok(el);el.hidden=!y;if(y&&el.tagName==='TR')n++;});if(cnt)cnt.textContent=on?n+(n===1?' tool matches':' tools match'):'';if(empty)empty.hidden=!(on&&n===0);}
+document.querySelectorAll('.cat-filters button[data-group]').forEach(function(b){b.addEventListener('click',function(){var g=b.dataset.group,v=b.dataset.value,act=f[g]===v;
+document.querySelectorAll('.cat-filters button[data-group="'+g+'"]').forEach(function(o){o.setAttribute('aria-pressed','false');});f[g]=act?'':v;b.setAttribute('aria-pressed',act?'false':'true');apply();});});
+document.querySelectorAll('[data-reset]').forEach(function(b){b.addEventListener('click',function(){f={free:'',ship:'',eng:''};document.querySelectorAll('.cat-filters button').forEach(function(o){o.setAttribute('aria-pressed','false');});apply();});});})();</script>`;
+
 // ---------- Category pages ----------
 const catIndex = [];
 for (const [key, c] of Object.entries(TASKS)) {
@@ -508,14 +527,17 @@ for (const [key, c] of Object.entries(TASKS)) {
 <h1>Best ${esc(c.h1)}</h1>
 <p>${list.length} tools, in alphabetical order (this isn't a ranking). Check each tool's commercial-use notes before you ship assets in a game.</p>
 </div></header>
-<div class="table-wrap"><table class="cmp"><thead><tr><th>Tool</th><th>Free plan</th><th>Commercial use</th><th>API</th><th>MCP</th></tr></thead><tbody>
-${list.map(t => `<tr><td><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 24)}${esc(t.name)}</a></td><td>${isNsv(t.free) ? NSV : esc(FREE[t.free])}</td><td>${licBadge(t)}</td><td>${isNsv(t.api.status) ? NSV : esc(API_L[t.api.status])}</td><td>${isNsv(t.mcp.status) ? NSV : esc(MCP_L[t.mcp.status])}</td></tr>`).join('\n')}
-</tbody></table></div>
-${cp.length ? `<div class="cmp-row" style="margin-top:6px"><span>Comparisons:</span>${cp.map(cmpChip).join('')}</div>` : ''}
-<h2 class="sub-h">Tool details</h2>
-<div class="grid">${list.map(t => toolCard(t)).join('\n')}
+${catFilters(list)}
+<div class="table-wrap"><table class="cmp cat-table"><thead><tr><th>Tool</th><th>Free plan</th><th>Commercial use</th><th>API</th><th>MCP</th><th><span class="sr-only">Visit</span></th></tr></thead><tbody>
+${list.map(t => `<tr ${catAttrs(t)}><td><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 24)}${esc(t.name)}</a></td><td>${isNsv(t.free) ? NSV : esc(FREE[t.free])}</td><td>${licBadge(t)}</td><td>${isNsv(t.api.status) ? NSV : esc(API_L[t.api.status])}</td><td>${isNsv(t.mcp.status) ? NSV : esc(MCP_L[t.mcp.status])}</td><td class="td-visit">${visitBtn(t, { cls: 'visit-sm', label: 'Visit' })}</td></tr>`).join('\n')}
+</tbody></table><p class="cat-empty" hidden>No tools match these filters. <button type="button" class="linkish" data-reset>Clear filters</button></p></div>
+${list.length > 1 ? `<div class="cmp-row" style="margin-top:6px"><span>Compare side by side:</span>${cp.map(cmpChip).join('')}<a class="chip c-muted" href="${L(`/compare/?task=${key}`)}">Pick any two →</a></div>` : ''}
+${GUIDES.filter(g => g.task === key).map(g => `<section class="rel-guide" aria-label="Related guide">${linkCard({ href: L(`/guides/${g.slug}/`), title: g.title, kicker: 'Related workflow guide', desc: esc(g.outcome), media: artImg(guideArtPage(g)), foot: flowStrip(g, { max: 4 }), cls: 'feature' })}</section>`).join('\n')}
+<h2 class="sub-h">Verdicts</h2>
+<div class="grid">${list.map(t => toolCard(t, { attrs: catAttrs(t) })).join('\n')}
 ${sponsorCard()}</div>
 ${newsletterBlock()}`,
+    scripts: CAT_FILTER_JS,
   }));
 }
 page('/category/', layout({
@@ -684,15 +706,15 @@ const ROWS = [
   ['Best for', t => val(t.bestFor)],
   ['What it does', t => esc(t.summary)],
   ['Verdict', t => esc(t.verdict)],
-  ['Tasks', t => t.tasks.map(k => esc(TASKS[k].label)).join(', ')],
-  ['Engines', t => esc(engineText(t))],
-  ['Free plan', t => `${isNsv(t.free) ? NSV : badge(FREE[t.free], t.free === 'yes' ? 'info' : 'neutral')} ${isNsv(t.free) && isNsv(t.freeTier) ? '' : val(t.freeTier)}`],
+  ['Tasks', t => t.tasks.map(k => esc(TASKS[k].label)).join(', '), t => t.tasks.join()],
+  ['Engines', t => esc(engineText(t)), t => engineText(t)],
+  ['Free plan', t => `${isNsv(t.free) ? NSV : badge(FREE[t.free], t.free === 'yes' ? 'info' : 'neutral')} ${isNsv(t.free) && isNsv(t.freeTier) ? '' : val(t.freeTier)}`, t => t.free],
   ['Pricing', t => `${val(t.pricing)}${srcA(t.pricingSource)}`],
-  ['Export formats', t => `${val(t.exportFormats)}${srcA(t.exportSource)}`],
-  ['Commercial use', t => `${licBadge(t)}<br>${val(t.license)}${srcA(t.licenseSource)}`],
-  ['Revenue share / caps', t => val(t.revenue)],
-  ['API', t => `${val(API_L[t.api.status])}${isNsv(t.api.note) ? '' : `. ${esc(t.api.note)}`}${srcA(t.api.source)}`],
-  ['MCP server', t => `${val(MCP_L[t.mcp.status])}${isNsv(t.mcp.note) ? '' : `. ${esc(t.mcp.note)}`}${srcA(t.mcp.source)}`],
+  ['Export formats', t => `${val(t.exportFormats)}${srcA(t.exportSource)}`, t => t.exportFormats],
+  ['Commercial use', t => `${licBadge(t)}<br>${val(t.license)}${srcA(t.licenseSource)}`, t => t.commercial],
+  ['Revenue share / caps', t => val(t.revenue), t => t.revenue],
+  ['API', t => `${val(API_L[t.api.status])}${isNsv(t.api.note) ? '' : `. ${esc(t.api.note)}`}${srcA(t.api.source)}`, t => t.api.status],
+  ['MCP server', t => `${val(MCP_L[t.mcp.status])}${isNsv(t.mcp.note) ? '' : `. ${esc(t.mcp.note)}`}${srcA(t.mcp.source)}`, t => t.mcp.status],
   ['Last checked', t => timeEl(t.lastChecked, true)],
 ];
 // Difference chips, computed from data fields only (null = not stated or not applicable, so no chip). No ratings or winners.
@@ -715,12 +737,53 @@ function diffChips(A, B) {
 }
 const pairTask = (A, B) => B.tasks.includes(A.tasks[0]) ? A.tasks[0] : A.tasks.includes(B.tasks[0]) ? B.tasks[0] : A.tasks.find(k => B.tasks.includes(k)) || A.tasks[0];
 const cmpGroups = Object.keys(TASKS).map(k => ({ k, pairs: COMPARE.filter(([a, b]) => pairTask(bySlug[a], bySlug[b]) === k) })).filter(g => g.pairs.length);
+// Every pair of tools that share a task gets a page, so "pick any two" always lands somewhere. Only the curated COMPARE
+// pairs are indexed and in the sitemap; generated pairs are noindex (thin, auto-built) and use the generic share image.
+const pairKey = (a, b) => [a, b].sort().join('|');
+const CURATED = new Set(COMPARE.map(([a, b]) => pairKey(a, b)));
+const ALL_PAIRS = COMPARE.map(([a, b]) => [a, b, true]);
+for (const k of Object.keys(TASKS)) {
+  const ts = tools.filter(t => t.tasks.includes(k)); // alphabetical
+  for (let i = 0; i < ts.length; i++) for (let j = i + 1; j < ts.length; j++) {
+    const key = pairKey(ts[i].slug, ts[j].slug);
+    if (!CURATED.has(key) && !ALL_PAIRS.some(([a, b]) => pairKey(a, b) === key)) ALL_PAIRS.push([ts[i].slug, ts[j].slug, false]);
+  }
+}
+const pairUrl = Object.fromEntries(ALL_PAIRS.map(([a, b]) => [pairKey(a, b), L(`/compare/${a}-vs-${b}/`)]));
+const PICKER_DATA = {
+  tasks: Object.entries(TASKS).map(([k, c]) => ({ k, label: c.label, tools: tools.filter(t => t.tasks.includes(k)).map(t => [t.slug, t.name]) })).filter(x => x.tools.length > 1),
+  pairs: pairUrl,
+};
+const pairCard = ([a, b]) => { const A = bySlug[a], B = bySlug[b]; return `<article class="card is-link vs">
+<span class="vs-logos">${logo(A, 48)}<em>vs</em>${logo(B, 48)}</span>
+<h3><a class="card-link" href="${L(`/compare/${a}-vs-${b}/`)}">${esc(A.name)} vs ${esc(B.name)}</a></h3>
+<ul class="vs-lic">${[A, B].map(t => `<li><span>${esc(t.name)}</span>${isNsv(t.commercial) ? `<span class="nsv">${NSV_TEXT}</span>` : licBadge(t)}</li>`).join('')}</ul>
+</article>`; };
 page('/compare/', layout({
-  title: `AI game-dev tool comparisons | ${SITE.name}`, description: 'Side-by-side comparisons of similar AI tools for game developers, built only from published pricing, specs and licence terms.', pathname: '/compare/',
-  og: ogFile('compare', 'page', { kicker: 'Comparisons', title: 'AI game-dev tools, side by side', sub: `${COMPARE.length} comparisons built only from published pricing, specs and licence terms. No ratings, no winners.` }),
-  body: `<h1 class="page-h">Comparisons</h1><p class="page-sub">Side by side, using only each vendor's published pricing, specs and licence terms. No benchmark scores, ratings or winners. The chips on each card are computed from our data, and details the vendor doesn't state are left out.</p>
-<div class="cmp-groups">${cmpGroups.map(g => `<section aria-labelledby="cg-${g.k}"><div class="sec-head"><h2 id="cg-${g.k}">${esc(TASKS[g.k].label)}</h2><a href="${L(`/category/${TASKS[g.k].page}/`)}">${esc(TASKS[g.k].label)} tools →</a></div>
-<div class="grid g2">${g.pairs.map(([a, b]) => { const A = bySlug[a], B = bySlug[b]; return `<article class="card is-link vs"><span class="vs-logos">${logo(A, 56)}<em>vs</em>${logo(B, 56)}</span><h3><a class="card-link" href="${L(`/compare/${a}-vs-${b}/`)}">${esc(A.name)} vs ${esc(B.name)}</a></h3>${chips(diffChips(A, B).map(s => chip(s, { muted: true })))}</article>`; }).join('\n')}</div></section>`).join('\n')}</div>`,
+  title: `AI game-dev tool comparisons | ${SITE.name}`, description: 'Compare any two AI tools for game developers side by side: free plans, pricing, commercial-use terms, API and engine support, from each vendor\'s published pages.', pathname: '/compare/',
+  og: ogFile('compare', 'page', { kicker: 'Comparisons', title: 'AI game-dev tools, side by side', sub: `Pick any two tools that do the same job. Built only from published pricing, specs and licence terms. No ratings, no winners.` }),
+  body: `<h1 class="page-h">Compare AI tools side by side</h1><p class="page-sub">Pick two tools that do the same job. Everything comes from each vendor's published pricing, specs and licence terms. No scores, ratings or winners.</p>
+<form class="card picker" id="picker" onsubmit="return false">
+<label class="pk-task">Task<select id="pk-task">${PICKER_DATA.tasks.map(x => `<option value="${x.k}">${esc(x.label)}</option>`).join('')}</select></label>
+<label>First tool<select id="pk-a"></select></label>
+<span class="pk-vs" aria-hidden="true">vs</span>
+<label>Second tool<select id="pk-b"></select></label>
+<button class="btn" type="submit" id="pk-go">Compare</button>
+<noscript><p class="note">The picker needs JavaScript. Browse the comparisons below instead.</p></noscript>
+</form>
+<h2 class="sub-h">Popular comparisons</h2>
+${cmpGroups.map(g => `<section class="cmp-group" aria-labelledby="cg-${g.k}"><div class="sec-head"><h3 id="cg-${g.k}">${esc(TASKS[g.k].label)}</h3><a href="${L(`/category/${TASKS[g.k].page}/`)}">All ${esc(TASKS[g.k].label.toLowerCase())} tools →</a></div>
+<div class="grid pairs">${g.pairs.map(pairCard).join('\n')}</div></section>`).join('\n')}
+<p class="note">Licence badges: green = commercial use allowed, amber = paid plans only or restricted, red = not allowed. Always read the vendor's current terms before you ship.</p>`,
+  scripts: `<script>window.PICK=${JSON.stringify(PICKER_DATA).replace(/</g, '\\u003c')};
+(function(){var D=window.PICK,t=document.getElementById('pk-task'),a=document.getElementById('pk-a'),b=document.getElementById('pk-b');
+var q=new URLSearchParams(location.search);if(q.get('task')&&D.tasks.some(function(x){return x.k===q.get('task');}))t.value=q.get('task');
+function fill(sel,list,skip){var cur=sel.value;sel.innerHTML='';list.forEach(function(p){if(p[0]===skip)return;var o=document.createElement('option');o.value=p[0];o.textContent=p[1];sel.appendChild(o);});if([].some.call(sel.options,function(o){return o.value===cur;}))sel.value=cur;}
+function list(){for(var i=0;i<D.tasks.length;i++)if(D.tasks[i].k===t.value)return D.tasks[i].tools;return [];}
+function sync(){var l=list();fill(a,l,null);fill(b,l,a.value);}
+t.addEventListener('change',function(){a.value='';sync();});a.addEventListener('change',function(){fill(b,list(),a.value);});
+document.getElementById('picker').addEventListener('submit',function(){var k=[a.value,b.value].sort().join('|');if(D.pairs[k])location.href=D.pairs[k];});
+sync();})();</script>`,
 }));
 // "Bottom line for game devs": sentences generated only from sourced fields, each with its source link.
 function bottomLine(A, B) {
@@ -744,30 +807,47 @@ function bottomLine(A, B) {
   items.push(eng(A) === eng(B) ? `<b>Engine integrations stated by the vendor:</b> both: ${eng(A)}.` : `<b>Engine integrations stated by the vendor:</b> ${esc(A.name)}: ${eng(A)}. ${esc(B.name)}: ${eng(B)}.`);
   return items;
 }
-for (const [a, b] of COMPARE) {
+// At-a-glance card for one side of a comparison.
+const glance = t => `<article class="card glance">
+<div class="card-top">${logo(t, 48, true)}<div class="card-title"><h2><a href="${toolUrl(t)}">${esc(t.name)}</a></h2><span class="card-sub">${esc([TASKS[t.tasks[0]].label, isNsv(t.pricingModel) ? '' : PRICING[t.pricingModel]].filter(Boolean).join(' · '))}</span></div></div>
+<dl class="glance-facts">
+<dt>Commercial use</dt><dd>${isNsv(t.commercial) ? NSV : licBadge(t)}</dd>
+<dt>Free plan</dt><dd>${isNsv(t.free) ? NSV : esc(FREE[t.free])}${isNsv(t.freeTier) ? '' : `<small>${esc(t.freeTier)}</small>`}</dd>
+<dt>Ship free-plan output?</dt><dd>${esc(freeShip(t)[1])}</dd>
+<dt>Engines</dt><dd>${esc(engineText(t))}</dd>
+</dl>
+<p class="glance-cta">${visitBtn(t)}<a class="btn-ghost" href="${toolUrl(t)}">Full listing</a></p>${t.affiliateUrl ? `<small class="aff-note">${esc(AFFILIATE_NOTE)}</small>` : ''}
+</article>`;
+for (const [a, b, curated] of ALL_PAIRS) {
   const A = bySlug[a], B = bySlug[b], p = `/compare/${a}-vs-${b}/`;
-  const cmpOg = ogFile(`compare/${a}-vs-${b}`, 'versus', { kicker: 'Comparison · pricing, licence, API', a: { logo: logoData(A), name: A.name }, b: { logo: logoData(B), name: B.name } });
+  const cmpOg = curated ? ogFile(`compare/${a}-vs-${b}`, 'versus', { kicker: 'Comparison · pricing, licence, API', a: { logo: logoData(A), name: A.name }, b: { logo: logoData(B), name: B.name } }) : undefined;
   const cmpDesc = `${A.name} vs ${B.name} for game developers: free plans, pricing, export formats, commercial-use terms, API and MCP, from each vendor's published pages.`;
   const modified = [CHECKED, A.lastChecked, B.lastChecked].filter(Boolean).sort().pop();
   const head = t => `<div role="columnheader" class="vs-tool"><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 36, true)}${esc(t.name)}</a>${licBadge(t)}</div>`;
+  const rows = ROWS.map(([h, fn, k]) => ({ h, fn, cls: k ? (String(k(A)) !== String(k(B)) ? ' is-diff' : ' is-same') : '' }));
+  const nDiff = rows.filter(r => r.cls === ' is-diff').length;
   page(p, layout({
     title: `${A.name} vs ${B.name}: pricing, licence, API compared | ${SITE.name}`,
-    description: cmpDesc, pathname: p,
+    description: cmpDesc, pathname: p, noindex: !curated,
     og: cmpOg,
-    jsonld: [
+    jsonld: curated ? [
       { '@context': 'https://schema.org', '@type': 'Article', headline: `${A.name} vs ${B.name}`, description: cmpDesc, url: URL_(p), mainEntityOfPage: URL_(p), datePublished: PUBLISHED, dateModified: modified, inLanguage: 'en-AU', author: ORG, publisher: ORG, about: [A, B].map(t => ({ '@type': 'SoftwareApplication', name: t.name, url: t.url })), ...(cmpOg ? { image: URL_(cmpOg) } : {}) },
       crumbsLd([['All tools', '/'], ['Comparisons', '/compare/'], [`${A.name} vs ${B.name}`, p]]),
-    ],
+    ] : [],
     body: `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/compare/')}">Comparisons</a> › ${esc(A.name)} vs ${esc(B.name)}</nav>
 <h1 class="page-h">${esc(A.name)} vs ${esc(B.name)}</h1>
-<p class="page-sub">Facts from each vendor's published pages, checked ${timeEl(CHECKED)}. No scores and no winner: pick based on what you need.</p>
+<p class="page-sub">Facts from each vendor's published pages, checked ${timeEl(CHECKED)}. No scores and no winner: pick based on what you need. <a href="${L(`/compare/?task=${pairTask(A, B)}`)}">Compare different tools →</a></p>
+<div class="glance-pair">${glance(A)}<span class="glance-vs" aria-hidden="true">vs</span>${glance(B)}</div>
 <section class="card bottom-line" aria-labelledby="bl-h"><h2 id="bl-h">Bottom line for game devs</h2><ul>${bottomLine(A, B).map(s => `<li>${s}</li>`).join('')}</ul></section>
-<div class="vs-grid" role="table" aria-label="${esc(A.name)} vs ${esc(B.name)}">
+<div class="vs-toolbar"><h2 class="sub-h">Full comparison</h2>${nDiff ? `<button type="button" class="chip" id="only-diff" aria-pressed="false">Show only differences (${nDiff})</button>` : ''}</div>
+<div class="vs-grid" id="vs-grid" role="table" aria-label="${esc(A.name)} vs ${esc(B.name)}">
 <div class="vs-row vs-head" role="row"><div role="columnheader" class="vs-label">Tool</div>${head(A)}${head(B)}</div>
-${ROWS.map(([h, f]) => `<div class="vs-row" role="row"><div role="rowheader" class="vs-label">${h}</div><div role="cell">${f(A)}</div><div role="cell">${f(B)}</div></div>`).join('\n')}
+${rows.map(r => `<div class="vs-row${r.cls}" role="row"><div role="rowheader" class="vs-label">${r.h}${r.cls === ' is-diff' ? '<span class="diff-dot" title="Differs">●</span>' : ''}</div><div role="cell">${r.fn(A)}</div><div role="cell">${r.fn(B)}</div></div>`).join('\n')}
+<div class="vs-row vs-cta" role="row"><div role="rowheader" class="vs-label">Try it</div><div role="cell">${visitBtn(A)}</div><div role="cell">${visitBtn(B)}</div></div>
 </div>
-<p class="note">Licence badges: green = commercial use allowed (including any free plan or trial), amber = paid plans only, restricted, or allowed but with no free plan, red = not allowed, grey = not stated by vendor or not applicable. Read the vendor's current terms before you ship.</p>`,
-  }));
+<p class="note">Rows marked ● differ between the two tools. Licence badges: green = commercial use allowed (including any free plan or trial), amber = paid plans only, restricted, or allowed but with no free plan, red = not allowed, grey = not stated by vendor or not applicable. Read the vendor's current terms before you ship.${A.affiliateUrl || B.affiliateUrl ? ` ${esc(AFFILIATE_NOTE)}` : ''}</p>`,
+    scripts: nDiff ? `<script>(function(){var b=document.getElementById('only-diff'),g=document.getElementById('vs-grid');b.addEventListener('click',function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on?'true':'false');g.classList.toggle('diff-only',on);});})();</script>` : '',
+  }), { sitemap: curated });
 }
 
 // ---------- Sponsor (one offer; checkout URL lives in config.mjs) ----------
