@@ -74,7 +74,7 @@ Owner: Mike Paul (Brisbane, Australia/Brisbane). Business inbox: hello@gamedevai
 ### Outreach log
 | Date | Tool | Contact | Type | Status | Reply |
 |---|---|---|---|---|---|
-| 2026-10-17 | PixelLab | support@pixellab.ai | you're listed | sent | |
+| 2026-10-17 | PixelLab | support@pixellab.ai | you're listed | sent | 2026-10-17: Paul (PixelLab) replied: API and MCP calls use the subscription's generations, and USD API credits are only needed without a plan. Listing corrected 2026-10-18. No reply sent. |
 | 2026-10-17 | Retro Diffusion | support@retrodiffusion.com | you're listed | sent | |
 | 2026-10-17 | Scenario | support@scenario.com | you're listed | sent | |
 | 2026-10-17 | Leonardo.Ai | contact@leonardo.ai | you're listed | sent | |
@@ -124,11 +124,20 @@ Carried over until then:
 - Newsletter subscribers: contact count in the Resend audience (exclude unsubscribed).
 - Sponsor revenue: Stripe payments on the sponsor payment link.
 - Affiliate revenue: each programme's dashboard.
-- Tools listed (42 on 2026-10-17), share checked in the last 30 days, share of `unverified` fields (target: down).
+- Tools listed (43 on 2026-10-18), share checked in the last 30 days, share of `unverified` fields (target: down).
 - Tool submissions: GitHub issues labelled `submission`. Outreach replies: outreach log.
 No estimates. If a number isn't available, write "not measured".
 
 ## Decisions log
+- **2026-10-18 (07:15 AEST): Daily operator pass.**
+  - **QA:** build OK. The live sitemap returned 94/94 URLs at 200 before the push. No broken internal links. External links: 237 returned 200; 10 returned 403 because the sites block bots (chatgpt.com and /pricing, leonardo.ai, /pricing and /api, the openai.com row terms, help.openai.com 6950777, a support.rokoko.com export article, fab.com distribution agreement, unrealengine.com/license). They load in a browser and are unchanged. /tools/ filters work. Newsletter test: delete-me-20261018@example.com subscribed, was deleted via /api/ops/ and now returns 404. Live Lighthouse scores (performance/accessibility/best practices/SEO): home 100/100/100/100, /tools/ 100/100/100/100, /category/3d-models/ 100/98/100/100, /tools/meshy/ 87/100/100/100.
+  - **Fix:** the 98 on category pages was a heading-order failure (h3 card title in the related-guide card, under the h1). The card title is now h2, with matching CSS. Local re-run: accessibility 100.
+  - **Stripe sponsor check (CEO):** no completed or paid checkout sessions since 17 Oct. There are 7 open, unpaid sessions, all from our own render tests. `data/sponsor.json` unchanged.
+  - **Correction:** PixelLab's API now reads "yes": calls draw on the plan's generations, and USD credits are needed only without a plan. Source: the vendor's email of 17 Oct 2026 (outreach log) plus api.pixellab.ai/v2/docs. lastChecked set to 2026-10-18. The PixelLab price currency is still not confirmed from a US view, so the bare $ stays.
+  - **New listing:** Mirelo (video-to-SFX, Music & SFX plus Trailers & marketing). Prices are in € only (vendor publishes € pricing, confirmed from a US view). The free plan is non-commercial and watermarked; paid plans allow commercial use (mirelo.ai/terms, updated 9 Oct 2026). Official API and MCP. It ranks automatically on game-dev fit (#4 in Music & SFX); rankings.json is unchanged. Tools listed: 43.
+  - **News:** Meshy Edit (16 Oct, meshy.ai/blog/meshy-edit); Skywork Matrix-Game 4.0 open-sourced under Apache-2.0 (15 Oct, github.com/SkyworkAI/Matrix-Game); Mirelo SFX 2.0 (14 Oct, mirelo.ai/blog/mirelo-sfx-2-0). No deals had expired.
+  - **SEO:** new v2 guide /guides/ai-pixel-art-sprites-to-engine/, covering PixelLab or Retro Diffusion to Godot (Nearest filter, integer scaling, AnimatedSprite2D) or Unity (pixel-art import, Sprite Editor slicing, animation clip, Pixel Perfect Camera). Every step cites official docs. Two official PixelLab YouTube videos, checked via oEmbed. 4 FAQs. The hero was drawn in-house with PIL (src/assets/img/guide-pixel-sprites.webp; no paid generation). Guides can now carry their own `checked` date. Sitemap lastmod now uses a tool's lastChecked or a guide's checked date when that is newer than SITE.updated. llms.txt and llms-full.txt updated by the build.
+  - **Feedback:** see ## Feedback.
 - **2026-10-17 (19:30 AEST): Affiliate status update; Cascadeur link live.** Approved affiliate links set as `affiliateUrl` (facts, rank and verdict unchanged): Cascadeur Tolt `https://cascadeur.com/?ref=michael9p` and Meshy PromoteKit `https://www.meshy.ai/?utm_medium=affiliate&utm_source=promotekit&via=gamedevaitools` (handle gamedevaitools); account holder Michael Rattray, created 2026-10-17. Visit button uses `rel="sponsored noopener"` and shows the standard affiliate disclosure. Tracker: `/workspace/affiliates/programs.csv` on the agent box.
 
   | Tool | Network | Status | Link | Notes |
@@ -226,6 +235,9 @@ No estimates. If a number isn't available, write "not measured".
 - **2026-10-17 (17:30 AEST): US pricing only on the site** (Mike's call). Removed the A$ notes from Suno, Soundraw and ChatGPT pricing so visitors see only US$ figures. Gridly and AIVA keep euro prices because the vendor publishes nothing else. Why: a single currency reads cleanly for the mostly US audience; the AU-geolocation checking rule above still applies when verifying prices. Screenshots: /workspace/screens/currency-usd-only/before and /after on the agent box.
 - **2026-10-17 (AEST): Multi-slot sponsorship, branch `sponsor-slots` (not merged).** Decision: Mike approved the 4-spot lineup on 2026-10-17, replacing the single US$79/week offer. Why: more inventory, matches how AI directories sell in 2026, rankings untouched. Spots: site-wide US$99/week (top strip + homepage card + wide-screen side card), category US$29/week (12), engine page US$29/week (5), newsletter US$49/issue. `SPONSOR_OFFERS` replaces `SPONSOR_PRICE`/`SPONSOR_OFFER`/`SPONSOR_PAYMENT_URL` in config.mjs; `sponsors.mjs` reads and checks bookings; `data/sponsor.json` migrated from `{}` to `{"bookings":[]}`. /sponsor/ lists the four spots (where, what, price, how many free this week, "Book by email" while `paymentUrl` is empty) with a new meta description; llms.txt and /about/ updated; the top strip label now reads "Sponsored" (was "Sponsor"). Polish/UX rule kept: nothing renders without an active paid booking. Stripe links came after Mike reviewed the screenshots (live 17:55 AEST, see next entry; /workspace/screens/sponsor-slots/before and /after on the agent box; the "Example Sponsor" fixture was local only). No Stripe objects created.
 - **2026-10-17 (17:55 AEST): Sponsor spots live** (Mike approved 17:42 AEST: "Yes, create the Stripe links, put it live and retire the US$79 link"). Created 4 products, prices and payment links in Stripe live mode (IDs in Sponsorship), checked each checkout renders the right amount ($99/$29/$29/$49; prices are USD), deactivated the old US$79 link after confirming no completed payments, merged `sponsor-slots` to main (fast-forward, commit a0e2e2d) and verified live. /sponsor/ buttons: "Book a week (US$99)", "Book a week (US$29)" x2, "Book an issue (US$49)"; email line for bigger campaigns kept. Old visitor price ladder retired; per-spot ladder pending.
+## Feedback
+- 2026-10-18: none found. X search (url:gamedevaitools.com, @gamedevaitools, "gamedevaitools", "GameDev AI Tools", since 16 Oct) returned 0 posts. Reddit couldn't be searched: it blocks the box and returns 403 to WebFetch. A web search showed only our own homepage.
+
 ## Open questions (need Mike)
 1. **X login:** access to post as @gamedevaitools (and set the automated-account label).
 2. **Affiliate payout and tax details:** bank/ABN/GST and tax forms for affiliate programmes (ask-first; nothing set up yet).

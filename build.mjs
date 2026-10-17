@@ -538,7 +538,7 @@ ${RANKED[key] ? `<p>${list.length} tools, ranked ${RANKED[key].nEvidence ? 'firs
 ${catFilters(list)}
 ${catTable(list, RANKED[key])}<p class="cat-empty" hidden>No tools match these filters. <button type="button" class="linkish" data-reset>Clear filters</button></p></div>
 ${list.length > 1 ? `<div class="cmp-row" style="margin-top:6px"><span>Compare side by side:</span>${cp.map(cmpChip).join('')}<a class="chip c-muted" href="${L(`/compare/?task=${key}`)}">Pick any two →</a></div>` : ''}
-${GUIDES.filter(g => g.task === key).map(g => `<section class="rel-guide" aria-label="Related guide">${linkCard({ href: L(`/guides/${g.slug}/`), title: g.title, kicker: 'Related workflow guide', desc: esc(g.outcome), media: artImg(guideArtPage(g)), foot: flowStrip(g, { max: 4 }), cls: 'feature' })}</section>`).join('\n')}
+${GUIDES.filter(g => g.task === key).map(g => `<section class="rel-guide" aria-label="Related guide">${linkCard({ href: L(`/guides/${g.slug}/`), title: g.title, kicker: 'Related workflow guide', desc: esc(g.outcome), media: artImg(guideArtPage(g)), foot: flowStrip(g, { max: 4 }), cls: 'feature', h: 'h2' })}</section>`).join('\n')}
 ${RANKED[key] ? `<h2 class="sub-h">Why each tool ranks where it does</h2>
 <div class="grid ranked-cards">${RANKED[key].rows.map(r => toolCard(r.t, { attrs: `${catAttrs(r.t)} data-rank="${r.n}" data-alpha="${list.indexOf(r.t)}"`, note: `<p class="rank-line"><span class="rank-n">#${r.n}</span>${r.label ? badge(r.label, 'accent') : ''}<span class="rank-tier">${r.tier === 'evidence' ? 'Independent tests' : 'Game-dev fit'}</span></p><p class="rank-why">${esc(r.why)} ${rankSources(r)}</p>\n` })).join('\n')}` : `<h2 class="sub-h">Verdicts</h2>
 <div class="grid">${list.map(t => toolCard(t, { attrs: catAttrs(t) })).join('\n')}`}
@@ -739,7 +739,7 @@ ${g.paths.map((pth, i) => `<div class="g-path" id="path-${pth.key}" role="tabpan
 </section>
 ${g.alternative ? `<aside class="card g-alt"><span class="kicker">Another option</span><p><b>${esc(g.alternative.name)}.</b> ${esc(g.alternative.note)} <a href="${esc(g.alternative.url)}" rel="noopener nofollow" target="_blank">Official repo ↗</a></p></aside>` : ''}
 ${faqBlock(g.faq)}
-<p class="note">${g.note ? `${esc(g.note)} ` : ''}Written from the official documentation linked on each step and checked ${timeEl(CHECKED)}. ${g.kind ? '' : 'Menus and settings change between versions, so follow the linked docs if something looks different. '}No vendor reviews or pays for these guides.</p>
+<p class="note">${g.note ? `${esc(g.note)} ` : ''}Written from the official documentation linked on each step and checked ${timeEl(g.checked || CHECKED)}. ${g.kind ? '' : 'Menus and settings change between versions, so follow the linked docs if something looks different. '}No vendor reviews or pays for these guides.</p>
 </article>
 <section class="related"><div class="sec-head"><h2>Tools for this workflow</h2></div><div class="grid g3">${gt.map(t => toolCard(t, { compact: true })).join('\n')}</div></section>`;
 }
@@ -1369,9 +1369,12 @@ fs.cpSync('src/assets', path.join(out, 'assets'), { recursive: true });
 if (OG) await OG.flush();
 // Root-level verification files (e.g. Google Search Console), copied byte-for-byte; never in the sitemap.
 if (fs.existsSync('src/root')) fs.cpSync('src/root', out, { recursive: true });
+// lastmod: a tool page's own lastChecked or a guide's checked date when that is newer than the site-wide date; otherwise SITE.updated.
+const LASTMOD = Object.fromEntries([...tools.map(t => [`/tools/${t.slug}/`, t.lastChecked]), ...GUIDES.map(g => [`/guides/${g.slug}/`, g.checked || CHECKED])]);
+const pageLastmod = p => (LASTMOD[p] && LASTMOD[p] > SITE.updated ? LASTMOD[p] : SITE.updated);
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[...pages, '/llms.txt', '/llms-full.txt'].map(p => `<url><loc>${URL_(p)}</loc><lastmod>${SITE.updated}</lastmod></url>`).join('\n')}
+${[...pages, '/llms.txt', '/llms-full.txt'].map(p => `<url><loc>${URL_(p)}</loc><lastmod>${pageLastmod(p)}</lastmod></url>`).join('\n')}
 </urlset>
 `);
 write('robots.txt', `User-agent: *\nAllow: /\n\n# LLM-friendly summary (https://llmstxt.org): ${URL_('/llms.txt')} and ${URL_('/llms-full.txt')}\nSitemap: ${URL_('/sitemap.xml')}\n`);

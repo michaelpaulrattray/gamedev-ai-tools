@@ -1,0 +1,201 @@
+{
+ "_doc": "Guide v2 content for /guides/ai-pixel-art-sprites-to-engine/. Every step is written in our own words from the linked official docs (checked 2026-10-18). Videos are from PixelLab's own YouTube channel (@PixelLab_AI), verified via oEmbed and linked from PixelLab's current site. No images apart from the in-house hero.",
+ "checked": "2026-10-18",
+ "result": "An AI-generated pixel-art character with its directions and animations, imported into Godot or Unity as a crisp, unblurred sprite that plays its walk cycle in your game.",
+ "flow": [
+  { "label": "Generate character", "ai": true },
+  { "label": "Animate + export sheet", "ai": true },
+  { "label": "Crisp import settings" },
+  { "label": "Slice frames" },
+  { "label": "Play in engine" }
+ ],
+ "shared": [
+  {
+   "h": "Check what your plan lets you ship",
+   "do": [
+    "PixelLab's pricing page lists commercial use on every plan, including the free tier: you own your generations, with one exception, you can't use them to train models.",
+    "Retro Diffusion's FAQ says everything you generate is yours, for personal and commercial projects.",
+    "If you sell on Steam, note which sprites you generated: Steam's Content Survey asks about AI-generated content that ships in the game."
+   ],
+   "see": "You know you can sell a game with these sprites, and what you've agreed not to do with them.",
+   "gotcha": "\"You own it\" under a tool's terms is a contract with the vendor, not a copyright guarantee. Keep the terms page's date with your project files.",
+   "source": { "label": "PixelLab: pricing and licence", "url": "https://www.pixellab.ai/pricing" }
+  },
+  {
+   "h": "Generate the character and its walk cycles",
+   "do": [
+    "Open PixelLab's Characters page and describe your character in a text prompt.",
+    "Choose 4 or 8 directional views.",
+    "Add walk, run, idle or other animations with one click, and check each in the built-in preview.",
+    "Export each animation as a sprite sheet (one image) or as individual frames."
+   ],
+   "see": "A sprite sheet or a set of frame images for each animation, in every direction you chose.",
+   "gotcha": "Keep every frame of a character at the same pixel size. Both engines below cut a sheet into equal cells, so mixed sizes slice wrongly.",
+   "source": { "label": "PixelLab: ways to use PixelLab", "url": "https://www.pixellab.ai/docs/ways-to-use-pixellab" }
+  },
+  {
+   "h": "Add custom moves with Animate with Text",
+   "do": [
+    "Give the tool a reference sprite (required) and type the action, such as attack, jump or idle.",
+    "Pick a frame count from 4 to 16 (even numbers only).",
+    "Turn on Remove Background if you want a transparent result."
+   ],
+   "see": "A new animation whose first frame is exactly your original sprite.",
+   "gotcha": "Cost grows with sprite size and frame count, and larger sprites allow fewer frames. PixelLab shows the exact cost before you generate.",
+   "source": { "label": "PixelLab: Animate with Text", "url": "https://www.pixellab.ai/docs/tools/animate-with-text-new" }
+  },
+  {
+   "h": "Or use Retro Diffusion's animation styles",
+   "do": [
+    "To animate a sprite you already have, use one of Retro Diffusion's advanced animation styles (walking, idle, jump, crouch, attack, destroy or a custom action), sized 32 to 256 px to match your start frame.",
+    "Animations come back as a GIF by default; through the API, set return_spritesheet to get a PNG sprite sheet instead.",
+    "For the other directions of an existing sprite, the rotate style returns 7 more views, or a 3x3 PNG sheet with return_spritesheet."
+   ],
+   "see": "A PNG sprite sheet you can slice in your engine, with a transparent background if your start frame was transparent.",
+   "gotcha": "Rotation frames step 45 degrees counter-clockwise from the down-right diagonal, so frames 2, 4, 6 and 8 are front, left, back and right.",
+   "source": { "label": "Retro Diffusion API reference (llms.txt)", "url": "https://github.com/Retro-Diffusion/api-examples/blob/main/llms.txt" }
+  }
+ ],
+ "paths": [
+  {
+   "key": "godot",
+   "label": "Godot",
+   "steps": [
+    {
+     "h": "Stop Godot smoothing your sprites",
+     "do": [
+      "Open Project > Project Settings and go to Rendering > Textures > Canvas Textures (turn on Advanced Settings if you don't see it).",
+      "Set Default Texture Filter to Nearest. In 2D, this project setting is the default filter for every CanvasItem.",
+      "Select your sprite sheet in the FileSystem dock and keep Compress > Mode on Lossless in the Import dock, the mode Godot's docs recommend for pixel art."
+     ],
+     "see": "Zoomed-in sprites show hard, square pixels instead of a blur.",
+     "gotcha": "If Godot detects a texture being used in 3D it switches it to VRAM compression, which hurts pixel art. Set Compress > Mode back to Lossless.",
+     "source": { "label": "Godot docs: importing images", "url": "https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_images.html" }
+    },
+    {
+     "h": "Scale the game window in whole steps",
+     "do": [
+      "In Project Settings > Display > Window, set the viewport width and height to your game's pixel resolution. Godot's docs suggest 640×360 as a good baseline.",
+      "Set Stretch > Mode to viewport and Stretch > Aspect to keep (or expand to support more aspect ratios).",
+      "Set Stretch > Scale Mode to integer."
+     ],
+     "see": "The game scales to 2x, 3x and so on, with black bars where the window doesn't fit an exact multiple.",
+     "gotcha": "Fractional scaling makes some pixels wider than others. Integer scale mode is what stops that.",
+     "source": { "label": "Godot docs: multiple resolutions", "url": "https://docs.godotengine.org/en/stable/tutorials/rendering/multiple_resolutions.html" }
+    },
+    {
+     "h": "Build the animation with AnimatedSprite2D",
+     "do": [
+      "Add an AnimatedSprite2D under your character's CharacterBody2D, then set its SpriteFrames property to New SpriteFrames.",
+      "In the SpriteFrames panel, click Add frames from a Sprite Sheet, choose your PNG, and set the horizontal and vertical frame counts to match the sheet.",
+      "Select the frames for one animation, click Add frames, and rename the animation (for example walk_down).",
+      "Raise Speed (FPS) if it plays too slowly, then call $AnimatedSprite2D.play(\"walk_down\") from your script."
+     ],
+     "see": "The walk cycle plays in the SpriteFrames preview and when you run the scene.",
+     "gotcha": "If you exported individual frames instead of a sheet, drag the frame files straight into the SpriteFrames panel.",
+     "source": { "label": "Godot docs: 2D sprite animation", "url": "https://docs.godotengine.org/en/stable/tutorials/2d/2d_sprite_animation.html" }
+    },
+    {
+     "h": "Optional: let a coding agent do it over MCP",
+     "do": [
+      "PixelLab runs an MCP server that coding assistants such as Claude Code can call; you add it with your PixelLab API token.",
+      "Its tools include create_character (4 or 8 directions) and animate_character, so the agent can generate sprites and write the Godot code that uses them.",
+      "PixelLab notes that Claude can run Godot headless and handles GDScript well."
+     ],
+     "see": "The agent returns generated characters and animations it can drop into your project.",
+     "gotcha": "Map objects made through the MCP server are deleted after 8 hours, so save anything you want to keep.",
+     "source": { "label": "PixelLab: MCP (vibe coding)", "url": "https://www.pixellab.ai/mcp" }
+    }
+   ]
+  },
+  {
+   "key": "unity",
+   "label": "Unity",
+   "steps": [
+    {
+     "h": "Import the sheet as pixel-art sprites",
+     "do": [
+      "Select the sprite sheet in the Project window and set Texture Type to Sprite (2D and UI) and Sprite Mode to Multiple.",
+      "Give all your sprites the same Pixels Per Unit value.",
+      "In the Advanced section, set Filter Mode to Point (no filter), set Compression to None, then click Apply."
+     ],
+     "see": "Sprites look blocky, not blurry, when you zoom in the Scene view.",
+     "gotcha": "Leave Filter Mode on Bilinear or Trilinear and the pixels blur when the sprite is scaled.",
+     "source": { "label": "Unity Manual: add a pixel perfect camera", "url": "https://docs.unity3d.com/Manual/urp/2d-pixelperfect-prep-sprites.html" }
+    },
+    {
+     "h": "Slice the sheet in the Sprite Editor",
+     "do": [
+      "Click Open Sprite Editor, then open the Slice dropdown in the toolbar.",
+      "Set Type to Grid By Cell Size and enter one frame's width and height as Pixel Size (or use Grid By Cell Count with the sheet's rows and columns).",
+      "Click Slice, check the outlines, then click Apply."
+     ],
+     "see": "Red outlines preview the cuts, and after Apply each frame appears as its own sprite under the texture in the Project window.",
+     "gotcha": "Unity may not draw the preview outlines on a texture you've already sliced. Adjust single frames by dragging their blue handles.",
+     "source": { "label": "Unity Manual: cut out sprites from a texture", "url": "https://docs.unity3d.com/Manual/sprite/sprite-editor/use-editor.html" }
+    },
+    {
+     "h": "Make the animation clip",
+     "do": [
+      "Select the GameObject with your Sprite Renderer and open Window > Animation > Animation.",
+      "Create a clip, then select the frames for one animation in the Project window and drag them onto the Animation window.",
+      "In the Animation window's More menu, turn on Show sample rate and lower Samples until the cycle plays at the speed you want."
+     ],
+     "see": "Pressing Play in the Animation window runs the walk cycle in the Scene view.",
+     "gotcha": "Samples defaults to 60, so each frame shows for only a sixtieth of a second. Unity's own tutorial uses 4 for its four-frame walk.",
+     "source": { "label": "Unity Learn: create 2D sprite animations", "url": "https://learn.unity.com/tutorial/create-2d-sprite-animations?version=6.3" }
+    },
+    {
+     "h": "Add a Pixel Perfect Camera (URP)",
+     "do": [
+      "Select the main camera, click Add Component and add Pixel Perfect Camera.",
+      "Set Assets Pixels Per Unit to the same value as your sprites' Pixels Per Unit.",
+      "Set Reference Resolution to your game's pixel resolution, for example 320 × 180.",
+      "In the Scene view's Grid and Snap overlay, set Grid Size to 1 divided by that Pixels Per Unit and turn on grid snapping."
+     ],
+     "see": "A dotted green outline of the reference resolution and a solid green outline of what the Game view shows.",
+     "gotcha": "In URP the Pixel Perfect Camera is built in (the Universal 2D template includes it). Don't install the separate 2D Pixel Perfect package: it only works with the Built-In Render Pipeline.",
+     "source": { "label": "Unity Manual: add a pixel perfect camera", "url": "https://docs.unity3d.com/Manual/urp/2d-pixelperfect-prep-sprites.html" }
+    }
+   ]
+  }
+ ],
+ "videos": [
+  {
+   "step": "Add custom moves with Animate with Text",
+   "youtube_id": "j2bE9gq914U",
+   "title": "How to Use Animate with Text in PixelLab",
+   "channel": "PixelLab",
+   "url": "https://www.youtube.com/watch?v=j2bE9gq914U"
+  },
+  {
+   "step": "Optional: let a coding agent do it over MCP",
+   "youtube_id": "THwZYWuOdZI",
+   "title": "AI Builds a Godot Game From Scratch | PixelLab MCP + Claude Code Workflow",
+   "channel": "PixelLab",
+   "url": "https://www.youtube.com/watch?v=THwZYWuOdZI"
+  }
+ ],
+ "faq": [
+  {
+   "q": "Can I sell a game that uses PixelLab sprites?",
+   "a": "PixelLab's pricing page says you can use generations commercially in your games and other projects, and that you own the rights to them, except that you can't use them to train models. Commercial use is listed on the free tier as well as the paid plans.",
+   "url": "https://www.pixellab.ai/pricing"
+  },
+  {
+   "q": "Does PixelLab train its models on my sprites?",
+   "a": "PixelLab's FAQ says it does not use user inputs or generated content to train its models.",
+   "url": "https://www.pixellab.ai/docs/faq"
+  },
+  {
+   "q": "Why does my pixel art look blurry in Godot?",
+   "a": "Usually the texture filter. Set Project Settings > Rendering > Textures > Canvas Textures > Default Texture Filter to Nearest (it reads only the nearest pixel), keep the sprite's Compress > Mode on Lossless, and use integer stretch scaling so pixels stay even.",
+   "url": "https://docs.godotengine.org/en/stable/classes/class_projectsettings.html"
+  },
+  {
+   "q": "Why does my pixel art look blurry in Unity?",
+   "a": "Set the sprite texture's Filter Mode to Point (no filter) and Compression to None, keep Pixels Per Unit the same on every sprite, and add a Pixel Perfect Camera in URP.",
+   "url": "https://docs.unity3d.com/Manual/urp/2d-pixelperfect-prep-sprites.html"
+  }
+ ]
+}

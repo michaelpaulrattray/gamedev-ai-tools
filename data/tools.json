@@ -11,12 +11,12 @@
   ],
   "pricingModel": "freemium",
   "summary": "AI generator for pixel art game assets: characters, 4/8-direction rotations, text- and skeleton-based sprite animations, tilesets, maps and UI elements.",
-  "pricing": "Free trial tier (no credit card). Paid plans listed at $12/month (2,000 generations), $24/month (5,000) and $50/month (10,000). API usage priced separately per call.",
+  "pricing": "Free trial tier (no credit card). Paid plans listed at $12/month (2,000 generations), $24/month (5,000) and $50/month (10,000). API and MCP calls use your plan's generations; separate USD API credits are only needed without a subscription or once the plan's generations run out (PixelLab, by email, 17 Oct 2026; the API's balance endpoint reports both).",
   "pricingSource": "https://www.pixellab.ai/pricing",
   "commercial": "yes",
   "license": "Pricing page lists \"Use generated images commercially\" and says the user owns the rights to generations, except using them to train models. Terms also reference the Open RAIL-M license.",
   "licenseSource": "https://www.pixellab.ai/termsofservice",
-  "lastChecked": "2026-10-17",
+  "lastChecked": "2026-10-18",
   "verdict": "For 2D devs who need pixel-art sprites, rotations and animations; outputs are usable commercially on every plan, but its terms bar training other models on them.",
   "bestFor": "Pixel-art characters, rotations, animations and tilesets",
   "free": "yes",
@@ -25,7 +25,7 @@
   "revenue": "unverified",
   "api": {
    "status": "yes",
-   "note": "REST API, priced per call",
+   "note": "REST API; calls draw on subscription generations, or on USD credits without a plan",
    "source": "https://api.pixellab.ai/v2/docs"
   },
   "mcp": {
@@ -1140,6 +1140,42 @@
    "status": "unverified",
    "note": "Not checked",
    "source": ""
+  }
+ },
+ {
+  "slug": "mirelo",
+  "name": "Mirelo",
+  "url": "https://mirelo.ai/",
+  "tasks": [
+   "audio",
+   "marketing"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Video-to-sound model (SFX 2.0) that generates sound effects, foley and ambience synced to a video while keeping its dialogue; also text-to-SFX, via a web studio, API and MCP server.",
+  "pricing": "Free €0/month (5,000 credits, 3 projects, watermark on exports). Creator €20/month (24,000 credits), Studio €99/month (120,000), Scale €299/month (420,000), Business €999/month (1,440,000); extra credits €0.75–1.20 per 1,000; Enterprise custom. Billed monthly. Prices are published in euros only.",
+  "pricingSource": "https://mirelo.ai/pricing",
+  "commercial": "paid-only",
+  "license": "Terms (last updated 9 Oct 2026): Free Plan users may use the Services and Output \"exclusively for non-commercial purposes\"; Paid Plan users may use them for commercial and business purposes. Rights in Output vest in you, subject to the plan limits and the Acceptable Use Policy (including its limits on training AI models). Free-plan output may carry a watermark and must credit Mirelo as the sound provider.",
+  "licenseSource": "https://mirelo.ai/terms",
+  "lastChecked": "2026-10-18",
+  "verdict": "For sound effects synced to trailer or gameplay footage; the free plan is non-commercial and watermarked, so anything you ship needs a paid plan.",
+  "bestFor": "Sound effects and ambience synced to trailer or gameplay video",
+  "free": "yes",
+  "freeTier": "Free €0/month: 5,000 credits, watermarked exports, non-commercial",
+  "exportFormats": "unverified",
+  "revenue": "unverified",
+  "api": {
+   "status": "yes",
+   "note": "Mirelo API (text-to-SFX and video-to-SFX)",
+   "source": "https://mirelo.ai/api-docs"
+  },
+  "mcp": {
+   "status": "official",
+   "note": "Hosted Mirelo MCP for Claude, Cursor, ChatGPT and other MCP clients",
+   "source": "https://mirelo.ai/mcp"
   }
  },
  {

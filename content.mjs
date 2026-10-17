@@ -99,6 +99,20 @@ export const GUIDES = [
     intro: '"Open weights" doesn\'t mean "free for commercial use". Here is how to check a model licence, and what 15 popular models\' licences say.',
     steps: [],
   },
+  {
+    // Workflow guide (v2): steps, paths, videos and FAQ live in data/guides/ai-pixel-art-sprites-to-engine.json.
+    slug: 'ai-pixel-art-sprites-to-engine',
+    title: 'AI pixel-art sprites to a playable character in Godot or Unity',
+    metaTitle: 'AI pixel-art sprites into Godot or Unity | GameDev AI Tools',
+    description: 'Generate a pixel-art character and walk cycles with AI, then import it crisp and animated in Godot or Unity. Every step sourced from official docs.',
+    tools: ['pixellab', 'retro-diffusion'],
+    task: 'concept-art', engines: ['godot', 'unity'],
+    hero: 'guide-pixel-sprites',
+    flow: [{ label: 'Generate character', ai: true }, { label: 'Animate + export sheet', ai: true }, { label: 'Crisp import settings' }, { label: 'Slice frames' }, { label: 'Play in engine' }],
+    outcome: 'A pixel-art character with 4 or 8 directions and walk cycles from PixelLab or Retro Diffusion, imported unblurred into Godot (AnimatedSprite2D) or Unity (sliced sprites, an animation clip and a Pixel Perfect Camera).',
+    intro: 'AI pixel-art tools give you a character and its animations in minutes, but engines blur and mis-slice pixel art unless you set them up for it. Here are the steps, each linked to the official docs.',
+    steps: [],
+  },
 ];
 
 export const DISCLOSURE = {
@@ -131,6 +145,12 @@ export const DISCLOSURE = {
 // Optional per item: type ('Launch' | 'Update' | 'Pricing change' | 'Licence change' | 'Funding'; otherwise inferred from the title,
 // defaulting to 'Update') and why (one sourced line, "Why it matters for game devs"; omitted when not set).
 export const NEWS = [
+  { date: '2026-10-16', title: 'Meshy launches Meshy Edit for local 3D edits', tool: 'meshy', type: 'Launch',
+    text: 'Open a model you generated in Meshy, select a part with Lasso or Brush, and describe the change in text or with up to 5 reference images. Only the selected part changes, each edit is saved as a new model and the original is kept. Credits for a failed edit are refunded automatically. Live for all registered users.',
+    source: 'https://www.meshy.ai/blog/meshy-edit', sourceName: 'Meshy blog' },
+  { date: '2026-10-15', title: 'Skywork open-sources Matrix-Game 4.0', tool: null, type: 'Launch',
+    text: 'An executable game engine keeps the gameplay, physics and input, while a causal video model re-renders its low-poly frames into detailed visuals. The v4 code is Apache-2.0, as are the scene weights and game assets on Hugging Face; third-party parts keep their own licences. Three demo scenes, with single-GPU inference paths for A100, RTX 5090, 5080 and 5070 Ti.',
+    source: 'https://github.com/SkyworkAI/Matrix-Game', sourceName: 'Skywork AI on GitHub' },
   { date: '2026-10-15', title: 'ElevenLabs launches Instant Soundtracks', tool: 'elevenlabs',
     text: 'Upload a video in ElevenCreative and get an original score plus sound effects placed at detected timestamps. In the API, separate_tracks returns music and SFX as separate files.',
     source: 'https://elevenlabs.io/blog/introducing-instant-soundtracks', sourceName: 'ElevenLabs blog' },
@@ -140,6 +160,9 @@ export const NEWS = [
   { date: '2026-10-14', title: 'Meshy introduces an Ultra 4K mode', tool: 'meshy',
     text: 'A new generation mode that produces models with up to 80 million triangles before simplification, alongside the Standard and Ultra 2K modes. Exact launch date: unverified (date shown is when it was reported).',
     source: 'https://digestai.news/story/meshy-introduces-ultra-4k-for-3d-models-with-80m-triangles', sourceName: 'DigestAI' },
+  { date: '2026-10-14', title: 'Mirelo releases SFX 2.0, a video-to-sound model', tool: 'mirelo', type: 'Launch',
+    text: 'Generates sound effects, foley and ambience synced to the action in a video, keeps the dialogue and can remove unwanted music. Mirelo Studio and the API take videos up to 10 minutes. Also available through partner platforms including Runway and Fal, and through Mirelo\'s own MCP server.',
+    source: 'https://mirelo.ai/blog/mirelo-sfx-2-0', sourceName: 'Mirelo blog' },
   { date: '2026-10-10', title: 'Meta unveils Horizon Create and Horizon Studio', tool: null,
     text: 'Two AI game-authoring tools, a mobile app and a browser editor, for building 2D and 3D games from natural-language prompts and publishing to Facebook, Instagram and Horizon. Both are in early access via a waitlist.',
     source: 'https://www.gamedevwire.com/articles/meta-launches-horizon-create-and-studio-for-ai-driven-mobile-game-development-4ae6a900', sourceName: 'Game Dev Wire' },

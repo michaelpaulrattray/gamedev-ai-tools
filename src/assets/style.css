@@ -404,6 +404,7 @@ form.submit button:hover,.newsletter button:not([disabled]):hover{filter:brightn
 .cat-empty{margin:0;padding:16px;color:var(--muted);font-size:.9rem}
 .cat-table tr[hidden]{display:none}
 .rel-guide{margin:22px 0 4px}
+.rel-guide .card h2{margin:0;font-size:1.08rem;line-height:1.3}
 .rel-guide .feature{margin:0}
 .rel-guide .feature .card-media{aspect-ratio:auto}
 .rel-guide .card.feature{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);padding:0;overflow:hidden;gap:0}
