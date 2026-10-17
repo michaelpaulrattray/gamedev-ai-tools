@@ -18,13 +18,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node build.mjs
-        env:
-          SITE_ORIGIN: https://michaelpaulrattray.github.io
-          SITE_BASE: /gamedev-ai-tools
+      # Site moved to https://gamedevaitools.com (Vercel). Pages now serves redirect stubs only.
+      # To restore the full site here: run `node build.mjs` with SITE_ORIGIN/SITE_BASE env and upload `dist`.
+      - run: node build.mjs && node pages-redirect.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: dist-pages
   deploy:
     needs: build
     runs-on: ubuntu-latest
