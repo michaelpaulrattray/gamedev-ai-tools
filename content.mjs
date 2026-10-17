@@ -119,7 +119,3 @@ export const COMPARE = [
   ['runway', 'luma-ai'], ['pixellab', 'retro-diffusion'], ['scenario', 'layer-ai'],
 ];
 
-export const SPONSOR_TIERS = [
-  { name: 'Featured listing', text: 'Your tool shown in a clearly labelled "Sponsored" slot on the home page and in relevant category pages. The listing itself still follows our editorial rules: facts from your official site with source links, no invented claims, and the same verdict format as every other tool.' },
-  { name: 'Newsletter slot', text: 'A clearly labelled sponsored mention in the newsletter. The newsletter has not launched yet, so this tier is not available until it does.' },
-];

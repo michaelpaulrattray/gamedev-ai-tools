@@ -1,7 +1,8 @@
 // Zero-dependency static site generator. Usage: node build.mjs  -> writes ./dist
 import fs from 'node:fs';
 import path from 'node:path';
-import { CHECKED, GUIDES, DISCLOSURE, NEWS, COMPARE, SPONSOR_TIERS } from './content.mjs';
+import { CHECKED, GUIDES, DISCLOSURE, NEWS, COMPARE } from './content.mjs';
+import { SPONSOR_PAYMENT_URL, SPONSOR_OFFER, BUSINESS_EMAIL, AFFILIATE_NOTE } from './config.mjs';
 
 const SITE = {
   name: 'GameDev AI Tools',
@@ -13,9 +14,11 @@ const SITE = {
 // Signup form is shown only when explicitly enabled AND both Resend env vars exist.
 const NEWSLETTER_ON = process.env.NEWSLETTER_ENABLED === '1' && Boolean(process.env.RESEND_API_KEY && process.env.RESEND_AUDIENCE_ID);
 console.log('Newsletter signup enabled:', NEWSLETTER_ON);
+// Build date in the business's time zone (Australia/Brisbane), YYYY-MM-DD. Used to drop expired deals and sponsor bookings.
+const TODAY = new Intl.DateTimeFormat('en-CA', { timeZone: 'Australia/Brisbane', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 const URL_ = p => SITE.origin + SITE.base + p;
 const L = p => SITE.base + p;
-const EMAIL = 'hello@gamedevaitools.com';
+const EMAIL = BUSINESS_EMAIL;
 const mailto = (subject) => `mailto:${EMAIL}${subject ? `?subject=${encodeURIComponent(subject)}` : ''}`;
 
 const TASKS = {
@@ -42,6 +45,12 @@ const COMMERCIAL = { 'yes': 'Commercial use allowed', 'paid-only': 'Commercial o
 
 const tools = JSON.parse(fs.readFileSync('data/tools.json', 'utf8')).sort((a, b) => a.name.localeCompare(b.name));
 const bySlug = Object.fromEntries(tools.map(t => [t.slug, t]));
+const readJson = (f, d) => fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : d;
+const sponsorRaw = readJson('data/sponsor.json', {});
+const SPONSOR = sponsorRaw && sponsorRaw.name && sponsorRaw.url && !(sponsorRaw.end && sponsorRaw.end < TODAY) && !(sponsorRaw.start && sponsorRaw.start > TODAY) ? sponsorRaw : null;
+const dealsAll = readJson('data/deals.json', []);
+const DEALS = dealsAll.filter(d => d && d.offer && d.source && !(d.expires && d.expires < TODAY));
+console.log(`Build date ${TODAY}: sponsor ${SPONSOR ? SPONSOR.name : 'none'}; deals ${DEALS.length} live, ${dealsAll.length - DEALS.length} dropped (expired or incomplete)`);
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const ld = o => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`;
 const LOGOS = new Set(fs.existsSync('src/assets/logos') ? fs.readdirSync('src/assets/logos').filter(f => f.endsWith('.png')).map(f => f.slice(0, -4)) : []);
@@ -56,6 +65,15 @@ const MARK = '<svg aria-hidden="true" width="28" height="28" viewBox="0 0 32 32"
 const srcA = (url, label = 'source') => url ? ` <a class="src" href="${esc(url)}"${url.startsWith('/') ? '' : ' rel="noopener nofollow" target="_blank"'}>${label}</a>` : '';
 const engineText = t => t.engines.filter(e => ENGINES[e]).map(e => ENGINES[e]).join(', ') || 'Any (standard file export / engine-agnostic)';
 
+function sponsorStrip() {
+  if (!SPONSOR) return `<aside class="sponsor-strip" aria-label="Sponsor"><div class="wrap"><span class="sp-label">Sponsor</span><span>Your tool here: <a href="${L('/sponsor/')}">Sponsor us</a></span></div></aside>`;
+  const img = SPONSOR.logo ? `<img src="${esc(SPONSOR.logo.startsWith('/') ? L(SPONSOR.logo) : SPONSOR.logo)}" alt="" width="20" height="20" loading="lazy" decoding="async">` : '';
+  return `<aside class="sponsor-strip" aria-label="Sponsor"><div class="wrap"><span class="sp-label">Sponsor</span><a href="${esc(SPONSOR.url)}" rel="sponsored noopener" target="_blank">${img}<strong>${esc(SPONSOR.name)}</strong></a></div></aside>`;
+}
+function footerSignup() {
+  if (!NEWSLETTER_ON) return `<form class="foot-signup" onsubmit="return false"><label for="fs-email">Newsletter (coming soon)</label><input id="fs-email" type="email" placeholder="you@example.com" disabled><button type="button" disabled>Coming soon</button></form>`;
+  return `<form class="foot-signup" method="post" action="/api/subscribe/"><label for="fs-email">Get the newsletter and the free <a href="${L('/cheat-sheet/')}">ship-it cheat sheet</a></label><input id="fs-email" type="email" name="email" required maxlength="254" placeholder="you@example.com" autocomplete="email">${HONEYPOT}<button type="submit">Subscribe</button></form>`;
+}
 function layout({ title, description, pathname, body, jsonld = [], scripts = '', noindex = false, head = '' }) {
   return `<!doctype html>
 <html lang="en">
@@ -74,20 +92,24 @@ function layout({ title, description, pathname, body, jsonld = [], scripts = '',
 <meta property="og:site_name" content="${SITE.name}">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="${L('/assets/style.css')}">${head}
+<script defer src="/_vercel/insights/script.js"></script>
 ${jsonld.map(ld).join('\n')}
 </head>
 <body>
 <header class="site-header"><div class="wrap">
 <a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a>
-<nav><a href="${L('/#tools')}">Tools</a><a href="${L('/category/')}">Categories</a><a class="hide-sm" href="${L('/guides/')}">Guides</a><a class="hide-sm" href="${L('/compare/')}">Compare</a><a class="hide-sm" href="${L('/new/')}">New</a><a class="hide-sm" href="${L('/sponsor/')}">Sponsor</a><a class="nav-cta" href="${L('/submit/')}">Submit a tool</a></nav>
+<nav><a href="${L('/#tools')}">Tools</a><a href="${L('/category/')}">Categories</a><a class="hide-sm" href="${L('/guides/')}">Guides</a><a class="hide-sm" href="${L('/compare/')}">Compare</a><a class="hide-sm" href="${L('/new/')}">New</a><a href="${L('/deals/')}">Deals</a><a class="nav-cta" href="${L('/submit/')}">Submit a tool</a></nav>
 </div></header>
+${sponsorStrip()}
 <main class="wrap">
 ${body}
 </main>
 <footer class="site-footer"><div class="wrap">
 <p class="foot-brand"><a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a></p>
-<p>Facts are taken from each vendor's own website and dated. Pricing and licences change often, so always check the vendor's current terms before you rely on them. This is not legal advice. No affiliate links.</p>
-<p class="foot-links"><a href="${L('/guides/')}">Guides</a> · <a href="${L('/compare/')}">Comparisons</a> · <a href="${L('/new/')}">New this week</a> · <a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a> · <a href="${L('/sponsor/')}">Sponsor</a> · <a href="${L('/get-featured/')}">Get featured</a> · <a href="${L('/privacy/')}">Privacy</a> · <a href="${mailto()}">Contact</a> · <a href="${L('/sitemap.xml')}">Sitemap</a> · Last updated ${SITE.updated}</p>
+${footerSignup()}
+<p>Facts are taken from each vendor's own website and dated. Pricing and licences change often, so always check the vendor's current terms before you rely on them. This is not legal advice.</p>
+<p class="aff-disc">${esc(AFFILIATE_NOTE)}</p>
+<p class="foot-links"><a href="${L('/guides/')}">Guides</a> · <a href="${L('/compare/')}">Comparisons</a> · <a href="${L('/new/')}">New this week</a> · <a href="${L('/deals/')}">Deals</a> · <a href="${L('/cheat-sheet/')}">Cheat sheet</a> · <a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a> · <a href="${L('/badge/')}">Badge</a> · <a href="${L('/sponsor/')}">Sponsor us</a> · <a href="${L('/privacy/')}">Privacy</a> · <a href="${mailto()}">Contact</a> · <a href="${L('/sitemap.xml')}">Sitemap</a> · Last updated ${SITE.updated}</p>
 </div></footer>
 ${scripts}
 </body>
@@ -118,8 +140,8 @@ function newsletterBlock() {
 <form onsubmit="return false"><input type="email" placeholder="you@example.com" disabled aria-label="Email (coming soon)"><button type="button" disabled>Coming soon</button></form>
 </section>`;
   return `<section class="newsletter" id="newsletter">
-<h2>Get the newsletter</h2>
-<p>An occasional email about new AI tools for game devs and changes to their pricing and licences. Unsubscribe any time.</p>
+<h2>AI tools you can legally ship in a paid game</h2>
+<p>Our cheat sheet: for every tool we list, whether free-plan output can go in a commercial game, which plan you need, and the catch, with sources and check dates. Subscribe and we'll email you the link, plus an occasional newsletter about new tools and licence changes. Unsubscribe any time. (It's also <a href="${L('/cheat-sheet/')}">free to read here</a>.)</p>
 <form method="post" action="/api/subscribe/">
 <input type="email" name="email" required maxlength="254" placeholder="you@example.com" aria-label="Email address">
 ${HONEYPOT}
@@ -144,7 +166,7 @@ page('/', layout({
 <section class="hero">
 <img class="hero-bg" src="${L('/assets/img/hero.webp')}" srcset="${L('/assets/img/hero-960.webp')} 960w, ${L('/assets/img/hero.webp')} 1680w" sizes="(max-width: 1180px) 100vw, 1180px" width="1680" height="720" alt="" fetchpriority="high" decoding="async">
 <div class="hero-inner">
-<p class="eyebrow"><span class="dot"></span>Free directory · No affiliate links · Checked ${SITE.updated}</p>
+<p class="eyebrow"><span class="dot"></span>Free directory · Sourced and dated · Checked ${SITE.updated}</p>
 <h1>Find the right AI tool for <span class="grad">every part of your game</span></h1>
 <p class="sub">${tools.length} AI tools for concept art, 3D models, textures, animation, voice, music, NPCs, code, levels, localisation, QA and trailers. Every listing shows pricing and commercial-use terms, with a link to the vendor's own page and the date we checked it.</p>
 <label class="searchbar">${ICON_SEARCH}<input id="q" type="search" placeholder="Search tools, e.g. pixel art, voice, Godot" aria-label="Search tools" autocomplete="off"></label>
@@ -183,7 +205,7 @@ ${GUIDES.map(g => `<a class="res-card" href="${L(`/guides/${g.slug}/`)}"><span c
 <div class="how-grid">
 <div><h3>Sourced</h3><p>Pricing and commercial-use notes come from each vendor's own pages, and every listing links to its source.</p></div>
 <div><h3>Dated</h3><p>Each tool shows the date we last checked it. Anything we couldn't confirm is marked "unverified".</p></div>
-<div><h3>Not a ranking</h3><p>Tools are listed alphabetically. There are no paid placements, reviews, ratings or affiliate links.</p></div>
+<div><h3>Not a ranking</h3><p>Tools are listed alphabetically, with no reviews or ratings. Sponsors and affiliate links never change a listing, its position or its verdict.</p></div>
 </div>
 </section>
 ${newsletterBlock()}`,
@@ -213,7 +235,7 @@ for (const t of tools) {
 <header class="tool-head">${logo(t, 72, true)}<div>
 <h1>${esc(t.name)}</h1>
 <p class="lead">${esc(t.summary)}</p>
-<p class="tool-cta"><a class="btn" href="${esc(t.url)}" rel="noopener nofollow" target="_blank">Visit official site ↗</a><span class="pill">${esc(PRICING[t.pricingModel])}</span><span class="pill lic lic-${t.commercial}">${esc(COMMERCIAL[t.commercial])}</span></p>
+<p class="tool-cta">${t.affiliateUrl ? `<a class="btn" href="${esc(t.affiliateUrl)}" rel="sponsored noopener" target="_blank">Visit official site ↗</a><small class="aff-note">${esc(AFFILIATE_NOTE)}</small>` : `<a class="btn" href="${esc(t.url)}" rel="noopener nofollow" target="_blank">Visit official site ↗</a>`}<span class="pill">${esc(PRICING[t.pricingModel])}</span><span class="pill lic lic-${t.commercial}">${esc(COMMERCIAL[t.commercial])}</span></p>
 </div></header>
 <p class="verdict big"><strong>Verdict:</strong> ${esc(t.verdict)}</p>
 <dl class="facts">
@@ -231,7 +253,8 @@ for (const t of tools) {
 ${COMPARE.filter(p => p.includes(t.slug)).length ? `<p class="cmp-links">Compare: ${COMPARE.filter(p => p.includes(t.slug)).map(p => `<a href="${L(`/compare/${p[0]}-vs-${p[1]}/`)}">${esc(bySlug[p[0]].name)} vs ${esc(bySlug[p[1]].name)}</a>`).join(' · ')}</p>` : ''}
 <p class="note">We summarise what the vendor's own pages say on the date above. "Unverified" means we couldn't confirm that detail. Read the vendor's current terms before you ship anything.</p>
 </article>
-${related.length ? `<section class="related"><h2>Related tools</h2><div class="grid">${related.map(card).join('\n')}</div></section>` : ''}`,
+${related.length ? `<section class="related"><h2>Related tools</h2><div class="grid">${related.map(card).join('\n')}</div></section>` : ''}
+${newsletterBlock()}`,
   }));
 }
 
@@ -258,31 +281,17 @@ for (const [key, c] of Object.entries(TASKS)) {
 ${list.map(t => `<tr><td><a class="cmp-tool" href="${L(`/tools/${t.slug}/`)}">${logo(t, 24)}${esc(t.name)}</a></td><td>${esc(FREE[t.free])}</td><td><span class="pill lic lic-${t.commercial}">${esc(COMMERCIAL[t.commercial])}</span></td><td>${esc(API_L[t.api.status])}</td><td>${esc(MCP_L[t.mcp.status])}</td></tr>`).join('\n')}
 </tbody></table></div>
 <h2 class="sub-h">Tool details</h2>
-<div class="grid">${list.map(card).join('\n')}</div>`,
+<div class="grid">${list.map(card).join('\n')}</div>
+${newsletterBlock()}`,
   }));
 }
 page('/category/', layout({
   title: `Categories: AI tools for game developers | ${SITE.name}`,
   description: 'Browse AI tools for game development by task: pixel art, 3D models, textures, animation, music, voice, NPC dialogue, code and design.',
   pathname: '/category/',
-  body: `<h1 class="page-h">Browse by task</h1><p class="page-sub">Pick a task to compare tools side by side, with pricing and commercial-use notes.</p><div class="tiles big">${catIndex.map(({ c, n }) => tile(c, n)).join('')}</div>`,
+  body: `<h1 class="page-h">Browse by task</h1><p class="page-sub">Pick a task to compare tools side by side, with pricing and commercial-use notes.</p><div class="tiles big">${catIndex.map(({ c, n }) => tile(c, n)).join('')}</div>
+${newsletterBlock()}`,
 }));
-
-// ---------- Get featured ----------
-page('/get-featured/', layout({
-  title: `Get featured | ${SITE.name}`,
-  description: 'Make an AI tool for game developers? Here is how listings work on GameDev AI Tools.',
-  pathname: '/get-featured/',
-  body: `<h1>Get featured</h1>
-<p>Do you build an AI tool that helps people make games? We'd like to list it.</p>
-<ul>
-<li>Every listing is based on your official website: what the tool does, your published pricing, and your commercial-use or licence terms, each with a source link and a "last checked" date.</li>
-<li>We don't publish reviews, ratings or user numbers we can't verify.</li>
-<li>Paid placements are described on the <a href="${L('/sponsor/')}">Sponsor</a> page (pricing on request). None are live yet, and any that go live will be clearly labelled "Sponsored".</li>
-</ul>
-<p>To suggest a tool, use the <a href="${L('/submit/')}">Submit a tool</a> form. For corrections or sponsorship, email <a href="${mailto('Listing enquiry')}">${EMAIL}</a> with links to your pricing and terms pages.</p>`,
-}));
-
 
 // ---------- Guides ----------
 const stmt = x => `${esc(x.text)}${srcA(x.url)}`;
@@ -301,7 +310,7 @@ for (const g of GUIDES) {
     body: `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/guides/')}">Guides</a> › ${esc(g.title)}</nav>
 <article class="guide"><h1 class="page-h">${esc(g.title)}</h1><p class="lead">${esc(g.intro)}</p>
 <ol class="steps">${g.steps.map(st => `<li><h2>${esc(st.h)}</h2><ul>${st.p.map(x => `<li>${stmt(x)}</li>`).join('')}</ul></li>`).join('')}</ol>
-<p class="note">Checked ${CHECKED}. Tools and docs change, so follow the linked sources. Not affiliated with any vendor.</p></article>
+<p class="note">Checked ${CHECKED}. Tools and docs change, so follow the linked sources. No vendor reviews or pays for these guides.</p></article>
 <section class="related"><h2>Tools for this workflow</h2><div class="grid">${g.tools.map(x => card(bySlug[x])).join('\n')}</div></section>`,
   }));
 }
@@ -359,15 +368,95 @@ ${ROWS.map(([h, f]) => `<tr><th scope="row">${h}</th><td>${f(A)}</td><td>${f(B)}
   }));
 }
 
-// ---------- Sponsor ----------
+// ---------- Sponsor (one offer; checkout URL lives in config.mjs) ----------
 page('/sponsor/', layout({
-  title: `Sponsor | ${SITE.name}`, description: 'Sponsorship options on GameDev AI Tools: a featured listing and a newsletter slot. Pricing on request.', pathname: '/sponsor/',
+  title: `Sponsor us | ${SITE.name}`, description: 'Sponsor GameDev AI Tools: your logo and link in the sponsor strip on every page for 7 days, plus a mention in the next newsletter. US$79/week.', pathname: '/sponsor/',
   body: `<h1 class="page-h">Sponsor GameDev AI Tools</h1>
-<p class="page-sub">Two ways to reach game developers looking for AI tools. Pricing on request. Sponsorship never changes a listing's facts or verdict.</p>
-<div class="tiers">${SPONSOR_TIERS.map(t => `<div class="tier"><h2>${esc(t.name)}</h2><p>${esc(t.text)}</p><p class="tier-price">Pricing on request</p></div>`).join('')}</div>
-<h2 class="sub-h">Ground rules</h2>
-<ul class="rules"><li>Sponsored placements are always labelled "Sponsored".</li><li>Listings follow the same editorial policy as everyone else: vendor-sourced facts, source links, a last-checked date, and "unverified" where we can't confirm something.</li><li>We don't publish traffic or subscriber numbers we can't verify. We'll share whatever real figures we have when you ask.</li><li>No affiliate links.</li></ul>
-<p>To ask about sponsorship, email <a href="${mailto('Sponsorship enquiry')}">${EMAIL}</a> with your tool's name and which tier you're interested in.</p>`,
+<div class="paid-thanks" id="paid-thanks" role="status" hidden><p><strong>Thanks!</strong> Email your logo (SVG or PNG) and link to <a href="${mailto('Sponsor logo and link')}">${EMAIL}</a> and we'll add you within a day.</p></div>
+<p class="offer">${esc(SPONSOR_OFFER)}</p>
+<p><a class="btn" href="${esc(SPONSOR_PAYMENT_URL)}">Sponsor us</a></p>
+<p class="note">The strip is labelled "Sponsor". Sponsorship never changes our listings, their order or their verdicts.</p>
+<p>Planning a bigger campaign? Email <a href="${mailto('Campaign enquiry')}">${EMAIL}</a>.</p>`,
+  scripts: `<script>if(/[?&]paid=1(&|$)/.test(location.search))document.getElementById('paid-thanks').hidden=false;</script>`,
+}));
+
+// ---------- Deals (data/deals.json; expired entries dropped at build time) ----------
+const dealTool = d => bySlug[d.tool] ? `<a href="${L(`/tools/${d.tool}/`)}">${esc(bySlug[d.tool].name)}</a>` : esc(d.tool);
+page('/deals/', layout({
+  title: `Deals on AI tools for game devs | ${SITE.name}`,
+  description: 'Live discounts and offers on AI tools for game developers, each sourced from the vendor, with its code and expiry date. Expired deals are removed automatically.',
+  pathname: '/deals/',
+  body: `<h1 class="page-h">Deals</h1>
+<p class="page-sub">Real offers on AI tools for game devs, each linked to the vendor's own announcement. Expired deals are removed automatically. Last built ${TODAY}.</p>
+${DEALS.length ? `<div class="table-wrap"><table class="cmp deals"><thead><tr><th>Tool</th><th>Offer</th><th>Code</th><th>Expires</th><th>Source</th></tr></thead><tbody>
+${DEALS.map(d => `<tr><td>${dealTool(d)}</td><td>${esc(d.offer)}</td><td>${d.code ? `<code>${esc(d.code)}</code>` : 'No code needed'}</td><td>${d.expires ? `<time datetime="${esc(d.expires)}">${esc(d.expires)}</time>` : 'No end date stated by the vendor'}</td><td><a href="${esc(d.source)}" rel="noopener nofollow" target="_blank">Vendor source</a></td></tr>`).join('\n')}
+</tbody></table></div>
+<p class="note">Check the vendor's page before you buy: offers can end early. Deals never change our listings or verdicts.</p>` : `<p class="empty-state">No live deals right now. We only list real offers, sourced from the vendor.</p><p>Subscribe below and the newsletter will mention new deals when there are real ones.</p>`}
+${newsletterBlock()}`,
+}));
+
+// ---------- Cheat sheet: AI tools you can legally ship in a paid game (built from tools.json) ----------
+const freeShip = t => {
+  if (t.commercial === 'n-a') return ['na', 'Not applicable'];
+  if (t.free === 'unverified' || t.commercial === 'unverified') return ['unk', 'Unverified'];
+  if (t.free === 'no') return ['paid', 'No free plan'];
+  if (t.commercial === 'yes') return t.free === 'yes' ? ['yes', 'Yes'] : ['yes', 'Yes (free option is a trial or credits)'];
+  if (t.commercial === 'paid-only') return ['paid', 'No: paid plan needed'];
+  if (t.commercial === 'restricted') return ['check', 'Restricted: read the catch'];
+  if (t.commercial === 'no') return ['no', 'No, on any plan'];
+  return ['unk', 'Unverified'];
+};
+const planNeeded = t => ({
+  'yes': t.free === 'yes' ? 'Free plan is enough' : t.free === 'no' ? 'Any paid plan' : 'Any plan (free option is a trial or credits)',
+  'paid-only': 'A paid plan (see pricing)',
+  'restricted': 'Depends on the licence terms',
+  'no': 'None: commercial use not allowed',
+  'unverified': 'Unverified',
+  'n-a': 'Not applicable (doesn\'t make shippable assets)',
+}[t.commercial] || 'Unverified');
+const catchText = t => [t.license, t.revenue && t.revenue !== 'unverified' ? `Caps: ${t.revenue}` : ''].filter(Boolean).join(' ');
+const SHEET_GROUPS = [
+  ['yes', 'Free-plan output can be shipped commercially'],
+  ['paid', 'You need a paid plan to ship'],
+  ['check', 'Restricted: read the terms'],
+  ['no', 'Not allowed in a commercial game'],
+  ['unk', 'Unverified: we couldn\'t confirm this on the vendor\'s pages'],
+  ['na', 'Not applicable: testing tools that don\'t make assets'],
+];
+const sheetRow = t => { const [k, label] = freeShip(t); return `<tr><td><a class="cmp-tool" href="${L(`/tools/${t.slug}/`)}">${logo(t, 24)}${esc(t.name)}</a></td><td><span class="pill ship-${k}">${esc(label)}</span></td><td>${esc(planNeeded(t))}</td><td>${esc(catchText(t))}</td><td>${t.licenseSource ? `<a href="${esc(t.licenseSource)}" rel="noopener nofollow" target="_blank">Terms</a>` : 'unverified'}${t.pricingSource ? ` · <a href="${esc(t.pricingSource)}" rel="noopener nofollow" target="_blank">Pricing</a>` : ''}</td><td><time datetime="${t.lastChecked}">${t.lastChecked}</time></td></tr>`; };
+const sheetCounts = Object.fromEntries(SHEET_GROUPS.map(([k]) => [k, tools.filter(t => freeShip(t)[0] === k).length]));
+page('/cheat-sheet/', layout({
+  title: `AI tools you can legally ship in a paid game (cheat sheet) | ${SITE.name}`,
+  description: `For ${tools.length} AI game-dev tools: can free-plan output go in a commercial game, which plan you need, and the catch. Sourced from each vendor's terms and dated.`,
+  pathname: '/cheat-sheet/',
+  body: `<h1 class="page-h">AI tools you can legally ship in a paid game</h1>
+<p class="page-sub">For each of the ${tools.length} tools we list: whether output from the free plan can be used commercially, which plan you need, and the catch. Every row links to the vendor's own terms and shows the date we checked it. This summarises published terms; it isn't legal advice. Read the current terms before you ship.</p>
+<p class="sheet-summary">${SHEET_GROUPS.map(([k, h]) => `<a href="#g-${k}"><strong>${sheetCounts[k]}</strong> ${esc(h.split(':')[0])}</a>`).join(' · ')}</p>
+${SHEET_GROUPS.filter(([k]) => sheetCounts[k]).map(([k, h]) => `<h2 class="sub-h" id="g-${k}">${esc(h)}</h2>
+<div class="table-wrap"><table class="cmp sheet"><thead><tr><th>Tool</th><th>Free plan, commercial?</th><th>Plan you need</th><th>The catch (from the vendor's terms)</th><th>Sources</th><th>Checked</th></tr></thead><tbody>
+${tools.filter(t => freeShip(t)[0] === k).map(sheetRow).join('\n')}
+</tbody></table></div>`).join('\n')}
+<p class="note">"Unverified" means the vendor's pages didn't clearly answer the question when we checked. We'd rather say so than guess. Spotted something out of date? Email <a href="${mailto('Cheat sheet correction')}">${EMAIL}</a> with a link to the vendor's terms.</p>
+${newsletterBlock()}`,
+}));
+
+// ---------- Badge ----------
+const BADGE_W = 200, BADGE_H = 44;
+const badgeSnippet = (slug, theme) => `<a href="${URL_(`/tools/${slug}/`)}"><img src="${URL_(`/assets/badge/listed-${theme}.svg`)}" alt="Listed on GameDev AI Tools" width="${BADGE_W}" height="${BADGE_H}"></a>`;
+page('/badge/', layout({
+  title: `"Listed on GameDev AI Tools" badge | ${SITE.name}`,
+  description: 'Is your tool listed on GameDev AI Tools? Add a "Listed on GameDev AI Tools" badge to your site, in light or dark, linking to your listing.',
+  pathname: '/badge/',
+  body: `<h1 class="page-h">"Listed on GameDev AI Tools" badge</h1>
+<p class="page-sub">If your tool is listed here, you're welcome to show this badge on your site. It links to your listing. It's optional and free, and it doesn't change your listing.</p>
+<div class="badge-demo"><div class="bd light"><img src="${L('/assets/badge/listed-light.svg')}" alt="Listed on GameDev AI Tools (light)" width="${BADGE_W}" height="${BADGE_H}"><span>Light</span></div><div class="bd dark"><img src="${L('/assets/badge/listed-dark.svg')}" alt="Listed on GameDev AI Tools (dark)" width="${BADGE_W}" height="${BADGE_H}"><span>Dark</span></div></div>
+<label class="badge-pick">Your tool <select id="badge-tool">${tools.map(t => `<option value="${t.slug}">${esc(t.name)}</option>`).join('')}</select></label>
+<h2 class="sub-h">Light badge</h2>
+<textarea class="snippet" id="snip-light" readonly rows="3">${esc(badgeSnippet(tools[0].slug, 'light'))}</textarea>
+<h2 class="sub-h">Dark badge</h2>
+<textarea class="snippet" id="snip-dark" readonly rows="3">${esc(badgeSnippet(tools[0].slug, 'dark'))}</textarea>
+<p class="note">Pick your tool above and the snippets update with your listing's URL. Without JavaScript, replace <code>${esc(tools[0].slug)}</code> with your tool's slug from its listing URL. Not listed yet? <a href="${L('/submit/')}">Submit your tool</a>.</p>`,
+  scripts: `<script>(function(){var s=document.getElementById('badge-tool');function u(){['light','dark'].forEach(function(th){document.getElementById('snip-'+th).value='<a href="${URL_('/tools/')}'+s.value+'/"><img src="${URL_('/assets/badge/listed-')}'+th+'.svg" alt="Listed on GameDev AI Tools" width="${BADGE_W}" height="${BADGE_H}"></a>';});}s.addEventListener('change',u);document.querySelectorAll('.snippet').forEach(function(t){t.addEventListener('focus',function(){t.select();});});})();</script>`,
 }));
 
 // ---------- Privacy (wording approved by Mike 2026-10-17; analytics, affiliate, payments and email sections added 2026-10-17 per Mike's policy) ----------
@@ -422,11 +511,20 @@ page('/submit/error/', layout({
 }), { sitemap: false });
 page('/subscribed/', layout({
   title: `You're subscribed | ${SITE.name}`, description: 'Newsletter signup received.', pathname: '/subscribed/', noindex: true,
-  body: `<h1>You're on the list</h1><p>Thanks for signing up. We haven't sent any newsletters yet, and you can unsubscribe from any email we send.</p><p><a href="${L('/')}">Back to all tools</a></p>`,
+  body: `<h1>You're on the list</h1><p>Thanks for signing up. We're emailing you a link to the <a href="${L('/cheat-sheet/')}">cheat sheet</a> (if it doesn't arrive, it's right here). Every email we send has an unsubscribe link.</p><p><a href="${L('/')}">Back to all tools</a></p>`,
 }), { sitemap: false });
 page('/subscribe-error/', layout({
   title: `Signup problem | ${SITE.name}`, description: 'There was a problem with your signup.', pathname: '/subscribe-error/', noindex: true,
   body: `<h1>Signup didn't work</h1><p>Please check your email address and <a href="${L('/#newsletter')}">try again</a>.</p>`,
+}), { sitemap: false });
+
+page('/unsubscribed/', layout({
+  title: `You're unsubscribed | ${SITE.name}`, description: 'You have been unsubscribed.', pathname: '/unsubscribed/', noindex: true,
+  body: `<h1>You're unsubscribed</h1><p>We won't email you again. If that was a mistake, you can sign up again any time.</p><p><a href="${L('/')}">Back to all tools</a></p>`,
+}), { sitemap: false });
+page('/unsubscribe-error/', layout({
+  title: `Unsubscribe problem | ${SITE.name}`, description: 'There was a problem unsubscribing.', pathname: '/unsubscribe-error/', noindex: true,
+  body: `<h1>We couldn't unsubscribe you automatically</h1><p>The link may be incomplete. Email <a href="${mailto('Unsubscribe')}">${EMAIL}</a> from the address you signed up with and we'll remove you.</p>`,
 }), { sitemap: false });
 
 // ---------- llms.txt / llms-full.txt (https://llmstxt.org) ----------
@@ -455,14 +553,21 @@ ${guideLinks.join('\n')}
 - [All comparisons](${URL_('/compare/')})
 ${cmpLinks.join('\n')}
 
+## Resources
+- [AI tools you can legally ship in a paid game](${URL_('/cheat-sheet/')}): cheat sheet of free-plan commercial use, plan needed and the catch for every tool, with sources and check dates
+- [Deals](${URL_('/deals/')}): live, vendor-sourced offers on AI game-dev tools; expired deals are removed automatically
+- [Listed badge](${URL_('/badge/')}): "Listed on GameDev AI Tools" badge snippets for listed tools
+
 ## Optional
 - [Full directory of tools](${URL_('/')}): searchable and filterable by task, engine, free plan and commercial use
 - [Full text for LLMs](${URL_('/llms-full.txt')}): every listing's sourced facts in one Markdown file
 - [New this week](${URL_('/new/')}): recent, sourced releases
 - [Submit a tool](${URL_('/submit/')})
-- [Sponsor](${URL_('/sponsor/')})
+- [Sponsor us](${URL_('/sponsor/')}): ${SPONSOR_OFFER}
 - [Privacy](${URL_('/privacy/')})
 - [Contact](mailto:${EMAIL}): corrections, sponsorship and general enquiries
+
+Disclosure: ${AFFILIATE_NOTE}
 `;
 write('llms.txt', llmsHead + llmsLinks);
 const toolMd = t => `### ${t.name}
