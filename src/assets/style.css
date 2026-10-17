@@ -712,3 +712,16 @@ h2.sub-h+.cmp-legend{margin-top:8px}
 .faq-item summary{cursor:pointer;font-weight:600;color:var(--text)}
 .faq-item p{margin:8px 0 0;color:#c9cfdd;font-size:.92rem}
 .g-table{margin:18px 0}
+/* Sponsor spots: wide-screen side card (fixed in the right margin, out of flow: no layout shift; hidden where the gutter can't fit it) */
+.sp-side{display:none}
+@media (min-width:1480px){.sp-side{display:block;position:fixed;top:calc(var(--hdr) + 28px);right:calc((100vw - 1180px) / 4 - 70px);width:140px;z-index:5}}
+.sp-side-card{gap:6px;padding:12px;text-decoration:none;color:var(--text);font-size:.85rem;line-height:1.35}
+.sp-side-card:hover{border-color:var(--line2)}
+.sp-side-card .tlogo{border-radius:8px}
+.sp-side-line{color:var(--muted);font-size:.78rem}
+.sp-row{margin-top:16px}
+.sp-offer-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.sp-offer-head h2{margin:0}
+.sp-price{font-weight:700;font-size:1.1rem}
+.sp-avail{color:var(--muted);font-size:.9rem}
+.sp-offer p{margin:0}

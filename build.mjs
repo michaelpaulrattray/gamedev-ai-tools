@@ -3,7 +3,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { CHECKED, GUIDES, DISCLOSURE, NEWS, COMPARE, ENGINE_HUBS } from './content.mjs';
-import { SPONSOR_PAYMENT_URL, SPONSOR_OFFER, SPONSOR_PRICE, BUSINESS_EMAIL, AFFILIATE_NOTE } from './config.mjs';
+import { SPONSOR_OFFERS, BUSINESS_EMAIL, AFFILIATE_NOTE } from './config.mjs';
+import { loadBookings, resolveBookings } from './sponsors.mjs';
 import { createOg, OG_W, OG_H } from './og.mjs';
 
 const SITE = {
@@ -73,12 +74,16 @@ for (const g of GUIDES) if (Array.isArray(g.paths) && g.paths.length) {
 const tools = JSON.parse(fs.readFileSync('data/tools.json', 'utf8')).sort((a, b) => a.name.localeCompare(b.name));
 const bySlug = Object.fromEntries(tools.map(t => [t.slug, t]));
 const readJson = (f, d) => fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : d;
-const sponsorRaw = readJson('data/sponsor.json', {});
-// Active paid sponsor = a filled booking (name + url; entries are only added after Stripe payment) inside its start/end dates.
-const SPONSOR = sponsorRaw && sponsorRaw.name && sponsorRaw.url && sponsorRaw.paid !== false && !(sponsorRaw.end && sponsorRaw.end < TODAY) && !(sponsorRaw.start && sponsorRaw.start > TODAY) ? sponsorRaw : null;
+// Sponsor bookings (sponsors.mjs): one active paid booking per slot, start/end AEST honoured at the build date.
+// Overlapping paid bookings for the same slot, unknown slots or incomplete bookings fail the build.
+const SPONSOR_SLOTS = new Set(['sitewide', 'newsletter', ...Object.values(TASKS).map(c => `category:${c.page}`), ...Object.values(ENGINE_PAGES).map(e => `engine:${e.page}`)]);
+const { active: SPONSORS, errors: sponsorErrors } = resolveBookings(loadBookings(process.env.SPONSOR_FILE || 'data/sponsor.json'), TODAY, { validSlots: SPONSOR_SLOTS });
+if (sponsorErrors.length) { console.error('\n*** SPONSOR BOOKING ERRORS (data/sponsor.json) ***\n- ' + sponsorErrors.join('\n- ') + '\n'); process.exit(1); }
+const SPONSOR = SPONSORS.get('sitewide') || null; // site-wide: top strip, homepage card, wide-screen side card
+const offer = id => SPONSOR_OFFERS.find(o => o.id === id);
 const dealsAll = readJson('data/deals.json', []);
 const DEALS = dealsAll.filter(d => d && d.offer && d.source && !(d.expires && d.expires < TODAY));
-console.log(`Build date ${TODAY}: sponsor ${SPONSOR ? SPONSOR.name : 'none'}; deals ${DEALS.length} live, ${dealsAll.length - DEALS.length} dropped (expired or incomplete)`);
+console.log(`Build date ${TODAY}: sponsors ${SPONSORS.size ? [...SPONSORS].map(([k, b]) => `${k}=${b.name}`).join(', ') : 'none'}; deals ${DEALS.length} live, ${dealsAll.length - DEALS.length} dropped (expired or incomplete)`);
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const ld = o => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`;
 const LOGOS = new Set(fs.existsSync('src/assets/logos') ? fs.readdirSync('src/assets/logos').filter(f => f.endsWith('.png')).map(f => f.slice(0, -4)) : []);
@@ -174,29 +179,35 @@ const ogFile = (name, kind, data) => OG ? OG.add(`og/${name}.png`, kind, data) :
 const slugOf = p => p.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'home';
 const stripSite = s => s.replace(/\s*\|\s*GameDev AI Tools$/, '');
 
+const spLogoSrc = S => esc(S.logo.startsWith('/') ? L(S.logo) : S.logo);
 function sponsorStrip() {
-  if (!SPONSOR) return ''; // no active paid sponsor: no strip (the sponsor card shows the empty state instead)
-  const img = SPONSOR.logo ? `<img src="${esc(SPONSOR.logo.startsWith('/') ? L(SPONSOR.logo) : SPONSOR.logo)}" alt="" width="20" height="20" loading="lazy" decoding="async">` : '';
-  return `<aside class="sponsor-strip" aria-label="Sponsor"><div class="wrap"><span class="sp-label">Sponsor</span><a href="${esc(SPONSOR.url)}" rel="sponsored noopener" target="_blank">${img}<strong>${esc(SPONSOR.name)}</strong></a></div></aside>`;
+  if (!SPONSOR) return ''; // no active paid site-wide booking: no strip
+  const img = SPONSOR.logo ? `<img src="${spLogoSrc(SPONSOR)}" alt="" width="20" height="20" loading="lazy" decoding="async">` : '';
+  return `<aside class="sponsor-strip" aria-label="Sponsored"><div class="wrap"><span class="sp-label">Sponsored</span><a href="${esc(SPONSOR.url)}" rel="sponsored noopener" target="_blank">${img}<strong>${esc(SPONSOR.name)}</strong></a></div></aside>`;
 }
 // Sponsor card: same card component as tool cards. Never part of tool lists' order, counts, ItemList JSON-LD or filters
-// (no data-slug, sits outside #results). Active paid sponsor: their logo, name, line and link; otherwise the empty "Your tool here" slot.
-// No active sponsor: render nothing (an empty "your tool here" slot reads as unsold space). Sponsors find the offer via
-// the footer, the Submit page and the "Is this your tool?" line on tool pages.
-function sponsorCard({ compact = false } = {}) {
+// (no data-slug, sits outside #results). Renders only for an active paid booking for that slot; otherwise nothing
+// (an empty "your tool here" slot reads as unsold space). Sponsors find the offer via the footer Advertise link,
+// the Submit page and the "Work at <tool>?" line on tool pages.
+function sponsorCard({ compact = false, booking = SPONSOR } = {}) {
+  const S = booking;
+  if (!S) return '';
+  const mark = S.logo
+    ? `<img class="tlogo" src="${spLogoSrc(S)}" alt="" width="44" height="44" loading="lazy" decoding="async">`
+    : `<span class="tlogo mono" aria-hidden="true" style="--h:${hue(S.name)};width:44px;height:44px">${esc(initials(S.name))}</span>`;
+  return `<article class="card is-link sp-card${compact ? ' compact' : ''}" aria-label="Sponsored">
+<div class="card-top">${mark}<div class="card-title"><h3><a class="card-link" href="${esc(S.url)}" rel="sponsored noopener" target="_blank">${esc(S.name)}</a></h3><span class="card-sub sp-tag">Sponsored</span></div><span class="arrow" aria-hidden="true">↗</span></div>
+${S.line ? `<p class="summary">${esc(S.line)}</p>\n` : ''}</article>`;
+}
+// Wide-screen side card (site-wide booking only): fixed in the right-hand margin, out of the document flow so it can't
+// shift layout; display:none below the breakpoint in style.css (.sp-side). No animation.
+function sponsorSide() {
   const S = SPONSOR;
   if (!S) return '';
-  const href = S ? S.url : L('/sponsor/');
-  const rel = S ? ' rel="sponsored noopener" target="_blank"' : '';
-  const mark = S && S.logo
-    ? `<img class="tlogo" src="${esc(S.logo.startsWith('/') ? L(S.logo) : S.logo)}" alt="" width="44" height="44" loading="lazy" decoding="async">`
-    : S ? `<span class="tlogo mono" aria-hidden="true" style="--h:${hue(S.name)};width:44px;height:44px">${esc(initials(S.name))}</span>`
-      : `<span class="tlogo sp-ph" aria-hidden="true">+</span>`;
-  const title = S ? S.name : 'Your tool here';
-  const line = S ? (S.line || '') : `Reach game devs choosing AI tools · from ${SPONSOR_PRICE}`;
-  return `<article class="card is-link sp-card${compact ? ' compact' : ''}${S ? '' : ' sp-empty'}" aria-label="Sponsored">
-<div class="card-top">${mark}<div class="card-title"><h3><a class="card-link" href="${esc(href)}"${rel}>${esc(title)}</a></h3><span class="card-sub sp-tag">Sponsored</span></div><span class="arrow" aria-hidden="true">${S ? '↗' : '→'}</span></div>
-${line ? `<p class="summary">${esc(line)}</p>\n` : ''}</article>`;
+  const mark = S.logo
+    ? `<img class="tlogo" src="${spLogoSrc(S)}" alt="" width="32" height="32" loading="lazy" decoding="async">`
+    : `<span class="tlogo mono" aria-hidden="true" style="--h:${hue(S.name)};width:32px;height:32px">${esc(initials(S.name))}</span>`;
+  return `<aside class="sp-side" aria-label="Sponsored"><a class="card sp-side-card" href="${esc(S.url)}" rel="sponsored noopener" target="_blank">${mark}<span class="sp-tag">Sponsored</span><strong>${esc(S.name)}</strong>${S.line ? `<span class="sp-side-line">${esc(S.line)}</span>` : ''}</a></aside>`;
 }
 const HONEYPOT = `<div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>`;
 function footerSignup() {
@@ -238,6 +249,7 @@ ${sponsorStrip()}
 <main class="wrap">
 ${body}
 </main>
+${sponsorSide()}
 <footer class="site-footer"><div class="wrap">
 <div class="foot-grid">
 <div class="foot-brand-col"><a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a>
@@ -530,7 +542,7 @@ ${GUIDES.filter(g => g.task === key).map(g => `<section class="rel-guide" aria-l
 ${RANKED[key] ? `<h2 class="sub-h">Why each tool ranks where it does</h2>
 <div class="grid ranked-cards">${RANKED[key].rows.map(r => toolCard(r.t, { attrs: `${catAttrs(r.t)} data-rank="${r.n}" data-alpha="${list.indexOf(r.t)}"`, note: `<p class="rank-line"><span class="rank-n">#${r.n}</span>${r.label ? badge(r.label, 'accent') : ''}<span class="rank-tier">${r.tier === 'evidence' ? 'Independent tests' : 'Game-dev fit'}</span></p><p class="rank-why">${esc(r.why)} ${rankSources(r)}</p>\n` })).join('\n')}` : `<h2 class="sub-h">Verdicts</h2>
 <div class="grid">${list.map(t => toolCard(t, { attrs: catAttrs(t) })).join('\n')}`}
-${sponsorCard()}</div>
+${sponsorCard({ booking: SPONSORS.get(`category:${c.page}`) })}</div>
 ${newsletterBlock()}`,
     scripts: CAT_FILTER_JS + (RANKED[key] ? RANK_SWITCH_JS : ''),
   }));
@@ -630,6 +642,7 @@ ${H ? H.sections.map(hubSection).join('\n') + faqBlock(H.faq) : ''}
 <p class="quick"><span>Other engines:</span>${engineList.filter(x => x.k !== k).map(x => chip(x.e.label, { href: L(`/engine/${x.e.page}/`) })).join('')}</p>
 <h2 class="sub-h">Tool details</h2>
 <div class="grid">${list.map(t => toolCard(t)).join('\n')}</div>
+${SPONSORS.get(`engine:${e.page}`) ? `<div class="grid sp-row">${sponsorCard({ booking: SPONSORS.get(`engine:${e.page}`) })}</div>` : ''}
 ${newsletterBlock()}`,
   }));
 }
@@ -975,14 +988,25 @@ ${rows.map(r => `<div class="vs-row${r.cls}" role="row"><div role="rowheader" cl
   }), { sitemap: curated });
 }
 
-// ---------- Sponsor (one offer; checkout URL lives in config.mjs) ----------
+// ---------- Sponsor (four spots from SPONSOR_OFFERS in config.mjs; bookings in data/sponsor.json) ----------
+const SPONSOR_DESC = 'Sponsor GameDev AI Tools: site-wide US$99/week, a category or engine page US$29/week, or a newsletter issue US$49. Always labelled Sponsored; never changes rankings.';
+const spBooked = id => [...SPONSORS.keys()].filter(k => k === id || k.startsWith(id + ':')).length;
+const spMailto = o => `mailto:${EMAIL}?subject=${encodeURIComponent(`Sponsor booking: ${o.name} (${o.price})`)}&body=${encodeURIComponent(`Hi,\n\nWe'd like to book the ${o.name} spot (${o.price}).\n${o.id === 'category' ? 'Category: \n' : o.id === 'engine' ? 'Engine page (Unity, Unreal, Godot, Blender or Roblox): \n' : ''}${o.unit === 'issue' ? 'Issue date' : 'Week starting'}: \nProduct name and link: \n\nThanks`)}`;
+const spCard = o => {
+  const free = o.slots - spBooked(o.id);
+  const avail = o.unit === 'issue' ? 'One sponsor per issue' : `${o.slots} ${o.slots === 1 ? 'spot' : 'spots'}${o.slotNote ? ` (${o.slotNote})` : ''} · ${free} free this week`;
+  return `<section class="card sp-offer" id="${o.id}"><div class="sp-offer-head"><h2>${esc(o.name)}</h2><span class="sp-price">${esc(o.price)}</span></div>
+<p><b>Where:</b> ${esc(o.where)}</p><p><b>What you get:</b> ${esc(o.gets)}</p><p class="sp-avail">${esc(avail)}</p>
+<p>${o.paymentUrl ? `<a class="btn" href="${esc(o.paymentUrl)}">Book (${esc(o.price)})</a>` : `<a class="btn" href="${esc(spMailto(o))}">Book by email</a>`}</p></section>`;
+};
 page('/sponsor/', layout({
-  title: `Sponsor us | ${SITE.name}`, description: SPONSOR_OFFER, pathname: '/sponsor/',
+  title: `Sponsor us | ${SITE.name}`, description: SPONSOR_DESC, pathname: '/sponsor/',
   body: `<h1 class="page-h">Sponsor GameDev AI Tools</h1>
+<p class="page-sub">Put your product in front of game developers choosing AI tools. Four kinds of spot, booked by the week (or by the issue for the newsletter). Prices in US$.</p>
 <div class="paid-thanks" id="paid-thanks" role="status" hidden><p><strong>Thanks!</strong> Email your logo (SVG or PNG) and link to <a href="${mailto('Sponsor logo and link')}">${EMAIL}</a> and we'll add you within a day.</p></div>
 <div class="prose">
-<section class="card"><span class="kicker">One offer</span><p class="offer">${esc(SPONSOR_OFFER)}</p><p><a class="btn" href="${esc(SPONSOR_PAYMENT_URL)}">Book a week (${esc(SPONSOR_PRICE)})</a></p></section>
-<p class="note">The strip is labelled "Sponsor". Sponsorship never changes our listings, their order or their verdicts. See <a href="${L('/about/')}">how we make money</a>.</p>
+${SPONSOR_OFFERS.map(spCard).join('\n')}
+<p class="note">Every paid spot is labelled "Sponsored". Sponsorship never changes our rankings, the order of tools, counts, filters or verdicts. See <a href="${L('/how-we-rank/')}">how we rank</a> and <a href="${L('/about/')}">how we make money</a>.</p>
 <p>Planning a bigger campaign? Email <a href="${mailto('Campaign enquiry')}">${EMAIL}</a>.</p>
 </div>`,
   scripts: `<script>if(/[?&]paid=1(&|$)/.test(location.search))document.getElementById('paid-thanks').hidden=false;</script>`,
@@ -1027,7 +1051,7 @@ page('/about/', layout({
 <li><b>Rankings and verdicts are never bought.</b> Category rankings use independent quality tests (such as public blind-vote leaderboards) where they exist, then a published game-dev fit score; see <a href="${L('/how-we-rank/')}">How we rank</a>. Each verdict is one line written only from the sourced facts. Sponsors and affiliate links never change a listing, its rank or its verdict.</li>
 </ul></section>
 <section class="card"><h2>How we make money</h2><ul>
-<li><b>Sponsorship:</b> a labelled sponsored card on the homepage and every category page, plus the strip across the top of every page, for a week, and a mention in our newsletter. See <a href="${L('/sponsor/')}">Sponsor us</a>.</li>
+<li><b>Sponsorship:</b> labelled "Sponsored" spots booked by the week: site-wide (the top strip and a homepage card), a single category or engine page, or one newsletter issue. Sponsors never change rankings or listings. See <a href="${L('/sponsor/')}">Sponsor us</a>.</li>
 <li><b>Affiliate links:</b> some "Visit official site" links may be affiliate links, which earn us a commission if you buy. When a listing uses one, the tool page says so next to the button. ${esc(AFFILIATE_NOTE)}</li>
 </ul></section>
 <section class="card"><h2>Contact</h2><p>Corrections, sponsorship and anything else: <a href="${mailto()}">${EMAIL}</a>. For a correction, please include a link to the vendor's page. To suggest a tool, use <a href="${L('/submit/')}">Submit a tool</a>.</p></section>
@@ -1301,7 +1325,7 @@ ${cmpLinks.join('\n')}
 - [Full text for LLMs](${URL_('/llms-full.txt')}): every listing's sourced facts in one Markdown file
 - [New this week](${URL_('/new/')}): recent, sourced releases
 - [Submit a tool](${URL_('/submit/')})
-- [Sponsor us](${URL_('/sponsor/')}): ${SPONSOR_OFFER}
+- [Sponsor us](${URL_('/sponsor/')}): ${SPONSOR_OFFERS.map(o => `${o.name} ${o.price}`).join('; ')}. Sponsored spots are labelled and never change rankings.
 - [About](${URL_('/about/')}): independent directory, editorial policy, how we make money, contact
 - [Privacy](${URL_('/privacy/')})
 - [Contact](mailto:${EMAIL}): corrections, sponsorship and general enquiries
