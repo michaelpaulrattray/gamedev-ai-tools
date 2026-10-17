@@ -67,9 +67,18 @@ Owner: Mike Paul (Brisbane, Australia/Brisbane). Business inbox: hello@gamedevai
 - Log every send in the outreach log below.
 
 ### Outreach log
-| Tool | Contact | Date sent | Reply |
-|---|---|---|---|
-| _none yet_ | | | |
+| Date | Tool | Contact | Type | Status | Reply |
+|---|---|---|---|---|---|
+| 2026-10-17 | PixelLab | support@pixellab.ai | you're listed | sent | |
+| 2026-10-17 | Retro Diffusion | support@retrodiffusion.com | you're listed | sent | |
+| 2026-10-17 | Scenario | support@scenario.com | you're listed | sent | |
+| 2026-10-17 | Leonardo.Ai | contact@leonardo.ai | you're listed | sent | |
+| 2026-10-17 | Layer | support@layer.ai | you're listed | sent | |
+| 2026-10-17 | Ludo.ai | info@ludo.ai | you're listed | sent | |
+| 2026-10-17 | Meshy | partnerships@meshy.ai | you're listed | sent | |
+| 2026-10-17 | Tripo AI | business@tripo3d.ai | you're listed | sent | |
+| 2026-10-17 | Hyper3D Rodin | hello@deemos.com | you're listed | sent (commercial terms not found; asked for link) | |
+| 2026-10-17 | Sloyd | hello@sloyd.ai | you're listed | sent | |
 
 ## X (@gamedevaitools) rules
 - Account labelled as automated (X's automated-account label, managed by Mike's account).
