@@ -1,29 +1,118 @@
 {
-  "_doc": "Category rankings. Key = task key from TASKS in build.mjs. 'evidence' lists ONLY tools with independent quality evidence, in rank order (best first); each needs a 'why' and at least one source with a URL. Every other tool in the category is ranked after them by the published game-dev fit score (computed in build.mjs, see /how-we-rank/). 'labels' are optional short tags. 'notes' explain why evidence was NOT used for a tool. Re-check monthly and update 'checked'. Sponsors and affiliate links never change a ranking.",
+  "_doc": "Category rankings. Key = task key from TASKS in build.mjs. 'evidence' lists ONLY tools with independent quality evidence that meaningfully compares tools in this category, in rank order (best first); each needs a 'why' and at least one source with a URL. Every other tool in the category is ranked after them by the published game-dev fit score (computed in build.mjs, see /how-we-rank/); categories with no evidence are ranked entirely on fit. Don't use evidence that would put a tool above others just because it was the only one tested (e.g. a near-bottom leaderboard rank). 'labels' are optional short tags. 'notes' explain evidence that was found but NOT used, and are shown on the page. Re-check monthly and update 'checked'. Sponsors and affiliate links never change a ranking.",
   "3d-models": {
     "checked": "2026-10-17",
     "evidence": [
       {
         "tool": "meshy",
         "why": "Highest-ranked of these tools on 3D Arena's blind human-preference leaderboard: Meshy 6 is #3 and Meshy 7 is #5 of 24 image-to-3D models. Free-plan output can be used commercially if you credit Meshy (CC BY 4.0).",
-        "sources": [
-          { "label": "3D Arena leaderboard", "url": "https://huggingface.co/spaces/3d-arena/3d-arena" }
-        ]
+        "sources": [{ "label": "3D Arena leaderboard", "url": "https://huggingface.co/spaces/3d-arena/3d-arena" }]
       },
       {
         "tool": "hunyuan3d",
         "why": "On 3D Arena, Hunyuan3D 2 is #8 and Hunyuan3D 2.1 is #10 of 24 image-to-3D models. Free open weights you run on your own GPU, but the licence doesn't cover the EU, UK or South Korea.",
-        "sources": [
-          { "label": "3D Arena leaderboard", "url": "https://huggingface.co/spaces/3d-arena/3d-arena" }
-        ]
+        "sources": [{ "label": "3D Arena leaderboard", "url": "https://huggingface.co/spaces/3d-arena/3d-arena" }]
       }
     ],
-    "labels": {
-      "meshy": "Top pick",
-      "hunyuan3d": "Best free (self-hosted)"
-    },
+    "labels": { "meshy": "Top pick", "hunyuan3d": "Best free (self-hosted)" },
     "notes": {
       "tripo": "Only Tripo's older open-source TripoSR model is on 3D Arena (#20 of 24). It isn't the model behind Tripo's paid service, so we don't use it here."
+    }
+  },
+  "audio": {
+    "checked": "2026-10-17",
+    "evidence": [
+      {
+        "tool": "suno",
+        "why": "Suno v6, the model Suno serves now, is #1 of 13 on Artificial Analysis's blind-vote vocal music leaderboard and #1 of 19 on its instrumental leaderboard.",
+        "sources": [
+          { "label": "AA vocal music leaderboard", "url": "https://artificialanalysis.ai/music/leaderboard/vocals" },
+          { "label": "AA instrumental leaderboard", "url": "https://artificialanalysis.ai/music/leaderboard/instrumental" }
+        ]
+      },
+      {
+        "tool": "elevenlabs",
+        "why": "Eleven Music v2.5 is #7 of 13 on Artificial Analysis's vocal music leaderboard and mid-table on the instrumental one. It ranks above Stable Audio only because Stable Audio isn't on the vocal board; on instrumentals the two are effectively tied.",
+        "sources": [
+          { "label": "AA vocal music leaderboard", "url": "https://artificialanalysis.ai/music/leaderboard/vocals" },
+          { "label": "AA instrumental leaderboard", "url": "https://artificialanalysis.ai/music/leaderboard/instrumental" }
+        ]
+      },
+      {
+        "tool": "stable-audio",
+        "why": "Stable Audio 3 Large is mid-table (roughly #7 to #12 of 19) on Artificial Analysis's instrumental music leaderboard. It isn't on the vocal board.",
+        "sources": [{ "label": "AA instrumental leaderboard", "url": "https://artificialanalysis.ai/music/leaderboard/instrumental" }]
+      }
+    ],
+    "labels": { "suno": "Top pick" },
+    "notes": {
+      "udio": "Udio isn't on Artificial Analysis's music leaderboards."
+    }
+  },
+  "voice": {
+    "checked": "2026-10-17",
+    "evidence": [
+      {
+        "tool": "elevenlabs",
+        "why": "Eleven v4 Turbo is #1 and Eleven v4 is #2 of 97 models on Artificial Analysis's blind-vote text-to-speech leaderboard. These are ElevenLabs' current models.",
+        "sources": [{ "label": "AA text-to-speech leaderboard", "url": "https://artificialanalysis.ai/text-to-speech/leaderboard" }]
+      },
+      {
+        "tool": "inworld-ai",
+        "why": "Inworld's own Realtime TTS-2 is #7 of 97 on Artificial Analysis's text-to-speech leaderboard (TTS-2 Flash is #12).",
+        "sources": [{ "label": "AA text-to-speech leaderboard", "url": "https://artificialanalysis.ai/text-to-speech/leaderboard" }]
+      }
+    ],
+    "labels": { "elevenlabs": "Top pick" },
+    "notes": {
+      "convai": "Uses voices from other providers, so other companies' leaderboard results don't count for it.",
+      "charisma-ai": "Uses voices from other providers, so other companies' leaderboard results don't count for it."
+    }
+  },
+  "code": {
+    "checked": "2026-10-17",
+    "evidence": [
+      {
+        "tool": "cursor",
+        "why": "Named a Leader in Gartner's 2026 Magic Quadrant for Enterprise AI Coding Agents (May 2026). Joint top with GitHub Copilot, the other Leader here; we list the two alphabetically.",
+        "sources": [{ "label": "Gartner MQ coverage (Virtualization Review)", "url": "https://virtualizationreview.com/articles/2026/06/05/ai-firms-push-cloud-giants-from-leaders-quadrant-in-gartner-ai-coding-report.aspx" }]
+      },
+      {
+        "tool": "github-copilot",
+        "why": "Named a Leader in Gartner's 2026 Magic Quadrant for Enterprise AI Coding Agents (May 2026). Joint top with Cursor; we list the two alphabetically.",
+        "sources": [{ "label": "Gartner MQ coverage (Virtualization Review)", "url": "https://virtualizationreview.com/articles/2026/06/05/ai-firms-push-cloud-giants-from-leaders-quadrant-in-gartner-ai-coding-report.aspx" }]
+      },
+      {
+        "tool": "windsurf",
+        "why": "Its maker, Cognition, was placed a Challenger (not a Leader) in Gartner's 2026 Magic Quadrant for Enterprise AI Coding Agents. Gartner assesses the vendor, not only Windsurf.",
+        "sources": [{ "label": "Gartner MQ coverage (Virtualization Review)", "url": "https://virtualizationreview.com/articles/2026/06/05/ai-firms-push-cloud-giants-from-leaders-quadrant-in-gartner-ai-coding-report.aspx" }]
+      }
+    ],
+    "labels": { "cursor": "Gartner Leader 2026", "github-copilot": "Gartner Leader 2026" },
+    "notes": {}
+  },
+  "concept-art": {
+    "checked": "2026-10-17",
+    "evidence": [],
+    "notes": {
+      "leonardo-ai": "Leonardo's own models are on Artificial Analysis's text-to-image leaderboard, but near the bottom (best: Lucid Origin Ultra, #86 of 102), so it doesn't move it up.",
+      "scenario": "Mostly runs other companies' image models, so their leaderboard results don't count for it.",
+      "layer-ai": "Mostly runs other companies' image models, so their leaderboard results don't count for it."
+    }
+  },
+  "textures": {
+    "checked": "2026-10-17",
+    "evidence": [],
+    "notes": {
+      "meshy": "Meshy ranks well on 3D Arena, but that judges whole 3D models, not textures, so we don't use it here."
+    }
+  },
+  "marketing": {
+    "checked": "2026-10-17",
+    "evidence": [],
+    "notes": {
+      "runway": "On Artificial Analysis's video leaderboards, Runway Gen-4.5 is #23 of 31 (text-to-video) and #26 of 82 (image-to-video). Luma was only tested on images, so the two can't be compared.",
+      "luma-ai": "Luma's Uni-1 image model is #31 of 102 on Artificial Analysis's text-to-image leaderboard; its current video model isn't on the video boards yet."
     }
   }
 }

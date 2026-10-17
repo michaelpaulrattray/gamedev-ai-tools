@@ -406,9 +406,10 @@ function fitWhy(t, note) {
 }
 const RANKED = {};
 for (const key of Object.keys(TASKS)) {
-  const R = RANKINGS[key], list = tools.filter(t => t.tasks.includes(key));
+  const R = RANKINGS[key] || {}, list = tools.filter(t => t.tasks.includes(key));
   const ev = R && Array.isArray(R.evidence) ? R.evidence.filter(e => e && e.why && Array.isArray(e.sources) && e.sources.some(s => s.url) && list.some(t => t.slug === e.tool)) : [];
-  if (!ev.length) continue; // no evidence yet: category stays alphabetical
+  if (list.length < 2) continue; // nothing to rank
+  // No evidence yet: the whole category is ranked on game-dev fit (and the page says so).
   const evSlugs = ev.map(e => e.tool);
   const rest = list.filter(t => !evSlugs.includes(t.slug)).sort((a, b) => fitScore(b, key) - fitScore(a, key) || a.name.localeCompare(b.name));
   const rows = [...ev.map(e => ({ t: bySlug[e.tool], tier: 'evidence', why: e.why, sources: e.sources.filter(s => s.url) })),
@@ -533,7 +534,7 @@ function catTable(list, R) {
   const row = (t, r) => `<tr ${catAttrs(t)}${r ? ` data-rank="${r.n}" data-alpha="${list.indexOf(t)}"${r.n === 1 ? ' class="is-top"' : ''}` : ''}>${R ? `<td class="td-rank">${r.n}</td>` : ''}<td><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 24)}${esc(t.name)}</a>${r && r.label ? `<span class="row-label">${esc(r.label)}</span>` : ''}</td><td>${isNsv(t.free) ? NSV : esc(FREE[t.free])}</td><td>${licBadge(t)}</td><td>${isNsv(t.api.status) ? NSV : esc(API_L[t.api.status])}</td><td>${isNsv(t.mcp.status) ? NSV : esc(MCP_L[t.mcp.status])}</td><td class="td-visit">${visitBtn(t, { cls: 'visit-sm', label: 'Visit' })}</td></tr>`;
   const cols = R ? 7 : 6;
   const body = R
-    ? R.rows.map(r => `${r.tier === 'fit' && r.n === R.nEvidence + 1 ? `<tr class="tier-row"><td colspan="${cols}">No independent quality tests yet for the tools below: ranked on game-dev fit. <a href="${L('/how-we-rank/')}">How</a></td></tr>\n` : ''}${row(r.t, r)}`).join('\n')
+    ? R.rows.map(r => `${r.tier === 'fit' && r.n === R.nEvidence + 1 ? `<tr class="tier-row"><td colspan="${cols}">${R.nEvidence ? 'No independent quality tests yet for the tools below' : 'No independent quality tests found for these tools yet'}: ranked on game-dev fit. <a href="${L('/how-we-rank/')}">How</a></td></tr>\n` : ''}${row(r.t, r)}`).join('\n')
     : list.map(t => row(t, null)).join('\n');
   return `${R ? `<div class="rank-switch" role="group" aria-label="Order"><button type="button" class="chip" data-order="rank" aria-pressed="true">Ranked</button><button type="button" class="chip" data-order="alpha" aria-pressed="false">A–Z</button></div>` : ''}<div class="table-wrap"><table class="cmp cat-table"><thead><tr>${R ? '<th class="td-rank">#</th>' : ''}<th>Tool</th><th>Free plan</th><th>Commercial use</th><th>API</th><th>MCP</th><th><span class="sr-only">Visit</span></th></tr></thead><tbody>
 ${body}
@@ -571,7 +572,7 @@ for (const [key, c] of Object.entries(TASKS)) {
 <nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/category/')}">Categories</a> › ${esc(c.label)}</nav>
 <header class="cat-hero">${artImg(c.page, { eager: true })}<div>
 <h1>Best ${esc(c.h1)}</h1>
-${RANKED[key] ? `<p>${list.length} tools, ranked: first by independent quality tests where they exist, then by fit for game devs. Paid placements never change the order. <a href="${L('/how-we-rank/')}">How we rank</a> · Checked ${timeEl(RANKED[key].checked)}</p>` : `<p>${list.length} tools, in alphabetical order (not ranked yet). Check each tool's commercial-use notes before you ship assets in a game.</p>`}
+${RANKED[key] ? `<p>${list.length} tools, ranked ${RANKED[key].nEvidence ? 'first by independent quality tests where they exist, then by fit for game devs' : 'by fit for game devs (we found no independent quality tests for these tools yet)'}. Paid placements never change the order. <a href="${L('/how-we-rank/')}">How we rank</a> · Checked ${timeEl(RANKED[key].checked)}</p>` : `<p>${list.length} tools, in alphabetical order (not ranked yet). Check each tool's commercial-use notes before you ship assets in a game.</p>`}
 </div></header>
 ${catFilters(list)}
 ${catTable(list, RANKED[key])}<p class="cat-empty" hidden>No tools match these filters. <button type="button" class="linkish" data-reset>Clear filters</button></p></div>
@@ -916,14 +917,14 @@ page('/how-we-rank/', layout({
   body: `<h1 class="page-h">How we rank</h1>
 <p class="page-sub">Each category is ranked in two steps. Every rank shows its reason and its sources, so you can check it.</p>
 <div class="prose">
-<section class="card"><span class="kicker">Step 1</span><h2>Independent quality tests</h2><p>If a tool appears in independent quality testing, it's ranked first, in the order that evidence shows. We use public blind-vote leaderboards (for example <a href="https://huggingface.co/spaces/3d-arena/3d-arena" rel="noopener nofollow" target="_blank">3D Arena</a> for 3D models), public benchmarks and reputable published reviews. We link every source and show the date we checked it. We only use results for the model the tool's service actually runs, not an older or different model from the same company.</p></section>
+<section class="card"><span class="kicker">Step 1</span><h2>Independent quality tests</h2><p>If a tool appears in independent quality testing, it's ranked first, in the order that evidence shows. We use public blind-vote leaderboards (for example <a href="https://huggingface.co/spaces/3d-arena/3d-arena" rel="noopener nofollow" target="_blank">3D Arena</a> for 3D models), public benchmarks and reputable published reviews. We link every source and show the date we checked it. We only use results for the model the tool's service actually runs, not an older or different model from the same company, and only when the evidence genuinely compares tools in that category. A tool isn't moved up just because it was the only one tested. Results we found but didn't use are noted on the page.</p></section>
 <section class="card"><span class="kicker">Step 2</span><h2>Game-dev fit, for tools without independent tests</h2><p>Tools without independent tests are ranked after those that have them, by a fit score built only from facts on each vendor's own pages:</p><ul>
 <li><b>Commercial use:</b> allowed (3 points), paid plans only (2), restricted (1), not stated (0).</li>
 <li><b>Engines:</b> 1 point each for a stated Godot, Unity or Unreal integration.</li>
 <li><b>Automation:</b> 1 point for a public API, 1 for an official MCP server.</li>
 <li><b>Focus:</b> 2 points if this category is the tool's main job.</li>
 <li><b>Free plan:</b> half a point, as a tie-breaker.</li></ul>
-<p>Ties are broken alphabetically. The page says which tools are ranked this way.</p></section>
+<p>Ties are broken alphabetically. Categories with no independent tests at all are ranked entirely this way, and the page says so.</p></section>
 <section class="card"><span class="kicker">Always</span><h2>What never changes a rank</h2><ul>
 <li>Sponsorship, affiliate commissions and vendor requests never change a rank, a verdict or a listing.</li>
 <li>If there's no evidence, we say so. We don't guess.</li>
