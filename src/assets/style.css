@@ -698,3 +698,17 @@ button.yt:hover .yt-play{transform:translate(0,-50%) scale(1.06)}
 h2.sub-h+.cmp-legend{margin-top:8px}
 @media (max-width:1020px){.cmp-panels.cp-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:720px){.cmp-panels.cp-2,.cmp-panels.cp-3,.cmp-panels.cp-4{grid-template-columns:1fr}}
+
+/* Engine hubs + licence guides (FAQ, hub sections, licence table) */
+.hub-sec .hub-intro{margin:0;color:#c9cfdd;font-size:.95rem}
+.hub-sec ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.hub-table th[scope=row],.lic-table th[scope=row]{text-align:left;font-weight:600;white-space:normal;text-transform:none;letter-spacing:normal;font-size:.9rem;color:var(--text);vertical-align:top;background:none}
+.lic-table th[scope=row] .badge{margin-top:4px}
+.lic-table td,.hub-table td{font-size:.88rem;vertical-align:top}
+.lic-table{min-width:900px}
+@media (max-width:700px){.lic-table{min-width:0}.lic-table thead{display:none}.lic-table,.lic-table tbody,.lic-table tr,.lic-table th,.lic-table td{display:block;width:auto}.lic-table tr{border-bottom:1px solid var(--line2);padding:10px 0}.lic-table th[scope=row]{border:0;padding:6px 14px}.lic-table td{border:0;padding:4px 14px}.lic-table td::before{content:attr(data-label);display:block;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}}
+.faq{margin:24px 0}
+.faq-item{margin:10px 0;padding:14px 16px}
+.faq-item summary{cursor:pointer;font-weight:600;color:var(--text)}
+.faq-item p{margin:8px 0 0;color:#c9cfdd;font-size:.92rem}
+.g-table{margin:18px 0}

@@ -1,0 +1,429 @@
+{
+  "_doc": "Guide v2 content for /guides/open-weights-model-licences/ (brief: docs/briefs/open-weights-model-licences.md). A licence guide: steps are how to check a licence, paths are per asset type, `table` is the at-a-glance licence comparison, `faq` renders a visible FAQ plus FAQPage JSON-LD. Every statement is from the linked licence or model card, checked 2026-10-17; anything not readable or not stated = \"Not stated by vendor\". Not legal advice. No videos (no official licence walkthroughs exist) and no images beyond the hero.",
+  "kind": "Licence guide",
+  "result": "\"Open weights\" doesn't mean \"free for commercial use\". SDXL, FLUX.1 [schnell], TRELLIS and TripoSR carry permissive licences. Stability's Community License is free for commercial use only under US$1M annual revenue. FLUX.1 [dev] is a non-commercial licence for the model. Hunyuan3D 2.1 excludes the EU, UK and South Korea. Here's each licence's catch, quoted and linked.",
+  "flow": [
+    {
+      "label": "Pick a model",
+      "ai": true
+    },
+    {
+      "label": "Read its licence"
+    },
+    {
+      "label": "Check caps and territory"
+    },
+    {
+      "label": "Keep a copy, disclose"
+    },
+    {
+      "label": "Ship"
+    }
+  ],
+  "shared": [
+    {
+      "h": "Find the exact licence for the version you'll use",
+      "do": [
+        "Open the model card on Hugging Face or the GitHub repo for the exact model and version you'll run (for example FLUX.1 [schnell], not just \"FLUX\").",
+        "Read the licence field and open the licence file it links to.",
+        "Save a copy of that licence text with the model version and the date you downloaded it."
+      ],
+      "see": "A named licence (for example Apache 2.0 or the Stability AI Community License) and a saved copy next to your project files.",
+      "gotcha": "Models in one family can carry different licences: FLUX.1 [schnell] and FLUX.2 [klein] 4B show Apache 2.0, while FLUX.1 [dev] is a non-commercial licence. Some licence texts (FLUX.2 [dev], Stable Audio Open) sit behind a Hugging Face login.",
+      "source": {
+        "label": "Hugging Face: FLUX.1 [schnell] model card",
+        "url": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+      }
+    },
+    {
+      "h": "Check what it says about outputs, not just the model",
+      "do": [
+        "Search the licence for \"Output\" and read every clause that mentions it.",
+        "Check separately whether using the model itself is limited (for example to non-commercial purposes).",
+        "If the two seem to pull in different directions for a paid game, get a commercial licence or ask a lawyer."
+      ],
+      "see": "A clear note of whether outputs can be used commercially and whether the model itself can be used in revenue-generating work.",
+      "gotcha": "FLUX.1 [dev] clause 2(d) lets you use Output \"for any purpose (including for commercial purposes)\", but the same licence limits use of the model to non-commercial purposes and excludes revenue-generating activity.",
+      "source": {
+        "label": "FLUX.1 [dev] Non-Commercial License",
+        "url": "https://github.com/black-forest-labs/flux/blob/main/model_licenses/LICENSE-FLUX1-dev"
+      }
+    },
+    {
+      "h": "Check revenue, user and territory limits",
+      "do": [
+        "Look for a revenue cap: the Stability AI Community License allows free commercial use only under US$1,000,000 annual revenue, and you must register with Stability.",
+        "Look for a user cap: Tencent's Hunyuan licences need a separate licence if your products had over 1 million monthly active users on the release date.",
+        "Look for a territory limit: Tencent's Hunyuan licences don't apply in the EU, UK or South Korea."
+      ],
+      "see": "Either \"no cap, no territory limit\" or a specific limit you can check against where and how you'll sell.",
+      "gotcha": "Above Stability's US$1M cap the licence terminates and you must request one from Stability. Steam and itch.io sell into the EU and UK, so a territory limit matters for a game sold worldwide.",
+      "source": {
+        "label": "Stability AI Community License",
+        "url": "https://stability.ai/community-license-agreement"
+      }
+    },
+    {
+      "h": "List the conditions you must follow or pass on",
+      "do": [
+        "Note any use restrictions (for example SDXL's Attachment A).",
+        "Note content-filter and AI-disclosure duties (FLUX.1 [dev] clause 2(e)) and no-training clauses (Tencent: Output can't be used to improve other AI models).",
+        "Fill in Steam's AI-content disclosure for anything that ships in the game."
+      ],
+      "see": "A short list of duties attached to the model, ready to hand to whoever ships the game.",
+      "gotcha": "Tencent's Acceptable Use Policy also bans placing machine-generated content in public without \"expressly and conspicuously identifying\" it as machine generated.",
+      "source": {
+        "label": "Tencent Hunyuan 3D 2.1 Community License",
+        "url": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1/blob/main/LICENSE"
+      }
+    }
+  ],
+  "paths": [
+    {
+      "key": "images",
+      "label": "Images and textures",
+      "steps": [
+        {
+          "h": "SDXL 1.0: CreativeML Open RAIL++-M",
+          "do": [
+            "Read Attachment A (use-based restrictions) of the SDXL 1.0 licence.",
+            "Note that \"Licensor claims no rights in the Output You generate\"."
+          ],
+          "see": "No revenue cap and no territory limit in the licence; a list of banned uses you must follow.",
+          "gotcha": "Fine-tunes and merges on model hubs may carry their own licences; check the one you actually download.",
+          "source": {
+            "label": "SDXL 1.0 licence",
+            "url": "https://github.com/Stability-AI/generative-models/blob/main/model_licenses/LICENSE-SDXL1.0"
+          }
+        },
+        {
+          "h": "Stable Diffusion 3.5: Stability AI Community License",
+          "do": [
+            "Check your (and your affiliates') annual revenue against US$1,000,000.",
+            "Register with Stability for commercial use.",
+            "Note: \"You own any outputs generated from the Models or Derivative Works to the extent permitted by applicable law.\""
+          ],
+          "see": "Free commercial use if you're under the cap and registered.",
+          "gotcha": "If you grow past US$1M, the licence terminates and you need one from Stability.",
+          "source": {
+            "label": "Stability AI Community License",
+            "url": "https://stability.ai/community-license-agreement"
+          }
+        },
+        {
+          "h": "FLUX: check which FLUX model you have",
+          "do": [
+            "FLUX.1 [schnell] and FLUX.2 [klein] 4B: Apache 2.0 on their model cards.",
+            "FLUX.1 [dev]: Non-Commercial License v1.1.1; read clauses 2(d) and 2(e).",
+            "FLUX.2 [dev] and FLUX.2 [klein] 9B: \"flux-non-commercial-license\" on the model card; the text needs a Hugging Face login, so its output terms are Not stated by vendor here."
+          ],
+          "see": "The exact licence for your FLUX model, not the family name.",
+          "gotcha": "Black Forest Labs sells commercial licences for its non-commercial models.",
+          "source": {
+            "label": "FLUX.1 [dev] Non-Commercial License",
+            "url": "https://github.com/black-forest-labs/flux/blob/main/model_licenses/LICENSE-FLUX1-dev"
+          }
+        },
+        {
+          "h": "Apache 2.0 options: fewest strings",
+          "do": [
+            "FLUX.1 [schnell], FLUX.2 [klein] 4B and Qwen-Image show Apache 2.0 on their model cards.",
+            "Keep the licence and any notices with your project."
+          ],
+          "see": "A permissive licence with no revenue cap or territory limit.",
+          "gotcha": "Apache 2.0 covers the model; hosted versions of the same model have their own service terms.",
+          "source": {
+            "label": "Hugging Face: Qwen-Image model card",
+            "url": "https://huggingface.co/Qwen/Qwen-Image"
+          }
+        }
+      ]
+    },
+    {
+      "key": "3d",
+      "label": "3D models",
+      "steps": [
+        {
+          "h": "Hunyuan3D 2.1 and HunyuanWorld 1.0: territory and MAU",
+          "do": [
+            "Read the Territory definition: the world excluding the EU, UK and South Korea.",
+            "Check the 1 million MAU clause against the release date (13 June 2025 for Hunyuan3D 2.1; 27 July 2025 for HunyuanWorld 1.0).",
+            "Note that \"Tencent claims no rights in Outputs You generate\" and that Output can't be used to improve other AI models."
+          ],
+          "see": "Whether you can use the model and its output where you'll sell.",
+          "gotcha": "Use of the works or \"Output or results\" outside the Territory \"is unlicensed and unauthorized\". How that applies to a game sold worldwide is Not stated by vendor: region-lock, pick another model, or ask Tencent or a lawyer.",
+          "source": {
+            "label": "Tencent Hunyuan 3D 2.1 Community License",
+            "url": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1/blob/main/LICENSE"
+          }
+        },
+        {
+          "h": "TRELLIS and TRELLIS.2: MIT, with dependency licences",
+          "do": [
+            "TRELLIS: the models and most of the code are MIT; some submodules (diffoctreerast, a modified FlexiCubes) have their own licences.",
+            "TRELLIS.2: MIT, but nvdiffrast and nvdiffrec \"operate under separate license terms\"."
+          ],
+          "see": "An MIT licence plus a list of dependency licences to read.",
+          "gotcha": "nvdiffrast's licence allows use \"non-commercially\" only (research or evaluation). Whether that affects meshes made with TRELLIS.2 is Not stated by vendor.",
+          "source": {
+            "label": "TRELLIS.2 repo",
+            "url": "https://github.com/microsoft/TRELLIS.2"
+          }
+        },
+        {
+          "h": "TripoSR and TripoSG: MIT",
+          "do": [
+            "Check the LICENSE file in each repo: both are MIT.",
+            "Keep the licence notice with your project."
+          ],
+          "see": "A permissive licence with no cap or territory limit.",
+          "gotcha": "Tripo's hosted app is a different product with plan-based terms (its free plan is non-commercial).",
+          "source": {
+            "label": "TripoSG repo",
+            "url": "https://github.com/VAST-AI-Research/TripoSG"
+          }
+        },
+        {
+          "h": "Stable Fast 3D: Stability AI Community License",
+          "do": [
+            "Its model card names the Stability AI Community License.",
+            "Apply the same US$1M revenue rule and registration as SD 3.5."
+          ],
+          "see": "Free commercial use under the cap, once registered.",
+          "gotcha": "Above the cap you need a licence from Stability.",
+          "source": {
+            "label": "Hugging Face: Stable Fast 3D",
+            "url": "https://huggingface.co/stabilityai/stable-fast-3d"
+          }
+        }
+      ]
+    },
+    {
+      "key": "audio",
+      "label": "Audio",
+      "steps": [
+        {
+          "h": "Stable Audio Open 1.0: read the licence on the model card",
+          "do": [
+            "Open the model card and the \"stable-audio-community\" licence it names (Hugging Face login needed).",
+            "Save a copy and check it for revenue caps and output terms."
+          ],
+          "see": "The licence text saved with your project.",
+          "gotcha": "We couldn't read the licence text without a login, so its terms are Not stated by vendor here.",
+          "source": {
+            "label": "Hugging Face: Stable Audio Open 1.0",
+            "url": "https://huggingface.co/stabilityai/stable-audio-open-1.0"
+          }
+        },
+        {
+          "h": "Hosted Stable Audio has different terms",
+          "do": [
+            "If you use Stable Audio on the web instead of the open model, its plan terms apply, not the open-weights licence.",
+            "Its free plan is for personal, non-commercial use; paid plans list a commercial licence."
+          ],
+          "see": "Which terms apply: the open-weights licence (local) or the service plan (hosted).",
+          "gotcha": "The same is true of other hosted versions of open models, such as Tencent's Hunyuan3D cloud API.",
+          "source": {
+            "label": "Our Stable Audio listing",
+            "url": "/tools/stable-audio/"
+          }
+        }
+      ]
+    }
+  ],
+  "table": {
+    "head": [
+      "Model",
+      "Asset",
+      "Licence",
+      "Outputs",
+      "Revenue, user or territory limit",
+      "The catch"
+    ],
+    "rows": [
+      {
+        "model": "Hunyuan3D 2.1 (Tencent)",
+        "asset": "3D models",
+        "licence": "Tencent Hunyuan 3D 2.1 Community License",
+        "outputs": "\"Tencent claims no rights in Outputs\"; use only inside the Territory",
+        "limits": "Licence request needed if MAU was over 1 million on the 2.1 release date (13 June 2025). Excludes the EU, UK and South Korea",
+        "catch": "Output can't be used to improve other AI models; machine-generated content in public must be identified (AUP)",
+        "tone": "warn",
+        "source": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1/blob/main/LICENSE"
+      },
+      {
+        "model": "HunyuanWorld 1.0 (Tencent)",
+        "asset": "3D worlds",
+        "licence": "Tencent HunyuanWorld-1.0 Community License",
+        "outputs": "\"Tencent claims no rights in Outputs\"; use only inside the Territory",
+        "limits": "Licence request needed if MAU was over 1 million on the release date (27 July 2025). Excludes the EU, UK and South Korea",
+        "catch": "Output can't be used to improve other AI models",
+        "tone": "warn",
+        "source": "https://github.com/Tencent-Hunyuan/HunyuanWorld-1.0/blob/main/LICENSE"
+      },
+      {
+        "model": "SDXL 1.0 (Stability AI)",
+        "asset": "Images",
+        "licence": "CreativeML Open RAIL++-M (26 July 2023)",
+        "outputs": "\"Licensor claims no rights in the Output\"; no non-commercial clause",
+        "limits": "Not stated by vendor (none in the licence)",
+        "catch": "Use-based restrictions in Attachment A",
+        "tone": "ok",
+        "source": "https://github.com/Stability-AI/generative-models/blob/main/model_licenses/LICENSE-SDXL1.0"
+      },
+      {
+        "model": "Stable Diffusion 3.5 Large (Stability AI)",
+        "asset": "Images",
+        "licence": "Stability AI Community License",
+        "outputs": "You own outputs \"to the extent permitted by applicable law\"",
+        "limits": "Free commercial use under US$1,000,000 annual revenue; register with Stability for commercial use. Not stated by vendor (none in the licence)",
+        "catch": "Above the cap the licence terminates and you must request one from Stability",
+        "tone": "warn",
+        "source": "https://stability.ai/community-license-agreement"
+      },
+      {
+        "model": "Stable Fast 3D (Stability AI)",
+        "asset": "3D models",
+        "licence": "Stability AI Community License (per the model card)",
+        "outputs": "As for SD 3.5",
+        "limits": "US$1,000,000 annual revenue. Not stated by vendor (none in the licence)",
+        "catch": "Register for commercial use",
+        "tone": "warn",
+        "source": "https://huggingface.co/stabilityai/stable-fast-3d"
+      },
+      {
+        "model": "FLUX.1 [dev] (Black Forest Labs)",
+        "asset": "Images",
+        "licence": "FLUX.1 [dev] Non-Commercial License v1.1.1",
+        "outputs": "Clause 2(d): \"You may use Output for any purpose (including for commercial purposes)\". But the model itself is licensed for non-commercial purposes only",
+        "limits": "Not stated by vendor",
+        "catch": "Content filters or review (2(e)); AI disclosure \"to the extent required under applicable law\"; commercial licences sold by BFL",
+        "tone": "warn",
+        "source": "https://github.com/black-forest-labs/flux/blob/main/model_licenses/LICENSE-FLUX1-dev"
+      },
+      {
+        "model": "FLUX.2 [dev] and FLUX.2 [klein] 9B (Black Forest Labs)",
+        "asset": "Images",
+        "licence": "\"flux-non-commercial-license\" (model card)",
+        "outputs": "Not stated by vendor (the licence text is behind a Hugging Face login; we haven't verified it)",
+        "limits": "Not stated by vendor",
+        "catch": "Read the licence on the model card before use",
+        "tone": "unk",
+        "source": "https://huggingface.co/black-forest-labs/FLUX.2-dev"
+      },
+      {
+        "model": "FLUX.1 [schnell] (Black Forest Labs)",
+        "asset": "Images",
+        "licence": "Apache 2.0 (model card)",
+        "outputs": "Permissive licence",
+        "limits": "None in Apache 2.0",
+        "catch": "Keep the licence and notices",
+        "tone": "ok",
+        "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+      },
+      {
+        "model": "FLUX.2 [klein] 4B (Black Forest Labs)",
+        "asset": "Images",
+        "licence": "Apache 2.0 (model card)",
+        "outputs": "Permissive licence",
+        "limits": "None in Apache 2.0",
+        "catch": "Keep the licence and notices",
+        "tone": "ok",
+        "source": "https://huggingface.co/black-forest-labs/FLUX.2-klein-4B"
+      },
+      {
+        "model": "Qwen-Image (Qwen)",
+        "asset": "Images",
+        "licence": "Apache 2.0 (model card)",
+        "outputs": "Permissive licence",
+        "limits": "None in Apache 2.0",
+        "catch": "Keep the licence and notices",
+        "tone": "ok",
+        "source": "https://huggingface.co/Qwen/Qwen-Image"
+      },
+      {
+        "model": "TRELLIS (Microsoft)",
+        "asset": "3D models",
+        "licence": "MIT for the models and most of the code",
+        "outputs": "MIT doesn't restrict it; output terms otherwise not stated by vendor",
+        "limits": "None in MIT",
+        "catch": "Some submodules (diffoctreerast, a modified FlexiCubes) have their own licences",
+        "tone": "warn",
+        "source": "https://github.com/microsoft/TRELLIS"
+      },
+      {
+        "model": "TRELLIS.2 (Microsoft)",
+        "asset": "3D models",
+        "licence": "MIT; nvdiffrast and nvdiffrec \"operate under separate license terms\"",
+        "outputs": "Whether the dependency licences affect generated meshes: Not stated by vendor",
+        "limits": "None in MIT",
+        "catch": "nvdiffrast's licence limits use to \"non-commercially\" (research or evaluation only)",
+        "tone": "warn",
+        "source": "https://github.com/microsoft/TRELLIS.2"
+      },
+      {
+        "model": "TripoSR (VAST / Stability AI)",
+        "asset": "3D models",
+        "licence": "MIT",
+        "outputs": "Permissive licence",
+        "limits": "None in MIT",
+        "catch": "Keep the licence notice",
+        "tone": "ok",
+        "source": "https://github.com/VAST-AI-Research/TripoSR"
+      },
+      {
+        "model": "TripoSG (VAST)",
+        "asset": "3D models",
+        "licence": "MIT",
+        "outputs": "Permissive licence",
+        "limits": "None in MIT",
+        "catch": "Keep the licence notice",
+        "tone": "ok",
+        "source": "https://github.com/VAST-AI-Research/TripoSG"
+      },
+      {
+        "model": "Stable Audio Open 1.0 (Stability AI)",
+        "asset": "Audio",
+        "licence": "\"stable-audio-community\" (model card)",
+        "outputs": "Not stated by vendor (the licence text is behind a Hugging Face login; we haven't verified it)",
+        "limits": "Not stated by vendor",
+        "catch": "Hosted Stable Audio has different terms: its free plan is non-commercial",
+        "tone": "unk",
+        "source": "https://huggingface.co/stabilityai/stable-audio-open-1.0"
+      }
+    ]
+  },
+  "faq": [
+    {
+      "q": "Is Hunyuan3D free for commercial use?",
+      "a": "Inside its Territory (the world excluding the EU, UK and South Korea), and if you weren't over 1 million monthly active users on the release date, the Tencent Hunyuan 3D 2.1 Community License grants use with conditions. Use of the works or Output outside the Territory is \"unlicensed and unauthorized\".",
+      "url": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1/blob/main/LICENSE"
+    },
+    {
+      "q": "Can I use FLUX.1 [dev] images in a paid game?",
+      "a": "Clause 2(d) says Output may be used \"for any purpose (including for commercial purposes)\", but the licence limits the model's own use to non-commercial purposes and excludes revenue-generating activity. Black Forest Labs sells commercial licences. Read both clauses.",
+      "url": "https://github.com/black-forest-labs/flux/blob/main/model_licenses/LICENSE-FLUX1-dev"
+    },
+    {
+      "q": "What is Stability AI's US$1M rule?",
+      "a": "The Stability AI Community License allows free commercial use if your annual revenue is under US$1,000,000, and you must register. Above that the licence terminates and you need to request one from Stability.",
+      "url": "https://stability.ai/community-license-agreement"
+    },
+    {
+      "q": "Which open models have the fewest strings attached?",
+      "a": "Those whose licence is Apache 2.0 or MIT: FLUX.1 [schnell], FLUX.2 [klein] 4B, Qwen-Image, TripoSR and TripoSG, plus SDXL under OpenRAIL++-M with use restrictions. TRELLIS is MIT, with dependency licences to check.",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    },
+    {
+      "q": "Do open-weights licences require me to disclose AI use?",
+      "a": "Some do. FLUX.1 [dev] requires disclosure to the extent applicable law requires it, and Tencent's Acceptable Use Policy requires identifying machine-generated content placed in public. Steam asks about AI content separately.",
+      "url": "https://github.com/black-forest-labs/flux/blob/main/model_licenses/LICENSE-FLUX1-dev"
+    },
+    {
+      "q": "Is this legal advice?",
+      "a": "No. It summarises each licence's text on the check date. Read the licence yourself, and ask a lawyer if your situation is unclear.",
+      "url": ""
+    }
+  ],
+  "note": "This is a summary of each licence's text on the check date, not legal advice. Licences change and new versions get new terms, so read the linked licence for the exact version you use."
+}

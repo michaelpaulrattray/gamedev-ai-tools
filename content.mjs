@@ -84,6 +84,21 @@ export const GUIDES = [
         s('Unreal Engine: texture import settings (compression and colour-space options for each map type).', 'https://dev.epicgames.com/documentation/en-us/unreal-engine/texture-import-settings-in-unreal-engine') ] },
     ],
   },
+  {
+    // Licence guide (v2): steps, paths, licence table and FAQ live in data/guides/open-weights-model-licences.json
+    // (brief: docs/briefs/open-weights-model-licences.md). Not a pipeline workflow, so engines is empty.
+    slug: 'open-weights-model-licences',
+    title: 'Open-weights model licences: what you can ship in a game',
+    metaTitle: 'Open-weights model licences for games | GameDev AI Tools',
+    description: 'Can you ship output from Hunyuan3D, SDXL, SD 3.5, FLUX or TRELLIS in a paid game? Each licence\'s catch, quoted and linked, with check dates.',
+    tools: ['hunyuan3d', 'hunyuanworld', 'stable-audio'],
+    task: '3d-models', engines: [],
+    hero: 'guide-open-weights',
+    flow: [{ label: 'Pick a model', ai: true }, { label: 'Read its licence' }, { label: 'Check caps and territory' }, { label: 'Keep a copy, disclose' }, { label: 'Ship' }],
+    outcome: 'For each open-weights model a game dev is likely to run locally: the licence, whether outputs can be used commercially, any revenue, user or territory limit, and the catch, each linked to the licence text.',
+    intro: '"Open weights" doesn\'t mean "free for commercial use". Here is how to check a model licence, and what 15 popular models\' licences say.',
+    steps: [],
+  },
 ];
 
 export const DISCLOSURE = {
@@ -105,7 +120,7 @@ export const DISCLOSURE = {
       s('See also the AI disclosure section of itch.io\'s quality guidelines.', 'https://itch.io/docs/creators/quality-guidelines') ] },
     { h: 'Epic Games Store', items: [
       s('We found no generative-AI disclosure requirement in Epic\'s published store requirements (checked on the date below).', 'https://dev.epicgames.com/docs/epic-games-store/requirements-guidelines/distribution-requirements/requirements-overview'),
-      s('Epic\'s "NoAI" and "CreatedWithAI" tags apply to marketplace assets, not store game listings.', 'https://marketplacehelp.epicgames.com/s/article/Introducing-the-NoAI-and-CreatedWithAI-tags?language=en_US') ] },
+      s('Epic\'s "CreatedWithAI" and "NoAI" tags apply to assets sold on Fab, not to Epic Games Store game listings. Fab\'s Distribution Agreement (section 18(k)) requires publishers to tag content "CreatedWithAI" when a material portion of it is generated with generative AI; "NoAI" is an opt-in tag that bars buyers from using the content in AI datasets, AI development or as AI inputs.', 'https://www.fab.com/distribution-agreement') ] },
     { h: 'Google Play', items: [
       s('Google Play\'s AI-Generated Content policy covers apps that generate content with AI (for example from user prompts). Those apps must prevent restricted content and provide a way to report offensive AI output.', 'https://support.google.com/googleplay/android-developer/answer/14094294?hl=en') ] },
   ],
@@ -137,3 +152,99 @@ export const COMPARE = [
   ['runway', 'luma-ai'], ['pixellab', 'retro-diffusion'], ['scenario', 'layer-ai'],
 ];
 
+
+// Engine hub editorial layer for /engine/<page>/ (briefs in docs/briefs/). Rendered on top of the auto-generated
+// tool table. Every statement is sourced; anything a vendor doesn't state is written as "Not stated by vendor".
+// Shape: { checked, title, description, answer, sections: [{ h, intro?, items: [s()], tools?: [slugs], table? }], faq: [{ q, a, url }] }
+export const ENGINE_HUBS = {
+  godot: {
+    checked: '2026-10-17',
+    title: 'Godot AI tools: plugins and MCP | GameDev AI Tools',
+    description: 'AI tools that work with Godot 4: editor assistants, MCP servers and asset generators, with pricing and commercial-use terms from each vendor, dated.',
+    answer: 'AI reaches Godot three ways: community editor plugins, MCP servers that let agents like Claude Code or Cursor drive the editor, and generators whose files Godot imports (GLB, PNG, WAV). Below are the tools whose vendors state Godot support, what each costs, and whether you can ship the output commercially.',
+    sections: [
+      { h: 'AI coding assistants for GDScript and C#', intro: 'Cursor, GitHub Copilot and Windsurf aren\'t Godot-specific: they work on any text file, so they work on .gd and .cs files. Each connects to MCP servers, and each tool page links its free plan and output terms.', tools: ['cursor', 'github-copilot', 'windsurf'], items: [] },
+      { h: 'In-editor Godot plugins (community projects, not official Godot tools)', items: [
+        s('GodotAI adds an AI chat panel to the Godot editor for Claude, ChatGPT, OpenRouter models or local models (Ollama, LM Studio, llama.cpp). It needs Godot 4.5 or later, and its Asset Library listing gives the licence as "Proprietary".', 'https://godotengine.org/asset-library/asset/4916'),
+        s('Godot AI Assistant Hub (Flamx Games) is an MIT-licensed plugin that embeds AI assistants in Godot. It doesn\'t run models itself: it connects to a provider, local first (Ollama), with Google Gemini, Ollama Turbo and OpenRouter also supported. Minimum Godot version: Not stated by vendor.', 'https://github.com/FlamxGames/godot-ai-assistant-hub'),
+        s('AI Copilot for Godot (unxsist) is an MIT-licensed agent in the editor dock that reads files, writes GDScript, edits scenes and runs your game. Its README badge shows Godot 4.7.', 'https://github.com/unxsist/godot-ai-chat/') ] },
+      { h: 'MCP servers: letting an agent drive the Godot editor', intro: 'An MCP (Model Context Protocol) server gives an outside AI agent tools it can call, here to read and change a Godot project. Listed alphabetically by repo; no ranking.', items: [
+        s('Coding-Solo/godot-mcp (MIT): launch the editor, run projects in debug mode, capture debug output, create scenes and add nodes, export MeshLibrary resources, and manage UIDs (Godot 4.4+). The README recommends Godot 4.7 (tested on 4.7 stable) and needs Node.js 18+.', 'https://github.com/Coding-Solo/godot-mcp'),
+        s('hi-godot/godot-ai (MIT): connects Claude Code, Claude Desktop, Codex and other MCP clients to a live Godot editor, with tools to build scenes, edit nodes and scripts, wire signals and set up UI, materials and animation. Godot AI v4 needs Godot 4.7+; C# support is text-only.', 'https://github.com/hi-godot/godot-ai') ] },
+      { h: 'Asset generators that export to Godot', intro: 'Meshy, Tripo, Hyper3D Rodin and Sloyd each list an official Godot plugin or bridge. Check the licence before you generate: on the free plans, Meshy licenses output under CC BY 4.0 (attribution required), Tripo\'s is non-commercial, and Hunyuan3D\'s licence excludes the EU, UK and South Korea.', tools: ['meshy', 'tripo', 'hyper3d-rodin', 'sloyd', 'hunyuan3d'], items: [
+        s('Meshy lists a Godot plugin among its game-engine integrations.', 'https://www.meshy.ai/integrations'),
+        s('Tripo lists a Godot plugin (Godot 4.4+) on its developer plugins page.', 'https://developers.tripo3d.ai/en/docs/plugins'),
+        s('Hyper3D lists a Rodin add-on for Godot.', 'https://docs.hyper3d.ai/en/addons'),
+        s('Sloyd lists a Godot plugin among its integrations.', 'https://sloyd.gitbook.io/documentation/integrations'),
+        s('Godot imports glTF 2.0 (.gltf and .glb) 3D scenes; glTF is the recommended format to export from Blender.', 'https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html'),
+        s('2D tools mostly export PNG images or sprite sheets, which Godot imports as textures.', 'https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_images.html'),
+        s('Audio tools export files such as WAV, Ogg Vorbis or MP3, which Godot imports.', 'https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_audio_samples.html'),
+        s('Watch the audio free plans: ElevenLabs, Suno and Stable Audio limit commercial use to paid plans (each tool page links its terms).', '/cheat-sheet/') ] },
+      { h: 'Selling AI-made assets on the Godot Asset Store', items: [
+        s('You can upload AI-generated assets or code, but you must disclose what is AI-generated, or how AI was used, when you submit. That includes AI material you\'ve edited and AI material placed inside something made by hand.', 'https://store.godotengine.org/help/'),
+        s('The store added AI disclosure information to assets (30 October 2025) and later a filter for assets that use AI.', 'https://store.godotengine.org/changelog/'),
+        s('For selling your game on Steam and other stores, see our store AI-disclosure summary.', '/steam-ai-disclosure/') ] },
+      { h: 'Godot\'s AI contribution policy (engine code, not your game)', items: [
+        s('Godot\'s 2026 contribution policy (30 June 2026) is about pull requests to the Godot engine itself: no autonomous AI agents or vibe coding, no AI-generated substantial code, and AI use must be disclosed in the PR. It doesn\'t restrict games you make with Godot.', 'https://godotengine.org/article/contribution-policy-2026/'),
+        s('Godot is released under the MIT licence.', 'https://godotengine.org/license/') ] },
+    ],
+    faq: [
+      { q: 'What\'s the difference between a Godot AI plugin and a Godot MCP server?', a: 'A plugin adds an AI chat or agent panel inside the Godot editor. An MCP server lets an outside agent, such as Claude Code or Cursor, read and change your project.', url: 'https://github.com/hi-godot/godot-ai' },
+      { q: 'Can I use AI-generated assets in a paid Godot game?', a: 'Godot\'s MIT licence doesn\'t restrict it. What matters is each AI tool\'s own terms: our cheat sheet lists, for every tool, whether free-plan output can go in a commercial game.', url: '/cheat-sheet/' },
+      { q: 'Can I sell AI-made assets on the Godot Asset Store?', a: 'Yes, if you disclose what is AI-generated, or how AI was used, when you submit, including AI material you\'ve edited.', url: 'https://store.godotengine.org/help/' },
+      { q: 'Does Godot\'s AI policy ban games made with AI?', a: 'No. The 2026 contribution policy covers code contributed to the Godot engine, not games made with Godot.', url: 'https://godotengine.org/article/contribution-policy-2026/' },
+      { q: 'Which AI 3D generators export to Godot?', a: 'Meshy, Tripo, Hyper3D Rodin and Sloyd each list an official Godot plugin or bridge. Most other 3D generators export GLB, which Godot imports.', url: 'https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html' },
+    ],
+  },
+  unity: {
+    checked: '2026-10-17',
+    title: 'Unity AI tools and credits | GameDev AI Tools',
+    description: 'Unity AI credits and pricing by plan, who owns what it generates, and other AI tools with Unity plugins. Sourced from vendor pages and dated.',
+    answer: 'Unity\'s AI tools run on Unity Credits. Pro includes 2,000 a month and Enterprise 3,000. Unity Personal gets a 14-day free trial, then a paid subscription ($10/month per Unity\'s FAQ; currency not stated by vendor). Unity says you own your inputs and outputs, but third-party terms also cover its generators. The CLI, MCP server and official agent plugin are free.',
+    sections: [
+      { h: 'Quick answer: Unity AI cost by plan', table: {
+        head: ['Plan', 'Monthly credits', 'How you get access'],
+        rows: [
+          ['Personal (free engine plan)', '1,000 (listed with the paid subscription)', '14-day free trial, then a paid subscription: "converts to a $10/month subscription" (currency not stated by vendor)'],
+          ['Pro (from $2,310/yr)', '2,000', 'Included in the paid plan'],
+          ['Enterprise (custom pricing)', '3,000', 'Included in the paid plan'],
+          ['Industry (custom pricing)', 'Not stated by vendor', 'Included ("Pro, Enterprise, and Industry customers receive access")'],
+        ],
+        sources: [['Plans & Pricing', 'https://unity.com/products'], ['Unity AI FAQ', 'https://unity.com/features/ai']],
+      }, items: [
+        s('Credits reset at the start of each billing cycle and unused credits don\'t roll over. At zero, AI features pause until the reset or until you buy more credits.', 'https://docs.unity.com/en-us/ai/credits/credits-about'),
+        s('Additional credit bundles are sold, and Unity Credits are non-refundable except as required by law.', 'https://unity.com/legal/unity-ai-credits-terms'),
+        s('The Unity CLI, the MCP server and Unity\'s official plugin are free to use, and the MCP server doesn\'t need Unity AI credits.', 'https://unity.com/features/ai') ] },
+      { h: 'What a Unity Credit buys', table: {
+        head: ['Activity', 'Example credits'],
+        rows: [['AI Assistant message', '4 to 1,500 or more'], ['Image', '1–6'], ['Texture', '1–9'], ['3D model', '8–13'], ['Sound effects', '1–5'], ['Music', '3–5'], ['Text to speech', 'About 3'], ['Animation (text to motion)', 'About 5'], ['Skybox', '2–5'], ['Video', '5–15'], ['Price per credit in money', 'Not stated by vendor']],
+        sources: [['About Unity Credits', 'https://docs.unity.com/en-us/ai/credits/credits-about']],
+      }, items: [
+        s('Unity says these figures are "representative examples only", that real use varies with the model and the request, and that the Unity Dashboard is the authority for your organisation.', 'https://docs.unity.com/en-us/ai/credits/credits-about') ] },
+      { h: 'Can you ship what Unity AI generates?', tools: ['layer-ai', 'scenario'], items: [
+        s('Ownership: Unity\'s AI Guiding Principles say "You own your input and output data", regardless of the partner model used, and training on your content is off by default (Guiding Principles last updated 19 August 2026, for Unity Editor 6.7 and below).', 'https://unity.com/legal/unityai-guiding-principles'),
+        s('Third-party terms: Unity\'s Third-Party AI Terms (updated 28 July 2026) say generator use is also governed by the providers\' own terms: Layer AI (FLUX-based models, sprites), Scenario (FLUX, GPT-Image, Google Gemini and Seedream models; images, 3D models, skyboxes, textures, sound and video) and Uthana (animation).', 'https://unity.com/legal/third-party-ai-terms'),
+        s('Responsibility: Unity says you\'re responsible for making sure your use of its AI tools and any generated assets don\'t infringe third-party rights.', 'https://unity.com/legal/unityai-guiding-principles'),
+        s('Unity\'s FAQ adds that developers are fully responsible for app-store declarations and verifying usage rights.', 'https://unity.com/features/ai'),
+        s('Metadata: Unity embeds "UnityAI" metadata in all generations, so you can find and remove them.', 'https://unity.com/legal/unityai-guiding-principles'),
+        s('For declaring AI content when you sell the game, see our Steam and store AI-disclosure summary.', '/steam-ai-disclosure/'),
+        s('Engine plan: Unity Pro is required for businesses with more than $200K in funding or annual revenue.', 'https://unity.com/products') ] },
+      { h: 'Using outside agents with Unity (MCP, CLI, plugin)', intro: 'Cursor, GitHub Copilot and Windsurf can connect to MCP servers.', tools: ['cursor', 'github-copilot', 'windsurf'], items: [
+        s('Unity\'s MCP server is set up through the Unity CLI and requires Unity 6 or later. Unity\'s official plugin is listed for Claude Code, Codex and Grok.', 'https://unity.com/features/ai'),
+        s('Using a third-party agent through Unity\'s AI gateway doesn\'t consume Unity credits.', 'https://unity.com/features/ai'),
+        s('The CLI is free and separate from Unity AI, and doesn\'t need a Unity AI subscription.', 'https://docs.unity.com/en-us/unity-cli/replace-mcp-server-unity-cli') ] },
+      { h: 'Selling AI-made assets on the Unity Asset Store', items: [
+        s('Content made with AI, completely or in part, must say so in the marketing data, and the "AI description" field must name the AI tools used, the content they generated and the modifications you made.', 'https://assetstore.unity.com/publishing/submission-guidelines'),
+        s('AI or AI-assisted content can\'t use words that imply human effort, such as "drawn", "hand drawn" or "painted". AI may be used for logos, backgrounds or supplemental visuals in marketing material if the package is accurately shown.', 'https://assetstore.unity.com/publishing/submission-guidelines'),
+        s('Unity can reject submissions mass-produced with AI that lack sufficient differentiation, and AI-generated 3D data must be retopologised and optimised before submission.', 'https://assetstore.unity.com/publishing/submission-guidelines') ] },
+    ],
+    faq: [
+      { q: 'Is Unity AI free on Unity Personal?', a: 'There\'s a 14-day free trial. After that it\'s a paid subscription: Unity\'s FAQ says the trial "converts to a $10/month subscription" (the currency isn\'t stated).', url: 'https://unity.com/features/ai' },
+      { q: 'How many credits does a 3D model cost in Unity AI?', a: 'Unity\'s example range is 8 to 13 credits per generation, but it says actual use varies and the Unity Dashboard is authoritative.', url: 'https://docs.unity.com/en-us/ai/credits/credits-about' },
+      { q: 'Do I own what Unity AI generates?', a: 'Unity\'s AI Guiding Principles say you own your input and output data. Its generators are also governed by third-party terms (Layer AI, Scenario, Uthana).', url: 'https://unity.com/legal/unityai-guiding-principles' },
+      { q: 'Do unused Unity Credits roll over?', a: 'No. They reset at the start of each billing cycle.', url: 'https://docs.unity.com/en-us/ai/credits/credits-about' },
+      { q: 'Does using Claude Code or Cursor with Unity cost Unity Credits?', a: 'Unity\'s FAQ says a third-party agent used through its AI gateway doesn\'t consume Unity credits, and the MCP server doesn\'t need credits.', url: 'https://unity.com/features/ai' },
+      { q: 'Can I sell AI-generated assets on the Unity Asset Store?', a: 'Yes, if you disclose it: the "AI description" field must name the AI tools used and what they generated. Follow Unity\'s submission guidelines.', url: 'https://assetstore.unity.com/publishing/submission-guidelines' },
+    ],
+  },
+};

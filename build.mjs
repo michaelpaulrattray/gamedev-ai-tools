@@ -2,7 +2,7 @@
 // Pages are plain HTML from template helpers; the only dependencies (satori, @resvg/resvg-js) render share images (og.mjs).
 import fs from 'node:fs';
 import path from 'node:path';
-import { CHECKED, GUIDES, DISCLOSURE, NEWS, COMPARE } from './content.mjs';
+import { CHECKED, GUIDES, DISCLOSURE, NEWS, COMPARE, ENGINE_HUBS } from './content.mjs';
 import { SPONSOR_PAYMENT_URL, SPONSOR_OFFER, SPONSOR_PRICE, BUSINESS_EMAIL, AFFILIATE_NOTE } from './config.mjs';
 import { createOg, OG_W, OG_H } from './og.mjs';
 
@@ -244,7 +244,7 @@ ${body}
 <p class="foot-tag">An independent directory of AI tools for game developers. Commercial-use terms sourced and dated, categories ranked on evidence.</p>
 ${footerSignup()}</div>
 <nav class="foot-col" aria-label="Explore"><h2>Explore</h2><a href="${L('/tools/')}">All tools</a><a href="${L('/category/')}">Best by category</a><a href="${L('/guides/')}">Guides</a><a href="${L('/compare/')}">Compare tools</a><a href="${L('/new/')}">New this week</a>${DEALS.length ? `<a href="${L('/deals/')}">Deals</a>` : ''}</nav>
-<nav class="foot-col" aria-label="Resources"><h2>Resources</h2><a href="${L('/cheat-sheet/')}">Can I ship it? cheat sheet</a><a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a><a href="${L('/how-we-rank/')}">How we rank</a><a href="${L('/badge/')}">"Listed on" badge</a></nav>
+<nav class="foot-col" aria-label="Resources"><h2>Resources</h2><a href="${L('/cheat-sheet/')}">Can I ship it? cheat sheet</a><a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a><a href="${L('/guides/open-weights-model-licences/')}">Open-weights licences</a><a href="${L('/how-we-rank/')}">How we rank</a><a href="${L('/badge/')}">"Listed on" badge</a></nav>
 <nav class="foot-col" aria-label="Company"><h2>Company</h2><a href="${L('/about/')}">About</a><a href="${L('/submit/')}">Submit a tool</a><a href="${L('/sponsor/')}">Advertise</a><a href="${mailto()}">Contact</a><a href="${L('/privacy/')}">Privacy</a></nav>
 </div>
 <div class="foot-bottom"><p>Facts come from each vendor's own website and are dated. Pricing and licences change often, so check the vendor's current terms before you rely on them. This isn't legal advice. <span class="aff-disc">${esc(AFFILIATE_NOTE)}</span></p>
@@ -589,26 +589,44 @@ ${CAT_GROUPS.map(gr => `<section class="hub-group" aria-labelledby="hg-${gr.keys
 ${newsletterBlock()}`,
 }));
 
-// ---------- Engine pages (one per ENGINE_PAGES entry with tagged tools) ----------
+// ---------- Editorial helpers shared by engine hubs and licence guides ----------
+// "Not stated by vendor" inside sourced text is shown muted, like empty data fields.
+const nsvText = x => esc(x).replace(/Not stated by vendor/g, NSV);
+const stmtN = x => `${nsvText(x.text)}${srcA(x.url)}`;
+// Visible FAQ (details/summary) + matching FAQPage JSON-LD (only questions shown on the page).
+const faqBlock = (faq, id = 'faq') => faq && faq.length ? `<section class="faq" aria-labelledby="${id}-h"><h2 class="sub-h" id="${id}-h">Questions</h2>${faq.map(f => `<details class="card faq-item"><summary>${esc(f.q)}</summary><p>${nsvText(f.a)}${f.url ? srcA(f.url) : ''}</p></details>`).join('')}</section>` : '';
+const faqLd = faq => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a + (f.url ? ` Source: ${f.url.startsWith('/') ? URL_(f.url) : f.url}` : '') } })) });
+// Engine hub section (content.mjs ENGINE_HUBS): heading, optional intro, optional table with sources, sourced statements, tool chips.
+const hubSection = sec => `<section class="card disc hub-sec"><h2>${esc(sec.h)}</h2>${sec.intro ? `<p class="hub-intro">${nsvText(sec.intro)}</p>` : ''}
+${sec.tools && sec.tools.length ? chips(sec.tools.map(sl => bySlug[sl]).filter(Boolean).map(t => chip(t.name, { tool: t, href: toolUrl(t) })), 'div') : ''}
+${sec.table ? `<div class="table-wrap"><table class="cmp hub-table"><thead><tr>${sec.table.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${sec.table.rows.map(r => `<tr>${r.map((c, i) => i ? `<td>${nsvText(c)}</td>` : `<th scope="row">${esc(c)}</th>`).join('')}</tr>`).join('')}</tbody></table></div>${sec.table.sources ? `<p class="note">Source: ${sec.table.sources.map(([l, u]) => `<a href="${esc(u)}" rel="noopener nofollow" target="_blank">${esc(l)}</a>`).join(', ')}.</p>` : ''}` : ''}
+${sec.items && sec.items.length ? `<ul>${sec.items.map(x => `<li>${stmtN(x)}</li>`).join('')}</ul>` : ''}</section>`;
+
+// ---------- Engine pages (one per ENGINE_PAGES entry with tagged tools; optional editorial hub from ENGINE_HUBS) ----------
 for (const { k, e, list } of engineList) {
   const p = `/engine/${e.page}/`;
   const desc = `${list.length} AI ${list.length === 1 ? 'tool' : 'tools'} for game developers whose vendor documents an official ${e.what} plugin, integration or export, with pricing and commercial-use terms from each vendor's site.`;
+  const H = ENGINE_HUBS[k];
   page(p, layout({
-    title: `${e.h1} (${SITE.updated.slice(0, 4)}) | ${SITE.name}`,
-    description: desc,
+    title: H && H.title ? H.title : `${e.h1} (${SITE.updated.slice(0, 4)}) | ${SITE.name}`,
+    description: H && H.description ? H.description : desc,
     pathname: p,
     og: ogFile(`engine/${e.page}`, 'page', { kicker: `Engine · ${list.length} ${list.length === 1 ? 'tool' : 'tools'}`, title: e.h1, sub: 'Official plugins, integrations and exports, with pricing and commercial-use terms, sourced and dated.' }),
     jsonld: [
       { '@context': 'https://schema.org', '@type': 'ItemList', name: e.h1, itemListElement: list.map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: URL_(`/tools/${t.slug}/`), name: t.name })) },
       crumbsLd([['All tools', '/'], [e.label, p]]),
+      ...(H && H.faq && H.faq.length ? [faqLd(H.faq)] : []),
     ],
     body: `
 <nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/#engines')}">Engines</a> › ${esc(e.label)}</nav>
 <h1 class="page-h">${esc(e.h1)}</h1>
+${H ? `<section class="card qa" aria-label="Short answer"><p class="qa-a"><span><b>Short answer:</b> ${nsvText(H.answer)}</span></p><p class="qa-terms">Every statement below links to its source. Checked ${timeEl(H.checked)}.</p></section>
+<h2 class="sub-h">Tools with an official ${esc(e.what)} plugin, integration or export</h2>` : ''}
 <p class="page-sub">${list.length} ${list.length === 1 ? 'tool whose vendor documents' : 'tools whose vendors document'} an official ${esc(e.what)} plugin, integration or export target, in alphabetical order (this isn't a ranking). Most other tools export standard files (PNG, FBX, GLB, WAV and so on) that work in any engine: see <a href="${L('/tools/')}">all tools</a>. Check each tool's commercial-use notes before you ship.</p>
 <div class="table-wrap"><table class="cmp"><thead><tr><th>Tool</th><th>Main task</th><th>Free plan</th><th>Commercial use</th></tr></thead><tbody>
 ${list.map(t => `<tr><td><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 24)}${esc(t.name)}</a></td><td><a href="${L(`/category/${TASKS[t.tasks[0]].page}/`)}">${esc(TASKS[t.tasks[0]].label)}</a></td><td>${isNsv(t.free) ? NSV : esc(FREE[t.free])}</td><td>${licBadge(t)}</td></tr>`).join('\n')}
 </tbody></table></div>
+${H ? H.sections.map(hubSection).join('\n') + faqBlock(H.faq) : ''}
 <p class="quick"><span>Other engines:</span>${engineList.filter(x => x.k !== k).map(x => chip(x.e.label, { href: L(`/engine/${x.e.page}/`) })).join('')}</p>
 <h2 class="sub-h">Tool details</h2>
 <div class="grid">${list.map(t => toolCard(t)).join('\n')}</div>
@@ -633,7 +651,7 @@ const guideChips = g => chips(g.tools.map(s => bySlug[s]).filter(Boolean).map(t 
 const engineBadges = g => (g.engines || []).map(e => badge(ENGINES[e], 'neutral')).join('');
 const FEATURED = GUIDES[0];
 const guideCard = g => linkCard({
-  href: L(`/guides/${g.slug}/`), title: g.title, kicker: esc(TASKS[g.task].label), media: artImg(guideArtPage(g)),
+  href: L(`/guides/${g.slug}/`), title: g.title, kicker: esc(g.kind || TASKS[g.task].label), media: artImg(guideArtPage(g)),
   desc: esc(g.outcome),
   foot: `${flowStrip(g)}<div class="card-foot"><span class="facts-line">${g.steps.length} steps${(g.engines || []).length ? ' · ' + g.engines.map(e => ENGINES[e]).join(', ') : ''}</span></div>`,
   attrs: ` data-task="${g.task}" data-engines="${(g.engines || []).join(' ')}"${g === FEATURED ? ' data-featured hidden' : ''}`,
@@ -642,7 +660,7 @@ const guideTasks = [...new Set(GUIDES.map(g => g.task))];
 const guideEngines = Object.keys(ENGINES).filter(e => GUIDES.some(g => (g.engines || []).includes(e)));
 page('/guides/', layout({
   title: `Workflow guides: AI tools in a game pipeline | ${SITE.name}`,
-  description: 'Step-by-step, sourced workflows for using AI tools in game development: 3D models to engine, voice to lip-sync, concept to texture set.',
+  description: 'Step-by-step, sourced guides for using AI tools in game development: 3D models to engine, voice to lip-sync, concept to texture set, and open-weights model licences.',
   pathname: '/guides/',
   og: ogFile('guides', 'page', { kicker: 'Workflow guides', title: 'AI tools in a game pipeline, step by step', sub: `${GUIDES.length} sourced workflows, each step linked to official documentation.`, artPage: TASKS[FEATURED.task].page }),
   body: `<h1 class="page-h">Workflow guides</h1><p class="page-sub">Factual steps with a link to the official documentation for each one. Checked ${timeEl(CHECKED)}.</p>
@@ -685,21 +703,30 @@ ${s.see ? `<p class="g-see"><b>You should see:</b> ${esc(s.see)}</p>` : ''}${s.g
 ${imgs}${vids}${s.source && s.source.url ? `<p class="g-src">From the official docs: <a href="${esc(s.source.url)}" rel="noopener nofollow" target="_blank">${esc(s.source.label || 'source')} ↗</a></p>` : ''}
 </div></li>`;
 }
+// Licence-style guides: an at-a-glance table (rows: model, asset, licence, outputs, limits, catch, tone, source).
+// Tone colours the licence badge only (commercial-use signal): ok = permissive, warn = conditions, unk = not verified.
+const GT_TONE = { ok: 'Permissive', warn: 'Conditions apply', bad: 'Not for commercial use', unk: 'Not verified' };
+const guideTable = g => `<section class="g-table" aria-labelledby="gt-h"><h2 class="g-h" id="gt-h">The licences at a glance</h2>
+<div class="table-wrap"><table class="cmp lic-table"><thead><tr>${g.table.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>
+${g.table.rows.map(r => `<tr><th scope="row">${esc(r.model)}<br>${badge(GT_TONE[r.tone] || GT_TONE.unk, GT_TONE[r.tone] ? r.tone : 'unk')}</th>${[esc(r.asset), nsvText(r.licence) + srcA(r.source, 'licence'), nsvText(r.outputs), nsvText(r.limits), nsvText(r.catch)].map((c, i) => `<td data-label="${esc(g.table.head[i + 1])}">${c}</td>`).join('')}</tr>`).join('\n')}
+</tbody></table></div><p class="note">Each row links to the licence or model card it quotes. Read the full licence for the exact version you use.</p></section>`;
 function guideV2(g, gt) {
   const shared = g.shared || [];
   return `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/guides/')}">Guides</a> › ${esc(g.title)}</nav>
 <article class="guide g2">
-<header class="guide-hero"><div class="guide-hero-art">${artImg(guideArtPage(g), { eager: true })}</div><div class="guide-hero-body"><span class="kicker">Workflow guide · ${esc(TASKS[g.task].label)}</span><h1>${esc(g.title)}</h1><p class="lead">${esc(g.result || g.outcome)}</p>
+<header class="guide-hero"><div class="guide-hero-art">${artImg(guideArtPage(g), { eager: true })}</div><div class="guide-hero-body"><span class="kicker">${esc(g.kind || 'Workflow guide')}${g.kind ? '' : ` · ${esc(TASKS[g.task].label)}`}</span><h1>${esc(g.title)}</h1><p class="lead">${esc(g.result || g.outcome)}</p>
 <p class="g-meta">${chips(gt.map(t => chip(t.name, { tool: t, href: toolUrl(t) })), 'div')}</p></div></header>
 ${flowStrip(g, { max: 5 })}
 <details class="card g-costs"><summary>Cost and licences of the AI tools in this guide</summary><ul class="cost-list">${gt.map(t => `<li><a class="tname" href="${toolUrl(t)}">${esc(t.name)}</a>${isNsv(t.commercial) ? '' : licBadge(t)}${isNsv(t.freeTier) ? '' : `<span>${esc(t.freeTier)}</span>`}${srcA(t.pricingSource, 'pricing')}</li>`).join('')}</ul></details>
+${g.table ? guideTable(g) : ''}
 ${shared.length ? `<h2 class="g-h">Everyone: steps 1–${shared.length}</h2><ol class="g-steps">${shared.map((s, i) => stepCard(g, s, i + 1)).join('\n')}</ol>` : ''}
 <section class="g-paths" aria-labelledby="path-h"><h2 class="g-h" id="path-h">Then pick your path</h2>
 <div class="g-tabs" role="tablist">${g.paths.map((pth, i) => `<button type="button" role="tab" class="chip" id="tab-${pth.key}" aria-controls="path-${pth.key}" aria-selected="${i === 0 ? 'true' : 'false'}" data-path="${pth.key}">${esc(pth.label)}</button>`).join('')}</div>
 ${g.paths.map((pth, i) => `<div class="g-path" id="path-${pth.key}" role="tabpanel" aria-labelledby="tab-${pth.key}"${i === 0 ? '' : ' data-hidden'}><h3 class="g-path-h">${esc(pth.label)}</h3><ol class="g-steps">${pth.steps.map((s, j) => stepCard(g, s, shared.length + j + 1)).join('\n')}</ol></div>`).join('\n')}
 </section>
 ${g.alternative ? `<aside class="card g-alt"><span class="kicker">Another option</span><p><b>${esc(g.alternative.name)}.</b> ${esc(g.alternative.note)} <a href="${esc(g.alternative.url)}" rel="noopener nofollow" target="_blank">Official repo ↗</a></p></aside>` : ''}
-<p class="note">Written from the official documentation linked on each step and checked ${timeEl(CHECKED)}. Menus and settings change between versions, so follow the linked docs if something looks different. No vendor reviews or pays for these guides.</p>
+${faqBlock(g.faq)}
+<p class="note">${g.note ? `${esc(g.note)} ` : ''}Written from the official documentation linked on each step and checked ${timeEl(CHECKED)}. ${g.kind ? '' : 'Menus and settings change between versions, so follow the linked docs if something looks different. '}No vendor reviews or pays for these guides.</p>
 </article>
 <section class="related"><div class="sec-head"><h2>Tools for this workflow</h2></div><div class="grid g3">${gt.map(t => toolCard(t, { compact: true })).join('\n')}</div></section>`;
 }
@@ -715,9 +742,9 @@ for (const g of GUIDES) {
   const p = `/guides/${g.slug}/`;
   const gt = g.tools.map(s => bySlug[s]).filter(Boolean);
   page(p, layout({
-    title: `${g.title} | ${SITE.name}`, description: g.description, pathname: p,
-    og: ogFile(`guides/${g.slug}`, 'page', { kicker: `Workflow guide · ${g.steps.length} steps`, title: g.title, sub: g.outcome, artPage: TASKS[g.task].page }),
-    jsonld: [{ '@context': 'https://schema.org', '@type': 'HowTo', name: g.title, description: g.description, step: g.steps.map((st, i) => ({ '@type': 'HowToStep', position: i + 1, name: st.h, text: st.p.map(x => x.text).join(' ') })) }],
+    title: g.metaTitle || `${g.title} | ${SITE.name}`, description: g.description, pathname: p,
+    og: ogFile(`guides/${g.slug}`, 'page', { kicker: `${g.kind || 'Workflow guide'} · ${g.steps.length} steps`, title: g.title, sub: g.outcome, artPage: TASKS[g.task].page }),
+    jsonld: [{ '@context': 'https://schema.org', '@type': 'HowTo', name: g.title, description: g.description, step: g.steps.map((st, i) => ({ '@type': 'HowToStep', position: i + 1, name: st.h, text: st.p.map(x => x.text).join(' ') })) }, ...(g.faq && g.faq.length ? [faqLd(g.faq)] : [])],
     scripts: g.paths ? GUIDE_V2_JS : '',
     body: g.paths ? guideV2(g, gt) : `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/guides/')}">Guides</a> › ${esc(g.title)}</nav>
 <article class="guide"><header class="guide-hero"><div class="guide-hero-art">${artImg(guideArtPage(g), { eager: true })}</div><div class="guide-hero-body"><span class="kicker">Workflow guide · ${esc(TASKS[g.task].label)}</span><h1>${esc(g.title)}</h1><p class="lead">${esc(g.intro)}</p></div></header>
@@ -1147,6 +1174,8 @@ const SHIP_DATA = Object.fromEntries(tools.map(t => [t.slug, {
   a: quickAnswer(t), c: isNsv(t.license) ? '' : (t.license.length > 240 ? t.license.slice(0, 237).replace(/\s+\S*$/, '') + '…' : t.license), src: t.licenseSource || '',
 }]));
 const homeBest = CAT_GROUPS.map(gr => `<div class="best-col"><h3>${esc(gr.h)}</h3><ul>${gr.keys.map(k => { const R = RANKED[k], r = R && R.rows[0]; return r ? `<li><a href="${L(`/category/${TASKS[k].page}/`)}"><span class="best-cat">${esc(TASKS[k].label)}</span><span class="best-tool">${logo(r.t, 22)}${esc(r.t.name)}${R.nEvidence ? '<i class="best-ev" title="Ranked on independent tests">●</i>' : ''}</span></a></li>` : ''; }).join('')}</ul></div>`).join('');
+// Home shows 3 guide cards (+3 resource cards = two full rows): the featured guide, then the two newest. All guides are on /guides/.
+const HOME_GUIDES = [GUIDES[0], ...GUIDES.slice(1).slice(-2).reverse()];
 page('/', layout({
   title: `${SITE.name}: the best AI tools for game developers, ranked`,
   description: SITE.description,
@@ -1186,7 +1215,7 @@ ${newRow.slice(0, NEW_MAX).map(({ t, n }) => toolCard(t, { compact: true, note: 
 <section class="res" aria-labelledby="res-h">
 <div class="sec-head"><h2 id="res-h">Guides and resources</h2><a href="${L('/guides/')}">All guides →</a></div>
 <div class="grid g3">
-${GUIDES.map(g => linkCard({ href: L(`/guides/${g.slug}/`), kicker: 'Workflow guide', title: g.title, media: artImg(guideArtPage(g)), foot: `${flowStrip(g)}<div class="card-foot"><span class="facts-line">${g.steps.length} steps</span></div>` })).join('\n')}
+${HOME_GUIDES.map(g => linkCard({ href: L(`/guides/${g.slug}/`), kicker: esc(g.kind || 'Workflow guide'), title: g.title, media: artImg(guideArtPage(g)), foot: `${flowStrip(g)}<div class="card-foot"><span class="facts-line">${g.steps.length} steps</span></div>` })).join('\n')}
 ${linkCard({ href: L('/steam-ai-disclosure/'), kicker: 'Store rules', title: DISCLOSURE.title, desc: esc(DISCLOSURE.description) })}
 ${linkCard({ href: L('/compare/'), kicker: 'Comparisons', title: `${COMPARE.length} side-by-side comparisons`, desc: 'Built only from published pricing, specs and licence terms.' })}
 ${linkCard({ href: L('/cheat-sheet/'), kicker: 'Cheat sheet', title: 'AI tools you can legally ship in a paid game', desc: 'Free-plan commercial use, the plan you need and the catch, for every tool.' })}

@@ -98,7 +98,7 @@
   "bestFor": "Studios training custom style models on their own art",
   "free": "yes",
   "freeTier": "50 daily credits; personal/evaluation use only",
-  "exportFormats": "unverified",
+  "exportFormats": "Images PNG, JPEG, WebP, SVG; video MP4, MOV, WebM, GIF; audio WAV, MP3; 3D GLB, OBJ, FBX, STL, VOX (pricing FAQ).",
   "revenue": "unverified",
   "api": {
    "status": "yes",
@@ -109,7 +109,8 @@
    "status": "official",
    "note": "Hosted MCP server (OAuth or API key)",
    "source": "https://mcp.scenario.com/docs"
-  }
+  },
+  "exportSource": "https://www.scenario.com/pricing"
  },
  {
   "slug": "leonardo-ai",
@@ -905,13 +906,13 @@
   ],
   "pricingModel": "freemium",
   "summary": "Text-to-music generator for full songs and instrumentals; used for prototyping soundtracks and menu music.",
-  "pricing": "Free $0/month (no commercial rights). Paid plans shown at $12 and $35 per month (yearly-billing savings advertised).",
+  "pricing": "Free $0/month (no commercial rights). Pro $15/month billed monthly, or $12/month billed yearly; Premier $45/month billed monthly, or $35/month billed yearly (pricing page, Monthly/Annual toggle). Currency not stated on the page.",
   "pricingSource": "https://suno.com/pricing",
   "commercial": "paid-only",
-  "license": "Terms: Pro/Premier subscribers are assigned Suno's rights in their Output; free/basic tier Outputs are for personal, non-commercial use only.",
-  "licenseSource": "https://suno.com/terms",
+  "license": "Terms: Pro/Premier subscribers are assigned Suno's rights in their Output; free/basic tier Outputs are for personal, non-commercial use only. Suno's help centre adds that subscribing after you made a song \"will not give you a retroactive license for the song\", so free-plan songs stay non-commercial after you upgrade; songs made while subscribed keep commercial rights even if you cancel.",
+  "licenseSource": "https://help.suno.com/en/articles/2410177",
   "lastChecked": "2026-10-17",
-  "verdict": "For prototype songs and menu music; free-tier output is personal, non-commercial use only.",
+  "verdict": "For prototype songs and menu music; free-tier output is personal, non-commercial use only, and upgrading later doesn't license songs made on the free plan.",
   "bestFor": "Prototype songs and menu music on a paid plan",
   "free": "yes",
   "freeTier": "Free $0; no commercial rights",
