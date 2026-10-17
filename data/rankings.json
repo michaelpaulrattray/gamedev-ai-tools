@@ -1,0 +1,29 @@
+{
+  "_doc": "Category rankings. Key = task key from TASKS in build.mjs. 'evidence' lists ONLY tools with independent quality evidence, in rank order (best first); each needs a 'why' and at least one source with a URL. Every other tool in the category is ranked after them by the published game-dev fit score (computed in build.mjs, see /how-we-rank/). 'labels' are optional short tags. 'notes' explain why evidence was NOT used for a tool. Re-check monthly and update 'checked'. Sponsors and affiliate links never change a ranking.",
+  "3d-models": {
+    "checked": "2026-10-17",
+    "evidence": [
+      {
+        "tool": "meshy",
+        "why": "Highest-ranked of these tools on 3D Arena's blind human-preference leaderboard: Meshy 6 is #3 and Meshy 7 is #5 of 24 image-to-3D models. Free-plan output can be used commercially if you credit Meshy (CC BY 4.0).",
+        "sources": [
+          { "label": "3D Arena leaderboard", "url": "https://huggingface.co/spaces/3d-arena/3d-arena" }
+        ]
+      },
+      {
+        "tool": "hunyuan3d",
+        "why": "On 3D Arena, Hunyuan3D 2 is #8 and Hunyuan3D 2.1 is #10 of 24 image-to-3D models. Free open weights you run on your own GPU, but the licence doesn't cover the EU, UK or South Korea.",
+        "sources": [
+          { "label": "3D Arena leaderboard", "url": "https://huggingface.co/spaces/3d-arena/3d-arena" }
+        ]
+      }
+    ],
+    "labels": {
+      "meshy": "Top pick",
+      "hunyuan3d": "Best free (self-hosted)"
+    },
+    "notes": {
+      "tripo": "Only Tripo's older open-source TripoSR model is on 3D Arena (#20 of 24). It isn't the model behind Tripo's paid service, so we don't use it here."
+    }
+  }
+}

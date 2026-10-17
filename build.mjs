@@ -235,7 +235,7 @@ ${body}
 ${footerSignup()}
 <p>An independent directory. Facts are taken from each vendor's own website and dated. Pricing and licences change often, so always check the vendor's current terms before you rely on them. This is not legal advice.</p>
 <p class="aff-disc">${esc(AFFILIATE_NOTE)}</p>
-<p class="foot-links"><a href="${L('/about/')}">About</a> · <a href="${L('/guides/')}">Guides</a> · <a href="${L('/compare/')}">Comparisons</a> · <a href="${L('/new/')}">New this week</a> · <a href="${L('/deals/')}">Deals</a> · <a href="${L('/cheat-sheet/')}">Cheat sheet</a> · <a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a> · <a href="${L('/badge/')}">Badge</a> · <a href="${L('/sponsor/')}">Advertise</a> ·<a href="${L('/privacy/')}">Privacy</a> · <a href="${mailto()}">Contact</a> · <a href="${L('/sitemap.xml')}">Sitemap</a> · Last updated ${timeEl(SITE.updated)}</p>
+<p class="foot-links"><a href="${L('/about/')}">About</a> · <a href="${L('/how-we-rank/')}">How we rank</a> · <a href="${L('/guides/')}">Guides</a> · <a href="${L('/compare/')}">Comparisons</a> · <a href="${L('/new/')}">New this week</a> · <a href="${L('/deals/')}">Deals</a> · <a href="${L('/cheat-sheet/')}">Cheat sheet</a> · <a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a> · <a href="${L('/badge/')}">Badge</a> · <a href="${L('/sponsor/')}">Advertise</a> ·<a href="${L('/privacy/')}">Privacy</a> · <a href="${mailto()}">Contact</a> · <a href="${L('/sitemap.xml')}">Sitemap</a> · Last updated ${timeEl(SITE.updated)}</p>
 </div></footer>
 ${scripts}
 </body>
@@ -382,13 +382,42 @@ ${linkCard({ href: L('/cheat-sheet/'), kicker: 'Cheat sheet', title: 'AI tools y
 <div class="how-grid">
 <div class="card"><h3>Sourced</h3><p>Pricing and commercial-use notes come from each vendor's own pages, and every listing links to its source.</p></div>
 <div class="card"><h3>Dated</h3><p>Each tool shows the date we last checked it. Anything the vendor doesn't clearly state is marked "Not stated by vendor".</p></div>
-<div class="card"><h3>Not a ranking</h3><p>Tools are listed alphabetically, with no reviews or ratings. Sponsors and affiliate links never change a listing, its position or its verdict.</p></div>
+<div class="card"><h3>Rankings you can check</h3><p>Categories are ranked by independent quality tests where they exist, then by fit for game devs, with sources. Sponsors and affiliate links never change a listing, its rank or its verdict. <a href="${L('/how-we-rank/')}">How we rank</a></p></div>
 </div>
 </section>
 ${newsletterBlock()}`,
   scripts: `<script>window.TOOLS=${JSON.stringify(tools.map(t => ({ slug: t.slug, name: t.name, summary: t.summary + ' ' + t.verdict + ' ' + t.bestFor, tasks: t.tasks, engines: t.engines, free: t.free, commercial: t.commercial }))).replace(/</g, '\\u003c')};</script>
 <script src="${L('/assets/app.js')}"></script>`,
 }));
+
+// ---------- Rankings (data/rankings.json + published fit score; method on /how-we-rank/) ----------
+// Tier 1: tools with independent quality evidence, in the order given in rankings.json (each needs a why + source).
+// Tier 2: every other tool in the category, ordered by the game-dev fit score below. Sponsors/affiliates never affect either.
+const RANKINGS = readJson('data/rankings.json', {});
+const FIT_COM = { yes: 3, 'paid-only': 2, restricted: 1 };
+const FIT_ENGINES = ['godot', 'unity', 'unreal'];
+const fitScore = (t, key) => (FIT_COM[t.commercial] || 0) + FIT_ENGINES.filter(e => t.engines.includes(e)).length
+  + (t.api.status === 'yes' ? 1 : 0) + (t.mcp.status === 'official' ? 1 : 0) + (t.tasks[0] === key ? 2 : 0) + (t.free === 'yes' ? 0.5 : 0);
+const FIT_COM_TEXT = { yes: 'commercial use allowed', 'paid-only': 'commercial use on paid plans', restricted: 'commercial use restricted', no: 'commercial use not allowed', unverified: 'commercial terms not stated by vendor', 'n-a': 'doesn\'t make shippable assets' };
+function fitWhy(t, note) {
+  const eng = FIT_ENGINES.filter(e => t.engines.includes(e)).map(e => ENGINES[e]);
+  const parts = [FIT_COM_TEXT[t.commercial] || FIT_COM_TEXT.unverified, eng.length ? `${eng.join(', ')} ${eng.length === 1 ? 'integration' : 'integrations'}` : 'no engine integration stated', [t.api.status === 'yes' ? 'API' : '', t.mcp.status === 'official' ? 'official MCP server' : ''].filter(Boolean).join(' and ')].filter(Boolean);
+  return `No independent quality tests found. Ranked on game-dev fit: ${parts.join('; ')}.${note ? ' ' + note : ''}`;
+}
+const RANKED = {};
+for (const key of Object.keys(TASKS)) {
+  const R = RANKINGS[key], list = tools.filter(t => t.tasks.includes(key));
+  const ev = R && Array.isArray(R.evidence) ? R.evidence.filter(e => e && e.why && Array.isArray(e.sources) && e.sources.some(s => s.url) && list.some(t => t.slug === e.tool)) : [];
+  if (!ev.length) continue; // no evidence yet: category stays alphabetical
+  const evSlugs = ev.map(e => e.tool);
+  const rest = list.filter(t => !evSlugs.includes(t.slug)).sort((a, b) => fitScore(b, key) - fitScore(a, key) || a.name.localeCompare(b.name));
+  const rows = [...ev.map(e => ({ t: bySlug[e.tool], tier: 'evidence', why: e.why, sources: e.sources.filter(s => s.url) })),
+    ...rest.map(t => ({ t, tier: 'fit', why: fitWhy(t, R.notes && R.notes[t.slug]), sources: [] }))];
+  rows.forEach((r, i) => { r.n = i + 1; r.label = (R.labels && R.labels[r.t.slug]) || ''; });
+  RANKED[key] = { checked: R.checked || CHECKED, rows, nEvidence: ev.length };
+}
+const rankOf = (slug, key) => { const R = RANKED[key]; const r = R && R.rows.find(x => x.t.slug === slug); return r || null; };
+const rankSources = r => r.sources.map(s => `<a class="src" href="${esc(s.url)}" rel="noopener nofollow" target="_blank">${esc(s.label || 'source')}</a>`).join(' ');
 
 // ---------- Tool pages ----------
 // Quick answer: one sentence derived strictly from the `commercial` field (plus `free` for "no free plan");
@@ -458,6 +487,7 @@ for (const t of tools) {
 <p class="lead">${esc(t.summary)}</p>
 <p class="tool-cta">${t.affiliateUrl ? `<a class="btn" href="${esc(t.affiliateUrl)}" rel="sponsored noopener" target="_blank">Visit official site ↗</a><small class="aff-note">${esc(AFFILIATE_NOTE)}</small>` : `<a class="btn" href="${esc(t.url)}" rel="noopener nofollow" target="_blank">Visit official site ↗</a>`}${isNsv(t.pricingModel) ? '' : badge(PRICING[t.pricingModel], 'neutral')}${licBadge(t)}</p>
 </div></header>
+${(() => { const r = rankOf(t.slug, t.tasks[0]); return r ? `<p class="rank-chip"><a href="${L(`/category/${TASKS[t.tasks[0]].page}/`)}"><b>#${r.n}</b> in ${esc(TASKS[t.tasks[0]].label)}</a>${r.label ? badge(r.label, 'accent') : ''}<span>${r.tier === 'evidence' ? 'based on independent tests' : 'ranked on game-dev fit'} · <a href="${L('/how-we-rank/')}">how we rank</a></span></p>` : ''; })()}
 <section class="card qa" aria-labelledby="qa-h">
 <h2 id="qa-h">${esc(q)}</h2>
 <p class="qa-a">${badge(QA_SHORT[t.commercial] || NSV_TEXT, licTone(t), { cls: 'b-lg' })} <span>${esc(answer)}</span></p>
@@ -499,6 +529,22 @@ function catFilters(list) {
   const anyFree = list.some(t => t.free === 'yes'), anyShip = list.some(t => t.commercial === 'yes');
   return `<div class="chip-filters cat-filters" role="group" aria-label="Filter tools"><div class="chips"><span class="cf-label">Filter</span>${anyFree ? chip('Free plan', { filter: ['free', '1'] }) : ''}${anyShip ? chip('Commercial use allowed', { filter: ['ship', '1'] }) : ''}${engs.map(e => chip(`Works with ${ENGINES[e]}`, { filter: ['eng', e] })).join('')}<span class="cf-count" aria-live="polite"></span></div></div>`;
 }
+function catTable(list, R) {
+  const row = (t, r) => `<tr ${catAttrs(t)}${r ? ` data-rank="${r.n}" data-alpha="${list.indexOf(t)}"${r.n === 1 ? ' class="is-top"' : ''}` : ''}>${R ? `<td class="td-rank">${r.n}</td>` : ''}<td><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 24)}${esc(t.name)}</a>${r && r.label ? `<span class="row-label">${esc(r.label)}</span>` : ''}</td><td>${isNsv(t.free) ? NSV : esc(FREE[t.free])}</td><td>${licBadge(t)}</td><td>${isNsv(t.api.status) ? NSV : esc(API_L[t.api.status])}</td><td>${isNsv(t.mcp.status) ? NSV : esc(MCP_L[t.mcp.status])}</td><td class="td-visit">${visitBtn(t, { cls: 'visit-sm', label: 'Visit' })}</td></tr>`;
+  const cols = R ? 7 : 6;
+  const body = R
+    ? R.rows.map(r => `${r.tier === 'fit' && r.n === R.nEvidence + 1 ? `<tr class="tier-row"><td colspan="${cols}">No independent quality tests yet for the tools below: ranked on game-dev fit. <a href="${L('/how-we-rank/')}">How</a></td></tr>\n` : ''}${row(r.t, r)}`).join('\n')
+    : list.map(t => row(t, null)).join('\n');
+  return `${R ? `<div class="rank-switch" role="group" aria-label="Order"><button type="button" class="chip" data-order="rank" aria-pressed="true">Ranked</button><button type="button" class="chip" data-order="alpha" aria-pressed="false">A–Z</button></div>` : ''}<div class="table-wrap"><table class="cmp cat-table"><thead><tr>${R ? '<th class="td-rank">#</th>' : ''}<th>Tool</th><th>Free plan</th><th>Commercial use</th><th>API</th><th>MCP</th><th><span class="sr-only">Visit</span></th></tr></thead><tbody>
+${body}
+</tbody></table>`;
+}
+const RANK_SWITCH_JS = `<script>(function(){var bs=document.querySelectorAll('.rank-switch button');if(!bs.length)return;
+function order(by){[document.querySelector('.cat-table tbody'),document.querySelector('.ranked-cards')].forEach(function(box){if(!box)return;var items=[].slice.call(box.querySelectorAll('[data-rank]'));items.sort(function(a,b){return (+a.dataset[by])-(+b.dataset[by]);});items.forEach(function(el){box.appendChild(el);});});
+var tr=document.querySelector('.tier-row');if(tr){tr.hidden=by!=='rank';if(by==='rank'){var first=document.querySelector('.cat-table tbody [data-rank="'+tr.dataset.before+'"]');if(first)first.parentNode.insertBefore(tr,first);}}
+document.querySelectorAll('.rank-n').forEach(function(n){n.style.visibility=by==='rank'?'':'hidden';});document.querySelectorAll('.td-rank').forEach(function(n){n.style.visibility=by==='rank'?'':'hidden';});}
+var tr=document.querySelector('.tier-row');if(tr){var nx=tr.nextElementSibling;if(nx)tr.dataset.before=nx.dataset.rank;}
+bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});order(b.dataset.order==='alpha'?'alpha':'rank');});});})();</script>`;
 const CAT_FILTER_JS = `<script>(function(){var f={free:'',ship:'',eng:''},els=document.querySelectorAll('[data-free]'),cnt=document.querySelector('.cf-count'),empty=document.querySelector('.cat-empty');
 function ok(el){return (!f.free||el.dataset.free==='1')&&(!f.ship||el.dataset.ship==='1')&&(!f.eng||(' '+el.dataset.eng+' ').indexOf(' '+f.eng+' ')!==-1);}
 function apply(){var n=0,on=f.free||f.ship||f.eng;els.forEach(function(el){var y=ok(el);el.hidden=!y;if(y&&el.tagName==='TR')n++;});if(cnt)cnt.textContent=on?n+(n===1?' tool matches':' tools match'):'';if(empty)empty.hidden=!(on&&n===0);}
@@ -520,24 +566,23 @@ for (const [key, c] of Object.entries(TASKS)) {
     description: desc,
     pathname: p,
     og: ogFile(`category/${c.page}`, 'page', { kicker: `Category · ${list.length} ${list.length === 1 ? 'tool' : 'tools'}`, title: c.h1, sub: 'Pricing and commercial-use terms from each vendor, sourced and dated.', artPage: c.page }),
-    jsonld: [{ '@context': 'https://schema.org', '@type': 'ItemList', name: c.h1, itemListElement: list.map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: URL_(`/tools/${t.slug}/`), name: t.name })) }],
+    jsonld: [{ '@context': 'https://schema.org', '@type': 'ItemList', name: c.h1, itemListElement: (RANKED[key] ? RANKED[key].rows.map(r => r.t) : list).map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: URL_(`/tools/${t.slug}/`), name: t.name })) }],
     body: `
 <nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/category/')}">Categories</a> › ${esc(c.label)}</nav>
 <header class="cat-hero">${artImg(c.page, { eager: true })}<div>
 <h1>Best ${esc(c.h1)}</h1>
-<p>${list.length} tools, in alphabetical order (this isn't a ranking). Check each tool's commercial-use notes before you ship assets in a game.</p>
+${RANKED[key] ? `<p>${list.length} tools, ranked: first by independent quality tests where they exist, then by fit for game devs. Paid placements never change the order. <a href="${L('/how-we-rank/')}">How we rank</a> · Checked ${timeEl(RANKED[key].checked)}</p>` : `<p>${list.length} tools, in alphabetical order (not ranked yet). Check each tool's commercial-use notes before you ship assets in a game.</p>`}
 </div></header>
 ${catFilters(list)}
-<div class="table-wrap"><table class="cmp cat-table"><thead><tr><th>Tool</th><th>Free plan</th><th>Commercial use</th><th>API</th><th>MCP</th><th><span class="sr-only">Visit</span></th></tr></thead><tbody>
-${list.map(t => `<tr ${catAttrs(t)}><td><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 24)}${esc(t.name)}</a></td><td>${isNsv(t.free) ? NSV : esc(FREE[t.free])}</td><td>${licBadge(t)}</td><td>${isNsv(t.api.status) ? NSV : esc(API_L[t.api.status])}</td><td>${isNsv(t.mcp.status) ? NSV : esc(MCP_L[t.mcp.status])}</td><td class="td-visit">${visitBtn(t, { cls: 'visit-sm', label: 'Visit' })}</td></tr>`).join('\n')}
-</tbody></table><p class="cat-empty" hidden>No tools match these filters. <button type="button" class="linkish" data-reset>Clear filters</button></p></div>
+${catTable(list, RANKED[key])}<p class="cat-empty" hidden>No tools match these filters. <button type="button" class="linkish" data-reset>Clear filters</button></p></div>
 ${list.length > 1 ? `<div class="cmp-row" style="margin-top:6px"><span>Compare side by side:</span>${cp.map(cmpChip).join('')}<a class="chip c-muted" href="${L(`/compare/?task=${key}`)}">Pick any two →</a></div>` : ''}
 ${GUIDES.filter(g => g.task === key).map(g => `<section class="rel-guide" aria-label="Related guide">${linkCard({ href: L(`/guides/${g.slug}/`), title: g.title, kicker: 'Related workflow guide', desc: esc(g.outcome), media: artImg(guideArtPage(g)), foot: flowStrip(g, { max: 4 }), cls: 'feature' })}</section>`).join('\n')}
-<h2 class="sub-h">Verdicts</h2>
-<div class="grid">${list.map(t => toolCard(t, { attrs: catAttrs(t) })).join('\n')}
+${RANKED[key] ? `<h2 class="sub-h">Why each tool ranks where it does</h2>
+<div class="grid ranked-cards">${RANKED[key].rows.map(r => toolCard(r.t, { attrs: `${catAttrs(r.t)} data-rank="${r.n}" data-alpha="${list.indexOf(r.t)}"`, note: `<p class="rank-line"><span class="rank-n">#${r.n}</span>${r.label ? badge(r.label, 'accent') : ''}<span class="rank-tier">${r.tier === 'evidence' ? 'Independent tests' : 'Game-dev fit'}</span></p><p class="rank-why">${esc(r.why)} ${rankSources(r)}</p>\n` })).join('\n')}` : `<h2 class="sub-h">Verdicts</h2>
+<div class="grid">${list.map(t => toolCard(t, { attrs: catAttrs(t) })).join('\n')}`}
 ${sponsorCard()}</div>
 ${newsletterBlock()}`,
-    scripts: CAT_FILTER_JS,
+    scripts: CAT_FILTER_JS + (RANKED[key] ? RANK_SWITCH_JS : ''),
   }));
 }
 page('/category/', layout({
@@ -863,6 +908,29 @@ page('/sponsor/', layout({
   scripts: `<script>if(/[?&]paid=1(&|$)/.test(location.search))document.getElementById('paid-thanks').hidden=false;</script>`,
 }));
 
+// ---------- How we rank ----------
+page('/how-we-rank/', layout({
+  title: `How we rank AI tools for game devs | ${SITE.name}`,
+  description: 'How GameDev AI Tools ranks AI tools in each category: independent quality tests first, then a published game-dev fit score. Sponsors and affiliate links never change a rank.',
+  pathname: '/how-we-rank/',
+  body: `<h1 class="page-h">How we rank</h1>
+<p class="page-sub">Each category is ranked in two steps. Every rank shows its reason and its sources, so you can check it.</p>
+<div class="prose">
+<section class="card"><span class="kicker">Step 1</span><h2>Independent quality tests</h2><p>If a tool appears in independent quality testing, it's ranked first, in the order that evidence shows. We use public blind-vote leaderboards (for example <a href="https://huggingface.co/spaces/3d-arena/3d-arena" rel="noopener nofollow" target="_blank">3D Arena</a> for 3D models), public benchmarks and reputable published reviews. We link every source and show the date we checked it. We only use results for the model the tool's service actually runs, not an older or different model from the same company.</p></section>
+<section class="card"><span class="kicker">Step 2</span><h2>Game-dev fit, for tools without independent tests</h2><p>Tools without independent tests are ranked after those that have them, by a fit score built only from facts on each vendor's own pages:</p><ul>
+<li><b>Commercial use:</b> allowed (3 points), paid plans only (2), restricted (1), not stated (0).</li>
+<li><b>Engines:</b> 1 point each for a stated Godot, Unity or Unreal integration.</li>
+<li><b>Automation:</b> 1 point for a public API, 1 for an official MCP server.</li>
+<li><b>Focus:</b> 2 points if this category is the tool's main job.</li>
+<li><b>Free plan:</b> half a point, as a tie-breaker.</li></ul>
+<p>Ties are broken alphabetically. The page says which tools are ranked this way.</p></section>
+<section class="card"><span class="kicker">Always</span><h2>What never changes a rank</h2><ul>
+<li>Sponsorship, affiliate commissions and vendor requests never change a rank, a verdict or a listing.</li>
+<li>If there's no evidence, we say so. We don't guess.</li>
+<li>Rankings are re-checked monthly. Spotted something out of date? Email <a href="${mailto('Ranking correction')}">${EMAIL}</a> with a link.</li></ul></section>
+</div>`,
+}));
+
 // ---------- About ----------
 page('/about/', layout({
   title: `About | ${SITE.name}`,
@@ -876,7 +944,7 @@ page('/about/', layout({
 <li><b>Sourced facts.</b> Pricing, free plans, licences, export formats, API and MCP details come from each vendor's own website, with a link to the source.</li>
 <li><b>Dated checks.</b> Every listing shows the date we last checked it, and we re-check listings regularly.</li>
 <li><b>"Not stated by vendor" when unknown.</b> If a vendor's pages don't clearly answer something, we say so rather than guess.</li>
-<li><b>Ordering and verdicts are never bought.</b> Tools are listed alphabetically. Each verdict is one line written only from the sourced facts. There are no ratings, reviews or winners, and sponsors and affiliate links never change a listing, its position or its verdict.</li>
+<li><b>Rankings and verdicts are never bought.</b> Category rankings use independent quality tests (such as public blind-vote leaderboards) where they exist, then a published game-dev fit score; see <a href="${L('/how-we-rank/')}">How we rank</a>. Each verdict is one line written only from the sourced facts. Sponsors and affiliate links never change a listing, its rank or its verdict.</li>
 </ul></section>
 <section class="card"><h2>How we make money</h2><ul>
 <li><b>Sponsorship:</b> a labelled sponsored card on the homepage and every category page, plus the strip across the top of every page, for a week, and a mention in our newsletter. See <a href="${L('/sponsor/')}">Sponsor us</a>.</li>
