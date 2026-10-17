@@ -594,11 +594,57 @@ ${newsletterBlock()}`,
     scripts: CAT_FILTER_JS + (RANKED[key] ? RANK_SWITCH_JS : ''),
   }));
 }
+// ---------- Categories hub: top picks + categories grouped by pipeline stage, each card showing its ranked top 3 ----------
+const CAT_GROUPS = [
+  { h: 'Art & assets', sub: 'Concepts, models, materials and motion', keys: ['concept-art', '3d-models', 'textures', 'animation'] },
+  { h: 'Sound', sub: 'Character voices, music and effects', keys: ['voice', 'audio'] },
+  { h: 'Gameplay & code', sub: 'Characters that talk back, code and worlds', keys: ['npc', 'code', 'level'] },
+  { h: 'Ship it', sub: 'Translation, testing and trailers', keys: ['localisation', 'qa', 'marketing'] },
+];
+const CAT_BLURB = {
+  'concept-art': 'Concept art, sprites, pixel art, icons and skyboxes.',
+  '3d-models': 'Text- or image-to-3D props, characters and environment pieces.',
+  'textures': 'Tileable materials, PBR maps and textures for 3D models.',
+  'animation': 'Auto-rigging, keyframe help and video-to-mocap.',
+  'voice': 'Text-to-speech and voice lines for characters.',
+  'audio': 'Soundtracks, loops and sound effects.',
+  'npc': 'Conversational NPCs with memory, voice and goals.',
+  'code': 'Coding assistants and in-editor helpers for game code.',
+  'level': 'Explorable worlds, levels and terrain from prompts or images.',
+  'localisation': 'Translating and managing your game\'s text.',
+  'qa': 'Automated playtesting and bug finding.',
+  'marketing': 'Trailer shots, key art and promo clips.',
+};
+const catGuides = key => GUIDES.filter(g => g.task === key);
+const catPairs = key => COMPARE.filter(([a, b]) => bySlug[a].tasks.includes(key) && bySlug[b].tasks.includes(key));
+function hubCard(key) {
+  const c = TASKS[key], list = tools.filter(t => t.tasks.includes(key));
+  if (!list.length) return '';
+  const R = RANKED[key];
+  const top = R ? R.rows.slice(0, 3) : list.slice(0, 3).map(t => ({ t }));
+  const lead = R && R.rows[0];
+  const gs = catGuides(key), ps = catPairs(key);
+  return `<article class="card is-link hub-card">
+<div class="card-media hub-media">${artImg(c.page)}<span class="hub-count">${list.length} ${list.length === 1 ? 'tool' : 'tools'}</span></div>
+<h3><a class="card-link" href="${L(`/category/${c.page}/`)}">${esc(c.label)}</a></h3>
+<p class="card-desc">${esc(CAT_BLURB[key] || '')}</p>
+${lead ? `<div class="hub-top"><span class="hub-n">#1</span>${logo(lead.t, 32)}<span class="hub-top-txt"><b>${esc(lead.t.name)}</b><small>${esc(lead.label || (lead.tier === 'evidence' ? 'Best on independent tests' : 'Best fit for game devs'))}</small></span></div>` : ''}
+<div class="hub-next">${top.slice(lead ? 1 : 0).map((r, i) => `<span class="hub-mini" title="${esc(r.t.name)}">${R ? `<em>#${i + 2}</em>` : ''}${logo(r.t, 22)}${esc(r.t.name)}</span>`).join('')}</div>
+<div class="hub-foot">${R ? `<span class="hub-basis${R.nEvidence ? ' is-ev' : ''}">${R.nEvidence ? 'Independent tests' : 'Ranked on features'}</span>` : ''}<span class="hub-links">${gs.length ? `<a class="above" href="${L(`/guides/${gs[0].slug}/`)}">Guide</a>` : ''}${ps.length ? `<a class="above" href="${L(`/compare/?task=${key}`)}">Compare</a>` : ''}</span></div>
+</article>`;
+}
+const topPicks = Object.keys(TASKS).map(k => ({ k, R: RANKED[k] })).filter(x => x.R && x.R.nEvidence).map(({ k, R }) => ({ k, r: R.rows[0], joint: R.rows[1] && R.rows[0].label && R.rows[1].label === R.rows[0].label ? R.rows[1] : null }));
 page('/category/', layout({
-  title: `Categories: AI tools for game developers | ${SITE.name}`,
-  description: 'Browse AI tools for game development by task: concept art, 3D models, textures, animation, voice, music, NPCs, code, levels, localisation, QA and trailers.',
+  title: `Best AI tools for every part of game development | ${SITE.name}`,
+  description: 'The best AI tools for each game-dev job, ranked: concept art, 3D models, textures, animation, voice, music, NPCs, code, levels, localisation, QA and trailers.',
   pathname: '/category/',
-  body: `<h1 class="page-h">Browse by task</h1><p class="page-sub">Pick a task to compare tools side by side, with pricing and commercial-use notes.</p><div class="tiles big">${catIndex.map(({ c, n }) => tile(c, n)).join('')}</div>
+  og: ogFile('category-hub', 'page', { kicker: 'Categories', title: 'The best AI tool for every part of your game', sub: `${Object.keys(TASKS).length} categories, ranked on independent tests where they exist.` }),
+  body: `<h1 class="page-h">The best AI tool for every part of your game</h1>
+<p class="page-sub">${Object.keys(TASKS).length} categories, each ranked: independent quality tests first where they exist, then fit for game devs. <a href="${L('/how-we-rank/')}">How we rank</a></p>
+${topPicks.length ? `<section class="hub-picks" aria-labelledby="picks-h"><div class="sec-head"><h2 id="picks-h">Top picks backed by independent tests</h2></div>
+<div class="picks-row">${topPicks.map(({ k, r, joint }) => `<a class="pick" href="${L(`/category/${TASKS[k].page}/`)}">${logo(r.t, 40)}<span class="pick-txt"><small>${esc(TASKS[k].label)}</small><b>${esc(joint ? `${r.t.name} / ${joint.t.name}` : r.t.name)}</b></span><span class="pick-n">${joint ? 'Joint #1' : '#1'}</span></a>`).join('')}</div></section>` : ''}
+${CAT_GROUPS.map(gr => `<section class="hub-group" aria-labelledby="hg-${gr.keys[0]}"><div class="sec-head"><h2 id="hg-${gr.keys[0]}">${esc(gr.h)}</h2><p>${esc(gr.sub)}</p></div>
+<div class="grid hub-grid">${gr.keys.map(hubCard).join('\n')}</div></section>`).join('\n')}
 ${newsletterBlock()}`,
 }));
 
