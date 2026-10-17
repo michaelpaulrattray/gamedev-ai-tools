@@ -238,7 +238,7 @@ main.wrap>p,main.wrap>ul{color:#c9cfdd;max-width:760px}
 .vs-head .vs-label{background:transparent}
 .vs-tool{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
 .vs-tool .cmp-tool{font-size:1.02rem}
-.vs-row .badge,.facts .badge,.cmp .badge{white-space:normal}
+.vs-row .badge,.facts .badge{white-space:normal}
 /* new */
 .week-h{font-size:1.2rem;margin:34px 0 12px;display:flex;align-items:baseline;gap:10px}
 .week-h small{font-size:.82rem;color:var(--dim);font-weight:400}
