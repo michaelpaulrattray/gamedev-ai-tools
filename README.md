@@ -1,6 +1,6 @@
 # GameDev AI Tools
 
-A free, static directory of AI tools for game developers. You can filter by task (pixel art and sprites, 3D models, textures, animation, music, voice, NPC dialogue, code), engine (Unity, Godot, Unreal), pricing model and commercial-use licence.
+A free, static directory of AI tools for game developers. You can filter by task (12 categories, from concept art and 3D models to localisation, QA and trailers), engine (Unity, Godot, Unreal), free plan and whether it's safe to ship commercially. Also generates `/llms.txt` and `/llms-full.txt`.
 
 Live: https://gamedevaitools.com (Vercel). The old GitHub Pages URL redirects there.
 
