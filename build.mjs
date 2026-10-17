@@ -34,14 +34,25 @@ const COMMERCIAL = { 'yes': 'Commercial use allowed', 'paid-only': 'Commercial o
 const tools = JSON.parse(fs.readFileSync('data/tools.json', 'utf8')).sort((a, b) => a.name.localeCompare(b.name));
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const ld = o => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`;
+const LOGOS = new Set(fs.existsSync('src/assets/logos') ? fs.readdirSync('src/assets/logos').filter(f => f.endsWith('.png')).map(f => f.slice(0, -4)) : []);
+const hue = s => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
+const initials = n => n.replace(/[^A-Za-z0-9 ]/g, '').split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+const logo = (t, size = 44, eager = false) => LOGOS.has(t.slug)
+  ? `<img class="tlogo" src="${L(`/assets/logos/${t.slug}.png`)}" alt="" width="${size}" height="${size}"${eager ? '' : ' loading="lazy"'} decoding="async">`
+  : `<span class="tlogo mono" aria-hidden="true" style="--h:${hue(t.slug)};width:${size}px;height:${size}px">${esc(initials(t.name))}</span>`;
+const catImg = page => L(`/assets/img/${page}.webp`);
+const ICON_SEARCH = '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
+const MARK = '<svg aria-hidden="true" width="28" height="28" viewBox="0 0 32 32"><defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#gm)"/><path d="M9 13h4m-2-2v4" stroke="#0b0d14" stroke-width="2.2" stroke-linecap="round"/><circle cx="20" cy="12.5" r="1.6" fill="#0b0d14"/><circle cx="23" cy="15.5" r="1.6" fill="#0b0d14"/><path d="M7 19c0-3 1.5-5 5-5h8c3.5 0 5 2 5 5v1.5c0 2-2.4 2.8-3.8 1.3L19 19.5h-6l-2.2 2.3C9.4 23.3 7 22.5 7 20.5z" fill="none" stroke="#0b0d14" stroke-width="2"/></svg>';
 const engineText = t => t.engines.filter(e => ENGINES[e]).map(e => ENGINES[e]).join(', ') || 'Any (standard file export / engine-agnostic)';
 
-function layout({ title, description, pathname, body, jsonld = [], scripts = '', noindex = false }) {
+function layout({ title, description, pathname, body, jsonld = [], scripts = '', noindex = false, head = '' }) {
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0d14">
+<meta name="color-scheme" content="dark">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${URL_(pathname)}">${noindex ? '\n<meta name="robots" content="noindex">' : ''}
@@ -51,18 +62,19 @@ function layout({ title, description, pathname, body, jsonld = [], scripts = '',
 <meta property="og:url" content="${URL_(pathname)}">
 <meta property="og:site_name" content="${SITE.name}">
 <meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="${L('/assets/style.css')}">
+<link rel="stylesheet" href="${L('/assets/style.css')}">${head}
 ${jsonld.map(ld).join('\n')}
 </head>
 <body>
 <header class="site-header"><div class="wrap">
-<a class="logo" href="${L('/')}">🎮 ${SITE.name}</a>
-<nav><a href="${L('/')}">All tools</a><a href="${L('/category/')}">Categories</a><a href="${L('/submit/')}">Submit a tool</a><a href="${L('/get-featured/')}">Get featured</a></nav>
+<a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a>
+<nav><a href="${L('/#tools')}">All tools</a><a href="${L('/category/')}">Categories</a><a href="${L('/get-featured/')}">Get featured</a><a class="nav-cta" href="${L('/submit/')}">Submit a tool</a></nav>
 </div></header>
 <main class="wrap">
 ${body}
 </main>
 <footer class="site-footer"><div class="wrap">
+<p class="foot-brand"><a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a></p>
 <p>Facts are taken from each vendor's own website and dated. Pricing and licences change often, so always check the vendor's current terms before you rely on them. This is not legal advice. No affiliate links.</p>
 <p><a href="${L('/privacy/')}">Privacy</a> · <a href="${L('/get-featured/')}">Get featured</a> · <a href="${L('/sitemap.xml')}">Sitemap</a> · Last updated ${SITE.updated}</p>
 </div></footer>
@@ -74,11 +86,10 @@ ${scripts}
 
 function card(t) {
   return `<article class="card" data-slug="${t.slug}">
-<h3><a href="${L(`/tools/${t.slug}/`)}">${esc(t.name)}</a></h3>
-<p>${esc(t.summary)}</p>
+<div class="card-top">${logo(t)}<div class="card-title"><h3><a href="${L(`/tools/${t.slug}/`)}">${esc(t.name)}</a></h3><span class="price">${esc(PRICING[t.pricingModel])}</span></div><span class="arrow" aria-hidden="true">→</span></div>
+<p class="summary">${esc(t.summary)}</p>
 <p class="verdict"><strong>Verdict:</strong> ${esc(t.verdict)}</p>
-<ul class="tags">${t.tasks.map(k => `<li>${esc(TASKS[k].label)}</li>`).join('')}</ul>
-<p class="meta"><span class="pill price">${esc(PRICING[t.pricingModel])}</span> <span class="pill lic lic-${t.commercial}">${esc(COMMERCIAL[t.commercial])}</span></p>
+<div class="card-foot"><ul class="tags">${t.tasks.map(k => `<li>${esc(TASKS[k].label)}</li>`).join('')}</ul><span class="pill lic lic-${t.commercial}">${esc(COMMERCIAL[t.commercial])}</span></div>
 </article>`;
 }
 
@@ -90,7 +101,7 @@ const page = (p, html, { sitemap = true } = {}) => { write(p === '/' ? 'index.ht
 
 const HONEYPOT = `<div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>`;
 function newsletterBlock() {
-  if (!NEWSLETTER_ON) return `<section class="newsletter" id="newsletter">
+  if (!NEWSLETTER_ON) return `<section class="newsletter soon" id="newsletter">
 <h2>Newsletter: coming soon</h2>
 <p>We're planning a short email about new AI tools for game devs and changes to their pricing and licences. Signup isn't open yet, and this form collects nothing.</p>
 <form onsubmit="return false"><input type="email" placeholder="you@example.com" disabled aria-label="Email (coming soon)"><button type="button" disabled>Coming soon</button></form>
@@ -106,6 +117,7 @@ ${HONEYPOT}
 </section>`;
 }
 
+const tile = (c, n) => `<a class="tile" href="${L(`/category/${c.page}/`)}"><img src="${catImg(c.page)}" alt="" width="640" height="480" loading="lazy" decoding="async"><span class="tile-body"><strong>${esc(c.label)}</strong><span>${n} ${n === 1 ? 'tool' : 'tools'}</span></span></a>`;
 // ---------- Home ----------
 const opts = (o) => Object.entries(o).map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join('');
 page('/', layout({
@@ -116,23 +128,43 @@ page('/', layout({
     '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: URL_('/'), description: SITE.description,
     potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: URL_('/') + '?q={search_term_string}' }, 'query-input': 'required name=search_term_string' },
   }],
+  head: `<link rel="preload" as="image" href="${L('/assets/img/hero-960.webp')}" imagesrcset="${L('/assets/img/hero-960.webp')} 960w, ${L('/assets/img/hero.webp')} 1680w" imagesizes="(max-width: 1180px) 100vw, 1180px" fetchpriority="high">`,
   body: `
 <section class="hero">
-<h1>AI tools for game developers</h1>
-<p>${tools.length} tools for sprites, 3D models, textures, music, voice, NPC dialogue and code. Each one lists its pricing and commercial-use licence, with a link to the source and the date we checked it.</p>
+<img class="hero-bg" src="${L('/assets/img/hero.webp')}" srcset="${L('/assets/img/hero-960.webp')} 960w, ${L('/assets/img/hero.webp')} 1680w" sizes="(max-width: 1180px) 100vw, 1180px" width="1680" height="720" alt="" fetchpriority="high" decoding="async">
+<div class="hero-inner">
+<p class="eyebrow"><span class="dot"></span>Free directory · No affiliate links · Checked ${SITE.updated}</p>
+<h1>Find the right AI tool for <span class="grad">every part of your game</span></h1>
+<p class="sub">${tools.length} AI tools for sprites, 3D models, textures, animation, music, voice, NPC dialogue and code. Every listing shows pricing and commercial-use terms, with a link to the vendor's own page and the date we checked it.</p>
+<label class="searchbar">${ICON_SEARCH}<input id="q" type="search" placeholder="Search tools, e.g. pixel art, voice, Godot" aria-label="Search tools" autocomplete="off"></label>
+<p class="quick"><span>Popular:</span>${['sprites', '3d-models', 'audio', 'voice', 'code'].map(k => `<a href="${L(`/?task=${k}#tools`)}">${esc(TASKS[k].label)}</a>`).join('')}</p>
+</div>
 </section>
-<section class="filters" aria-label="Search and filters">
-<input id="q" type="search" placeholder="Search tools, e.g. pixel art, voice, Godot" aria-label="Search tools">
+<section class="cats" aria-labelledby="cats-h">
+<div class="sec-head"><h2 id="cats-h">Browse by task</h2><a href="${L('/category/')}">All categories →</a></div>
+<div class="tiles">${Object.entries(TASKS).map(([k, c]) => tile(c, tools.filter(t => t.tasks.includes(k)).length)).join('')}</div>
+</section>
+<section id="tools" class="tools-sec" aria-labelledby="tools-h">
+<div class="sec-head"><h2 id="tools-h">All tools</h2><p id="count" aria-live="polite">${tools.length} tools</p></div>
+<div class="filters" role="group" aria-label="Filters">
 <select id="f-task" aria-label="Task"><option value="">All tasks</option>${opts(Object.fromEntries(Object.entries(TASKS).map(([k, v]) => [k, v.label])))}</select>
 <select id="f-engine" aria-label="Engine"><option value="">Any engine</option>${opts(ENGINES)}</select>
 <select id="f-pricing" aria-label="Pricing"><option value="">Any pricing</option>${opts(PRICING)}</select>
 <select id="f-commercial" aria-label="Commercial use"><option value="">Any licence</option>${opts(COMMERCIAL)}</select>
 <button id="reset" type="button">Reset</button>
-</section>
+</div>
 <p class="hint">The engine filter shows tools whose vendor states a plugin, integration or export for that engine. Most other tools export standard files (PNG, FBX, GLB, WAV and so on) that work in any engine.</p>
-<p id="count" aria-live="polite">${tools.length} tools</p>
-<section id="results" class="grid">
+<div id="results" class="grid">
 ${tools.map(card).join('\n')}
+</div>
+</section>
+<section class="how" aria-labelledby="how-h">
+<h2 id="how-h">How listings work</h2>
+<div class="how-grid">
+<div><h3>Sourced</h3><p>Pricing and commercial-use notes come from each vendor's own pages, and every listing links to its source.</p></div>
+<div><h3>Dated</h3><p>Each tool shows the date we last checked it. Anything we couldn't confirm is marked "unverified".</p></div>
+<div><h3>Not a ranking</h3><p>Tools are listed alphabetically. There are no paid placements, reviews, ratings or affiliate links.</p></div>
+</div>
 </section>
 ${newsletterBlock()}`,
   scripts: `<script>window.TOOLS=${JSON.stringify(tools.map(t => ({ slug: t.slug, name: t.name, summary: t.summary + ' ' + t.verdict, tasks: t.tasks, engines: t.engines, pricingModel: t.pricingModel, commercial: t.commercial }))).replace(/</g, '\\u003c')};</script>
@@ -158,10 +190,12 @@ for (const t of tools) {
     body: `
 <nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L(`/category/${TASKS[t.tasks[0]].page}/`)}">${esc(TASKS[t.tasks[0]].label)}</a> › ${esc(t.name)}</nav>
 <article class="tool">
+<header class="tool-head">${logo(t, 72, true)}<div>
 <h1>${esc(t.name)}</h1>
 <p class="lead">${esc(t.summary)}</p>
+<p class="tool-cta"><a class="btn" href="${esc(t.url)}" rel="noopener nofollow" target="_blank">Visit official site ↗</a><span class="pill">${esc(PRICING[t.pricingModel])}</span><span class="pill lic lic-${t.commercial}">${esc(COMMERCIAL[t.commercial])}</span></p>
+</div></header>
 <p class="verdict big"><strong>Verdict:</strong> ${esc(t.verdict)}</p>
-<p><a class="btn" href="${esc(t.url)}" rel="noopener nofollow" target="_blank">Visit official site ↗</a></p>
 <dl class="facts">
 <dt>Tasks</dt><dd>${t.tasks.map(k => `<a href="${L(`/category/${TASKS[k].page}/`)}">${esc(TASKS[k].label)}</a>`).join(', ')}</dd>
 <dt>Engines</dt><dd>${esc(engineText(t))}</dd>
@@ -171,7 +205,7 @@ for (const t of tools) {
 </dl>
 <p class="note">We summarise what the vendor's own pages say on the date above. "Unverified" means we couldn't confirm that detail. Read the vendor's current terms before you ship anything.</p>
 </article>
-${related.length ? `<section><h2>Related tools</h2><div class="grid">${related.map(card).join('\n')}</div></section>` : ''}`,
+${related.length ? `<section class="related"><h2>Related tools</h2><div class="grid">${related.map(card).join('\n')}</div></section>` : ''}`,
   }));
 }
 
@@ -190,11 +224,13 @@ for (const [key, c] of Object.entries(TASKS)) {
     jsonld: [{ '@context': 'https://schema.org', '@type': 'ItemList', name: c.h1, itemListElement: list.map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: URL_(`/tools/${t.slug}/`), name: t.name })) }],
     body: `
 <nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/category/')}">Categories</a> › ${esc(c.label)}</nav>
+<header class="cat-hero"><img src="${catImg(c.page)}" alt="" width="640" height="480" fetchpriority="high" decoding="async"><div>
 <h1>Best ${esc(c.h1)}</h1>
 <p>${list.length} tools, in alphabetical order (this isn't a ranking). Check each tool's commercial-use notes before you ship assets in a game.</p>
-<table class="cmp"><thead><tr><th>Tool</th><th>Pricing</th><th>Commercial use</th></tr></thead><tbody>
-${list.map(t => `<tr><td><a href="${L(`/tools/${t.slug}/`)}">${esc(t.name)}</a></td><td>${esc(PRICING[t.pricingModel])}</td><td><span class="pill lic lic-${t.commercial}">${esc(COMMERCIAL[t.commercial])}</span></td></tr>`).join('\n')}
-</tbody></table>
+</div></header>
+<div class="table-wrap"><table class="cmp"><thead><tr><th>Tool</th><th>Pricing</th><th>Commercial use</th></tr></thead><tbody>
+${list.map(t => `<tr><td><a class="cmp-tool" href="${L(`/tools/${t.slug}/`)}">${logo(t, 24)}${esc(t.name)}</a></td><td>${esc(PRICING[t.pricingModel])}</td><td><span class="pill lic lic-${t.commercial}">${esc(COMMERCIAL[t.commercial])}</span></td></tr>`).join('\n')}
+</tbody></table></div>
 <div class="grid">${list.map(card).join('\n')}</div>`,
   }));
 }
@@ -202,7 +238,7 @@ page('/category/', layout({
   title: `Categories: AI tools for game developers | ${SITE.name}`,
   description: 'Browse AI tools for game development by task: pixel art, 3D models, textures, animation, music, voice, NPC dialogue, code and design.',
   pathname: '/category/',
-  body: `<h1>Browse by task</h1><ul class="catlist">${catIndex.map(({ c, p, n }) => `<li><a href="${L(p)}">${esc(c.h1)}</a> <span>(${n})</span></li>`).join('')}</ul>`,
+  body: `<h1 class="page-h">Browse by task</h1><p class="page-sub">Pick a task to compare tools side by side, with pricing and commercial-use notes.</p><div class="tiles big">${catIndex.map(({ c, n }) => tile(c, n)).join('')}</div>`,
 }));
 
 // ---------- Get featured ----------

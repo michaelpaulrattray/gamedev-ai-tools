@@ -1,0 +1,114 @@
+{
+ "pixellab": {
+  "source": "https://www.pixellab.ai/apple-touch-icon.png",
+  "w": 96
+ },
+ "retro-diffusion": {
+  "source": "https://retrodiffusion.ai/icon.png",
+  "w": 96
+ },
+ "scenario": {
+  "source": "https://www.scenario.com/favicon-196x196.png",
+  "w": 96
+ },
+ "layer-ai": {
+  "source": "https://layer.ai/static/branding/apple-touch-icon.png",
+  "w": 96
+ },
+ "ludo-ai": {
+  "source": "https://ludo.ai/apple-touch-icon.png",
+  "w": 96
+ },
+ "meshy": {
+  "source": "https://www.meshy.ai/icon3.png?icon3.2rgbsx6r7frix.png",
+  "w": 96
+ },
+ "tripo": {
+  "source": "https://www.tripo3d.ai/logo-48x48.png",
+  "w": 48
+ },
+ "hyper3d-rodin": {
+  "source": "https://hyper3d.ai/apple-touch-icon.png",
+  "w": 96
+ },
+ "sloyd": {
+  "source": "https://www.sloyd.ai/apple-icon.png?6d165b2a1d5024c7",
+  "w": 96
+ },
+ "skybox-ai": {
+  "source": "https://static.wixstatic.com/ficons/5bf3df_e8a61b84557040d987eea0ab79cb84d0%7Emv2.ico",
+  "w": 48
+ },
+ "cascadeur": {
+  "source": "https://cascadeur.com/favicon/favicon_512.png",
+  "w": 96
+ },
+ "deepmotion": {
+  "source": "https://storage.googleapis.com/www.deepmotion.com/assets/673f8e9224f2764a495ca432/673f8e9224f2764a495ca61e_DM_Glyph_FullColor%20(4).png",
+  "w": 96
+ },
+ "rokoko-vision": {
+  "source": "https://cdn.prod.website-files.com/5e6b63ac3b6e253f11889f39/637b526fcdac988127315abf_256x256_rokoko_logo.png",
+  "w": 96
+ },
+ "unity-ai": {
+  "source": "https://unity.com/apple-touch-icon.png",
+  "w": 96
+ },
+ "ludus-ai": {
+  "source": "https://ludusengine.com/apple-touch-icon.png",
+  "w": 96
+ },
+ "github-copilot": {
+  "source": "https://github.com/apple-touch-icon.png",
+  "w": 96
+ },
+ "cursor": {
+  "source": "https://cursor.com/marketing-static/icon-192x192-light.png",
+  "w": 96
+ },
+ "elevenlabs": {
+  "source": "https://elevenlabs.io/apple-icon.png?6592732ab34b1d42",
+  "w": 96
+ },
+ "inworld-ai": {
+  "source": "https://inworld.ai/favicon.ico?favicon.22-v1jeb_rtrm.ico",
+  "w": 96
+ },
+ "convai": {
+  "source": "https://cdn.prod.website-files.com/66f6655083b0f778e338eebf/66fb9e2f3b4c9acafeeeca64_Group%20654947.png",
+  "w": 96
+ },
+ "charisma-ai": {
+  "source": "https://charisma.ai/static/favicon.ico",
+  "w": 96
+ },
+ "suno": {
+  "source": "https://cdn-o.suno.com/favicon-512x512.png",
+  "w": 96
+ },
+ "udio": {
+  "source": "https://www.udio.com/favicon.ico?favicon.0wbc3vz33genq.ico",
+  "w": 96
+ },
+ "aiva": {
+  "source": "https://www.aiva.ai/assets/img/favicon.ico",
+  "w": 96
+ },
+ "stable-audio": {
+  "source": "https://stableaudio.com/apple-touch-icon.png",
+  "w": 96
+ },
+ "soundraw": {
+  "source": "https://soundraw.io/assets/apple-touch-icon-4ffadde212293f472dc6fde485807f0a51992631e0f2d9169dfac04b84d5e98e.png",
+  "w": 96
+ },
+ "mubert": {
+  "source": "https://mubert.com/android-icon-192x192.png",
+  "w": 96
+ },
+ "beatoven": {
+  "source": "https://cdn.prod.website-files.com/65d772a7cbf713010f7736f6/6663501af2d9db64c264bfce_logo%20(2).png",
+  "w": 96
+ }
+}
