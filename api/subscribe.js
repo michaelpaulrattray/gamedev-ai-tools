@@ -3,7 +3,7 @@ const { readBody, clean, isEmail, redirect } = require('./_util');
 module.exports = async (req, res) => {
   if (req.method !== 'POST') { res.statusCode = 405; res.setHeader('Allow', 'POST'); return res.end('Method Not Allowed'); }
   const key = process.env.RESEND_API_KEY, audience = process.env.RESEND_AUDIENCE_ID;
-  if (!key || !audience) return redirect(res, '/subscribe-error/');
+  if (process.env.NEWSLETTER_ENABLED !== '1' || !key || !audience) return redirect(res, '/subscribe-error/');
   const b = await readBody(req);
   if (clean(b.company, 200)) return redirect(res, '/subscribed/'); // honeypot: pretend success, store nothing
   const email = clean(b.email, 254).toLowerCase();
