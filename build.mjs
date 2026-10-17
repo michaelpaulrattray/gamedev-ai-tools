@@ -835,9 +835,21 @@ for (const k of Object.keys(TASKS)) {
 }
 const pairUrl = Object.fromEntries(ALL_PAIRS.map(([a, b]) => [pairKey(a, b), L(`/compare/${a}-vs-${b}/`)]));
 const PICKER_DATA = {
-  tasks: Object.entries(TASKS).map(([k, c]) => ({ k, label: c.label, tools: tools.filter(t => t.tasks.includes(k)).map(t => [t.slug, t.name]) })).filter(x => x.tools.length > 1),
+  tasks: Object.entries(TASKS).map(([k, c]) => ({ k, label: c.label, tools: tools.filter(t => t.tasks.includes(k)).map(t => [t.slug, t.name]), top: RANKED[k] ? RANKED[k].rows.slice(0, 2).map(r => r.t.slug) : [] })).filter(x => x.tools.length > 1),
   pairs: pairUrl,
 };
+// Compact pair row: both logos, "A vs B", a licence dot per tool; optional tag (e.g. "#1 vs #2").
+const licDot = t => `<i class="ldot ld-${licTone(t)}" title="${esc(t.name)}: ${esc(COMMERCIAL[t.commercial] || NSV_TEXT)}"></i>`;
+const pairRow = ([a, b], tag = '') => { const A = bySlug[a], B = bySlug[b], u = pairUrl[pairKey(a, b)] || L(`/compare/${a}-vs-${b}/`); return `<a class="prow${tag ? ' is-top' : ''}" href="${u}"><span class="prow-logos">${logo(A, 30)}${logo(B, 30)}</span><span class="prow-name">${esc(A.name)} <em>vs</em> ${esc(B.name)}</span>${tag ? `<span class="prow-tag">${esc(tag)}</span>` : ''}<span class="prow-lic">${licDot(A)}${licDot(B)}</span></a>`; };
+function cmpPanel(k) {
+  const list = tools.filter(t => t.tasks.includes(k));
+  if (list.length < 2) return '';
+  const R = RANKED[k], top = R ? [R.rows[0].t.slug, R.rows[1].t.slug] : null;
+  const curated = COMPARE.filter(([a, b]) => pairTask(bySlug[a], bySlug[b]) === k && !(top && pairKey(a, b) === pairKey(top[0], top[1])));
+  return `<section class="card cmp-panel" aria-labelledby="cp-${k}"><div class="cmp-panel-h"><h3 id="cp-${k}">${esc(TASKS[k].label)}</h3><a href="${L(`/compare/?task=${k}`)}">Pick any two →</a></div>
+${top ? pairRow(top, '#1 vs #2') : ''}${curated.map(p => pairRow(p)).join('')}
+<p class="cmp-panel-foot">${list.length} tools · <a href="${L(`/category/${TASKS[k].page}/`)}">See the ranking</a></p></section>`;
+}
 const pairCard = ([a, b]) => { const A = bySlug[a], B = bySlug[b]; return `<article class="card is-link vs">
 <span class="vs-logos">${logo(A, 48)}<em>vs</em>${logo(B, 48)}</span>
 <h3><a class="card-link" href="${L(`/compare/${a}-vs-${b}/`)}">${esc(A.name)} vs ${esc(B.name)}</a></h3>
@@ -845,8 +857,8 @@ const pairCard = ([a, b]) => { const A = bySlug[a], B = bySlug[b]; return `<arti
 </article>`; };
 page('/compare/', layout({
   title: `AI game-dev tool comparisons | ${SITE.name}`, description: 'Compare any two AI tools for game developers side by side: free plans, pricing, commercial-use terms, API and engine support, from each vendor\'s published pages.', pathname: '/compare/',
-  og: ogFile('compare', 'page', { kicker: 'Comparisons', title: 'AI game-dev tools, side by side', sub: `Pick any two tools that do the same job. Built only from published pricing, specs and licence terms. No ratings, no winners.` }),
-  body: `<h1 class="page-h">Compare AI tools side by side</h1><p class="page-sub">Pick two tools that do the same job. Everything comes from each vendor's published pricing, specs and licence terms. No scores, ratings or winners.</p>
+  og: ogFile('compare', 'page', { kicker: 'Comparisons', title: 'AI game-dev tools, side by side', sub: `Pick any two tools that do the same job: sourced facts side by side, plus our ranking where we have evidence.` }),
+  body: `<h1 class="page-h">Compare AI tools side by side</h1><p class="page-sub">Pick two tools that do the same job. Facts come from each vendor's published pricing, specs and licence terms, and each page shows <a href="${L('/how-we-rank/')}">our ranking</a> where we have evidence.</p>
 <form class="card picker" id="picker" onsubmit="return false">
 <label class="pk-task">Task<select id="pk-task">${PICKER_DATA.tasks.map(x => `<option value="${x.k}">${esc(x.label)}</option>`).join('')}</select></label>
 <label>First tool<select id="pk-a"></select></label>
@@ -855,16 +867,17 @@ page('/compare/', layout({
 <button class="btn" type="submit" id="pk-go">Compare</button>
 <noscript><p class="note">The picker needs JavaScript. Browse the comparisons below instead.</p></noscript>
 </form>
-<h2 class="sub-h">Popular comparisons</h2>
-${cmpGroups.map(g => `<section class="cmp-group" aria-labelledby="cg-${g.k}"><div class="sec-head"><h3 id="cg-${g.k}">${esc(TASKS[g.k].label)}</h3><a href="${L(`/category/${TASKS[g.k].page}/`)}">All ${esc(TASKS[g.k].label.toLowerCase())} tools →</a></div>
-<div class="grid pairs">${g.pairs.map(pairCard).join('\n')}</div></section>`).join('\n')}
+<h2 class="sub-h">Top matchups by category</h2>
+<p class="cmp-legend"><i class="ldot ld-ok"></i> commercial use allowed <i class="ldot ld-warn"></i> paid plans only or restricted <i class="ldot ld-bad"></i> not allowed <i class="ldot ld-unk"></i> not stated</p>
+${CAT_GROUPS.map(gr => `<div class="cmp-stage"><h3 class="cmp-stage-h">${esc(gr.h)}</h3><div class="cmp-panels cp-${gr.keys.filter(k => tools.filter(x => x.tasks.includes(k)).length > 1).length}">${gr.keys.map(cmpPanel).join('')}</div></div>`).join('\n')}
 <p class="note">Licence badges: green = commercial use allowed, amber = paid plans only or restricted, red = not allowed. Always read the vendor's current terms before you ship.</p>`,
   scripts: `<script>window.PICK=${JSON.stringify(PICKER_DATA).replace(/</g, '\\u003c')};
 (function(){var D=window.PICK,t=document.getElementById('pk-task'),a=document.getElementById('pk-a'),b=document.getElementById('pk-b');
 var q=new URLSearchParams(location.search);if(q.get('task')&&D.tasks.some(function(x){return x.k===q.get('task');}))t.value=q.get('task');
 function fill(sel,list,skip){var cur=sel.value;sel.innerHTML='';list.forEach(function(p){if(p[0]===skip)return;var o=document.createElement('option');o.value=p[0];o.textContent=p[1];sel.appendChild(o);});if([].some.call(sel.options,function(o){return o.value===cur;}))sel.value=cur;}
 function list(){for(var i=0;i<D.tasks.length;i++)if(D.tasks[i].k===t.value)return D.tasks[i].tools;return [];}
-function sync(){var l=list();fill(a,l,null);fill(b,l,a.value);}
+function top(){for(var i=0;i<D.tasks.length;i++)if(D.tasks[i].k===t.value)return D.tasks[i].top||[];return [];}
+function sync(){var l=list(),tp=top();fill(a,l,null);if(tp[0])a.value=tp[0];fill(b,l,a.value);if(tp[1]&&tp[1]!==a.value)b.value=tp[1];}
 t.addEventListener('change',function(){a.value='';sync();});a.addEventListener('change',function(){fill(b,list(),a.value);});
 document.getElementById('picker').addEventListener('submit',function(){var k=[a.value,b.value].sort().join('|');if(D.pairs[k])location.href=D.pairs[k];});
 sync();})();</script>`,
@@ -892,8 +905,8 @@ function bottomLine(A, B) {
   return items;
 }
 // At-a-glance card for one side of a comparison.
-const glance = t => `<article class="card glance">
-<div class="card-top">${logo(t, 48, true)}<div class="card-title"><h2><a href="${toolUrl(t)}">${esc(t.name)}</a></h2><span class="card-sub">${esc([TASKS[t.tasks[0]].label, isNsv(t.pricingModel) ? '' : PRICING[t.pricingModel]].filter(Boolean).join(' · '))}</span></div></div>
+const glance = (t, k) => { const r = k ? rankOf(t.slug, k) : null; return `<article class="card glance">
+${r ? `<a class="glance-rank" href="${L(`/category/${TASKS[k].page}/`)}"><b>#${r.n}</b> in ${esc(TASKS[k].label)}${r.label ? ` · ${esc(r.label)}` : ''}</a>` : ''}<div class="card-top">${logo(t, 48, true)}<div class="card-title"><h2><a href="${toolUrl(t)}">${esc(t.name)}</a></h2><span class="card-sub">${esc([TASKS[t.tasks[0]].label, isNsv(t.pricingModel) ? '' : PRICING[t.pricingModel]].filter(Boolean).join(' · '))}</span></div></div>
 <dl class="glance-facts">
 <dt>Commercial use</dt><dd>${isNsv(t.commercial) ? NSV : licBadge(t)}</dd>
 <dt>Free plan</dt><dd>${isNsv(t.free) ? NSV : esc(FREE[t.free])}${isNsv(t.freeTier) ? '' : `<small>${esc(t.freeTier)}</small>`}</dd>
@@ -901,7 +914,7 @@ const glance = t => `<article class="card glance">
 <dt>Engines</dt><dd>${esc(engineText(t))}</dd>
 </dl>
 <p class="glance-cta">${visitBtn(t)}<a class="btn-ghost" href="${toolUrl(t)}">Full listing</a></p>${t.affiliateUrl ? `<small class="aff-note">${esc(AFFILIATE_NOTE)}</small>` : ''}
-</article>`;
+</article>`; };
 for (const [a, b, curated] of ALL_PAIRS) {
   const A = bySlug[a], B = bySlug[b], p = `/compare/${a}-vs-${b}/`;
   const cmpOg = curated ? ogFile(`compare/${a}-vs-${b}`, 'versus', { kicker: 'Comparison · pricing, licence, API', a: { logo: logoData(A), name: A.name }, b: { logo: logoData(B), name: B.name } }) : undefined;
@@ -920,8 +933,9 @@ for (const [a, b, curated] of ALL_PAIRS) {
     ] : [],
     body: `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/compare/')}">Comparisons</a> › ${esc(A.name)} vs ${esc(B.name)}</nav>
 <h1 class="page-h">${esc(A.name)} vs ${esc(B.name)}</h1>
-<p class="page-sub">Facts from each vendor's published pages, checked ${timeEl(CHECKED)}. No scores and no winner: pick based on what you need. <a href="${L(`/compare/?task=${pairTask(A, B)}`)}">Compare different tools →</a></p>
-<div class="glance-pair">${glance(A)}<span class="glance-vs" aria-hidden="true">vs</span>${glance(B)}</div>
+<p class="page-sub">Facts from each vendor's published pages, checked ${timeEl(CHECKED)}. <a href="${L(`/compare/?task=${pairTask(A, B)}`)}">Compare different tools →</a></p>
+${(() => { const k = pairTask(A, B), rA = rankOf(A.slug, k), rB = rankOf(B.slug, k); if (!rA || !rB) return ''; const best = rA.n < rB.n ? rA : rB, other = best === rA ? rB : rA; return `<section class="card cmp-verdict" aria-labelledby="cv-h"><h2 id="cv-h">Our ranking</h2><p>In ${esc(TASKS[k].label)}, <b>${esc(best.t.name)}</b> ranks <b>#${best.n}</b> and ${esc(other.t.name)} ranks #${other.n}. ${esc(best.why)} ${rankSources(best)}</p><p class="cmp-verdict-foot"><a href="${L(`/category/${TASKS[k].page}/`)}">Full ranking: ${esc(TASKS[k].label)}</a> · <a href="${L('/how-we-rank/')}">How we rank</a></p></section>`; })()}
+<div class="glance-pair">${glance(A, pairTask(A, B))}<span class="glance-vs" aria-hidden="true">vs</span>${glance(B, pairTask(A, B))}</div>
 <section class="card bottom-line" aria-labelledby="bl-h"><h2 id="bl-h">Bottom line for game devs</h2><ul>${bottomLine(A, B).map(s => `<li>${s}</li>`).join('')}</ul></section>
 <div class="vs-toolbar"><h2 class="sub-h">Full comparison</h2>${nDiff ? `<button type="button" class="chip" id="only-diff" aria-pressed="false">Show only differences (${nDiff})</button>` : ''}</div>
 <div class="vs-grid" id="vs-grid" role="table" aria-label="${esc(A.name)} vs ${esc(B.name)}">
