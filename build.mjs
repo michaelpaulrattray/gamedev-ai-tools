@@ -232,18 +232,23 @@ ${jsonld.map(ld).join('\n')}
 <body>
 <header class="site-header"><div class="wrap">
 <a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a>
-<nav><a href="${L('/#tools')}">Tools</a><a href="${L('/category/')}">Categories</a><a class="hide-sm" href="${L('/guides/')}">Guides</a><a class="hide-sm" href="${L('/compare/')}">Compare</a><a class="hide-sm" href="${L('/new/')}">New</a>${DEALS.length ? `<a href="${L('/deals/')}">Deals</a>` : ''}<a class="nav-cta" href="${L('/submit/')}">Submit a tool</a></nav>
+<nav><a href="${L('/tools/')}">Tools</a><a href="${L('/category/')}">Categories</a><a class="hide-sm" href="${L('/guides/')}">Guides</a><a class="hide-sm" href="${L('/compare/')}">Compare</a><a class="hide-sm" href="${L('/new/')}">New</a>${DEALS.length ? `<a href="${L('/deals/')}">Deals</a>` : ''}<a class="nav-cta" href="${L('/submit/')}">Submit a tool</a></nav>
 </div></header>
 ${sponsorStrip()}
 <main class="wrap">
 ${body}
 </main>
 <footer class="site-footer"><div class="wrap">
-<p class="foot-brand"><a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a></p>
-${footerSignup()}
-<p>An independent directory. Facts are taken from each vendor's own website and dated. Pricing and licences change often, so always check the vendor's current terms before you rely on them. This is not legal advice.</p>
-<p class="aff-disc">${esc(AFFILIATE_NOTE)}</p>
-<p class="foot-links"><a href="${L('/about/')}">About</a> · <a href="${L('/how-we-rank/')}">How we rank</a> · <a href="${L('/guides/')}">Guides</a> · <a href="${L('/compare/')}">Comparisons</a> · <a href="${L('/new/')}">New this week</a> · <a href="${L('/deals/')}">Deals</a> · <a href="${L('/cheat-sheet/')}">Cheat sheet</a> · <a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a> · <a href="${L('/badge/')}">Badge</a> · <a href="${L('/sponsor/')}">Advertise</a> ·<a href="${L('/privacy/')}">Privacy</a> · <a href="${mailto()}">Contact</a> · <a href="${L('/sitemap.xml')}">Sitemap</a> · Last updated ${timeEl(SITE.updated)}</p>
+<div class="foot-grid">
+<div class="foot-brand-col"><a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a>
+<p class="foot-tag">An independent directory of AI tools for game developers. Commercial-use terms sourced and dated, categories ranked on evidence.</p>
+${footerSignup()}</div>
+<nav class="foot-col" aria-label="Explore"><h2>Explore</h2><a href="${L('/tools/')}">All tools</a><a href="${L('/category/')}">Best by category</a><a href="${L('/guides/')}">Guides</a><a href="${L('/compare/')}">Compare tools</a><a href="${L('/new/')}">New this week</a>${DEALS.length ? `<a href="${L('/deals/')}">Deals</a>` : ''}</nav>
+<nav class="foot-col" aria-label="Resources"><h2>Resources</h2><a href="${L('/cheat-sheet/')}">Can I ship it? cheat sheet</a><a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a><a href="${L('/how-we-rank/')}">How we rank</a><a href="${L('/badge/')}">"Listed on" badge</a></nav>
+<nav class="foot-col" aria-label="Company"><h2>Company</h2><a href="${L('/about/')}">About</a><a href="${L('/submit/')}">Submit a tool</a><a href="${L('/sponsor/')}">Advertise</a><a href="${mailto()}">Contact</a><a href="${L('/privacy/')}">Privacy</a></nav>
+</div>
+<div class="foot-bottom"><p>Facts come from each vendor's own website and are dated. Pricing and licences change often, so check the vendor's current terms before you rely on them. This isn't legal advice. <span class="aff-disc">${esc(AFFILIATE_NOTE)}</span></p>
+<p class="foot-meta"><span>© ${TODAY.slice(0, 4)} GameDev AI Tools</span><span>Last updated ${timeEl(SITE.updated)}</span><a href="${L('/sitemap.xml')}">Sitemap</a></p></div>
 </div></footer>
 ${scripts}
 </body>
@@ -332,71 +337,7 @@ const HOME_SUB = (() => {
   const second = pd ? `, and ${pd} more ${pd === 1 ? 'needs' : 'need'} a paid plan` : '';
   return `Going by each vendor's published terms, ${first}${second}. Every price and licence term links to the vendor's page, with the date we checked it.`;
 })();
-page('/', layout({
-  title: `${SITE.name}: directory of AI tools for game developers`,
-  description: SITE.description,
-  pathname: '/',
-  og: ogFile('home', 'page', { title: HOME_TITLE, sub: HOME_SUB, chips: [{ label: `${tools.length} tools` }, { label: `${Object.keys(TASKS).length} tasks` }, { label: 'Sourced and dated' }] }),
-  jsonld: [{
-    '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: URL_('/'), description: SITE.description,
-    potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: URL_('/') + '?q={search_term_string}' }, 'query-input': 'required name=search_term_string' },
-  }],
-  body: `
-<section class="hero">
-<p class="eyebrow"><span class="dot"></span><span>Free, independent directory · Checked ${timeEl(SITE.updated)}</span></p>
-<h1>Which AI tools can you legally ship in a <span class="grad">paid game?</span></h1>
-<p class="sub">${esc(HOME_SUB)}</p>
-<label class="searchbar">${ICON_SEARCH}<input id="q" type="search" placeholder="Search tools, e.g. pixel art, voice, Godot" aria-label="Search tools" autocomplete="off"></label>
-<p class="quick"><span>Popular:</span>${['3d-models', 'concept-art', 'audio', 'voice', 'code', 'qa'].map(k => chip(TASKS[k].label, { href: L(`/?task=${k}#tools`) })).join('')}</p>
-</section>
-${newRow.length ? `<section aria-labelledby="new-h">
-<div class="sec-head"><h2 id="new-h">New &amp; updated this week</h2><a href="${L('/new/')}">All news →</a></div>
-<div class="grid ${NEW_COLS} new-row">${sponsorCard({ compact: true })}
-${newRow.slice(0, NEW_MAX).map(({ t, n }) => toolCard(t, { compact: true, note: `<p class="card-note">${newsBadge(n)}${timeEl(n.date, true)}</p><p class="note-title">${esc(n.title)}</p>\n` })).join('\n')}</div>
-</section>` : ''}
-<section class="cats" aria-labelledby="cats-h">
-<div class="sec-head"><h2 id="cats-h">Browse by task</h2><a href="${L('/category/')}">All categories →</a></div>
-<div class="tiles">${Object.entries(TASKS).map(([k, c]) => tile(c, tools.filter(t => t.tasks.includes(k)).length)).join('')}</div>
-</section>
-<section id="engines" aria-labelledby="eng-h">
-<div class="sec-head"><h2 id="eng-h">Browse by engine</h2></div>
-<p class="quick"><span>Tools with an official plugin, integration or export for:</span>${engineList.map(({ e, n }) => chip(`${e.label} (${n})`, { href: L(`/engine/${e.page}/`) })).join('')}</p>
-</section>
-<section id="tools" class="tools-sec" aria-labelledby="tools-h">
-<div class="sec-head"><h2 id="tools-h">All tools, A to Z</h2><p id="count" aria-live="polite">${tools.length} tools</p></div>
-<div class="filters" role="group" aria-label="Filters">
-<select id="f-task" aria-label="Task"><option value="">All tasks</option>${opts(Object.fromEntries(Object.entries(TASKS).map(([k, v]) => [k, v.label])))}</select>
-<select id="f-engine" aria-label="Engine"><option value="">Any engine</option>${opts(ENGINES)}</select>
-<select id="f-pricing" aria-label="Free or paid"><option value="">Free or paid</option>${opts(FREE)}</select>
-<select id="f-commercial" aria-label="Safe to ship commercially"><option value="">Safe to ship commercially?</option>${opts(SHIP)}</select>
-<button id="reset" type="button">Reset</button>
-</div>
-<p class="hint">"Safe to ship commercially" goes only on what each vendor's published terms say, and every tool page links to them. It isn't legal advice. The engine filter shows tools whose vendor states a plugin, integration or export for that engine. Most other tools export standard files (PNG, FBX, GLB, WAV and so on) that work in any engine.</p>
-<div id="results" class="grid">
-${tools.map(t => toolCard(t)).join('\n')}
-</div>
-</section>
-<section class="res" aria-labelledby="res-h">
-<div class="sec-head"><h2 id="res-h">Guides and resources</h2><a href="${L('/guides/')}">All guides →</a></div>
-<div class="grid g3">
-${GUIDES.map(g => linkCard({ href: L(`/guides/${g.slug}/`), kicker: 'Workflow guide', title: g.title, media: artImg(guideArtPage(g)), foot: `${flowStrip(g)}<div class="card-foot"><span class="facts-line">${g.steps.length} steps</span></div>` })).join('\n')}
-${linkCard({ href: L('/steam-ai-disclosure/'), kicker: 'Store rules', title: DISCLOSURE.title, desc: esc(DISCLOSURE.description) })}
-${linkCard({ href: L('/compare/'), kicker: 'Comparisons', title: `${COMPARE.length} side-by-side comparisons`, desc: 'Built only from published pricing, specs and licence terms.' })}
-${linkCard({ href: L('/cheat-sheet/'), kicker: 'Cheat sheet', title: 'AI tools you can legally ship in a paid game', desc: 'Free-plan commercial use, the plan you need and the catch, for every tool.' })}
-</div>
-</section>
-<section class="how" aria-labelledby="how-h">
-<div class="sec-head"><h2 id="how-h">How listings work</h2><a href="${L('/about/')}">About us →</a></div>
-<div class="how-grid">
-<div class="card"><h3>Sourced</h3><p>Pricing and commercial-use notes come from each vendor's own pages, and every listing links to its source.</p></div>
-<div class="card"><h3>Dated</h3><p>Each tool shows the date we last checked it. Anything the vendor doesn't clearly state is marked "Not stated by vendor".</p></div>
-<div class="card"><h3>Rankings you can check</h3><p>Categories are ranked by independent quality tests where they exist, then by fit for game devs, with sources. Sponsors and affiliate links never change a listing, its rank or its verdict. <a href="${L('/how-we-rank/')}">How we rank</a></p></div>
-</div>
-</section>
-${newsletterBlock()}`,
-  scripts: `<script>window.TOOLS=${JSON.stringify(tools.map(t => ({ slug: t.slug, name: t.name, summary: t.summary + ' ' + t.verdict + ' ' + t.bestFor, tasks: t.tasks, engines: t.engines, free: t.free, commercial: t.commercial }))).replace(/</g, '\\u003c')};</script>
-<script src="${L('/assets/app.js')}"></script>`,
-}));
+// Homepage and /tools/ are built near the end (after rankings) — see "Home + tools pages".
 
 // ---------- Rankings (data/rankings.json + published fit score; method on /how-we-rank/) ----------
 // Tier 1: tools with independent quality evidence, in the order given in rankings.json (each needs a why + source).
@@ -664,7 +605,7 @@ for (const { k, e, list } of engineList) {
     body: `
 <nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/#engines')}">Engines</a> › ${esc(e.label)}</nav>
 <h1 class="page-h">${esc(e.h1)}</h1>
-<p class="page-sub">${list.length} ${list.length === 1 ? 'tool whose vendor documents' : 'tools whose vendors document'} an official ${esc(e.what)} plugin, integration or export target, in alphabetical order (this isn't a ranking). Most other tools export standard files (PNG, FBX, GLB, WAV and so on) that work in any engine: see <a href="${L('/#tools')}">all tools</a>. Check each tool's commercial-use notes before you ship.</p>
+<p class="page-sub">${list.length} ${list.length === 1 ? 'tool whose vendor documents' : 'tools whose vendors document'} an official ${esc(e.what)} plugin, integration or export target, in alphabetical order (this isn't a ranking). Most other tools export standard files (PNG, FBX, GLB, WAV and so on) that work in any engine: see <a href="${L('/tools/')}">all tools</a>. Check each tool's commercial-use notes before you ship.</p>
 <div class="table-wrap"><table class="cmp"><thead><tr><th>Tool</th><th>Main task</th><th>Free plan</th><th>Commercial use</th></tr></thead><tbody>
 ${list.map(t => `<tr><td><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 24)}${esc(t.name)}</a></td><td><a href="${L(`/category/${TASKS[t.tasks[0]].page}/`)}">${esc(TASKS[t.tasks[0]].label)}</a></td><td>${isNsv(t.free) ? NSV : esc(FREE[t.free])}</td><td>${licBadge(t)}</td></tr>`).join('\n')}
 </tbody></table></div>
@@ -1183,6 +1124,99 @@ page('/unsubscribe-error/', layout({
   title: `Unsubscribe problem | ${SITE.name}`, description: 'There was a problem unsubscribing.', pathname: '/unsubscribe-error/', noindex: true,
   body: `<h1>We couldn't unsubscribe you automatically</h1><p>The link may be incomplete. Email <a href="${mailto('Unsubscribe')}">${EMAIL}</a> from the address you signed up with and we'll remove you.</p>`,
 }), { sitemap: false });
+
+// ---------- Home + tools pages ----------
+// Home: hero (search goes to /tools/) with top picks, "Can I ship it?" checker, best-for-each-job, new this week, guides, trust, newsletter.
+const SHIP_SHORT = { yes: 'Yes', 'paid-only': 'Paid plans only', restricted: 'Restricted', no: 'No', unverified: NSV_TEXT, 'n-a': 'Not applicable' };
+const SHIP_DATA = Object.fromEntries(tools.map(t => [t.slug, {
+  n: t.name, u: toolUrl(t), l: LOGOS.has(t.slug) ? L(`/assets/logos/${t.slug}.png`) : '', s: SHIP_SHORT[t.commercial] || NSV_TEXT, tone: licTone(t),
+  a: quickAnswer(t), c: isNsv(t.license) ? '' : (t.license.length > 240 ? t.license.slice(0, 237).replace(/\s+\S*$/, '') + '…' : t.license), src: t.licenseSource || '',
+}]));
+const homeBest = CAT_GROUPS.map(gr => `<div class="best-col"><h3>${esc(gr.h)}</h3><ul>${gr.keys.map(k => { const R = RANKED[k], r = R && R.rows[0]; return r ? `<li><a href="${L(`/category/${TASKS[k].page}/`)}"><span class="best-cat">${esc(TASKS[k].label)}</span><span class="best-tool">${logo(r.t, 22)}${esc(r.t.name)}${R.nEvidence ? '<i class="best-ev" title="Ranked on independent tests">●</i>' : ''}</span></a></li>` : ''; }).join('')}</ul></div>`).join('');
+page('/', layout({
+  title: `${SITE.name}: the best AI tools for game developers, ranked`,
+  description: SITE.description,
+  pathname: '/',
+  og: ogFile('home', 'page', { title: HOME_TITLE, sub: HOME_SUB, chips: [{ label: `${tools.length} tools` }, { label: `${Object.keys(TASKS).length} tasks` }, { label: 'Sourced and dated' }] }),
+  jsonld: [{
+    '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: URL_('/'), description: SITE.description,
+    potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: URL_('/tools/') + '?q={search_term_string}' }, 'query-input': 'required name=search_term_string' },
+  }],
+  body: `
+<section class="hero hero2">
+<div class="hero-main">
+<p class="eyebrow"><span class="dot"></span><span>Free, independent directory · Checked ${timeEl(SITE.updated)}</span></p>
+<h1>Which AI tools can you legally ship in a <span class="grad">paid game?</span></h1>
+<p class="sub">Commercial-use terms for ${tools.length} AI tools, sourced from each vendor and dated, plus a ranked pick for every part of game dev.</p>
+<ul class="hero-stats"><li><b>${tools.length}</b> tools</li><li><b>${Object.keys(TASKS).length}</b> categories ranked</li><li><b>${sheetCounts.yes}</b> safe to ship on a free plan</li></ul>
+<form class="searchbar" action="${L('/tools/')}" method="get" role="search">${ICON_SEARCH}<input name="q" type="search" placeholder="Search tools, e.g. pixel art, voice, Godot" aria-label="Search tools" autocomplete="off"><button type="submit" class="sb-go">Search</button></form>
+<p class="quick"><span>Popular:</span>${['3d-models', 'concept-art', 'audio', 'voice', 'code'].map(k => chip(TASKS[k].label, { href: L(`/category/${TASKS[k].page}/`) })).join('')}</p>
+</div>
+${topPicks.length ? `<aside class="hero-picks" aria-labelledby="hp-h"><h2 id="hp-h">Top picks <small>backed by independent tests</small></h2>${topPicks.map(({ k, r, joint }) => `<a class="hpick" href="${L(`/category/${TASKS[k].page}/`)}">${logo(r.t, 36)}<span class="hp-txt"><small>${esc(TASKS[k].label)}</small><b>${esc(joint ? `${r.t.name} / ${joint.t.name}` : r.t.name)}</b></span><span class="hp-n">${joint ? 'Joint #1' : '#1'}</span></a>`).join('')}<a class="hp-all" href="${L('/category/')}">Best tool for every category →</a></aside>` : ''}
+</section>
+<section class="card ship" aria-labelledby="ship-h">
+<div class="ship-q"><span class="kicker">Quick check</span><h2 id="ship-h">Can I ship it?</h2><p>Pick a tool to see whether what it makes can go in a game you sell.</p>
+<label class="ship-pick"><span class="sr-only">Tool</span><select id="ship-sel"><option value="">Choose a tool…</option>${tools.map(t => `<option value="${t.slug}">${esc(t.name)}</option>`).join('')}</select></label></div>
+<div class="ship-out" id="ship-out" aria-live="polite"><p class="ship-empty">Your answer appears here, with the catch and a link to the vendor's terms. Want them all at once? <a href="${L('/cheat-sheet/')}">See the cheat sheet</a>.</p></div>
+</section>
+<section aria-labelledby="best-h"><div class="sec-head"><h2 id="best-h">Best for each job</h2><a href="${L('/category/')}">All categories →</a></div>
+<div class="best-grid">${homeBest}</div>
+<p class="best-note"><i class="best-ev">●</i> ranked on independent tests · others ranked on features. <a href="${L('/how-we-rank/')}">How we rank</a></p></section>
+${newRow.length ? `<section aria-labelledby="new-h">
+<div class="sec-head"><h2 id="new-h">New &amp; updated this week</h2><a href="${L('/new/')}">All news →</a></div>
+<div class="grid ${NEW_COLS} new-row">${sponsorCard({ compact: true })}
+${newRow.slice(0, NEW_MAX).map(({ t, n }) => toolCard(t, { compact: true, note: `<p class="card-note">${newsBadge(n)}${timeEl(n.date, true)}</p><p class="note-title">${esc(n.title)}</p>\n` })).join('\n')}</div>
+</section>` : ''}
+<section class="card all-tools" aria-labelledby="at-h"><div><h2 id="at-h">Browse all ${tools.length} tools</h2><p>Search and filter by task, engine, free plan and whether you can ship the output commercially.</p></div>
+<div class="at-side"><a class="btn" href="${L('/tools/')}">Browse all tools →</a><p class="quick" id="engines"><span>By engine:</span>${engineList.map(({ e, n }) => chip(`${e.label} (${n})`, { href: L(`/engine/${e.page}/`) })).join('')}</p></div></section>
+<section class="res" aria-labelledby="res-h">
+<div class="sec-head"><h2 id="res-h">Guides and resources</h2><a href="${L('/guides/')}">All guides →</a></div>
+<div class="grid g3">
+${GUIDES.map(g => linkCard({ href: L(`/guides/${g.slug}/`), kicker: 'Workflow guide', title: g.title, media: artImg(guideArtPage(g)), foot: `${flowStrip(g)}<div class="card-foot"><span class="facts-line">${g.steps.length} steps</span></div>` })).join('\n')}
+${linkCard({ href: L('/steam-ai-disclosure/'), kicker: 'Store rules', title: DISCLOSURE.title, desc: esc(DISCLOSURE.description) })}
+${linkCard({ href: L('/compare/'), kicker: 'Comparisons', title: `${COMPARE.length} side-by-side comparisons`, desc: 'Built only from published pricing, specs and licence terms.' })}
+${linkCard({ href: L('/cheat-sheet/'), kicker: 'Cheat sheet', title: 'AI tools you can legally ship in a paid game', desc: 'Free-plan commercial use, the plan you need and the catch, for every tool.' })}
+</div>
+</section>
+<section class="how" aria-labelledby="how-h">
+<div class="sec-head"><h2 id="how-h">How listings work</h2><a href="${L('/about/')}">About us →</a></div>
+<div class="how-grid">
+<div class="card"><h3>Sourced</h3><p>Pricing and commercial-use notes come from each vendor's own pages, and every listing links to its source.</p></div>
+<div class="card"><h3>Dated</h3><p>Each tool shows the date we last checked it. Anything the vendor doesn't clearly state is marked "Not stated by vendor".</p></div>
+<div class="card"><h3>Rankings you can check</h3><p>Categories are ranked by independent quality tests where they exist, then by fit for game devs, with sources. Sponsors and affiliate links never change a listing, its rank or its verdict. <a href="${L('/how-we-rank/')}">How we rank</a></p></div>
+</div>
+</section>
+${newsletterBlock()}`,
+  scripts: `<script>window.SHIP=${JSON.stringify(SHIP_DATA).replace(/</g, '\\u003c')};
+(function(){var D=window.SHIP,s=document.getElementById('ship-sel'),o=document.getElementById('ship-out');if(!s)return;
+function e(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+s.addEventListener('change',function(){var d=D[s.value];if(!d){return;}
+o.innerHTML='<div class="ship-res"><div class="ship-top">'+(d.l?'<img class="tlogo" src="'+e(d.l)+'" alt="" width="40" height="40">':'')+'<b>'+e(d.n)+'</b><span class="badge b-lg b-'+e(d.tone)+'">'+e(d.s)+'</span></div><p class="ship-a">'+e(d.a)+'</p>'+(d.c?'<p class="ship-c"><b>The terms say:</b> '+e(d.c)+'</p>':'')+'<p class="ship-links"><a href="'+e(d.u)+'">Full listing →</a>'+(d.src?' <a href="'+e(d.src)+'" rel="noopener nofollow" target="_blank">Vendor terms ↗</a>':'')+'</p></div>';});})();</script>`,
+}));
+page('/tools/', layout({
+  title: `All AI tools for game developers: search and filter | ${SITE.name}`,
+  description: `Search ${tools.length} AI tools for game development and filter by task, engine, free plan and whether you can ship the output commercially.`,
+  pathname: '/tools/',
+  body: `<h1 class="page-h">All ${tools.length} AI tools for game devs</h1>
+<p class="page-sub">Search, or filter by task, engine, free plan and commercial use. Want the best pick instead? See <a href="${L('/category/')}">the best tool for every category</a>.</p>
+<label class="searchbar tools-search">${ICON_SEARCH}<input id="q" type="search" placeholder="Search tools, e.g. pixel art, voice, Godot" aria-label="Search tools" autocomplete="off"></label>
+<section id="tools" class="tools-sec" aria-labelledby="tools-h">
+<div class="sec-head"><h2 id="tools-h" class="sr-only">All tools</h2><p id="count" aria-live="polite">${tools.length} tools</p></div>
+<div class="filters" role="group" aria-label="Filters">
+<select id="f-task" aria-label="Task"><option value="">All tasks</option>${opts(Object.fromEntries(Object.entries(TASKS).map(([k, v]) => [k, v.label])))}</select>
+<select id="f-engine" aria-label="Engine"><option value="">Any engine</option>${opts(ENGINES)}</select>
+<select id="f-pricing" aria-label="Free or paid"><option value="">Free or paid</option>${opts(FREE)}</select>
+<select id="f-commercial" aria-label="Safe to ship commercially"><option value="">Safe to ship commercially?</option>${opts(SHIP)}</select>
+<button id="reset" type="button">Reset</button>
+</div>
+<p class="hint">"Safe to ship commercially" goes only on what each vendor's published terms say, and every tool page links to them. It isn't legal advice. The engine filter shows tools whose vendor states a plugin, integration or export for that engine. Most other tools export standard files (PNG, FBX, GLB, WAV and so on) that work in any engine.</p>
+<div id="results" class="grid">
+${tools.map(t => toolCard(t)).join('\n')}
+</div>
+</section>`,
+  scripts: `<script>window.TOOLS=${JSON.stringify(tools.map(t => ({ slug: t.slug, name: t.name, summary: t.summary + ' ' + t.verdict + ' ' + t.bestFor, tasks: t.tasks, engines: t.engines, free: t.free, commercial: t.commercial }))).replace(/</g, '\\u003c')};</script>
+<script src="${L('/assets/app.js')}"></script>`,
+}));
 
 // ---------- llms.txt / llms-full.txt (https://llmstxt.org) ----------
 const md = s => String(s).replace(/\s+/g, ' ').trim();
