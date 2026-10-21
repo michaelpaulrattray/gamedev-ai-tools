@@ -7,6 +7,7 @@ import { SPONSOR_OFFERS, BUSINESS_EMAIL, AFFILIATE_NOTE } from './config.mjs';
 import { loadBookings, resolveBookings } from './sponsors.mjs';
 import { createOg, OG_W, OG_H } from './og.mjs';
 
+const HOME_DESC = 'Free directory of AI tools for game developers. Filter by task, engine, free plan and commercial use. Pricing and licence terms sourced from each vendor.';
 const SITE = {
   name: 'GameDev AI Tools',
   origin: process.env.SITE_ORIGIN || 'https://gamedevaitools.com',
@@ -47,8 +48,11 @@ const ENGINE_PAGES = {
   unity:   { label: 'Unity', page: 'unity', h1: 'AI tools for Unity developers', what: 'Unity' },
   unreal:  { label: 'Unreal', page: 'unreal', h1: 'AI tools for Unreal Engine developers', what: 'Unreal Engine' },
   godot:   { label: 'Godot', page: 'godot', h1: 'AI tools for Godot developers', what: 'Godot' },
-  blender: { label: 'Blender', page: 'blender', h1: 'AI tools with Blender add-ons and integrations', what: 'Blender' },
-  roblox:  { label: 'Roblox', page: 'roblox', h1: 'AI tools for Roblox Studio', what: 'Roblox Studio' },
+  blender: { label: 'Blender', page: 'blender', h1: 'AI tools with Blender add-ons and integrations', what: 'Blender',
+    title: 'Blender AI tools: add-ons & integrations | GameDev AI Tools',
+    description: 'AI tools with an official Blender add-on, integration or export, with pricing and commercial-use terms from each vendor\'s site.' },
+  roblox:  { label: 'Roblox', page: 'roblox', h1: 'AI tools for Roblox Studio', what: 'Roblox Studio',
+    description: 'AI tools with an official Roblox Studio plugin, integration or export, with pricing and commercial-use terms from each vendor\'s site.' },
 };
 const ENGINES = Object.fromEntries(Object.entries(ENGINE_PAGES).map(([k, e]) => [k, e.label]));
 // First publication date of the site's pages (launch, per OPERATIONS.md); used as Article datePublished.
@@ -85,6 +89,8 @@ const dealsAll = readJson('data/deals.json', []);
 const DEALS = dealsAll.filter(d => d && d.offer && d.source && !(d.expires && d.expires < TODAY));
 console.log(`Build date ${TODAY}: sponsors ${SPONSORS.size ? [...SPONSORS].map(([k, b]) => `${k}=${b.name}`).join(', ') : 'none'}; deals ${DEALS.length} live, ${dealsAll.length - DEALS.length} dropped (expired or incomplete)`);
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+// First candidate that fits the limit (titles 60, metas 160); falls back to the last one.
+const fit = (max, ...c) => c.find(x => x.length <= max) || c[c.length - 1];
 const ld = o => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`;
 const LOGOS = new Set(fs.existsSync('src/assets/logos') ? fs.readdirSync('src/assets/logos').filter(f => f.endsWith('.png')).map(f => f.slice(0, -4)) : []);
 const hue = s => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
@@ -101,12 +107,12 @@ const isNsv = v => v === undefined || v === null || v === '' || v === 'unverifie
 const NSV = `<span class="nsv">${NSV_TEXT}</span>`;
 const val = v => isNsv(v) ? NSV : esc(v); // detail pages: unknown -> muted "Not stated by vendor"
 
-// ---------- Friendly dates (absolute, e.g. "Sat 17 Oct"; year shown only when not the current year; ISO stays in data and in <time datetime>) ----------
+// ---------- Friendly dates (absolute, e.g. "Sat 17 Oct 2026"; ISO stays in data and in <time datetime>) ----------
 const DAY_MS = 86400000;
 const dayNum = iso => Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10)) / DAY_MS;
 const WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const dateLabel = iso => { const d = new Date(dayNum(iso) * DAY_MS); return `${WD[d.getUTCDay()]} ${d.getUTCDate()} ${MON[d.getUTCMonth()]}${iso.slice(0, 4) !== TODAY.slice(0, 4) ? ' ' + iso.slice(0, 4) : ''}`; };
-// Visible dates are absolute ("Sat 17 Oct", year added when it isn't the build year) so static HTML never goes stale.
+const dateLabel = iso => { const d = new Date(dayNum(iso) * DAY_MS); return `${WD[d.getUTCDay()]} ${d.getUTCDate()} ${MON[d.getUTCMonth()]} ${iso.slice(0, 4)}`; };
+// Visible dates are absolute and include the year ("Sat 17 Oct 2026") so static HTML never goes stale.
 // `cap` is kept for call-site compatibility (labels already start with a capital).
 function friendly(iso, cap = false) {
   if (!/^\d{4}-\d{2}-\d{2}/.test(iso || '')) return esc(iso || '');
@@ -215,6 +221,7 @@ function footerSignup() {
   return `<form class="foot-signup" method="post" action="/api/subscribe/"><label for="fs-email">Get the newsletter and the free <a href="${L('/cheat-sheet/')}">ship-it cheat sheet</a></label><input id="fs-email" type="email" name="email" required maxlength="254" placeholder="you@example.com" autocomplete="email">${HONEYPOT}<button type="submit">Subscribe</button></form>`;
 }
 function layout({ title, description, pathname, body, jsonld = [], scripts = '', noindex = false, head = '', og }) {
+  if (title.length > 60) title = stripSite(title);
   // Every page gets a 1200x630 share image: page-specific when passed in, otherwise a generic title card for that page.
   const ogPath = og !== undefined ? og : noindex ? (OG ? '/og/home.png' : null) : ogFile(`page/${slugOf(pathname)}`, 'page', { kicker: 'GameDev AI Tools', title: stripSite(title), sub: description });
   const ogTags = ogPath ? `\n<meta property="og:image" content="${URL_(ogPath)}">\n<meta property="og:image:width" content="${OG_W}">\n<meta property="og:image:height" content="${OG_H}">\n<meta property="og:image:alt" content="${esc(stripSite(title))}">\n<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:image" content="${URL_(ogPath)}">` : '\n<meta name="twitter:card" content="summary">';
@@ -429,7 +436,7 @@ for (const t of tools) {
   const answer = quickAnswer(t);
   const terms = isNsv(t.license) ? '' : t.license;
   page(p, layout({
-    title: `${t.name}: pricing, commercial licence & game dev uses | ${SITE.name}`,
+    title: fit(60, `${t.name}: pricing & commercial licence | ${SITE.name}`, `${t.name}: pricing & licence | ${SITE.name}`, `${t.name} pricing & licence for game devs`, `${t.name}: pricing & licence`),
     description: desc,
     pathname: p,
     og: ogFile(`tools/${t.slug}`, 'tool', { logo: logoData(t), name: t.name, task: TASKS[t.tasks[0]].label, badge: { label: OG_LIC[t.commercial] || OG_LIC.unverified, tone: licTone(t) } }),
@@ -524,7 +531,7 @@ for (const [key, c] of Object.entries(TASKS)) {
   const desc = `${list.length} AI tools for ${c.label.toLowerCase()} in game development, with pricing and commercial-use licence notes from each vendor's site. Checked ${SITE.updated}.`;
   const cp = COMPARE.filter(([a, b]) => bySlug[a].tasks.includes(key) && bySlug[b].tasks.includes(key));
   page(p, layout({
-    title: `Best ${c.h1} (${SITE.updated.slice(0, 4)}) | ${SITE.name}`,
+    title: fit(60, `Best ${c.h1} (${SITE.updated.slice(0, 4)}) | ${SITE.name}`, `Best ${c.h1} (${SITE.updated.slice(0, 4)})`, `Best ${c.h1}`, `Best AI tools: ${c.label} (${SITE.updated.slice(0, 4)})`),
     description: desc,
     pathname: p,
     og: ogFile(`category/${c.page}`, 'page', { kicker: `Category · ${list.length} ${list.length === 1 ? 'tool' : 'tools'}`, title: c.h1, sub: 'Pricing and commercial-use terms from each vendor, sourced and dated.', artPage: c.page }),
@@ -620,8 +627,8 @@ for (const { k, e, list } of engineList) {
   const desc = `${list.length} AI ${list.length === 1 ? 'tool' : 'tools'} for game developers whose vendor documents an official ${e.what} plugin, integration or export, with pricing and commercial-use terms from each vendor's site.`;
   const H = ENGINE_HUBS[k];
   page(p, layout({
-    title: H && H.title ? H.title : `${e.h1} (${SITE.updated.slice(0, 4)}) | ${SITE.name}`,
-    description: H && H.description ? H.description : desc,
+    title: H && H.title ? H.title : e.title ? e.title : `${e.h1} (${SITE.updated.slice(0, 4)}) | ${SITE.name}`,
+    description: H && H.description ? H.description : e.description || desc,
     pathname: p,
     og: ogFile(`engine/${e.page}`, 'page', { kicker: `Engine · ${list.length} ${list.length === 1 ? 'tool' : 'tools'}`, title: e.h1, sub: 'Official plugins, integrations and exports, with pricing and commercial-use terms, sourced and dated.' }),
     jsonld: [
@@ -673,7 +680,8 @@ const guideTasks = [...new Set(GUIDES.map(g => g.task))];
 const guideEngines = Object.keys(ENGINES).filter(e => GUIDES.some(g => (g.engines || []).includes(e)));
 page('/guides/', layout({
   title: `Workflow guides: AI tools in a game pipeline | ${SITE.name}`,
-  description: 'Step-by-step, sourced guides for using AI tools in game development: 3D models to engine, voice to lip-sync, concept to texture set, and open-weights model licences.',
+  description: 'Step-by-step, sourced guides for AI tools in game development: 3D models to engine, voice to lip-sync, concept to textures, open-weights licences.',
+  jsonld: [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Workflow guides', url: URL_('/guides/'), mainEntity: { '@type': 'ItemList', itemListElement: GUIDES.map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: URL_(`/guides/${g.slug}/`), name: g.title })) } }],
   pathname: '/guides/',
   og: ogFile('guides', 'page', { kicker: 'Workflow guides', title: 'AI tools in a game pipeline, step by step', sub: `${GUIDES.length} sourced workflows, each step linked to official documentation.`, artPage: TASKS[FEATURED.task].page }),
   body: `<h1 class="page-h">Workflow guides</h1><p class="page-sub">Factual steps with a link to the official documentation for each one. Checked ${timeEl(CHECKED)}.</p>
@@ -755,7 +763,7 @@ for (const g of GUIDES) {
   const p = `/guides/${g.slug}/`;
   const gt = g.tools.map(s => bySlug[s]).filter(Boolean);
   page(p, layout({
-    title: g.metaTitle || `${g.title} | ${SITE.name}`, description: g.description, pathname: p,
+    title: g.metaTitle || fit(60, `${g.title} | ${SITE.name}`, g.title, `${g.title.split(':')[0]} | ${SITE.name}`), description: g.description, pathname: p,
     og: ogFile(`guides/${g.slug}`, 'page', { kicker: `${g.kind || 'Workflow guide'} · ${g.steps.length} steps`, title: g.title, sub: g.outcome, artPage: TASKS[g.task].page }),
     jsonld: [{ '@context': 'https://schema.org', '@type': 'HowTo', name: g.title, description: g.description, step: g.steps.map((st, i) => ({ '@type': 'HowToStep', position: i + 1, name: st.h, text: st.p.map(x => x.text).join(' ') })) }, ...(g.faq && g.faq.length ? [faqLd(g.faq)] : [])],
     scripts: g.paths ? GUIDE_V2_JS : '',
@@ -900,7 +908,8 @@ const pairCard = ([a, b]) => { const A = bySlug[a], B = bySlug[b]; return `<arti
 <ul class="vs-lic">${[A, B].map(t => `<li><span>${esc(t.name)}</span>${isNsv(t.commercial) ? `<span class="nsv">${NSV_TEXT}</span>` : licBadge(t)}</li>`).join('')}</ul>
 </article>`; };
 page('/compare/', layout({
-  title: `AI game-dev tool comparisons | ${SITE.name}`, description: 'Compare any two AI tools for game developers side by side: free plans, pricing, commercial-use terms, API and engine support, from each vendor\'s published pages.', pathname: '/compare/',
+  title: `AI game-dev tool comparisons | ${SITE.name}`, description: 'Compare two AI tools for game developers side by side: free plans, pricing, commercial-use terms, API and engine support, from each vendor\'s published pages.', pathname: '/compare/',
+  jsonld: [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'AI game-dev tool comparisons', url: URL_('/compare/'), mainEntity: { '@type': 'ItemList', itemListElement: COMPARE.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: URL_(`/compare/${c[0]}-vs-${c[1]}/`) })) } }],
   og: ogFile('compare', 'page', { kicker: 'Comparisons', title: 'AI game-dev tools, side by side', sub: `Pick any two tools that do the same job: sourced facts side by side, plus our ranking where we have evidence.` }),
   body: `<h1 class="page-h">Compare AI tools side by side</h1><p class="page-sub">Pick two tools that do the same job. Facts come from each vendor's published pricing, specs and licence terms, and each page shows <a href="${L('/how-we-rank/')}">our ranking</a> where we have evidence.</p>
 <form class="card picker" id="picker" onsubmit="return false">
@@ -965,13 +974,13 @@ const THIN_NSV = 7, THIN_PAIRS = [];
 for (const [a, b, curated] of ALL_PAIRS) {
   const A = bySlug[a], B = bySlug[b], p = `/compare/${a}-vs-${b}/`;
   const cmpOg = curated ? ogFile(`compare/${a}-vs-${b}`, 'versus', { kicker: 'Comparison · pricing, licence, API', a: { logo: logoData(A), name: A.name }, b: { logo: logoData(B), name: B.name } }) : undefined;
-  const cmpDesc = `${A.name} vs ${B.name} for game developers: free plans, pricing, export formats, commercial-use terms, API and MCP, from each vendor's published pages.`;
+  const cmpDesc = fit(160, `${A.name} vs ${B.name} for game developers: free plans, pricing, export formats, commercial-use terms, API and MCP, from each vendor's published pages.`, `${A.name} vs ${B.name} for game devs: free plans, pricing, exports, commercial-use terms, API and MCP, from each vendor's own pages.`, `${A.name} vs ${B.name}: free plans, pricing, exports, commercial terms, API and MCP, from each vendor's pages.`, `${A.name} vs ${B.name}: pricing, commercial terms and API, from each vendor's pages.`);
   const modified = [CHECKED, A.lastChecked, B.lastChecked].filter(Boolean).sort().pop();
   const head = t => `<div role="columnheader" class="vs-tool"><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 36, true)}${esc(t.name)}</a>${licBadge(t)}</div>`;
   const rows = ROWS.map(([h, fn, k]) => ({ h, fn, cls: k ? (String(k(A)) !== String(k(B)) ? ' is-diff' : ' is-same') : '' }));
   const nDiff = rows.filter(r => r.cls === ' is-diff').length;
   const mk = idx => layout({
-    title: `${A.name} vs ${B.name}: pricing, licence, API compared | ${SITE.name}`,
+    title: fit(60, `${A.name} vs ${B.name}: pricing, licence, API | ${SITE.name}`, `${A.name} vs ${B.name}: pricing & licence | ${SITE.name}`, `${A.name} vs ${B.name} | ${SITE.name}`, `${A.name} vs ${B.name}: pricing & licence`, `${A.name} vs ${B.name}`),
     description: cmpDesc, pathname: p, noindex: !idx,
     og: cmpOg,
     jsonld: idx ? [
@@ -1000,7 +1009,7 @@ ${rows.map(r => `<div class="vs-row${r.cls}" role="row"><div role="rowheader" cl
 }
 
 // ---------- Sponsor (four spots from SPONSOR_OFFERS in config.mjs; bookings in data/sponsor.json) ----------
-const SPONSOR_DESC = 'Sponsor GameDev AI Tools: site-wide US$99/week, a category or engine page US$29/week, or a newsletter issue US$49. Always labelled Sponsored; never changes rankings.';
+const SPONSOR_DESC = 'Sponsor GameDev AI Tools: site-wide US$99/week, category or engine page US$29/week, newsletter US$49/issue. Labelled Sponsored; never changes rankings.';
 const spBooked = id => [...SPONSORS.keys()].filter(k => k === id || k.startsWith(id + ':')).length;
 const spMailto = o => `mailto:${EMAIL}?subject=${encodeURIComponent(`Sponsor booking: ${o.name} (${o.price})`)}&body=${encodeURIComponent(`Hi,\n\nWe'd like to book the ${o.name} spot (${o.price}).\n${o.id === 'category' ? 'Category: \n' : o.id === 'engine' ? 'Engine page (Unity, Unreal, Godot, Blender or Roblox): \n' : ''}${o.unit === 'issue' ? 'Issue date' : 'Week starting'}: \nProduct name and link: \n\nThanks`)}`;
 const spCard = o => {
@@ -1026,8 +1035,9 @@ ${SPONSOR_OFFERS.map(spCard).join('\n')}
 // ---------- How we rank ----------
 page('/how-we-rank/', layout({
   title: `How we rank AI tools for game devs | ${SITE.name}`,
-  description: 'How GameDev AI Tools ranks AI tools in each category: independent quality tests first, then a published game-dev fit score. Sponsors and affiliate links never change a rank.',
+  description: 'How we rank AI tools in each category: independent quality tests first, then a published game-dev fit score. Sponsors and affiliate links never change a rank.',
   pathname: '/how-we-rank/',
+  jsonld: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'How we rank AI tools for game devs', url: URL_('/how-we-rank/'), publisher: ORG }],
   body: `<h1 class="page-h">How we rank</h1>
 <p class="page-sub">Each category is ranked in two steps. Every rank shows its reason and its sources, so you can check it.</p>
 <div class="prose">
@@ -1097,9 +1107,10 @@ const catchText = t => [isNsv(t.license) ? '' : t.license, t.revenue && t.revenu
 const SHEET_TONE = { yes: 'ok', paid: 'warn', check: 'warn', no: 'bad', unk: 'unk', na: 'unk' };
 const sheetRow = t => { const [k, label] = freeShip(t); return `<tr><td><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 24)}${esc(t.name)}</a></td><td>${badge(label, SHEET_TONE[k])}</td><td>${planNeeded(t) === NSV_TEXT ? NSV : esc(planNeeded(t))}</td><td>${catchText(t) ? esc(catchText(t)) : NSV}</td><td>${t.licenseSource ? `<a href="${esc(t.licenseSource)}" rel="noopener nofollow" target="_blank">Terms</a>` : NSV}${t.pricingSource ? ` · <a href="${esc(t.pricingSource)}" rel="noopener nofollow" target="_blank">Pricing</a>` : ''}</td><td>${timeEl(t.lastChecked, true)}</td></tr>`; };
 page('/cheat-sheet/', layout({
-  title: `AI tools you can legally ship in a paid game (cheat sheet) | ${SITE.name}`,
+  title: `AI tools you can ship in a paid game: cheat sheet`,
   description: `For ${tools.length} AI game-dev tools: can free-plan output go in a commercial game, which plan you need, and the catch. Sourced from each vendor's terms and dated.`,
   pathname: '/cheat-sheet/',
+  jsonld: [{ '@context': 'https://schema.org', '@type': 'Article', headline: 'AI tools you can legally ship in a paid game', url: URL_('/cheat-sheet/'), mainEntityOfPage: URL_('/cheat-sheet/'), datePublished: PUBLISHED, dateModified: CHECKED, inLanguage: 'en-AU', author: ORG, publisher: ORG, about: tools.map(t => ({ '@type': 'SoftwareApplication', name: t.name, url: t.url })) }],
   og: ogFile('cheat-sheet', 'page', { kicker: 'Cheat sheet', title: 'AI tools you can legally ship in a paid game', sub: `Free-plan commercial use, the plan you need and the catch, for ${tools.length} tools. Sourced and dated.`, chips: [{ label: `${sheetCounts.yes} free-plan OK`, tone: 'ok' }, { label: `${sheetCounts.paid} paid plan needed`, tone: 'warn' }, { label: `${sheetCounts.check} restricted`, tone: 'warn' }] }),
   body: `<h1 class="page-h">AI tools you can legally ship in a paid game</h1>
 <p class="page-sub">For each of the ${tools.length} tools we list: whether output from the free plan can be used commercially, which plan you need, and the catch. Every row links to the vendor's own terms and shows the date we checked it. This summarises published terms; it isn't legal advice. Read the current terms before you ship.</p>
@@ -1212,8 +1223,8 @@ const homeBest = CAT_GROUPS.map(gr => `<div class="best-col"><h3>${esc(gr.h)}</h
 // Home shows 3 guide cards (+3 resource cards = two full rows): the featured guide, then the two newest. All guides are on /guides/.
 const HOME_GUIDES = [GUIDES[0], ...GUIDES.slice(1).slice(-2).reverse()];
 page('/', layout({
-  title: `${SITE.name}: the best AI tools for game developers, ranked`,
-  description: SITE.description,
+  title: `${SITE.name}: AI tools for game developers, ranked`,
+  description: HOME_DESC,
   pathname: '/',
   og: ogFile('home', 'page', { title: HOME_TITLE, sub: HOME_SUB, chips: [{ label: `${tools.length} tools` }, { label: `${Object.keys(TASKS).length} tasks` }, { label: 'Sourced and dated' }] }),
   jsonld: [{
@@ -1275,6 +1286,7 @@ page('/tools/', layout({
   title: `All AI tools for game developers: search and filter | ${SITE.name}`,
   description: `Search ${tools.length} AI tools for game development and filter by task, engine, free plan and whether you can ship the output commercially.`,
   pathname: '/tools/',
+  jsonld: [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'All AI tools for game developers', url: URL_('/tools/'), mainEntity: { '@type': 'ItemList', numberOfItems: tools.length, itemListElement: tools.map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: URL_(`/tools/${t.slug}/`), name: t.name })) } }],
   body: `<h1 class="page-h">All ${tools.length} AI tools for game devs</h1>
 <p class="page-sub">Search, or filter by task, engine, free plan and commercial use. Want the best pick instead? See <a href="${L('/category/')}">the best tool for every category</a>.</p>
 <label class="searchbar tools-search">${ICON_SEARCH}<input id="q" type="search" placeholder="Search tools, e.g. pixel art, voice, Godot" aria-label="Search tools" autocomplete="off"></label>
