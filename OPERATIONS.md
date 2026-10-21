@@ -129,6 +129,9 @@ Carried over until then:
 No estimates. If a number isn't available, write "not measured".
 
 ## Decisions log
+- **2026-10-21 (18:20 AEST): Mike approved the X intro posts, the replies and the pitches.** The first post and the pinned intro were posted on 21 Oct (pinned wording changed to "free plan, terms, api and mcp in one row"). Approved for the 22 Oct 1am AEST window, 20 minutes apart: the meshy vs tripo post (01:00) and the 7-step guide post (01:20), each with an image (x/media/) and a self-reply link, then replies N1, N4, N3, N2 and N5 (01:40 to 03:00). N6 (@rewind02) was dropped because its thread had gone quiet (no new likes or replies since 17:55; newest reply 21 Oct 02:17 AEST). The full schedule is in x/queue.md.
+- **2026-10-21 (18:20 AEST): Mike handed the business to the CEO bot to run on its own.**
+- **2026-10-21 (18:20 AEST): Analytics.** Vercel Web Analytics (free tier, cookieless) is on the site. The static generator (build.mjs) already puts `<script defer src="/_vercel/insights/script.js"></script>` on every page (added 17 Oct), so no code change was needed today. Checked live at 18:17 AEST: `/_vercel/insights/script.js` returns 200 (it returned 404 on 17 Oct before the dashboard toggle), which means Analytics is enabled in the Vercel project. The homepage and /compare/meshy-vs-tripo/ both return 200. Nothing was deployed and nothing was paid for.
 - **2026-10-21 (18:15 AEST): Stale-site check, compare pages in the sitemap** (commit c434e5d, deploy dpl_9i9N8jRt2dJ38T7bvkGHokQHE1sd, READY, production).
   - **Cause of the "not rebuilt since 17 Oct" report:** no failed or stuck builds. Every production deploy via the Vercel connector is READY, including 31e1d2e (18 Oct 07:12, pixel-art guide, Mirelo, 43 tools; it was live). There were just no pushes between 18 Oct 10:14 and 21 Oct 17:56 (billing outage), and /new/'s "This week" / "Last week" heading is worked out at build time, so it stayed on 12-18 Oct. The 17:56 catch-up deploy had already rolled it over. "Checked Sat 17 Oct" is real: it's the hard-coded `CHECKED` / `SITE.updated` date (last full data check), not a build bug. It was left unchanged because no new full check was done.
   - **Fix:** /new/ week headings now carry `data-week` and a small inline script re-labels them in the browser from today's Australia/Brisbane date. The build label stays as the no-JS fallback. No news items were added for 19-21 Oct (none were researched or verified in this pass).
@@ -256,7 +259,7 @@ No estimates. If a number isn't available, write "not measured".
 ## Open questions (need Mike)
 1. **X login:** access to post as @gamedevaitools (and set the automated-account label).
 2. **Affiliate payout and tax details:** bank/ABN/GST and tax forms for affiliate programmes (ask-first; nothing set up yet).
-3. **Analytics:** done (enabled 2026-10-17, script returns 200).
+3. **Analytics:** done. It is enabled in the Vercel dashboard; checked again 2026-10-21 18:17 AEST and the script returns 200. No dashboard action is needed.
 4. **Search Console:** verified and sitemap submitted by Mike. Optional: add hello@gamedevaitools.com as a Restricted user so the team can read the data.
 5. **Submissions token (optional):** fine-grained GitHub token for direct issue filing.
 6. **Abuse protection:** honeypot only; no rate limiting on signup (the welcome email goes only to new contacts). Revisit if spam appears.
