@@ -12,7 +12,7 @@ Screenshots are in /workspace/x/media/showcase/ (box, outside this repo).
 - Verdict: passes the bar. It's playable now and looks good. Ask them which image and 3D tools they used.
 - Screens: /workspace/x/media/showcase/soulloop-steam-1.jpg, soulloop-steam-2.jpg, soulloop-x-thumb.jpg
 
-## 2. Nightshoal (1920s fishing and exploration, Godot). PASSES, BUT CREATOR IDENTITY IS UNCLEAR
+## 2. Nightshoal by @RUSuper (itch: ProFactor), 1920s fishing and exploration, Godot. PASSES (creator settled in pass 2)
 - Game: free alpha for Windows and Linux on itch, https://profactor.itch.io/nightshoal (author "ProFactor", itch AI disclosure: Code, Graphics, Sounds, Text). A Steam demo is "planned".
 - Visuals: a stylized archipelago, lighthouse and ocean, with a moody night menu and a cohesive look. Well above Paper Route and roughly at the bar.
 - AI tools: Claude Code (Opus 5.5) for code, Tripo for 3D animals and characters, ElevenLabs for sound and music, Blender MCP for model fixes, Astra for textures.
@@ -37,3 +37,26 @@ Screenshots are in /workspace/x/media/showcase/ (box, outside this repo).
 - jura_log Meshy diorama: low-poly prototype. VORTEX_Promos cyberpunk shooter: promo or farming account.
 
 Not covered: Reddit's JSON search was blocked from the box, so I couldn't cross-check the Nightshoal Reddit devlogs.
+
+## Pass 2 (X-focused, 2026-10-21)
+### Nightshoal creator: settled as @RUSuper
+- @RUSuper is the developer. He replies "Hello, I'm dev of this game, if anyone has some questions feel free to ask" (https://x.com/RUSuper/status/2112079935217217580) and asks reposters to tag him: "I'm the developer of this game" (https://x.com/RUSuper/status/2109999159591960657). He thanked Stefan_3D_AI "for featuring my game" (https://x.com/RUSuper/status/2111435366574297339). He posts original WIP that never appears on @hakimieiqbal (for example the pirate ship in a bottle, https://x.com/RUSuper/status/2111733353200144866). He also gives a week 11 breakdown: "Opus 5.5, TripoAI, Blender, Codex Astra ... ~2,000 commits, ~160k lines, 480 automated test suites. New version on itch now" (https://x.com/RUSuper/status/2108555898125767075).
+- @hakimieiqbal is a curator, not the dev. He posts the same first-person "Week N of building..." format about several unrelated projects: a cozy Unity/Meshy game (https://x.com/hakimieiqbal/status/2111066451519979557), PowerState (https://x.com/hakimieiqbal/status/2111791232628257095), and a projected-concept-art village (https://x.com/hakimieiqbal/status/2111428789272019234). He follows them with QuadcodeAI promo posts (for example https://x.com/hakimieiqbal/status/2112153629113172254). Treat him as a farming/repost account. Credit and contact @RUSuper.
+- ProFactor (itch) is very likely RUSuper. RUSuper says the "new version on itch now" is the same build hakimieiqbal links (profactor.itch.io/nightshoal). I didn't find an explicit "I am ProFactor" statement.
+- Openness for @RUSuper: high. He answers how-to questions publicly (UI asset generation, Steam AI disclosure) and says he'll post to Steam despite anti-AI pushback (https://x.com/RUSuper/status/2111824790688280747).
+- Extra screen: /workspace/x/media/showcase/nightshoal-x-thumb.jpg (taken from hakimieiqbal's repost video). The itch screenshots are the canonical ones.
+
+### New: After the Wind by @afterthewinddev. NEAR-PASS, ON THE WATCHLIST (no playable build yet)
+- Game: co-op "Monster Hunter meets Ragnarok Online" made in Godot. Painterly, cohesive, Ghibli-ish style (grass shader, mushroom boar, character creator). Visually at or above the bar. Original IP.
+- Posts: https://x.com/afterthewinddev/status/2112557587254382604 (process video, 174 likes, 9,132 views); https://x.com/afterthewinddev/status/2112220737742553139 (mushroom boar, 40 likes); https://x.com/afterthewinddev/status/2112195416720883998 (character creator). Featured by Stefan_3D_AI ("The cleanest game MVP made with AI I've seen") and reposted by @tripoai.
+- AI tools (his own replies): Claude Code / Opus 5.5 for code, Codex and Astra for reference image gen and some VFX (https://x.com/afterthewinddev/status/2112628784914448519), Tripo for 3D including segmentation (https://x.com/afterthewinddev/status/2112533477438419240), and a custom "Router" subagent skill (https://x.com/afterthewinddev/status/2112431391367483738).
+- Creator: real. 5 weeks of WIP, detailed technical replies, X account dating from 2021, Instagram instagram.com/afterthewindgame, GitHub github.com/waltwildwest (linked by him).
+- Openness: very high. He answers style-consistency questions in depth (https://x.com/afterthewinddev/status/2112530830367379752) and says "I'll make some content on it in the upcoming days". Existing breakdown: the 5-week process video above.
+- Fails one rule: no playable demo. "I'm aiming for a first playtest by the end of November" (https://x.com/afterthewinddev/status/2112613468280918017). Feature it once the playtest opens.
+- Screens: /workspace/x/media/showcase/afterthewind-x-1.jpg, afterthewind-x-2.jpg
+
+### Reviewed in pass 2 and not added
+- Concept-art projected village (via @hakimieiqbal): looks great, but the original creator is uncredited. Replies note it only holds at a fixed camera. Not a game.
+- Stefan_3D_AI's own "Day 22" RTS: decent dark-fantasy look but a prototype UI and no build. He's a curator/creator account.
+- Tripo- and Meshy-featured items (the Little Prince playbook by @Saccc_c, TokenGremlin, techartist_, the Sandbox level): one-hour or two-day demos or workflow pieces, not shippable games at the bar.
+- The broad min_faves:100 video search was dominated by tool and repo listicles and the WeaselPit AI-clone scam story. No new game passes.
