@@ -1607,5 +1607,159 @@
    "note": "unverified",
    "source": ""
   }
+ },
+ {
+  "slug": "thrixel",
+  "name": "Thrixel",
+  "url": "https://thrixel.com/",
+  "tasks": [
+   "3d-models"
+  ],
+  "engines": [
+   "unity",
+   "unreal",
+   "roblox"
+  ],
+  "pricingModel": "freemium",
+  "summary": "Text- or image-to-3D models built from separate named parts, with editing, detailing, retexturing, triangle reduction and rigging. Made to be driven by coding agents (Claude Code, Codex, Cursor) through its MCP server and Build World skill.",
+  "pricing": "Free: 250 Cubes a month. Paid plans from US$20/month; Pro US$30/month (US$300/year), Studio US$99/month (US$990/year), Ultra US$200/month (US$2,000/year); Enterprise not priced. Top-up packs from US$10 for 400 Cubes. Figures from Thrixel's own public plan data (its pricing page returned 403 to us).",
+  "pricingSource": "https://api.thrixel.com/api/v1/tiers",
+  "commercial": "unverified",
+  "license": "unverified",
+  "licenseSource": "",
+  "lastChecked": "2026-10-22",
+  "verdict": "For agent-driven 3D asset generation with part-level editing and an official MCP server; its terms page was not readable to us, so commercial use is not stated.",
+  "bestFor": "Generating editable, multi-part 3D props from a coding agent",
+  "free": "yes",
+  "freeTier": "250 Cubes a month; Detailer, Sculptor, Texture and Rig limited to 4 runs each a month",
+  "exportFormats": "GLB, FBX, OBJ, STL, USDZ",
+  "exportSource": "https://thrixel.com/docs",
+  "revenue": "unverified",
+  "api": {
+   "status": "yes",
+   "note": "REST API at api.thrixel.com/api/v1 with API keys",
+   "source": "https://thrixel.com/docs"
+  },
+  "mcp": {
+   "status": "official",
+   "note": "thrixel-mcp server for Claude Code, Codex, Cursor and other MCP clients",
+   "source": "https://thrixel.com/mcp"
+  }
+ },
+ {
+  "slug": "dreamlands",
+  "name": "Dreamlands",
+  "url": "https://dreamlands.ai/",
+  "tasks": [
+   "level",
+   "3d-models",
+   "concept-art"
+  ],
+  "engines": [
+   "unreal",
+   "unity",
+   "roblox",
+   "blender"
+  ],
+  "pricingModel": "unverified",
+  "summary": "Agentic 3D world building: concept art from a sentence, then matching 3D props, modular building kits, PBR materials and whole buildings from a floor plan, exported to your engine.",
+  "pricing": "unverified",
+  "pricingSource": "https://dreamlands.ai/",
+  "commercial": "restricted",
+  "license": "Terms (last updated 29 March 2026): Standard and Subscription plans get a non-exclusive licence to use Generated Assets in projects, including commercial projects; Dreamlands may redistribute the same assets through its library or marketplace or license them to others. Exclusive rights only under an Enterprise Agreement. Licence survives cancellation for assets already downloaded. No warranty against third-party IP claims; outputs may not be used to train AI models.",
+  "licenseSource": "https://dreamlands.ai/terms",
+  "lastChecked": "2026-10-22",
+  "verdict": "For building whole stylistically consistent worlds and kits for Unreal, Unity or Roblox; commercial use is allowed but non-exclusive, and Dreamlands can reuse your generated assets.",
+  "bestFor": "Whole environments, building kits and matching props in one style",
+  "free": "unverified",
+  "freeTier": "unverified",
+  "exportFormats": "glTF, FBX, USD; plugins for Unreal (and UEFN), Unity, Roblox, Blender, Maya and 3ds Max",
+  "exportSource": "https://dreamlands.ai/games/",
+  "revenue": "unverified",
+  "api": {
+   "status": "unverified",
+   "note": "unverified",
+   "source": ""
+  },
+  "mcp": {
+   "status": "unverified",
+   "note": "unverified",
+   "source": ""
+  }
+ },
+ {
+  "slug": "bake3d",
+  "name": "Bake3D",
+  "url": "https://bake3d.ai/",
+  "tasks": [
+   "3d-models",
+   "animation"
+  ],
+  "engines": [
+   "godot",
+   "unity",
+   "unreal",
+   "blender"
+  ],
+  "pricingModel": "pay-as-you-go",
+  "summary": "Image or text to a textured, rigged and animated 3D character or prop, exported as GLB, FBX or USDZ with skeleton, skin weights and baked clips. Studio, REST API and MCP server share the same jobs.",
+  "pricing": "Credit packs (never expire): US$5 for 80, US$10 for 180, US$25 for 500, US$60 for 1,250. Plans: Pro US$29/month (750 credits), Studio US$79/month (2,100 credits). A rigged Standard character is 65 credits; exports are free.",
+  "pricingSource": "https://bake3d.ai/pricing",
+  "commercial": "yes",
+  "license": "Assets generated with purchased credits (any pack or plan) carry a commercial, royalty-free licence that stays valid after you stop paying. Free sign-up credits that older accounts received are personal use only. You must have the rights to images you upload.",
+  "licenseSource": "https://bake3d.ai/pricing",
+  "lastChecked": "2026-10-22",
+  "verdict": "For rigged, animated characters straight into Godot, Blender, Unity or Unreal; purchased-credit output is commercial and royalty-free, but there are no free credits.",
+  "bestFor": "Rigged, animated characters and creatures from one image",
+  "free": "no",
+  "freeTier": "No free credits; a free account gets a browser demo and a readiness check 3 times a day",
+  "exportFormats": "GLB, FBX 7.4, USDZ; STL, 3MF and OBJ of the current pose",
+  "exportSource": "https://bake3d.ai/docs",
+  "revenue": "unverified",
+  "api": {
+   "status": "yes",
+   "note": "REST API with API keys",
+   "source": "https://bake3d.ai/docs"
+  },
+  "mcp": {
+   "status": "official",
+   "note": "Bake3D MCP server (API keys, MCP and editor plug-ins listed with plans)",
+   "source": "https://bake3d.ai/docs"
+  }
+ },
+ {
+  "slug": "ultimate-engine-copilot",
+  "name": "Ultimate Engine CoPilot (BlueprintsLab)",
+  "url": "https://www.gamedevcore.com/",
+  "tasks": [
+   "code"
+  ],
+  "engines": [
+   "unreal"
+  ],
+  "pricingModel": "paid",
+  "summary": "BlueprintsLab's in-editor AI copilot for Unreal Engine 5 (formerly Ultimate Blueprint Generator): builds Blueprints, C++, materials, Niagara, PCG, UI and animation with 1,655 native tools, using hosted AI, your own keys, local models or coding agents.",
+  "pricing": "One-time licence US$284.99 per seat (bring your own AI; up to 20% off from 10 seats). Indie US$25/month or US$250/year (50M tokens/month). Studio US$80/month or US$800/year (150M tokens/month). Teams quoted.",
+  "pricingSource": "https://www.gamedevcore.com/pricing",
+  "commercial": "yes",
+  "license": "Terms (last updated 29 September 2026): a purchase gives a non-exclusive licence to use the plugin for personal or commercial use; plan access lasts only while the plan is active. The plugin is editor-only and isn't included in the games you ship. Ownership of AI-generated output: Not stated by vendor.",
+  "licenseSource": "https://www.gamedevcore.com/terms",
+  "lastChecked": "2026-10-22",
+  "verdict": "For Unreal devs who want an agent that edits Blueprints and C++ inside the editor; buy once or subscribe with AI included, with no free plan.",
+  "bestFor": "Unreal teams wanting an in-editor agent for Blueprints, C++ and level work",
+  "free": "no",
+  "freeTier": "No free plan; the plugin ships with a small built-in AI allowance after purchase",
+  "exportFormats": "Edits made inside the Unreal project",
+  "revenue": "unverified",
+  "api": {
+   "status": "unverified",
+   "note": "unverified",
+   "source": ""
+  },
+  "mcp": {
+   "status": "unverified",
+   "note": "Runs Claude Code, Codex, Gemini CLI and GitHub Copilot inside the editor through MCP",
+   "source": "https://www.gamedevcore.com/solutions/unreal-engine-ai-assistant"
+  }
  }
 ]
