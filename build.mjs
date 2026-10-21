@@ -616,7 +616,7 @@ const stmtN = x => `${nsvText(x.text)}${srcA(x.url)}`;
 const faqBlock = (faq, id = 'faq') => faq && faq.length ? `<section class="faq" aria-labelledby="${id}-h"><h2 class="sub-h" id="${id}-h">Questions</h2>${faq.map(f => `<details class="card faq-item"><summary>${esc(f.q)}</summary><p>${nsvText(f.a)}${f.url ? srcA(f.url) : ''}</p></details>`).join('')}</section>` : '';
 const faqLd = faq => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a + (f.url ? ` Source: ${f.url.startsWith('/') ? URL_(f.url) : f.url}` : '') } })) });
 // Engine hub section (content.mjs ENGINE_HUBS): heading, optional intro, optional table with sources, sourced statements, tool chips.
-const hubSection = sec => `<section class="card disc hub-sec"><h2>${esc(sec.h)}</h2>${sec.intro ? `<p class="hub-intro">${nsvText(sec.intro)}</p>` : ''}
+const hubSection = sec => `<section class="card disc hub-sec"${sec.id ? ` id="${esc(sec.id)}"` : ''}><h2>${esc(sec.h)}</h2>${sec.checked ? `<p class="note">Checked ${timeEl(sec.checked)}.</p>` : ''}${sec.intro ? `<p class="hub-intro">${nsvText(sec.intro)}</p>` : ''}
 ${sec.tools && sec.tools.length ? chips(sec.tools.map(sl => bySlug[sl]).filter(Boolean).map(t => chip(t.name, { tool: t, href: toolUrl(t) })), 'div') : ''}
 ${sec.table ? `<div class="table-wrap"><table class="cmp hub-table"><thead><tr>${sec.table.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${sec.table.rows.map(r => `<tr>${r.map((c, i) => i ? `<td>${nsvText(c)}</td>` : `<th scope="row">${esc(c)}</th>`).join('')}</tr>`).join('')}</tbody></table></div>${sec.table.sources ? `<p class="note">Source: ${sec.table.sources.map(([l, u]) => `<a href="${esc(u)}" rel="noopener nofollow" target="_blank">${esc(l)}</a>`).join(', ')}.</p>` : ''}` : ''}
 ${sec.items && sec.items.length ? `<ul>${sec.items.map(x => `<li>${stmtN(x)}</li>`).join('')}</ul>` : ''}</section>`;
@@ -786,18 +786,22 @@ ${flowStrip(g, { max: 5 })}
 }
 
 // ---------- Store AI disclosure ----------
-const discOg = ogFile('page/steam-ai-disclosure', 'page', { kicker: 'GameDev AI Tools', title: `${DISCLOSURE.title} (${CHECKED.slice(0, 4)})`, sub: DISCLOSURE.description });
+const DISC_CHECKED = DISCLOSURE.checked || CHECKED;
+const discOg = ogFile('page/steam-ai-disclosure', 'page', { kicker: 'GameDev AI Tools', title: DISCLOSURE.metaTitle || `${DISCLOSURE.title} (${CHECKED.slice(0, 4)})`, sub: DISCLOSURE.description });
 page('/steam-ai-disclosure/', layout({
-  title: `${DISCLOSURE.title} (${CHECKED.slice(0, 4)}) | ${SITE.name}`, description: DISCLOSURE.description, pathname: '/steam-ai-disclosure/',
+  title: `${DISCLOSURE.metaTitle || `${DISCLOSURE.title} (${CHECKED.slice(0, 4)})`} | ${SITE.name}`, description: DISCLOSURE.description, pathname: '/steam-ai-disclosure/',
   og: discOg,
   jsonld: [
-    { '@context': 'https://schema.org', '@type': 'Article', headline: DISCLOSURE.title, description: DISCLOSURE.description, abstract: DISCLOSURE.answer, url: URL_('/steam-ai-disclosure/'), mainEntityOfPage: URL_('/steam-ai-disclosure/'), datePublished: PUBLISHED, dateModified: CHECKED, inLanguage: 'en-AU', author: ORG, publisher: ORG, ...(discOg ? { image: URL_(discOg) } : {}) },
+    { '@context': 'https://schema.org', '@type': 'Article', headline: DISCLOSURE.title, description: DISCLOSURE.description, abstract: DISCLOSURE.answer, url: URL_('/steam-ai-disclosure/'), mainEntityOfPage: URL_('/steam-ai-disclosure/'), datePublished: PUBLISHED, dateModified: DISC_CHECKED, inLanguage: 'en-AU', author: ORG, publisher: ORG, ...(discOg ? { image: URL_(discOg) } : {}) },
     crumbsLd([['All tools', '/'], ['Guides', '/guides/'], ['Store AI disclosure', '/steam-ai-disclosure/']]),
+    ...(DISCLOSURE.faq && DISCLOSURE.faq.length ? [faqLd(DISCLOSURE.faq)] : []),
   ],
   body: `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/guides/')}">Guides</a> › Store AI disclosure</nav>
 <article class="guide"><h1 class="page-h">${esc(DISCLOSURE.title)}</h1>
-${DISCLOSURE.answer ? `<section class="card qa" aria-label="Short answer"><p class="qa-a"><span><b>Short answer:</b> ${esc(DISCLOSURE.answer)}</span></p></section>` : ''}<p class="lead">${esc(DISCLOSURE.description)} Checked ${timeEl(CHECKED)}.</p>
-${DISCLOSURE.sections.map(sec => `<section class="card disc"><h2>${esc(sec.h)}</h2><ul>${sec.items.map(x => `<li>${stmt(x)}</li>`).join('')}</ul></section>`).join('')}
+${DISCLOSURE.answer ? `<section class="card qa" aria-label="Short answer"><p class="qa-a"><span><b>Short answer:</b> ${esc(DISCLOSURE.answer)}</span></p></section>` : ''}<p class="lead">${esc(DISCLOSURE.description)} Checked ${timeEl(DISC_CHECKED)}. See also the <a href="${L('/cheat-sheet/')}">Can I ship it? cheat sheet</a>.</p>
+<nav aria-label="Jump to a store">${chips(DISCLOSURE.sections.filter(sec => sec.id).map(sec => chip(sec.h, { href: `#${sec.id}` })), 'div')}</nav>
+${DISCLOSURE.sections.map(hubSection).join('')}
+${faqBlock(DISCLOSURE.faq, 'disc-faq')}
 <p class="note">${esc(DISCLOSURE.note)}</p></article>`,
 }));
 
@@ -1392,8 +1396,8 @@ fs.cpSync('src/assets', path.join(out, 'assets'), { recursive: true });
 if (OG) await OG.flush();
 // Root-level verification files (e.g. Google Search Console), copied byte-for-byte; never in the sitemap.
 if (fs.existsSync('src/root')) fs.cpSync('src/root', out, { recursive: true });
-// lastmod: a tool page's own lastChecked or a guide's checked date when that is newer than the site-wide date; otherwise SITE.updated.
-const LASTMOD = Object.fromEntries([...tools.map(t => [`/tools/${t.slug}/`, t.lastChecked]), ...GUIDES.map(g => [`/guides/${g.slug}/`, g.checked || CHECKED])]);
+// lastmod: a tool page's own lastChecked, a guide's checked date, the store-rules page's checked date or the newest /new/ item, when newer than the site-wide date; otherwise SITE.updated.
+const LASTMOD = Object.fromEntries([...tools.map(t => [`/tools/${t.slug}/`, t.lastChecked]), ...GUIDES.map(g => [`/guides/${g.slug}/`, g.checked || CHECKED]), ['/steam-ai-disclosure/', DISC_CHECKED], ['/new/', NEWS.reduce((m, n) => (n.date > m ? n.date : m), CHECKED)]]);
 const pageLastmod = p => (LASTMOD[p] && LASTMOD[p] > SITE.updated ? LASTMOD[p] : SITE.updated);
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

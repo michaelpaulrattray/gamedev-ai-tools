@@ -116,27 +116,66 @@ export const GUIDES = [
 ];
 
 export const DISCLOSURE = {
-  title: 'Steam AI-content disclosure (and other stores)',
-  description: 'What Steam\'s Content Survey asks about generative AI, plus what itch.io, Epic Games Store and Google Play publish. Dated, with source links.',
-  // Direct answer shown right under the headline (and in the Article JSON-LD). Only facts sourced in the Steam section below.
-  answer: 'Yes, Steam asks. Before review you complete a Content Survey with a section on generative AI. Valve says it is concerned with AI-made content that ships with the game and that players consume, such as artwork, sound, narrative and localisation, not efficiency gains from AI dev tools. If your game generates content with AI while it runs, you must also describe the guardrails that stop it generating illegal content.',
+  // H1 and link text. metaTitle is the <title> (the build adds " | GameDev AI Tools"); kept under 60 characters with the suffix.
+  title: 'AI-content disclosure rules: Steam and other stores',
+  metaTitle: 'Steam & store AI disclosure rules (2026)',
+  description: 'What Steam, Google Play, Apple, Xbox, itch.io, Epic and Fab ask about AI content, with dated sources. We found no Nintendo or PlayStation policy.',
+  checked: '2026-10-22',
+  // Direct answer shown right under the headline (and in the Article JSON-LD). Only facts sourced in the sections below.
+  answer: 'Yes, Steam asks. Before review you complete a Content Survey with a section on generative AI. Valve says it is concerned with AI-made content that ships with the game and that players consume, such as artwork, sound, narrative and localisation, not efficiency gains from AI dev tools. If your game generates content with AI while it runs, you must also describe the guardrails that stop it generating illegal content. Other stores differ. Google Play asks you to declare AI-generated store-listing images and videos. Apple and the Microsoft Store (which includes Xbox) set rules for apps that generate AI content for players, not for pre-made assets. We found no public AI-content policy from Nintendo or PlayStation.',
+  // Each section: id (page anchor), h, checked (date we last read the sources), optional intro/tools/table, items.
   sections: [
-    { h: 'Steam (Valve)', items: [
+    { id: 'steam', h: 'Steam (Valve)', checked: '2026-10-22', items: [
       s('Before review, you complete a Content Survey. Its third section covers generative AI in development or in the product.', 'https://partner.steamgames.com/doc/gettingstarted/contentsurvey'),
       s('Valve says efficiency gains from AI-powered dev tools are "not the focus" of the section. It is concerned with AI-created content that ships with the game and is consumed by players, such as artwork, sound, narrative and localisation.', 'https://partner.steamgames.com/doc/gettingstarted/contentsurvey'),
       s('Pre-Generated content (made with AI during development) is reviewed the same way as non-AI content, against your Steam Distribution Agreement promises: no illegal or infringing content, and consistency with your marketing materials.', 'https://partner.steamgames.com/doc/gettingstarted/contentsurvey'),
       s('Live-Generated content (made by AI while the game runs) has the same rules, plus you must describe the guardrails that stop it generating illegal content.', 'https://partner.steamgames.com/doc/gettingstarted/contentsurvey'),
       s('Valve does not currently ship Live-Generated AI in Adult Only Sexual Content games.', 'https://partner.steamgames.com/doc/gettingstarted/contentsurvey'),
       s('Valve revised and clarified this guidance in January 2026 (as reported by Game Developer on 16 January 2026).', 'https://www.gamedeveloper.com/business/valve-tweaks-and-clarifies-ai-disclosure-rules-for-steam') ] },
-    { h: 'itch.io', items: [
+    { id: 'itch-io', h: 'itch.io', checked: '2026-10-22', items: [
       s('In a developer update dated 20 November 2024, itch.io added a "Generative AI disclosure" field covering Graphics, Sound, Text & Dialog and Code. Answering yes applies the "AI Generated" tag; answering no applies "No AI".', 'https://itch.io/t/4309690/generative-ai-disclosure-tagging'),
       s('The field is required for asset creators. Untagged assets made with generative AI are no longer eligible for indexing on browse pages.', 'https://itch.io/t/4309690/generative-ai-disclosure-tagging'),
       s('See also the AI disclosure section of itch.io\'s quality guidelines.', 'https://itch.io/docs/creators/quality-guidelines') ] },
-    { h: 'Epic Games Store', items: [
-      s('We found no generative-AI disclosure requirement in Epic\'s published store requirements (checked on the date below).', 'https://dev.epicgames.com/docs/epic-games-store/requirements-guidelines/distribution-requirements/requirements-overview'),
+    { id: 'epic', h: 'Epic Games Store and Fab', checked: '2026-10-17', items: [
+      s('We found no generative-AI disclosure requirement in Epic\'s published store requirements (checked on the date shown).', 'https://dev.epicgames.com/docs/epic-games-store/requirements-guidelines/distribution-requirements/requirements-overview'),
       s('Epic\'s "CreatedWithAI" and "NoAI" tags apply to assets sold on Fab, not to Epic Games Store game listings. Fab\'s Distribution Agreement (section 18(k)) requires publishers to tag content "CreatedWithAI" when a material portion of it is generated with generative AI; "NoAI" is an opt-in tag that bars buyers from using the content in AI datasets, AI development or as AI inputs.', 'https://www.fab.com/distribution-agreement') ] },
-    { h: 'Google Play', items: [
-      s('Google Play\'s AI-Generated Content policy covers apps that generate content with AI (for example from user prompts). Those apps must prevent restricted content and provide a way to report offensive AI output.', 'https://support.google.com/googleplay/android-developer/answer/14094294?hl=en') ] },
+    { id: 'google-play', h: 'Google Play', checked: '2026-10-22', items: [
+      s('Store listing assets: Play Console uses a self-declaration model. Each image or video you add to your store listing, promotional content or YouTube videos is declared on its own, through a checkbox in the content creation flow that reads "Regulations require that AI-generated content be labeled under certain circumstances" or similar.', 'https://support.google.com/googleplay/android-developer/answer/17262077?hl=en'),
+      s('Google says declared assets "will be AI-labeled on the Google Play Store and other surfaces where used". You can untick a declaration later in the creation flow or in the Asset library.', 'https://support.google.com/googleplay/android-developer/answer/17262077?hl=en'),
+      s('In-app generation: Google Play\'s AI-Generated Content policy covers apps that generate content with AI from text, voice or image prompts. Developers are responsible for making sure those apps don\'t generate offensive content, and Google says the policy aims for developers to incorporate user feedback. Apps that only host AI-generated content fall under the User Generated Content policy instead.', 'https://support.google.com/googleplay/android-developer/answer/14094294?hl=en') ] },
+    { id: 'apple', h: 'Apple App Store', checked: '2026-10-22', items: [
+      s('App Review Guideline 1.2 (User-Generated Content) names "AI content creation apps" alongside social media and user-generated content platforms. Such apps must include a way to filter objectionable material, a way to report offensive content with timely responses, the ability to block abusive users, and published contact information. The guidelines page was last updated 16 October 2026.', 'https://developer.apple.com/app-store/review/guidelines/'),
+      s('A label or declaration for pre-made AI assets in a game: Not stated by vendor in the App Review Guidelines.', 'https://developer.apple.com/app-store/review/guidelines/') ] },
+    { id: 'microsoft-xbox', h: 'Microsoft Store and Xbox', checked: '2026-10-22', tools: ['inworld-ai', 'convai'], items: [
+      s('Policy 11.16 "Live Generative AI Content": products with dynamic content created by generative AI models in response to user inputs must disclose live generative AI in the metadata, note it in Partner Center during submission, keep that content compliant with all Store Policies, and give users a way to report inappropriate content to the developer.', 'https://learn.microsoft.com/en-us/windows/apps/publish/store-policies'),
+      s('Microsoft\'s policies define "Store" to include the Microsoft Store, the Windows Store and "XBOX-branded stores". The current version (7.20) was published 15 September 2026 and takes effect 22 October 2026.', 'https://learn.microsoft.com/en-us/windows/apps/publish/store-policies'),
+      s('A rule for pre-made AI assets: Not stated by vendor in the Store Policies. ID@Xbox console certification requirements aren\'t public, so we haven\'t checked them.', 'https://learn.microsoft.com/en-us/windows/apps/publish/store-policies') ] },
+    { id: 'unity-asset-store', h: 'Unity Asset Store', checked: '2026-10-22', items: [
+      s('AI-generated content can be published, sold or given away on the Asset Store, but any package that includes AI or machine-learning generated content must disclose it in the product listing. Submissions that resemble third-party or copyrighted work, plagiarise other publishers or lack significant value can be rejected (Submission Guidelines 1.1.b).', 'https://support.unity.com/hc/en-us/articles/16456407029524') ] },
+    { id: 'nintendo-playstation', h: 'Nintendo and PlayStation', checked: '2026-10-22', items: [
+      s('We found no public AI-content disclosure policy from Nintendo. Its developer portal describes the publishing process publicly, but platform documentation and guidelines open only after you sign in and accept a non-disclosure agreement.', 'https://developer.nintendo.com/the-process'),
+      s('We found no public AI-content disclosure policy from Sony Interactive Entertainment. PlayStation\'s partner portal is login-gated, so we can\'t check what it asks.', 'https://partners.playstation.net/') ] },
+    { id: 'at-a-glance', h: 'At a glance', checked: '2026-10-22', intro: 'Pre-made means AI content you made during development and ship. Runtime means AI that generates content while players use your game or app.',
+      table: { head: ['Store', 'Asks about pre-made AI content?', 'Asks about runtime AI?', 'Checked'], rows: [
+        ['Steam', 'Yes, in the Content Survey', 'Yes, plus your guardrails', '22 Oct 2026'],
+        ['itch.io', 'Yes, a disclosure field (required for assets)', 'Not stated by vendor', '22 Oct 2026'],
+        ['Epic Games Store', 'No requirement found', 'No requirement found', '17 Oct 2026'],
+        ['Fab', 'Yes, "CreatedWithAI" tag for a material portion', 'Not stated by vendor', '17 Oct 2026'],
+        ['Google Play', 'Yes, store-listing images and videos', 'Yes, AI-Generated Content policy', '22 Oct 2026'],
+        ['Apple App Store', 'Not stated by vendor', 'Yes, guideline 1.2 safeguards', '22 Oct 2026'],
+        ['Microsoft Store and Xbox', 'Not stated by vendor', 'Yes, policy 11.16', '22 Oct 2026'],
+        ['Unity Asset Store', 'Yes, in the product listing', 'Not stated by vendor', '22 Oct 2026'],
+        ['Nintendo', 'No public policy found', 'No public policy found', '22 Oct 2026'],
+        ['PlayStation', 'No public policy found', 'No public policy found', '22 Oct 2026'] ] },
+      items: [] },
+  ],
+  faq: [
+    { q: 'Does Google Play make me label AI-generated store images?', a: 'Yes. Play Console asks you to self-declare each AI-generated image or video in your store listing, promotional content or YouTube videos, and Google labels declared assets on the Play Store.', url: 'https://support.google.com/googleplay/android-developer/answer/17262077?hl=en' },
+    { q: 'What does Apple require for AI content in apps and games?', a: 'Guideline 1.2 covers AI content creation apps: they need content filtering, a way to report offensive content, user blocking and published contact information. The guidelines state no label for pre-made AI assets.', url: 'https://developer.apple.com/app-store/review/guidelines/' },
+    { q: 'Does Xbox require AI disclosure?', a: 'For live generative AI, yes. Microsoft Store policy 11.16, which also covers Xbox-branded stores, requires you to disclose it in the metadata and note it in Partner Center. The public policies state no rule for pre-made AI assets.', url: 'https://learn.microsoft.com/en-us/windows/apps/publish/store-policies' },
+    { q: 'What are Nintendo\'s and PlayStation\'s AI rules?', a: 'We found no public AI-content policy from either, as of 22 Oct 2026. Both developer portals keep their detailed requirements behind a sign-in.' },
+    { q: 'Which stores only care about runtime AI?', a: 'Going by their public pages, Apple and the Microsoft Store (including Xbox) set rules only for AI that generates content for users. Steam covers both pre-made and runtime AI. Google Play covers runtime generation plus AI-generated store-listing images and videos.' },
+    { q: 'Is this legal advice?', a: 'No. Store rules change, so read the linked pages before you submit.' },
   ],
   note: 'This is a summary, not legal advice. Store rules change, so read the linked pages before you submit.',
 };
@@ -145,6 +184,15 @@ export const DISCLOSURE = {
 // Optional per item: type ('Launch' | 'Update' | 'Pricing change' | 'Licence change' | 'Funding'; otherwise inferred from the title,
 // defaulting to 'Update') and why (one sourced line, "Why it matters for game devs"; omitted when not set).
 export const NEWS = [
+  { date: '2026-10-20', title: 'ElevenLabs launches Eleven Realtime speech-to-speech models', tool: 'elevenlabs', type: 'Launch',
+    text: 'Two speech-to-speech models, each a complete voice agent: v1 Mini for natural conversation at low cost (ElevenLabs names interactive characters as a fit) and v1 Max for multi-step tasks and tool use. Both support 90+ languages and the ElevenLabs voice library. Use them in ElevenAgents or through a Realtime API that follows OpenAI\'s Realtime spec over WebSocket.',
+    source: 'https://elevenlabs.io/blog/realtime', sourceName: 'ElevenLabs blog' },
+  { date: '2026-10-19', title: 'Viggle releases JST-2 for 3D scenes, characters and motion', tool: null, type: 'Launch',
+    text: 'One model family generates explorable 3D scenes (Gaussian splats), animation-ready 3D characters from text or an image, and full-body motion from text or video. Free to try in the PINOC browser app; API access and a PINOC MCP server for agents. Scenes are static, with rule-based physics for collisions.',
+    source: 'https://viggle.ai/jst2', sourceName: 'Viggle' },
+  { date: '2026-10-18', title: 'Tripo open-sources EdenLive, a real-time generative renderer', tool: 'tripo', type: 'Launch',
+    text: 'Feed it a graybox game stream, a normal-map animation or footage, plus a first frame and a prompt, and it renders styled video in real time (the 5B model does 720p at 24+ FPS on one RTX 5090). Code is Apache-2.0 and the 5B and 14B weights are on Hugging Face, but the weights carry mixed licences: the FLUX part used for the workbench\'s first frame is non-commercial. Includes EdenGolem, an agent skill that builds a playable graybox game from a prompt.',
+    source: 'https://www.tripo3d.ai/research/edenlive', sourceName: 'Tripo AI research' },
   { date: '2026-10-16', title: 'Meshy launches Meshy Edit for local 3D edits', tool: 'meshy', type: 'Launch',
     text: 'Open a model you generated in Meshy, select a part with Lasso or Brush, and describe the change in text or with up to 5 reference images. Only the selected part changes, each edit is saved as a new model and the original is kept. Credits for a failed edit are refunded automatically. Live for all registered users.',
     source: 'https://www.meshy.ai/blog/meshy-edit', sourceName: 'Meshy blog' },
