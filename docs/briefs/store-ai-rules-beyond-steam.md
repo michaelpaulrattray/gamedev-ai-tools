@@ -1,3 +1,8 @@
+> **WITHDRAWN 22 Oct 2026: covered by live /steam-ai-disclosure/.** Checked 22 Oct 2026 (AEST): the live page has the new 59-character title, an answer-first paragraph covering other stores, sections for Google Play (store-listing declaration), Apple (guideline 1.2), Microsoft Store and Xbox (policy 11.16), Unity Asset Store, and Nintendo and PlayStation (no public policy found), an at-a-glance table, a 6-question FAQ, and Article, BreadcrumbList and FAQPage JSON-LD. The remaining gaps:
+> - The Epic Games Store and Fab section still shows "Checked Sat 17 Oct 2026". Re-check it so every store carries the 22 Oct date.
+> - There's no link to /guides/steam-ai-disclosure-examples/ yet, because that page isn't live. Add the link when it ships.
+> - The Unity Asset Store line doesn't yet point to a seller-focused guide (ideas board rank 18, not briefed).
+
 # Brief: AI-content rules beyond Steam (Google Play, Apple, Microsoft Store/Xbox, Fab, Unity Asset Store, Nintendo, PlayStation)
 
 Status: Briefed · Written 22 Oct 2026 (AEST) by the SEO research agent · Ideas board rank 7
