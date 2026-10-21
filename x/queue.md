@@ -2,16 +2,27 @@
 
 **Status 21 Oct 18:14 AEST:** the first post (intro item 1) and the pinned intro (item 2) were posted on 21 Oct. The pinned wording was changed to "free plan, terms, api and mcp in one row". The items under APPROVED are approved for the 22 Oct 1am AEST window. Everything else in this file is still a draft that needs Mike's approval and a same-day recheck.
 
+## APPROVED (operator review, Thu 22 Oct 07:05 AEST) for the Fri 23 Oct 1am Brisbane window
+
+The 22 Oct window posted items 1, 3 and 4 only. Items 2, 5, 6 and 7 were never posted. Their targets were re-read by ID at 07:05 AEST on 22 Oct. Same wording as approved by Mike on 21 Oct. Still do the same-day recheck before each post.
+
+| # | Time (AEST, 23 Oct) | Item | Decision |
+|---|---|---|---|
+| 1 | 01:00 | Own post: the guide (old item 2), media x/media/guide-7-steps.png, self-reply links /guides/ai-3d-model-to-engine/ | **APPROVED.** Evergreen. Guide returned 200 at 07:04 AEST and still covers scale, normals, polycount and the baked normal map. |
+| 2 | 01:20 | Reply N2 (@froessell), Recommended text | **APPROVED.** Still active: L118, Re34, I8,446 (was L56, Re25). His post still says 7,010 credits, 60 passing tests and a 15 MB web build. About 43 hours old at 01:20, so recheck the replies are still moving and drop it if they've stopped. |
+| - | - | Reply N3 (@ViggleAI) | **HELD (drop).** Posted 20 Oct 01:20 AEST, so it will be about 3 days old by 23 Oct 1am, over the 2-day rule. Use an own post on JST-2 instead if Copy Humanizer drafts one (it's now on /new/). |
+| - | - | Reply N5 (@tripoai EdenLive) | **HELD (drop).** About 48 hours old by 23 Oct 1am, and the thread is quiet (Re5, I14.5k). Also, 22 Oct's first post was meshy vs tripo. EdenLive is now on /new/ (with the non-commercial FLUX weights caveat), so an own post linking /new/ is the better route. |
+
 ## APPROVED (Mike, 21 Oct 6:14pm Brisbane) for the Thu 22 Oct 1am Brisbane window
 
 Post in this order, at least 20 minutes apart. Each item still needs the same-day recheck below (target live, facts re-curled). If a target fails the recheck, skip it and keep the spacing.
 
 | # | Time (AEST, 22 Oct) | Item | Text | Media | Self-reply |
 |---|---|---|---|---|---|
-| 1 | 01:00 | Own post: meshy vs tripo (intro-posts.md item 4, recommended) | meshy vs tripo for props: both have an official mcp server and both list unity, unreal, godot and blender. the free plan is where they split | x/media/meshy-vs-tripo.png | meshy's free plan is cc by 4.0, tripo's is non-commercial. every other column, side by side: gamedevaitools.com/compare/meshy-vs-tripo/ |
+| 1 | 01:00 | **POSTED 01:09 AEST** https://x.com/gamedevaitools/status/2112924366837309676 (self-reply https://x.com/gamedevaitools/status/2112924452984127548). Own post: meshy vs tripo (intro-posts.md item 4, recommended) | meshy vs tripo for props: both have an official mcp server and both list unity, unreal, godot and blender. the free plan is where they split | x/media/meshy-vs-tripo.png | meshy's free plan is cc by 4.0, tripo's is non-commercial. every other column, side by side: gamedevaitools.com/compare/meshy-vs-tripo/ |
 | 2 | 01:20 | Own post: the 7-step guide (intro-posts.md item 5, recommended) | the mesh is the easy part. scale, normals, polycount and a baked normal map are the rest of the guide | x/media/guide-7-steps.png | the full guide, with each step linked to the official docs: gamedevaitools.com/guides/ai-3d-model-to-engine/ |
-| 3 | 01:40 | Reply N1 (@ArielFrischer) | N1 Recommended text below | none | none |
-| 4 | 02:00 | Reply N4 (@ElevenLabs) | N4 Recommended text below | none | none |
+| 3 | 01:40 | **POSTED 01:32 AEST** https://x.com/gamedevaitools/status/2112929929918849350. Reply N1 (@ArielFrischer) | N1 Recommended text below | none | none |
+| 4 | 02:00 | **POSTED 01:52 AEST** https://x.com/gamedevaitools/status/2112935031434039568 (X then showed its 'Unlock more on X' graduated-access notice). Reply N4 (@ElevenLabs) | N4 Recommended text below | none | none |
 | 5 | 02:20 | Reply N3 (@ViggleAI) | N3 Recommended text below | none | none |
 | 6 | 02:40 | Reply N2 (@froessell) | N2 Recommended text below | none | none |
 | 7 | 03:00 | Reply N5 (@tripoai) | N5 Recommended text below | none | none |
@@ -101,3 +112,28 @@ Post N1 first (it's an ask), then N4 and N3 (launches, most reach), then N2, N5 
 - Meshy's developer group chat post: it's an invite asking people to reply with what they're building. We don't build things, so replying would misrepresent us.
 - "Turn ANY image into a 3D model for FREE 🚨" listicles: hype bait.
 - A reply under @rammcodes's 3D-print MCP post (@Javimbuilds): a 3D-printing thread, which is off-topic.
+
+## REPLY to @brehm_shaun — DROPPED (Mike pulled it, 21 Oct 18:48 AEST). Do not post.
+- In reply to: https://x.com/brehm_shaun/status/2112674685468938337
+- Text: clicking DONE on a card and having claude pick up the next task is such a clean loop, and about 200 lines for the whole thing is wild. would you be up for us featuring symbiosis: criticality on gamedevaitools.com, with this breakdown credited to you? only if you're keen
+- No links. Facts from CEO brief (task cards, ~200 lines).
+
+## Own posts, 22 Oct (APPROVED by CEO 22 Oct 07:10 AEST; post one per 1am window from Fri 23 Oct after already-approved items, max 2 own posts per window). Links go in the first reply only. No hashtags.
+
+### P1. Tripo EdenLive
+- **Post:** tripo open-sourced edenlive: feed it greybox or engine footage, get styled video back at 720p, 24+ fps on one rtx 5090. the catch: the code is apache-2.0, but the flux first-frame weights are non-commercial, so check that before it goes in a trailer
+- **First reply:** how it stacks up with the rest of this week's launches: gamedevaitools.com/new/ (source: https://www.tripo3d.ai/research/edenlive)
+
+### P2. Viggle JST-2
+- **Post:** viggle's jst-2 builds 3d scenes as gaussian splats, plus 3d characters and motion. free to try in their pinoc browser app, and there's an api and mcp server if you want it in your own pipeline
+- **First reply:** this week's launches side by side: gamedevaitools.com/new/ (source: https://viggle.ai/jst2)
+
+### P3. ElevenLabs Eleven Realtime
+- **Post:** elevenlabs shipped eleven realtime: speech-to-speech voice agent models in two sizes (v1 mini and v1 max), 90+ languages, and the api uses openai's realtime format. worth a look for talking npcs
+- **First reply:** gamedevaitools.com/new/ (source: https://elevenlabs.io/blog/realtime)
+
+### P4. Store AI rules beyond Steam
+- **Post:** steam isn't the only store asking about ai. our steam ai disclosure page now covers google play, apple, microsoft/xbox and the unity asset store too, in one place
+- **First reply:** gamedevaitools.com/steam-ai-disclosure/
+
+Facts are only from CEO's 22 Oct note and the linked sources. Post one a day or space them 3+ hours apart. P4 is a page plug, so pair it with a launch post rather than going first.
