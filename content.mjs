@@ -408,3 +408,29 @@ export const CAN_SELL = {
     ],
   },
 };
+
+// Alternatives pages (/alternatives/<slug>/): built only from tools already in data/tools.json and their sourced fields.
+// `why` restates facts already on the base tool's listing; per-tool notes come from each listing's verdict at build time.
+// Shape: { slug, base, task, title, metaTitle, description, why, tools: [slugs] }
+export const ALTERNATIVES = [
+  { slug: 'midjourney-alternatives-game-art', base: 'midjourney', task: 'concept-art', title: 'Midjourney alternatives for game art',
+    metaTitle: 'Midjourney alternatives for game art (2026)',
+    description: 'AI tools for game art compared with Midjourney: free plans, commercial-use terms, pricing, API and MCP, from each vendor\'s own pages.',
+    why: 'Midjourney has no free plan, images are public by default unless you pay for Pro or Mega, and companies over US$1M a year need Pro or Mega. These tools handle game art with different terms.',
+    tools: ['chatgpt', 'layer-ai', 'leonardo-ai', 'ludo-ai', 'pixellab', 'retro-diffusion', 'scenario'] },
+  { slug: 'meshy-alternatives-game-ready-3d', base: 'meshy', task: '3d-models', title: 'Meshy alternatives for game-ready 3D',
+    metaTitle: 'Meshy alternatives for game-ready 3D (2026)',
+    description: 'AI 3D model tools compared with Meshy for game assets: free plans, commercial terms, export formats, engines, API and MCP, sourced from each vendor.',
+    why: 'Meshy\'s free-plan output is CC BY 4.0, so you credit Meshy unless you pay. These 3D tools differ on licence, rigging, export formats and engine support.',
+    tools: ['bake3d', 'dreamlands', 'hunyuan3d', 'hyper3d-rodin', 'sloyd', 'thrixel', 'tripo'] },
+  { slug: 'cursor-alternatives-game-dev', base: 'cursor', task: 'code', title: 'Cursor alternatives for game dev',
+    metaTitle: 'Cursor alternatives for game development (2026)',
+    description: 'AI coding tools compared with Cursor for game code: free plans, pricing, commercial terms, engine plugins, API and MCP, from each vendor\'s pages.',
+    why: 'Cursor is an AI-first editor with a free tier. Some game devs want an assistant inside the engine editor instead, or a different pricing model.',
+    tools: ['chatgpt', 'claude-code', 'github-copilot', 'ludus-ai', 'ultimate-engine-copilot', 'windsurf'] },
+  { slug: 'suno-alternatives-game-music', base: 'suno', task: 'audio', title: 'Suno alternatives for game music',
+    metaTitle: 'Suno alternatives for game music (2026)',
+    description: 'AI music tools compared with Suno for game soundtracks: free plans, commercial-use terms, pricing, API and MCP, sourced from each vendor\'s pages.',
+    why: 'Suno\'s free-plan songs are personal, non-commercial use only, and subscribing later doesn\'t license them. These music tools have different terms.',
+    tools: ['aiva', 'beatoven', 'mubert', 'soundraw', 'stable-audio', 'udio'] },
+];

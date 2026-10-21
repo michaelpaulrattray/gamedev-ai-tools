@@ -2,7 +2,7 @@
 // Pages are plain HTML from template helpers; the only dependencies (satori, @resvg/resvg-js) render share images (og.mjs).
 import fs from 'node:fs';
 import path from 'node:path';
-import { CHECKED, GUIDES, DISCLOSURE, NEWS, COMPARE, ENGINE_HUBS, CAN_SELL } from './content.mjs';
+import { CHECKED, GUIDES, DISCLOSURE, NEWS, COMPARE, ENGINE_HUBS, CAN_SELL, ALTERNATIVES } from './content.mjs';
 import { SPONSOR_OFFERS, BUSINESS_EMAIL, AFFILIATE_NOTE } from './config.mjs';
 import { loadBookings, resolveBookings } from './sponsors.mjs';
 import { createOg, OG_W, OG_H } from './og.mjs';
@@ -250,7 +250,7 @@ ${jsonld.map(ld).join('\n')}
 <body>
 <header class="site-header"><div class="wrap">
 <a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a>
-<nav><a href="${L('/tools/')}">Tools</a><a href="${L('/category/')}">Categories</a><a class="hide-sm" href="${L('/guides/')}">Guides</a><a class="hide-sm" href="${L('/compare/')}">Compare</a><a class="hide-sm" href="${L('/new/')}">New</a>${DEALS.length ? `<a href="${L('/deals/')}">Deals</a>` : ''}<a class="nav-cta" href="${L('/submit/')}">Submit a tool</a></nav>
+<nav><a href="${L('/tools/')}">Tools</a><a href="${L('/category/')}">Categories</a><a class="hide-sm" href="${L('/guides/')}">Guides</a><a class="hide-sm" href="${L('/compare/')}">Compare</a><a class="hide-sm" href="${L('/alternatives/')}">Alternatives</a><a class="hide-sm" href="${L('/new/')}">New</a>${DEALS.length ? `<a href="${L('/deals/')}">Deals</a>` : ''}<a class="nav-cta" href="${L('/submit/')}">Submit a tool</a></nav>
 </div></header>
 ${sponsorStrip()}
 <main class="wrap">
@@ -262,7 +262,7 @@ ${sponsorSide()}
 <div class="foot-brand-col"><a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a>
 <p class="foot-tag">An independent directory of AI tools for game developers. Commercial-use terms sourced and dated, categories ranked on evidence.</p>
 ${footerSignup()}</div>
-<nav class="foot-col" aria-label="Explore"><h2>Explore</h2><a href="${L('/tools/')}">All tools</a><a href="${L('/category/')}">Best by category</a><a href="${L('/guides/')}">Guides</a><a href="${L('/compare/')}">Compare tools</a><a href="${L('/new/')}">New this week</a>${DEALS.length ? `<a href="${L('/deals/')}">Deals</a>` : ''}</nav>
+<nav class="foot-col" aria-label="Explore"><h2>Explore</h2><a href="${L('/tools/')}">All tools</a><a href="${L('/category/')}">Best by category</a><a href="${L('/guides/')}">Guides</a><a href="${L('/compare/')}">Compare tools</a><a href="${L('/alternatives/')}">Alternatives</a><a href="${L('/new/')}">New this week</a>${DEALS.length ? `<a href="${L('/deals/')}">Deals</a>` : ''}</nav>
 <nav class="foot-col" aria-label="Resources"><h2>Resources</h2><a href="${L('/cheat-sheet/')}">Can I ship it? cheat sheet</a><a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a><a href="${L('/guides/open-weights-model-licences/')}">Open-weights licences</a><a href="${L('/how-we-rank/')}">How we rank</a><a href="${L('/badge/')}">"Listed on" badge</a></nav>
 <nav class="foot-col" aria-label="Company"><h2>Company</h2><a href="${L('/about/')}">About</a><a href="${L('/submit/')}">Submit a tool</a><a href="${L('/sponsor/')}">Advertise</a><a href="${mailto()}">Contact</a><a href="${L('/privacy/')}">Privacy</a></nav>
 </div>
@@ -509,6 +509,7 @@ ${alts.length ? `<section class="alts" aria-labelledby="alt-h">
 <div class="sec-head"><h2 id="alt-h">Alternatives</h2><a href="${L(`/category/${TASKS[t.tasks[0]].page}/`)}">More in ${esc(TASKS[t.tasks[0]].label)} →</a></div>
 ${pairs.length ? `<div class="cmp-row"><span>Compare side by side:</span>${pairs.map(cmpChip).join('')}</div>` : ''}
 <div class="grid ${alts.length >= 4 ? 'g4' : 'g3'}">${alts.map(o => toolCard(o, { compact: true })).join('\n')}</div>
+${ALTERNATIVES.filter(a => a.base === t.slug).map(a => `<p class="cmp-row">${chip(`${a.title} →`, { href: L(`/alternatives/${a.slug}/`) })}</p>`).join('')}
 </section>` : ''}
 ${newsletterBlock()}`,
   }));
@@ -1331,6 +1332,60 @@ ${tools.map(t => toolCard(t)).join('\n')}
 <script src="${L('/assets/app.js')}"></script>`,
 }));
 
+// ---------- Alternatives pages (content.mjs ALTERNATIVES): comparison table + notes from existing listing data ----------
+const altCell = v => isNsv(v) ? NSV : esc(v);
+const altPairs = (base, list) => list.map(t => pairUrl[pairKey(base.slug, t.slug)] ? { t, u: pairUrl[pairKey(base.slug, t.slug)] } : null).filter(Boolean);
+for (const A of ALTERNATIVES) {
+  const base = bySlug[A.base], list = A.tools.map(s => bySlug[s]).filter(Boolean);
+  if (!base || !list.length) continue;
+  const p = `/alternatives/${A.slug}/`, all = [base, ...list];
+  const checked = all.map(t => t.lastChecked).sort().pop();
+  const pairs = altPairs(base, list);
+  page(p, layout({
+    title: fit(60, `${A.metaTitle} | ${SITE.name}`, A.metaTitle, A.title),
+    description: A.description,
+    pathname: p,
+    og: ogFile(`alternatives/${A.slug}`, 'page', { kicker: 'Alternatives', title: A.title, sub: `${list.length} tools compared with ${base.name}, sourced from each vendor.` }),
+    jsonld: [
+      { '@context': 'https://schema.org', '@type': 'Article', headline: A.title, description: A.description, datePublished: '2026-10-22', dateModified: checked, url: URL_(p), author: { '@type': 'Organization', name: SITE.name, url: URL_('/') }, publisher: { '@type': 'Organization', name: SITE.name, url: URL_('/') } },
+      { '@context': 'https://schema.org', '@type': 'ItemList', name: A.title, itemListElement: list.map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: URL_(`/tools/${t.slug}/`), name: t.name })) },
+      { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'All tools', item: URL_('/') },
+        { '@type': 'ListItem', position: 2, name: 'Alternatives', item: URL_('/alternatives/') },
+        { '@type': 'ListItem', position: 3, name: A.title, item: URL_(p) } ] },
+    ],
+    body: `
+<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/alternatives/')}">Alternatives</a> › ${esc(A.title)}</nav>
+<h1 class="page-h">${esc(A.title)}</h1>
+<p class="page-sub">${esc(A.why)} Listed A to Z, not ranked; for the ranking see <a href="${L(`/category/${TASKS[A.task].page}/`)}">best ${esc(TASKS[A.task].label.toLowerCase())} tools</a>. Checked ${timeEl(checked)}.</p>
+<div class="table-wrap"><table class="cmp"><thead><tr><th>Tool</th><th>Best for</th><th>Free plan</th><th>Commercial use</th><th>Engines</th><th>API</th><th>MCP</th></tr></thead><tbody>
+${all.map(t => `<tr${t === base ? ' class="is-top"' : ''}><td><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 24)}${esc(t.name)}</a>${t === base ? '<span class="row-label">Compared with</span>' : ''}</td><td>${altCell(t.bestFor)}</td><td>${isNsv(t.free) ? NSV : esc(FREE[t.free])}</td><td>${licBadge(t)}</td><td>${esc(engineText(t))}</td><td>${isNsv(t.api.status) ? NSV : esc(API_L[t.api.status])}</td><td>${isNsv(t.mcp.status) ? NSV : esc(MCP_L[t.mcp.status])}</td></tr>`).join('\n')}
+</tbody></table></div>
+<p class="note">Every cell comes from the tool's listing, which links the vendor's own pages. "Not stated by vendor" means we couldn't find it there.</p>
+<h2 class="sub-h">Notes on each alternative</h2>
+${list.map(t => { const u = pairUrl[pairKey(base.slug, t.slug)]; return `<section class="card disc hub-sec"><h3><a href="${toolUrl(t)}">${esc(t.name)}</a></h3>
+<p>${esc(t.verdict)}</p>
+<p><b>Price:</b> ${altCell(t.pricing)}${srcA(t.pricingSource)}</p>
+<p><b>Licence:</b> ${altCell(t.license)}${srcA(t.licenseSource)} · Checked ${timeEl(t.lastChecked)}</p>
+<p class="cmp-row">${chip(`${t.name} listing`, { href: toolUrl(t) })}${u ? chip(`${base.name} vs ${t.name}`, { href: u }) : ''}</p></section>`; }).join('\n')}
+${pairs.length ? `<div class="cmp-row"><span>Compare side by side:</span>${pairs.map(x => chip(`${base.name} vs ${x.t.name}`, { href: x.u })).join('')}<a class="chip c-muted" href="${L(`/compare/?task=${A.task}`)}">Pick any two →</a></div>` : ''}
+<p class="note">We summarise vendors' published pages on the dates shown. Read the current terms before you ship. Paid placements never change this list.</p>
+${newsletterBlock()}`,
+  }));
+}
+page('/alternatives/', layout({
+  title: `Alternatives to popular AI game-dev tools | ${SITE.name}`,
+  description: 'Alternatives to Midjourney, Meshy, Cursor and Suno for game developers, compared on free plans, commercial terms, engines, API and MCP from vendor pages.',
+  pathname: '/alternatives/',
+  og: ogFile('alternatives-hub', 'page', { kicker: 'Alternatives', title: 'Alternatives to popular AI game-dev tools', sub: 'Sourced from each vendor, never paid placement.' }),
+  jsonld: [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Alternatives to popular AI game-dev tools', url: URL_('/alternatives/'), mainEntity: { '@type': 'ItemList', itemListElement: ALTERNATIVES.map((a, i) => ({ '@type': 'ListItem', position: i + 1, url: URL_(`/alternatives/${a.slug}/`), name: a.title })) } }],
+  body: `<nav class="crumbs"><a href="${L('/')}">All tools</a> › Alternatives</nav>
+<h1 class="page-h">Alternatives to popular AI game-dev tools</h1>
+<p class="page-sub">Looking past the obvious pick? Each page compares a well-known tool with the listed alternatives on free plans, commercial-use terms, engines, API and MCP, using only facts from each vendor's own pages. Also see <a href="${L('/compare/')}">side-by-side comparisons</a> and <a href="${L('/tools/')}">all tools</a>.</p>
+<div class="grid">${ALTERNATIVES.filter(a => bySlug[a.base]).map(a => linkCard({ href: L(`/alternatives/${a.slug}/`), title: a.title, kicker: TASKS[a.task].label, desc: `${a.tools.length} alternatives to ${esc(bySlug[a.base].name)}. ${esc(a.description)}` })).join('\n')}</div>
+${newsletterBlock()}`,
+}));
+
 // ---------- llms.txt / llms-full.txt (https://llmstxt.org) ----------
 const md = s => String(s).replace(/\s+/g, ' ').trim();
 const mdv = v => isNsv(v) ? NSV_TEXT : md(v);
@@ -1360,6 +1415,10 @@ ${guideLinks.join('\n')}
 ## Comparisons
 - [All comparisons](${URL_('/compare/')})
 ${cmpLinks.join('\n')}
+
+## Alternatives
+- [All alternatives](${URL_('/alternatives/')})
+${ALTERNATIVES.map(a => `- [${md(a.title)}](${URL_(`/alternatives/${a.slug}/`)}): ${md(a.description)}`).join('\n')}
 
 ## Resources
 - [AI tools you can legally ship in a paid game](${URL_('/cheat-sheet/')}): cheat sheet of free-plan commercial use, plan needed and the catch for every tool, with sources and check dates
