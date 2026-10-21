@@ -220,7 +220,7 @@ export const NEWS = [
 export const COMPARE = [
   ['meshy', 'tripo'], ['hyper3d-rodin', 'meshy'], ['suno', 'udio'], ['aiva', 'mubert'], ['cursor', 'github-copilot'], ['cursor', 'windsurf'],
   ['elevenlabs', 'inworld-ai'], ['convai', 'inworld-ai'], ['cascadeur', 'deepmotion'], ['crowdin', 'gridly'], ['modl-ai', 'nunu-ai'],
-  ['runway', 'luma-ai'], ['pixellab', 'retro-diffusion'], ['scenario', 'layer-ai'],
+  ['runway', 'luma-ai'], ['pixellab', 'retro-diffusion'], ['scenario', 'layer-ai'], ['chatgpt', 'midjourney'], ['leonardo-ai', 'midjourney'],
 ];
 
 
@@ -359,6 +359,52 @@ export const ENGINE_HUBS = {
       { q: 'Can I sell AI-generated assets on Fab?', a: 'Yes, tagged: Fab\'s Distribution Agreement requires the CreatedWithAI tag when a material portion of the content is generated with generative AI.', url: 'https://www.fab.com/distribution-agreement' },
       { q: 'Which AI 3D generators export to Unreal?', a: 'In our listings: Meshy, Tripo, Hyper3D Rodin, Sloyd and World Labs Marble, each with a different licence catch (see above).', url: '/category/3d-models/' },
       { q: 'Does the Epic Games Store require AI disclosure?', a: 'We didn\'t find a requirement as of the check date. Steam does ask, in its Content Survey.', url: '/steam-ai-disclosure/' },
+    ],
+  },
+};
+
+// "Can I sell a game made with X?" answer blocks on tool pages (/tools/<slug>/#can-i-sell). Briefs: docs/briefs/can-i-sell-*.md.
+// Shape: { checked, metaTitle?, metaDesc?, h, answer, note, table?: { cols, rows, source }, rules: [{ h, text, url }], sections: [{ h, items: [s()] }], alts: [slugs], links: [{ href, label }], faq: [{ q, a, url }] }
+const MJ_TERMS = 'https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service';
+const MJ_PLANS = 'https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans';
+const MJ_HELP = 'https://docs.midjourney.com/hc/en-us/articles/27870375276557-Using-Images-Videos-Commercially';
+export const CAN_SELL = {
+  midjourney: {
+    checked: '2026-10-22',
+    metaTitle: 'Can I sell a game made with Midjourney? | GameDev AI Tools',
+    metaDesc: 'Yes on any paid plan, but companies earning over US$1M a year need Pro or Mega. You keep ownership after cancelling. Sourced from Midjourney\'s terms.',
+    h: 'Can I use Midjourney images in a game I sell?',
+    answer: 'Yes, on any paid plan, with two catches. Midjourney\'s terms say you own the images you create, and that ownership continues if you cancel. But a company (or its employee) earning over US$1,000,000 a year must be on Pro or Mega. Images you upscale from other users stay theirs. Steam\'s Content Survey covers AI-generated art.',
+    note: 'This summarises Midjourney\'s published terms and help docs on the date shown. It isn\'t legal advice; for a decision about your game, talk to a lawyer.',
+    table: { cols: ['Plan', 'Monthly price', 'Annual price', 'Stealth (private) mode', 'Commercial use'], source: MJ_PLANS, rows: [
+      ['Basic', 'US$10', 'US$96 (US$8/month)', 'No', 'General Commercial Terms'],
+      ['Standard', 'US$30', 'US$288 (US$24/month)', 'No', 'General Commercial Terms'],
+      ['Pro', 'US$60', 'US$576 (US$48/month)', 'Yes', 'General Commercial Terms; required for companies over US$1M/year'],
+      ['Mega', 'US$120', 'US$1,152 (US$96/month)', 'Yes', 'Same as Pro'],
+      ['Free plan or trial', 'Not stated by vendor', 'Not stated by vendor', 'Not stated by vendor', 'Not stated by vendor ("All Midjourney plans are subscriptions")'],
+    ] },
+    rules: [
+      { h: 'The US$1M company rule', text: 'The Terms (effective 27 May 2026): "If you are a company or any employee of a company with more than $1,000,000 USD a year in revenue, you must be subscribed to a \'Pro\' or \'Mega\' plan to own Your Assets." The help article says "a business grossing more than $1,000,000 USD a year". Whether revenue is counted per company or group, and for which year: Not stated by vendor.', url: MJ_TERMS },
+      { h: 'Cancelling is fine', text: '"Your ownership of the Assets you created persists even if in subsequent months You downgrade or cancel Your membership."', url: MJ_TERMS },
+      { h: 'Upscaling other people\'s images', text: '"If you upscale an image that another user created, that image belongs to the original creator, not you." You need their permission to use it.', url: MJ_HELP },
+      { h: 'Public by default', text: '"By default, Your Content is publicly viewable and remixable." Stealth Mode is only on Pro and Mega, on a "best efforts" basis, and doesn\'t cover shared spaces such as Discord rooms. In practice, art for an unannounced game made on Basic or Standard can be seen by others before you reveal it.', url: MJ_TERMS },
+      { h: 'A licence back to Midjourney', text: 'You grant Midjourney a "perpetual, worldwide, non-exclusive, sublicensable no-charge, royalty-free, irrevocable copyright license" over your inputs and the Assets you produce.', url: MJ_TERMS },
+      { h: 'No warranty, and you indemnify them', text: 'Assets are provided "AS IS", with no warranty of "NON-INFRINGEMENT", and you indemnify Midjourney against third-party claims arising from your use of the Services and Assets.', url: MJ_TERMS },
+      { h: 'No copyright guidance', text: '"Midjourney cannot offer guidance on copyright matters." It recommends a lawyer for specific questions.', url: MJ_HELP },
+    ],
+    sections: [
+      { h: 'Credit', items: [s('Attribution requirement: Not stated by vendor in the Terms or the commercial-use help article.', MJ_TERMS)] },
+      { h: 'Store disclosure', items: [s('Steam\'s Content Survey asks about AI-generated content that ships with your game and is consumed by players, "such as artwork, sound, narrative, localization". Pre-generated content is reviewed against your promise that the game is "consistent with your marketing materials", so treat capsule and store art the same way.', 'https://partner.steamgames.com/doc/gettingstarted/contentsurvey')] },
+    ],
+    alts: ['chatgpt', 'leonardo-ai', 'scenario', 'layer-ai', 'pixellab', 'retro-diffusion'],
+    links: [{ href: '/steam-ai-disclosure/', label: 'Steam & store AI disclosure rules' }, { href: '/cheat-sheet/', label: 'Cheat sheet: AI tools you can ship' }, { href: '/guides/open-weights-model-licences/', label: 'Open-weights licences (local models)' }, { href: '/category/concept-art/', label: 'All concept art tools' }],
+    faq: [
+      { q: 'Can I use Midjourney images in a game I sell?', a: 'Midjourney\'s terms say you own the images you create, so commercial use is allowed, with exceptions for companies over US$1M revenue and for other users\' images. This isn\'t legal advice.', url: MJ_TERMS },
+      { q: 'Is the Basic plan enough?', a: 'For individuals and companies under US$1M a year, Midjourney lists "General Commercial Terms" on every plan, including Basic.', url: MJ_PLANS },
+      { q: 'My studio earns over US$1M. What then?', a: 'Midjourney\'s terms say you must be on Pro or Mega to own your assets.', url: MJ_TERMS },
+      { q: 'What if I cancel?', a: 'Midjourney says ownership persists after you downgrade or cancel.', url: MJ_TERMS },
+      { q: 'Are my images private?', a: 'Not by default. Content is "publicly viewable and remixable" unless you use Stealth Mode on Pro or Mega.', url: MJ_TERMS },
+      { q: 'Do I have to disclose Midjourney art on Steam?', a: 'Steam\'s Content Survey asks about AI-generated content that ships with the game, including artwork.', url: 'https://partner.steamgames.com/doc/gettingstarted/contentsurvey' },
     ],
   },
 };

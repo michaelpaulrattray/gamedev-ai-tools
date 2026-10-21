@@ -1572,5 +1572,40 @@
    "note": "unverified",
    "source": ""
   }
+ },
+ {
+  "slug": "midjourney",
+  "name": "Midjourney",
+  "url": "https://www.midjourney.com/",
+  "tasks": [
+   "concept-art"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "paid",
+  "summary": "AI image (and video) generation on the web and Discord; used for concept art, key art and 2D game images. Four subscription plans, no free plan stated.",
+  "pricing": "Basic US$10/month, Standard US$30, Pro US$60, Mega US$120 per month; annual billing US$96, US$288, US$576 or US$1,152 a year (20% off). Extra fast GPU time US$4/hr.",
+  "pricingSource": "https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans",
+  "commercial": "paid-only",
+  "license": "Terms of Service (effective 27 May 2026): you own the Assets you create; ownership persists if you later downgrade or cancel. A company (or employee of a company) with more than US$1,000,000 a year in revenue must be on Pro or Mega to own its Assets. Upscales of other users' images stay theirs. Content is publicly viewable and remixable by default (Stealth Mode on Pro/Mega only). Assets are provided AS IS, with no non-infringement warranty, and you indemnify Midjourney.",
+  "licenseSource": "https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service",
+  "lastChecked": "2026-10-22",
+  "verdict": "For concept and key art on a subscription; you own what you make on any plan, but studios over US$1M a year need Pro or Mega, and images are public unless you pay for Stealth.",
+  "bestFor": "Concept art, key art and 2D illustration",
+  "free": "no",
+  "freeTier": "No free plan stated: \"All Midjourney plans are subscriptions\"",
+  "exportFormats": "unverified",
+  "revenue": "Company revenue over US$1,000,000/year requires Pro or Mega; no revenue share stated",
+  "api": {
+   "status": "unverified",
+   "note": "No public API stated; the Terms say you may not use automated tools to access the Services or generate Assets",
+   "source": "https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service"
+  },
+  "mcp": {
+   "status": "unverified",
+   "note": "unverified",
+   "source": ""
+  }
  }
 ]

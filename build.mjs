@@ -2,7 +2,7 @@
 // Pages are plain HTML from template helpers; the only dependencies (satori, @resvg/resvg-js) render share images (og.mjs).
 import fs from 'node:fs';
 import path from 'node:path';
-import { CHECKED, GUIDES, DISCLOSURE, NEWS, COMPARE, ENGINE_HUBS } from './content.mjs';
+import { CHECKED, GUIDES, DISCLOSURE, NEWS, COMPARE, ENGINE_HUBS, CAN_SELL } from './content.mjs';
 import { SPONSOR_OFFERS, BUSINESS_EMAIL, AFFILIATE_NOTE } from './config.mjs';
 import { loadBookings, resolveBookings } from './sponsors.mjs';
 import { createOg, OG_W, OG_H } from './og.mjs';
@@ -425,6 +425,28 @@ function alternativesFor(t) {
   const shared = tools.filter(o => o.slug !== t.slug && !primary.includes(o) && o.tasks.some(k => t.tasks.includes(k)));
   return [...primary, ...shared].slice(0, 4);
 }
+const nsvText = x => esc(x).replace(/Not stated by vendor/g, NSV);
+const stmtN = x => `${nsvText(x.text)}${srcA(x.url)}`;
+// Visible FAQ (details/summary) + matching FAQPage JSON-LD (only questions shown on the page).
+const faqBlock = (faq, id = 'faq') => faq && faq.length ? `<section class="faq" aria-labelledby="${id}-h"><h2 class="sub-h" id="${id}-h">Questions</h2>${faq.map(f => `<details class="card faq-item"><summary>${esc(f.q)}</summary><p>${nsvText(f.a)}${f.url ? srcA(f.url) : ''}</p></details>`).join('')}</section>` : '';
+const faqLd = faq => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a + (f.url ? ` Source: ${f.url.startsWith('/') ? URL_(f.url) : f.url}` : '') } })) });
+// "Can I sell?" answer block (content.mjs CAN_SELL), rendered at #can-i-sell on the tool page.
+function canSellBlock(t, cs) {
+  const tbl = cs.table ? `<h3>Plan by plan</h3><div class="table-wrap"><table class="cmp"><thead><tr>${cs.table.cols.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${cs.table.rows.map(r => `<tr>${r.map(c => `<td>${nsvText(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div><p class="note">Source:${srcA(cs.table.source, 'Midjourney plans')} · Checked ${timeEl(cs.checked)}</p>` : '';
+  const alts = (cs.alts || []).filter(x => bySlug[x]);
+  return `<section class="card disc hub-sec" id="can-i-sell" aria-labelledby="cs-h">
+<h2 id="cs-h">${esc(cs.h)}</h2>
+<p class="hub-intro"><strong>${esc(cs.answer)}</strong></p>
+<p class="note">${esc(cs.note)} Checked ${timeEl(cs.checked)}.</p>
+${tbl}
+<h3>The rules that catch people out</h3>
+<ol>${cs.rules.map(r => `<li><b>${esc(r.h)}.</b> ${nsvText(r.text)}${srcA(r.url)}</li>`).join('')}</ol>
+${cs.sections.map(sec => `<h3>${esc(sec.h)}</h3>${sec.items.map(i => `<p>${stmtN(i)}</p>`).join('')}`).join('\n')}
+${alts.length ? `<h3>Alternatives with different terms</h3><ul>${alts.map(x => `<li><a href="${toolUrl(bySlug[x])}">${esc(bySlug[x].name)}</a>: ${esc(QA_SHORT[bySlug[x].commercial] || NSV_TEXT)}. ${esc(bySlug[x].verdict)}</li>`).join('')}</ul>` : ''}
+${cs.links ? `<p class="cmp-row">${cs.links.map(l => chip(l.label, { href: L(l.href) })).join('')}</p>` : ''}
+</section>
+${faqBlock(cs.faq, 'cs-faq')}`;
+}
 const sourceLine = url => url ? `<br><small>Source: <a href="${esc(url)}" rel="noopener nofollow" target="_blank">${esc(url)}</a></small>` : '';
 for (const t of tools) {
   const p = `/tools/${t.slug}/`;
@@ -435,9 +457,10 @@ for (const t of tools) {
   const q = `Can I use ${t.name} in a commercial game?`;
   const answer = quickAnswer(t);
   const terms = isNsv(t.license) ? '' : t.license;
+  const cs = CAN_SELL[t.slug];
   page(p, layout({
-    title: fit(60, `${t.name}: pricing & commercial licence | ${SITE.name}`, `${t.name}: pricing & licence | ${SITE.name}`, `${t.name} pricing & licence for game devs`, `${t.name}: pricing & licence`),
-    description: desc,
+    title: cs && cs.metaTitle ? cs.metaTitle : fit(60, `${t.name}: pricing & commercial licence | ${SITE.name}`, `${t.name}: pricing & licence | ${SITE.name}`, `${t.name} pricing & licence for game devs`, `${t.name}: pricing & licence`),
+    description: cs && cs.metaDesc ? cs.metaDesc : desc,
     pathname: p,
     og: ogFile(`tools/${t.slug}`, 'tool', { logo: logoData(t), name: t.name, task: TASKS[t.tasks[0]].label, badge: { label: OG_LIC[t.commercial] || OG_LIC.unverified, tone: licTone(t) } }),
     jsonld: [
@@ -446,7 +469,7 @@ for (const t of tools) {
         { '@type': 'ListItem', position: 1, name: 'All tools', item: URL_('/') },
         { '@type': 'ListItem', position: 2, name: TASKS[t.tasks[0]].label, item: URL_(`/category/${TASKS[t.tasks[0]].page}/`) },
         { '@type': 'ListItem', position: 3, name: t.name, item: URL_(p) } ] },
-      { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: `${answer}${terms ? ` What the terms say: ${terms}` : ''}${t.licenseSource ? ` Source: ${t.licenseSource} (checked ${t.lastChecked}).` : ''}` } }] },
+      { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: `${answer}${terms ? ` What the terms say: ${terms}` : ''}${t.licenseSource ? ` Source: ${t.licenseSource} (checked ${t.lastChecked}).` : ''}` } }, ...(cs ? faqLd(cs.faq).mainEntity : [])] },
     ],
     body: `
 <nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L(`/category/${TASKS[t.tasks[0]].page}/`)}">${esc(TASKS[t.tasks[0]].label)}</a> › ${esc(t.name)}</nav>
@@ -462,6 +485,7 @@ ${(() => { const r = rankOf(t.slug, t.tasks[0]); return r ? `<p class="rank-chip
 <p class="qa-a">${badge(QA_SHORT[t.commercial] || NSV_TEXT, licTone(t), { cls: 'b-lg' })} <span>${esc(answer)}</span></p>
 <p class="qa-terms">${terms ? `What the terms say: ${esc(terms)} ` : ''}${t.licenseSource ? `<a href="${esc(t.licenseSource)}" rel="noopener nofollow" target="_blank">Read the vendor's terms ↗</a>` : NSV} · Checked ${timeEl(t.lastChecked)}</p>
 </section>
+${cs ? canSellBlock(t, cs) : ''}
 <p class="verdict big"><strong>Verdict:</strong> ${esc(t.verdict)}</p>
 <dl class="facts">
 <dt>Best for</dt><dd>${val(t.bestFor)}</dd>
@@ -610,11 +634,6 @@ ${newsletterBlock()}`,
 
 // ---------- Editorial helpers shared by engine hubs and licence guides ----------
 // "Not stated by vendor" inside sourced text is shown muted, like empty data fields.
-const nsvText = x => esc(x).replace(/Not stated by vendor/g, NSV);
-const stmtN = x => `${nsvText(x.text)}${srcA(x.url)}`;
-// Visible FAQ (details/summary) + matching FAQPage JSON-LD (only questions shown on the page).
-const faqBlock = (faq, id = 'faq') => faq && faq.length ? `<section class="faq" aria-labelledby="${id}-h"><h2 class="sub-h" id="${id}-h">Questions</h2>${faq.map(f => `<details class="card faq-item"><summary>${esc(f.q)}</summary><p>${nsvText(f.a)}${f.url ? srcA(f.url) : ''}</p></details>`).join('')}</section>` : '';
-const faqLd = faq => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a + (f.url ? ` Source: ${f.url.startsWith('/') ? URL_(f.url) : f.url}` : '') } })) });
 // Engine hub section (content.mjs ENGINE_HUBS): heading, optional intro, optional table with sources, sourced statements, tool chips.
 const hubSection = sec => `<section class="card disc hub-sec"${sec.id ? ` id="${esc(sec.id)}"` : ''}><h2>${esc(sec.h)}</h2>${sec.checked ? `<p class="note">Checked ${timeEl(sec.checked)}.</p>` : ''}${sec.intro ? `<p class="hub-intro">${nsvText(sec.intro)}</p>` : ''}
 ${sec.tools && sec.tools.length ? chips(sec.tools.map(sl => bySlug[sl]).filter(Boolean).map(t => chip(t.name, { tool: t, href: toolUrl(t) })), 'div') : ''}
