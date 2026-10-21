@@ -812,17 +812,21 @@ const newsTop = n => `<article class="card news-top">
 ${whyLine(n)}${newsMeta(n)}
 </div>
 </article>`;
+// Week headings ("This week" / "Last week") are relative, so they are re-labelled in the browser from today's Australia/Brisbane date;
+// the build-time label is only the no-JS fallback. Absolute dates stay as built.
+const WEEK_JS = `<script>(function(){try{var t=new Intl.DateTimeFormat('en-CA',{timeZone:'Australia/Brisbane',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());var dn=function(s){return Date.UTC(+s.slice(0,4),+s.slice(5,7)-1,+s.slice(8,10))/864e5;};var d=dn(t),ws=d-((new Date(d*864e5).getUTCDay()+6)%7);var W=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];document.querySelectorAll('[data-week]').forEach(function(e){var k=dn(e.getAttribute('data-week')),n=Math.round((ws-k)/7),x=new Date(k*864e5);e.textContent=n===0?'This week':n===1?'Last week':'Week of '+W[x.getUTCDay()]+' '+x.getUTCDate()+' '+M[x.getUTCMonth()];});}catch(e){}})();</script>`;
 const newsWeeks = [];
 for (const n of NEWS) { const k = weekStart(n.date); let w = newsWeeks.find(x => x.k === k); if (!w) newsWeeks.push(w = { k, label: weekLabel(n.date), items: [] }); w.items.push(n); }
 page('/new/', layout({
   title: `New this week: AI game-dev tool releases | ${SITE.name}`, description: 'Real releases and updates to AI tools for game developers this week, each with a source link.', pathname: '/new/',
   og: ogFile('new', 'page', { kicker: 'New this week', title: 'AI game-dev tool releases and updates', sub: NEWS.slice(0, 2).map(n => n.title).join(' · '), artPage: newsArt(NEWS[0]) || undefined }),
   body: `<h1 class="page-h">New this week</h1><p class="page-sub">Releases and updates to AI tools for game devs, each linked to its source. Dates are the source's publication date (Australia/Brisbane). Last checked ${timeEl(CHECKED)}.</p>
-${newsWeeks.map((w, wi) => `<section aria-labelledby="wk-${wi}"><h2 class="week-h" id="wk-${wi}">${esc(w.label)} <small>${dateLabel(isoOf(w.k))} to ${dateLabel(isoOf(w.k + 6))}</small></h2>
+${newsWeeks.map((w, wi) => `<section aria-labelledby="wk-${wi}"><h2 class="week-h" id="wk-${wi}"><span data-week="${isoOf(w.k)}">${esc(w.label)}</span> <small>${dateLabel(isoOf(w.k))} to ${dateLabel(isoOf(w.k + 6))}</small></h2>
 ${wi === 0 ? newsTop(w.items[0]) : ''}
 <div class="news-list">${w.items.filter((n, i) => !(wi === 0 && i === 0)).map(newsCard).join('\n')}</div></section>`).join('\n')}
 <p class="note">Know of a release we missed? <a href="${L('/submit/')}">Submit it</a> with a link to the official announcement.</p>
 ${newsletterBlock({ heading: 'Get this every week', text: `New AI tools for game devs and changes to their pricing and licences, by email, plus our <a href="${L('/cheat-sheet/')}">ship-it cheat sheet</a>. Every email has an unsubscribe link.` })}`,
+  scripts: WEEK_JS,
 }));
 
 // ---------- Comparisons ----------
@@ -861,8 +865,8 @@ function diffChips(A, B) {
 }
 const pairTask = (A, B) => B.tasks.includes(A.tasks[0]) ? A.tasks[0] : A.tasks.includes(B.tasks[0]) ? B.tasks[0] : A.tasks.find(k => B.tasks.includes(k)) || A.tasks[0];
 const cmpGroups = Object.keys(TASKS).map(k => ({ k, pairs: COMPARE.filter(([a, b]) => pairTask(bySlug[a], bySlug[b]) === k) })).filter(g => g.pairs.length);
-// Every pair of tools that share a task gets a page, so "pick any two" always lands somewhere. Only the curated COMPARE
-// pairs are indexed and in the sitemap; generated pairs are noindex (thin, auto-built) and use the generic share image.
+// Every pair of tools that share a task gets a page, so "pick any two" always lands somewhere. Curated COMPARE
+// pairs get a versus share image; generated pairs use the generic one. See THIN_NSV below for which pairs are indexed.
 const pairKey = (a, b) => [a, b].sort().join('|');
 const CURATED = new Set(COMPARE.map(([a, b]) => pairKey(a, b)));
 const ALL_PAIRS = COMPARE.map(([a, b]) => [a, b, true]);
@@ -955,6 +959,9 @@ ${r ? `<a class="glance-rank" href="${L(`/category/${TASKS[k].page}/`)}"><b>#${r
 </dl>
 <p class="glance-cta">${visitBtn(t)}<a class="btn-ghost" href="${toolUrl(t)}">Full listing</a></p>${t.affiliateUrl ? `<small class="aff-note">${esc(AFFILIATE_NOTE)}</small>` : ''}
 </article>`; };
+// Indexing: curated pairs always; generated pairs too, unless they're thin, i.e. at least THIN_NSV "Not stated by vendor" cells
+// (more than any curated pair has). Thin pairs stay noindex and out of the sitemap.
+const THIN_NSV = 7, THIN_PAIRS = [];
 for (const [a, b, curated] of ALL_PAIRS) {
   const A = bySlug[a], B = bySlug[b], p = `/compare/${a}-vs-${b}/`;
   const cmpOg = curated ? ogFile(`compare/${a}-vs-${b}`, 'versus', { kicker: 'Comparison · pricing, licence, API', a: { logo: logoData(A), name: A.name }, b: { logo: logoData(B), name: B.name } }) : undefined;
@@ -963,11 +970,11 @@ for (const [a, b, curated] of ALL_PAIRS) {
   const head = t => `<div role="columnheader" class="vs-tool"><a class="cmp-tool" href="${toolUrl(t)}">${logo(t, 36, true)}${esc(t.name)}</a>${licBadge(t)}</div>`;
   const rows = ROWS.map(([h, fn, k]) => ({ h, fn, cls: k ? (String(k(A)) !== String(k(B)) ? ' is-diff' : ' is-same') : '' }));
   const nDiff = rows.filter(r => r.cls === ' is-diff').length;
-  page(p, layout({
+  const mk = idx => layout({
     title: `${A.name} vs ${B.name}: pricing, licence, API compared | ${SITE.name}`,
-    description: cmpDesc, pathname: p, noindex: !curated,
+    description: cmpDesc, pathname: p, noindex: !idx,
     og: cmpOg,
-    jsonld: curated ? [
+    jsonld: idx ? [
       { '@context': 'https://schema.org', '@type': 'Article', headline: `${A.name} vs ${B.name}`, description: cmpDesc, url: URL_(p), mainEntityOfPage: URL_(p), datePublished: PUBLISHED, dateModified: modified, inLanguage: 'en-AU', author: ORG, publisher: ORG, about: [A, B].map(t => ({ '@type': 'SoftwareApplication', name: t.name, url: t.url })), ...(cmpOg ? { image: URL_(cmpOg) } : {}) },
       crumbsLd([['All tools', '/'], ['Comparisons', '/compare/'], [`${A.name} vs ${B.name}`, p]]),
     ] : [],
@@ -985,7 +992,11 @@ ${rows.map(r => `<div class="vs-row${r.cls}" role="row"><div role="rowheader" cl
 </div>
 <p class="note">Rows marked ● differ between the two tools. Licence badges: green = commercial use allowed (including any free plan or trial), amber = paid plans only, restricted, or allowed but with no free plan, red = not allowed, grey = not stated by vendor or not applicable. Read the vendor's current terms before you ship.${A.affiliateUrl || B.affiliateUrl ? ` ${esc(AFFILIATE_NOTE)}` : ''}</p>`,
     scripts: nDiff ? `<script>(function(){var b=document.getElementById('only-diff'),g=document.getElementById('vs-grid');b.addEventListener('click',function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on?'true':'false');g.classList.toggle('diff-only',on);});})();</script>` : '',
-  }), { sitemap: curated });
+  });
+  const html = mk(true), nNsv = (html.match(/class="nsv"/g) || []).length;
+  const indexed = curated || nNsv < THIN_NSV;
+  if (!indexed) THIN_PAIRS.push(p);
+  page(p, indexed ? html : mk(false), { sitemap: indexed });
 }
 
 // ---------- Sponsor (four spots from SPONSOR_OFFERS in config.mjs; bookings in data/sponsor.json) ----------
@@ -1381,3 +1392,4 @@ write('robots.txt', `User-agent: *\nAllow: /\n\n# LLM-friendly summary (https://
 write('404.html', layout({ title: `Not found | ${SITE.name}`, description: 'Page not found.', pathname: '/404.html', noindex: true, body: `<h1>Page not found</h1><p><a href="${L('/')}">Back to all tools</a></p>` }));
 write('.nojekyll', '');
 console.log(`Built ${pages.length} pages, ${tools.length} tools -> ${out}/`);
+console.log(`Compare: ${THIN_PAIRS.length} thin pairs noindex: ${THIN_PAIRS.join(" ")}`);
