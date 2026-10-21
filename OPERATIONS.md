@@ -129,6 +129,10 @@ Carried over until then:
 No estimates. If a number isn't available, write "not measured".
 
 ## Decisions log
+- **2026-10-21 (18:45 AEST): Showcase X DMs, 0 of 3 sent.** Mike approved new texts for @brehm_shaun and @builtbysketch. Both conversations were empty, so nothing had been sent before. For each one, add_conversation_keys was rejected with "Conversation key initialization failed: UNAUTHORIZED_REQUESTING_USER", so send_chat_message was never called. Per the X Chat rules, I stopped and didn't retry. The approved texts are unchanged in Mike's 21 Oct approval.
+  - 2026-10-21 18:44 AEST | @brehm_shaun | SKIPPED (not sent) | add_conversation_keys UNAUTHORIZED_REQUESTING_USER. He may only accept messages from accounts he follows, or this new account isn't allowed to start Chats yet.
+  - 2026-10-21 18:44 AEST | @builtbysketch | SKIPPED (not sent) | add_conversation_keys UNAUTHORIZED_REQUESTING_USER, same as above.
+  - 2026-10-21 | @WhistioHQ | SKIPPED (unverified) | The Red Dust source post was deleted and there's no store page. Not sent, per Mike.
 - **2026-10-21 (18:40 AEST): Showcase X DMs held for Mike's review, 0 of 3 sent.** X Chat now unlocks on @gamedevaitools (key saved on the box), and all three recipients have Chat public keys. Mike asked to see the texts before anything goes out, so no conversation keys were added and nothing was encrypted or sent.
   - 2026-10-21 | @brehm_shaun | held (verified) | Solo dev of Symbiosis: Criticality. Steam app 4985040 lists Brehmdig as developer/publisher, Next Fest demo, daily devlog posts.
   - 2026-10-21 | @WhistioHQ | held (not verified, recommend skip) | The Red Dust source post (2109134934489043407) is deleted, no Red Dust posts left on the timeline, no store/itch page, 6-month-old account with 8 followers, and "Red Dust" is already a 2020 Steam game by Mukorka.
