@@ -8,8 +8,8 @@ The 22 Oct window posted items 1, 3 and 4 only. Items 2, 5, 6 and 7 were never p
 
 | # | Time (AEST, 23 Oct) | Item | Decision |
 |---|---|---|---|
-| 1 | 01:00 | Own post: the guide (old item 2), media x/media/guide-7-steps.png, self-reply links /guides/ai-3d-model-to-engine/ | **APPROVED.** Evergreen. Guide returned 200 at 07:04 AEST and still covers scale, normals, polycount and the baked normal map. |
-| 2 | 01:20 | Reply N2 (@froessell), Recommended text | **APPROVED.** Still active: L118, Re34, I8,446 (was L56, Re25). His post still says 7,010 credits, 60 passing tests and a 15 MB web build. About 43 hours old at 01:20, so recheck the replies are still moving and drop it if they've stopped. |
+| 1 | 01:00 | **POSTED 01:06 AEST** https://x.com/gamedevaitools/status/2113285824192401671 (self-reply https://x.com/gamedevaitools/status/2113285919168246125). Own post: the guide (old item 2), media x/media/guide-7-steps.png, self-reply links /guides/ai-3d-model-to-engine/ | **APPROVED.** Evergreen. Guide returned 200 at 07:04 AEST and still covers scale, normals, polycount and the baked normal map. |
+| 2 | 01:20 | **POSTED 01:20 AEST** https://x.com/gamedevaitools/status/2113289456879047164 (thread still active at 01:05: L124, Re36, I8,789, new replies within the hour). Reply N2 (@froessell), Recommended text | **APPROVED.** Still active: L118, Re34, I8,446 (was L56, Re25). His post still says 7,010 credits, 60 passing tests and a 15 MB web build. About 43 hours old at 01:20, so recheck the replies are still moving and drop it if they've stopped. |
 | - | - | Reply N3 (@ViggleAI) | **HELD (drop).** Posted 20 Oct 01:20 AEST, so it will be about 3 days old by 23 Oct 1am, over the 2-day rule. Use an own post on JST-2 instead if Copy Humanizer drafts one (it's now on /new/). |
 | - | - | Reply N5 (@tripoai EdenLive) | **HELD (drop).** About 48 hours old by 23 Oct 1am, and the thread is quiet (Re5, I14.5k). Also, 22 Oct's first post was meshy vs tripo. EdenLive is now on /new/ (with the non-commercial FLUX weights caveat), so an own post linking /new/ is the better route. |
 
