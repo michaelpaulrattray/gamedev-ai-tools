@@ -2,6 +2,19 @@
 
 **Status 21 Oct 18:14 AEST:** the first post (intro item 1) and the pinned intro (item 2) were posted on 21 Oct. The pinned wording was changed to "free plan, terms, api and mcp in one row". The items under APPROVED are approved for the 22 Oct 1am AEST window. Everything else in this file is still a draft that needs Mike's approval and a same-day recheck.
 
+## APPROVED (operator review, Fri 23 Oct 07:40 AEST) for the Sat 24 Oct 1am Brisbane window
+
+The 23 Oct window posted the guide post and the N2 reply only (see below). From the CEO-approved own posts of 22 Oct (P1-P4 at the bottom of this file):
+
+| # | Time (AEST) | Item | Decision |
+|---|---|---|---|
+| 1 | Sat 24 Oct 01:00 | P3 ElevenLabs Eleven Realtime (post + first reply linking gamedevaitools.com/new/) | **APPROVED.** Facts re-checked 23 Oct against the live /new/ item (source elevenlabs.io/blog/realtime): v1 Mini and v1 Max, 90+ languages, Realtime API following OpenAI's Realtime spec. No hashtags, no link in the post, no em dashes. About 4 days old by then, so post it now or drop it. |
+| 2 | Sun 25 Oct 01:00 | P4 Store AI rules beyond Steam (post + first reply linking gamedevaitools.com/steam-ai-disclosure/) | **APPROVED for the next window, not tonight** (one own post a day; P4 is a page plug and goes after a launch post). Facts: the live page covers Google Play, Apple, Microsoft Store and Xbox, and the Unity Asset Store (checked 22 Oct). |
+| - | - | P1 Tripo EdenLive | **DROPPED.** Released 18 Oct, about 6 days old by the next window. Still on /new/. |
+| - | - | P2 Viggle JST-2 | **DROPPED.** Released 19 Oct, about 5 days old by the next window. Still on /new/. |
+
+Still do the same-day recheck before posting (page returns 200, facts unchanged). Timely items for Copy Humanizer to draft (not in this queue yet): Epic's 2026 AI MegaJam (announced 23 Oct, now on /new/) and Wonder Interactive's Strata (22 Oct, now on /new/). See OPERATIONS.md, 23 Oct.
+
 ## APPROVED (operator review, Thu 22 Oct 07:05 AEST) for the Fri 23 Oct 1am Brisbane window
 
 The 22 Oct window posted items 1, 3 and 4 only. Items 2, 5, 6 and 7 were never posted. Their targets were re-read by ID at 07:05 AEST on 22 Oct. Same wording as approved by Mike on 21 Oct. Still do the same-day recheck before each post.

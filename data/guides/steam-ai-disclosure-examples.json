@@ -1,0 +1,335 @@
+{
+ "_doc": "Guide v2 content for /guides/steam-ai-disclosure-examples/ (brief: docs/briefs/steam-ai-disclosure-examples.md). Every Valve statement is from the Steamworks Content Survey page, checked 2026-10-23. Example wording is ours and labelled as such; anything Valve doesn't state = \"Not stated by vendor\". `scope` renders the in/out-of-scope table; `notice` renders a visible disclaimer under the flow strip. Not legal advice. No videos and no images beyond the in-house hero.",
+ "kind": "Guide",
+ "checked": "2026-10-23",
+ "notice": "The example wording on this page is ours, not text Valve supplies or approves. Describe what your game actually does. This isn't legal advice.",
+ "result": "Describe the AI-made content that ships in your game and that players see or hear, such as art, sound, text or localisation, and say how you made it. Valve says efficiency gains from AI dev tools are \"not the focus\". If AI generates content while the game runs, also describe your guardrails against illegal content.",
+ "flow": [
+  {
+   "label": "List what ships",
+   "ai": true
+  },
+  {
+   "label": "Pre-Generated wording"
+  },
+  {
+   "label": "Live-Generated guardrails"
+  },
+  {
+   "label": "Submit for review"
+  },
+  {
+   "label": "Update via Support"
+  }
+ ],
+ "scope": {
+  "title": "In or out of scope? A quick list",
+  "head": [
+   "Situation",
+   "Disclose?",
+   "Why (Valve's wording, or what it doesn't say)"
+  ],
+  "rows": [
+   {
+    "situation": "AI concept art you painted over and shipped in the game",
+    "answer": "Yes, as Pre-Generated",
+    "why": "Pre-Generated covers content \"that ships with your game and is consumed by players that is created with the help of AI tools during development\"."
+   },
+   {
+    "situation": "AI music or sound effects in the build",
+    "answer": "Yes, as Pre-Generated",
+    "why": "The section names \"artwork, sound, narrative, localization, etc.\""
+   },
+   {
+    "situation": "AI voice lines in the build",
+    "answer": "Yes, as Pre-Generated",
+    "why": "Voice lines are sound that ships with the game and players hear."
+   },
+   {
+    "situation": "AI-translated store or in-game text",
+    "answer": "Yes, as Pre-Generated",
+    "why": "\"Localization\" is one of Valve's named examples."
+   },
+   {
+    "situation": "Code written with Copilot, Cursor, Claude Code or ChatGPT",
+    "answer": "Not stated by vendor",
+    "why": "Valve says efficiency gains from AI-powered dev tools are \"not the focus of this section\". Whether shipped AI-written code itself must be listed: Not stated by vendor."
+   },
+   {
+    "situation": "AI images used only as reference, nothing AI-made ships",
+    "answer": "Not stated by vendor",
+    "why": "The section is about content that \"ships with your game\". Valve doesn't list reference-only use, so this row is our reading, not Valve's."
+   },
+   {
+    "situation": "AI placeholder art removed before release",
+    "answer": "Not stated by vendor",
+    "why": "Valve compares your answers \"relative to the content in your build\". The rule that you disclose content even if it's not accessible is written for mature content, not AI."
+   },
+   {
+    "situation": "An LLM writes NPC dialogue while the game runs",
+    "answer": "Yes, as Live-Generated",
+    "why": "Live-Generated is content \"created with the help of AI tools while the game is running\", and you must describe your guardrails."
+   }
+  ],
+  "source": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+ },
+ "shared": [
+  {
+   "h": "Know what the AI section asks",
+   "do": [
+    "Open the Content Survey in Steamworks before you submit your store page and build for review. It has three parts: General Content, Mature Content and Generative AI Content.",
+    "Read the AI part as being about content that ships with your game and that players consume, such as artwork, sound, narrative and localisation.",
+    "Keep the full rules page open: our Steam & store AI disclosure page summarises Pre-Generated and Live-Generated AI and other stores' rules."
+   ],
+   "see": "A list of the content types in your build that AI helped make, and whether any AI runs while the game is playing.",
+   "gotcha": "Valve's review compares your answers \"relative to the content in your build and on your store page\", so describe the build you're actually submitting.",
+   "source": {
+    "label": "Steamworks: Content Survey",
+    "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+   }
+  },
+  {
+   "h": "List every AI-made thing that ships",
+   "do": [
+    "Go through your build by content type: art, UI, music, sound effects, voice, story and dialogue text, translations.",
+    "For each one, note the tool you used and what a person did after (repainted, edited, re-recorded, proofread).",
+    "Mark anything AI generates at runtime separately: that's Live-Generated."
+   ],
+   "see": "A short table of content type, tool and human step that you can turn into one or two sentences each.",
+   "gotcha": "Disclosure doesn't fix a licence problem. Check each tool's commercial-use terms on its listing or the cheat sheet before you ship its output.",
+   "source": {
+    "label": "Steamworks: Content Survey",
+    "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+   }
+  }
+ ],
+ "paths": [
+  {
+   "key": "pre",
+   "label": "Pre-Generated examples",
+   "steps": [
+    {
+     "h": "Art and UI",
+     "do": [
+      "Example (ours): \"Background environment concepts were generated with [tool] and repainted by our artist. Final in-game backgrounds are hand-finished.\"",
+      "Name the content (backgrounds, item icons, portraits), the tool, and the human step."
+     ],
+     "see": "One or two plain sentences a reviewer can check against the build.",
+     "gotcha": "Don't describe AI use you didn't ship. Valve's section is about content that ships and players consume.",
+     "source": {
+      "label": "Steamworks: Content Survey",
+      "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+     }
+    },
+    {
+     "h": "Music and sound effects",
+     "do": [
+      "Example (ours): \"Some ambient music loops and UI sound effects were generated with [tool], then edited and mixed by us.\"",
+      "If only some tracks are AI-made, say which kind (ambient loops, menu music, foley)."
+     ],
+     "see": "A sentence that tells players which sounds came from AI.",
+     "gotcha": "Several AI music tools only allow commercial use on paid plans; check before release.",
+     "source": {
+      "label": "Steamworks: Content Survey",
+      "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+     }
+    },
+    {
+     "h": "Voice lines",
+     "do": [
+      "Example (ours): \"Voices for minor NPCs were generated with [tool] text-to-speech from our own scripts. Main characters are voiced by human actors.\"",
+      "Say which characters or lines use AI voices."
+     ],
+     "see": "A clear split between AI voices and recorded voices.",
+     "gotcha": "Voice cloning of a real person raises consent questions that disclosure doesn't answer.",
+     "source": {
+      "label": "Steamworks: Content Survey",
+      "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+     }
+    },
+    {
+     "h": "Story, dialogue and item text",
+     "do": [
+      "Example (ours): \"First drafts of item descriptions and side-quest dialogue were written with [tool] and rewritten by our writer.\"",
+      "Mention the share only if you know it (for example, item descriptions only)."
+     ],
+     "see": "A sentence naming which text started as AI drafts.",
+     "gotcha": "Don't invent percentages. Describe what you did.",
+     "source": {
+      "label": "Steamworks: Content Survey",
+      "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+     }
+    },
+    {
+     "h": "Localisation",
+     "do": [
+      "Example (ours): \"The French, German and Spanish translations were machine-translated with [tool] and reviewed by native-speaking testers.\"",
+      "List the languages and whether a person reviewed them."
+     ],
+     "see": "A sentence players of each language can rely on.",
+     "gotcha": "If a language was not reviewed by a person, say so plainly rather than implying it was.",
+     "source": {
+      "label": "Steamworks: Content Survey",
+      "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+     }
+    }
+   ]
+  },
+  {
+   "key": "live",
+   "label": "Live-Generated and guardrails",
+   "steps": [
+    {
+     "h": "Describe the runtime AI",
+     "do": [
+      "Example (ours): \"Tavern NPCs answer the player's typed questions using [model] from [provider], accessed through our server.\"",
+      "Say what the AI generates while the game runs (text, voice, images) and where it runs."
+     ],
+     "see": "A reviewer can tell exactly which feature uses runtime AI.",
+     "gotcha": "Live-Generated content follows the same rules as Pre-Generated content, plus the guardrails requirement.",
+     "source": {
+      "label": "Steamworks: Content Survey",
+      "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+     }
+    },
+    {
+     "h": "Describe your guardrails",
+     "do": [
+      "Example (ours): \"Player input is filtered for banned topics before it reaches the model. Every reply passes an output moderation check, NPCs refuse sexual, hateful and illegal topics, players can report a reply from the dialogue menu, and reports are logged for review.\"",
+      "Cover input filtering, output moderation, blocked topics, player reporting and logging."
+     ],
+     "see": "An answer to Valve's request to \"tell us what kind of guardrails you're putting on your AI to ensure it's not generating illegal content\".",
+     "gotcha": "Valve says it doesn't want to ship Live-Generated AI Adult Only Sexual Content \"at this time\".",
+     "source": {
+      "label": "Steamworks: Content Survey",
+      "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+     }
+    },
+    {
+     "h": "Plan for running costs",
+     "do": [
+      "Pick how players pay for ongoing AI costs. Valve's FAQ lists four ways: build it into the game's price, microtransactions for each interaction, a subscription for ongoing access, or a one-off DLC that unlocks unlimited interactions.",
+      "Collect any payment with a Steam-supported payment method."
+     ],
+     "see": "A monetisation plan that matches what your store page says.",
+     "gotcha": "You manage access to the external AI service for your players, so plan for the service changing its prices or models.",
+     "source": {
+      "label": "Steamworks: Content Survey",
+      "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+     }
+    }
+   ]
+  },
+  {
+   "key": "after",
+   "label": "After release",
+   "steps": [
+    {
+     "h": "Change your answers when the content changes",
+     "do": [
+      "If an update adds or removes AI content, check whether the survey still matches.",
+      "Some answers can't be edited after approval without contacting Steam Support. Send a summary of what changed, which survey answer it affects and how a tester can reach the content."
+     ],
+     "see": "Your survey answers match the current build.",
+     "gotcha": "Keep your own notes of tools and dates as you go. They make the update email quick.",
+     "source": {
+      "label": "Steamworks: Content Survey",
+      "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+     }
+    },
+    {
+     "h": "Remember what disclosure doesn't do",
+     "do": [
+      "Treat the survey as a description, not a permission slip.",
+      "Re-check the content rules for anything you disclose."
+     ],
+     "see": "Valve's FAQ answer: \"Products on Steam must adhere to the content rules, regardless of whether it is disclosed in these surveys.\"",
+     "gotcha": "Disclosure also doesn't settle a tool's licence. A non-commercial free plan stays non-commercial after you disclose it.",
+     "source": {
+      "label": "Steamworks: Content Survey",
+      "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+     }
+    }
+   ]
+  }
+ ],
+ "faq": [
+  {
+   "q": "What do I write in Steam's AI disclosure?",
+   "a": "Describe the AI-made content that ships in your game and that players consume, such as art, sound, text or localisation, and how you made it. The example wording on this page is ours, not Valve's.",
+   "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+  },
+  {
+   "q": "Do I have to disclose Copilot or ChatGPT for code?",
+   "a": "Valve says efficiency gains from AI-powered dev tools are \"not the focus\" of the AI section. Whether shipped AI-written code itself must be listed is Not stated by vendor.",
+   "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+  },
+  {
+   "q": "What's Live-Generated AI?",
+   "a": "Content created with the help of AI tools while the game is running. As well as following the Pre-Generated rules, you must tell Valve what guardrails stop it generating illegal content.",
+   "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+  },
+  {
+   "q": "Can I change my answers after release?",
+   "a": "Some answers can't be edited after your build and store page are approved without first contacting Steam Support. Send a summary of what changed and which survey answer it affects.",
+   "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+  },
+  {
+   "q": "Does disclosing make any AI content OK?",
+   "a": "No. Valve says products on Steam must follow its content rules whether or not the content is disclosed in the survey.",
+   "url": "https://partner.steamgames.com/doc/gettingstarted/contentsurvey"
+  }
+ ],
+ "note": "Example wording is ours, not Valve's, and this is a summary of Valve's public Content Survey page on the check date, not legal advice. The exact field labels and character limits inside Steamworks are behind a login: Not stated by vendor.",
+ "published": "2026-10-23",
+ "related": [
+  {
+   "href": "/steam-ai-disclosure/",
+   "label": "Full Steam & store AI disclosure rules"
+  },
+  {
+   "href": "/cheat-sheet/",
+   "label": "Can I ship it? cheat sheet"
+  },
+  {
+   "href": "/guides/open-weights-model-licences/",
+   "label": "Open-weights licences"
+  },
+  {
+   "href": "/category/concept-art/",
+   "label": "Concept art tools"
+  },
+  {
+   "href": "/category/music-and-sound/",
+   "label": "Music & SFX tools"
+  },
+  {
+   "href": "/category/voice/",
+   "label": "Voice tools"
+  },
+  {
+   "href": "/category/localisation/",
+   "label": "Localisation tools"
+  },
+  {
+   "href": "/category/npc-dialogue/",
+   "label": "NPC tools"
+  },
+  {
+   "href": "/tools/inworld-ai/",
+   "label": "Inworld AI"
+  },
+  {
+   "href": "/tools/convai/",
+   "label": "Convai"
+  },
+  {
+   "href": "/tools/github-copilot/",
+   "label": "GitHub Copilot"
+  },
+  {
+   "href": "/tools/claude-code/",
+   "label": "Claude Code"
+  }
+ ]
+}

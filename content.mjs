@@ -113,6 +113,21 @@ export const GUIDES = [
     intro: 'AI pixel-art tools give you a character and its animations in minutes, but engines blur and mis-slice pixel art unless you set them up for it. Here are the steps, each linked to the official docs.',
     steps: [],
   },
+  {
+    // Guide (v2): scope table, example wording paths and FAQ live in data/guides/steam-ai-disclosure-examples.json
+    // (brief: docs/briefs/steam-ai-disclosure-examples.md). Companion to /steam-ai-disclosure/; no main tool.
+    slug: 'steam-ai-disclosure-examples',
+    title: 'How to fill in Steam\'s AI disclosure, with examples',
+    metaTitle: 'Steam AI disclosure: example wording | GameDev AI Tools',
+    description: 'Example wording for Steam\'s AI disclosure: art, music, voice, text, localisation and live AI NPCs, plus what\'s out of scope, like AI coding tools.',
+    tools: [],
+    task: 'marketing', engines: [],
+    hero: 'guide-steam-disclosure',
+    flow: [{ label: 'List what ships', ai: true }, { label: 'Pre-Generated wording' }, { label: 'Live-Generated guardrails' }, { label: 'Submit for review' }, { label: 'Update via Support' }],
+    outcome: 'Example wording for each kind of AI content in Steam\'s Content Survey (art, sound, voice, text, localisation, runtime AI and its guardrails), a scope list, and what to do when your game changes.',
+    intro: 'Valve\'s Content Survey asks you to describe AI-made content that ships with your game. Here is what is in scope, example wording you can adapt, and what to do after release.',
+    steps: [],
+  },
 ];
 
 export const DISCLOSURE = {
@@ -184,6 +199,12 @@ export const DISCLOSURE = {
 // Optional per item: type ('Launch' | 'Update' | 'Pricing change' | 'Licence change' | 'Funding'; otherwise inferred from the title,
 // defaulting to 'Update') and why (one sourced line, "Why it matters for game devs"; omitted when not set).
 export const NEWS = [
+  { date: '2026-10-23', title: 'Epic announces the 2026 Epic AI MegaJam for Unreal Engine and UEFN', tool: null, type: 'Update',
+    text: 'A four-day online jam (12 to 15 November, plus an in-person venue in San Francisco on 14 and 15 November): build a playable game in Unreal Engine or UEFN, solo or in teams of up to five, with any AI tools you like. Using AI is optional (Epic corrected its FAQ on 23 Oct). There are cash prizes and Development Continuation Grants, you can set up agents and MCP before kickoff but not start the game, and the FAQ says you own your game.',
+    source: 'https://itch.io/jam/2026-epic-ai-megajam', sourceName: 'Epic Games on itch.io' },
+  { date: '2026-10-22', title: 'Wonder Interactive launches Strata to ship Unreal projects to the browser', tool: null, type: 'Launch',
+    text: 'Strata takes an Unreal Engine 5.8 or 6.0 project, builds it for the web (WebAssembly and WebGPU) on its own machines, puts it online and plays it on a cloud GPU to check it works, then returns a play link. You can push with its command-line tool or let a coding agent such as Claude Code or Codex do it. No local engine install is needed. The free plan allows 2 runs a day; paid plans are unlimited.',
+    source: 'https://simplystream.com/docs/strata', sourceName: 'SimplyStream docs' },
   { date: '2026-10-20', title: 'ElevenLabs launches Eleven Realtime speech-to-speech models', tool: 'elevenlabs', type: 'Launch',
     text: 'Two speech-to-speech models, each a complete voice agent: v1 Mini for natural conversation at low cost (ElevenLabs names interactive characters as a fit) and v1 Max for multi-step tasks and tool use. Both support 90+ languages and the ElevenLabs voice library. Use them in ElevenAgents or through a Realtime API that follows OpenAI\'s Realtime spec over WebSocket.',
     source: 'https://elevenlabs.io/blog/realtime', sourceName: 'ElevenLabs blog' },
@@ -203,8 +224,8 @@ export const NEWS = [
     text: 'Upload a video in ElevenCreative and get an original score plus sound effects placed at detected timestamps. In the API, separate_tracks returns music and SFX as separate files.',
     source: 'https://elevenlabs.io/blog/introducing-instant-soundtracks', sourceName: 'ElevenLabs blog' },
   { date: '2026-10-15', title: 'Scenario open-sources a Blender extension for AI agents', tool: 'scenario',
-    text: 'Scenario\'s CEO announced on 14 October an open-source Blender extension that lets AI agents inspect and edit scenes, build camera paths and request renders. Generation still runs on Scenario\'s online service.',
-    source: 'https://runtimewire.com/article/scenario-blender-agent-plugin', sourceName: 'RuntimeWire' },
+    text: 'Scenario for Blender is an open-source (GPL-3.0-or-later) Blender 5.0+ extension that brings Scenario image, video, 3D and PBR material generation into the viewport, plus a local MCP server so agents such as Claude Code can read the open scene and request generations. Generation still runs on Scenario\'s online service and uses Creative Units.',
+    source: 'https://github.com/scenario-labs/blender-plugin', sourceName: 'Scenario on GitHub' },
   { date: '2026-10-14', title: 'Meshy introduces an Ultra 4K mode', tool: 'meshy',
     text: 'A new generation mode that produces models with up to 80 million triangles before simplification, alongside the Standard and Ultra 2K modes. Exact launch date: unverified (date shown is when it was reported).',
     source: 'https://digestai.news/story/meshy-introduces-ultra-4k-for-3d-models-with-80m-triangles', sourceName: 'DigestAI' },

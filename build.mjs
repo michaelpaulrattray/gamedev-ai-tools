@@ -751,6 +751,13 @@ const guideTable = g => `<section class="g-table" aria-labelledby="gt-h"><h2 cla
 <div class="table-wrap"><table class="cmp lic-table"><thead><tr>${g.table.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>
 ${g.table.rows.map(r => `<tr><th scope="row">${esc(r.model)}<br>${badge(GT_TONE[r.tone] || GT_TONE.unk, GT_TONE[r.tone] ? r.tone : 'unk')}</th>${[esc(r.asset), nsvText(r.licence) + srcA(r.source, 'licence'), nsvText(r.outputs), nsvText(r.limits), nsvText(r.catch)].map((c, i) => `<td data-label="${esc(g.table.head[i + 1])}">${c}</td>`).join('')}</tr>`).join('\n')}
 </tbody></table></div><p class="note">Each row links to the licence or model card it quotes. Read the full licence for the exact version you use.</p></section>`;
+// Scope-style guides: a plain three-column table (situation, answer, why). No colour: colour is reserved for commercial-use badges.
+const guideScope = g => `<section class="g-table" aria-labelledby="gs-h"><h2 class="g-h" id="gs-h">${esc(g.scope.title || 'At a glance')}</h2>
+<div class="table-wrap"><table class="cmp lic-table"><thead><tr>${g.scope.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>
+${g.scope.rows.map(r => `<tr><th scope="row">${esc(r.situation)}</th>${[nsvText(r.answer), nsvText(r.why)].map((c, i) => `<td data-label="${esc(g.scope.head[i + 1])}">${c}</td>`).join('')}</tr>`).join('\n')}
+</tbody></table></div>${g.scope.source ? `<p class="note">Source:${srcA(g.scope.source, 'Steamworks Content Survey')} · Checked ${timeEl(g.checked || CHECKED)}</p>` : ''}</section>`;
+// Total step cards in a v2 guide (shared + every path), used when the content.mjs entry has no legacy steps.
+const guideStepCount = g => g.steps.length || (g.shared || []).length + (g.paths || []).reduce((n, p) => n + p.steps.length, 0);
 function guideV2(g, gt) {
   const shared = g.shared || [];
   return `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/guides/')}">Guides</a> › ${esc(g.title)}</nav>
@@ -758,8 +765,9 @@ function guideV2(g, gt) {
 <header class="guide-hero"><div class="guide-hero-art">${artImg(guideArtPage(g), { eager: true })}</div><div class="guide-hero-body"><span class="kicker">${esc(g.kind || 'Workflow guide')}${g.kind ? '' : ` · ${esc(TASKS[g.task].label)}`}</span><h1>${esc(g.title)}</h1><p class="lead">${esc(g.result || g.outcome)}</p>
 <p class="g-meta">${chips(gt.map(t => chip(t.name, { tool: t, href: toolUrl(t) })), 'div')}</p></div></header>
 ${flowStrip(g, { max: 5 })}
-<details class="card g-costs"><summary>Cost and licences of the AI tools in this guide</summary><ul class="cost-list">${gt.map(t => `<li><a class="tname" href="${toolUrl(t)}">${esc(t.name)}</a>${isNsv(t.commercial) ? '' : licBadge(t)}${isNsv(t.freeTier) ? '' : `<span>${esc(t.freeTier)}</span>`}${srcA(t.pricingSource, 'pricing')}</li>`).join('')}</ul></details>
-${g.table ? guideTable(g) : ''}
+${g.notice ? `<section class="card qa" aria-label="Before you copy anything"><p class="qa-a"><span>${esc(g.notice)}</span></p></section>` : ''}
+${gt.length ? `<details class="card g-costs"><summary>Cost and licences of the AI tools in this guide</summary><ul class="cost-list">${gt.map(t => `<li><a class="tname" href="${toolUrl(t)}">${esc(t.name)}</a>${isNsv(t.commercial) ? '' : licBadge(t)}${isNsv(t.freeTier) ? '' : `<span>${esc(t.freeTier)}</span>`}${srcA(t.pricingSource, 'pricing')}</li>`).join('')}</ul></details>` : ''}
+${g.table ? guideTable(g) : ''}${g.scope ? guideScope(g) : ''}
 ${shared.length ? `<h2 class="g-h">Everyone: steps 1–${shared.length}</h2><ol class="g-steps">${shared.map((s, i) => stepCard(g, s, i + 1)).join('\n')}</ol>` : ''}
 <section class="g-paths" aria-labelledby="path-h"><h2 class="g-h" id="path-h">Then pick your path</h2>
 <div class="g-tabs" role="tablist">${g.paths.map((pth, i) => `<button type="button" role="tab" class="chip" id="tab-${pth.key}" aria-controls="path-${pth.key}" aria-selected="${i === 0 ? 'true' : 'false'}" data-path="${pth.key}">${esc(pth.label)}</button>`).join('')}</div>
@@ -769,7 +777,7 @@ ${g.alternative ? `<aside class="card g-alt"><span class="kicker">Another option
 ${faqBlock(g.faq)}
 <p class="note">${g.note ? `${esc(g.note)} ` : ''}Written from the official documentation linked on each step and checked ${timeEl(g.checked || CHECKED)}. ${g.kind ? '' : 'Menus and settings change between versions, so follow the linked docs if something looks different. '}No vendor reviews or pays for these guides.</p>
 </article>
-<section class="related"><div class="sec-head"><h2>Tools for this workflow</h2></div><div class="grid g3">${gt.map(t => toolCard(t, { compact: true })).join('\n')}</div></section>`;
+${gt.length ? `<section class="related"><div class="sec-head"><h2>Tools for this workflow</h2></div><div class="grid g3">${gt.map(t => toolCard(t, { compact: true })).join('\n')}</div></section>` : ''}${g.related ? `<p class="note">${g.related.map(r => `<a href="${L(r.href)}">${esc(r.label)}</a>`).join(' · ')}</p>` : ''}`;
 }
 // Path tabs (all paths are visible without JS) + click-to-load YouTube (youtube-nocookie).
 const GUIDE_V2_JS = `<script>(function(){var tabs=document.querySelectorAll('.g-tabs [data-path]'),panes=document.querySelectorAll('.g-path');
@@ -784,8 +792,13 @@ for (const g of GUIDES) {
   const gt = g.tools.map(s => bySlug[s]).filter(Boolean);
   page(p, layout({
     title: g.metaTitle || fit(60, `${g.title} | ${SITE.name}`, g.title, `${g.title.split(':')[0]} | ${SITE.name}`), description: g.description, pathname: p,
-    og: ogFile(`guides/${g.slug}`, 'page', { kicker: `${g.kind || 'Workflow guide'} · ${g.steps.length} steps`, title: g.title, sub: g.outcome, artPage: TASKS[g.task].page }),
-    jsonld: [{ '@context': 'https://schema.org', '@type': 'HowTo', name: g.title, description: g.description, step: g.steps.map((st, i) => ({ '@type': 'HowToStep', position: i + 1, name: st.h, text: st.p.map(x => x.text).join(' ') })) }, ...(g.faq && g.faq.length ? [faqLd(g.faq)] : [])],
+    og: ogFile(`guides/${g.slug}`, 'page', { kicker: `${g.kind || 'Workflow guide'} · ${guideStepCount(g)} steps`, title: g.title, sub: g.outcome, artPage: TASKS[g.task].page }),
+    // Workflow guides are HowTo (v2 steps from shared + paths when the legacy list is empty); reference guides (`kind`) are Article.
+    jsonld: [g.kind
+      ? { '@context': 'https://schema.org', '@type': 'Article', headline: g.title, description: g.description, url: URL_(p), mainEntityOfPage: URL_(p), datePublished: g.published || PUBLISHED, dateModified: g.checked || CHECKED, inLanguage: 'en-AU', author: ORG, publisher: ORG }
+      : { '@context': 'https://schema.org', '@type': 'HowTo', name: g.title, description: g.description, step: (g.steps.length ? g.steps.map(st => ({ name: st.h, text: st.p.map(x => x.text).join(' ') })) : [...(g.shared || []), ...(g.paths || []).flatMap(pth => pth.steps.map(st => ({ ...st, h: `${pth.label}: ${st.h}` })))].map(st => ({ name: st.h, text: st.do.join(' ') }))).map((st, i) => ({ '@type': 'HowToStep', position: i + 1, ...st })) },
+      crumbsLd([['All tools', '/'], ['Guides', '/guides/'], [g.title, p]]),
+      ...(g.faq && g.faq.length ? [faqLd(g.faq)] : [])],
     scripts: g.paths ? GUIDE_V2_JS : '',
     body: g.paths ? guideV2(g, gt) : `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/guides/')}">Guides</a> › ${esc(g.title)}</nav>
 <article class="guide"><header class="guide-hero"><div class="guide-hero-art">${artImg(guideArtPage(g), { eager: true })}</div><div class="guide-hero-body"><span class="kicker">Workflow guide · ${esc(TASKS[g.task].label)}</span><h1>${esc(g.title)}</h1><p class="lead">${esc(g.intro)}</p></div></header>
@@ -818,7 +831,7 @@ page('/steam-ai-disclosure/', layout({
   ],
   body: `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/guides/')}">Guides</a> › Store AI disclosure</nav>
 <article class="guide"><h1 class="page-h">${esc(DISCLOSURE.title)}</h1>
-${DISCLOSURE.answer ? `<section class="card qa" aria-label="Short answer"><p class="qa-a"><span><b>Short answer:</b> ${esc(DISCLOSURE.answer)}</span></p></section>` : ''}<p class="lead">${esc(DISCLOSURE.description)} Checked ${timeEl(DISC_CHECKED)}. See also the <a href="${L('/cheat-sheet/')}">Can I ship it? cheat sheet</a>.</p>
+${DISCLOSURE.answer ? `<section class="card qa" aria-label="Short answer"><p class="qa-a"><span><b>Short answer:</b> ${esc(DISCLOSURE.answer)}</span></p></section>` : ''}<p class="lead">${esc(DISCLOSURE.description)} Checked ${timeEl(DISC_CHECKED)}. See also the <a href="${L('/cheat-sheet/')}">Can I ship it? cheat sheet</a>.</p><p class="note">Filling in Steam's form? <a href="${L('/guides/steam-ai-disclosure-examples/')}">See example wording for each kind of AI content</a>.</p>
 <nav aria-label="Jump to a store">${chips(DISCLOSURE.sections.filter(sec => sec.id).map(sec => chip(sec.h, { href: `#${sec.id}` })), 'div')}</nav>
 ${DISCLOSURE.sections.map(hubSection).join('')}
 ${faqBlock(DISCLOSURE.faq, 'disc-faq')}

@@ -347,7 +347,10 @@
   "name": "Sloyd",
   "url": "https://www.sloyd.ai/",
   "tasks": [
-   "3d-models"
+   "3d-models",
+   "animation",
+   "textures",
+   "concept-art"
   ],
   "engines": [
    "godot",
@@ -357,19 +360,19 @@
    "roblox"
   ],
   "pricingModel": "freemium",
-  "summary": "Template-based and AI 3D generator for game-ready props and objects, with browser editor and plugins for Unity, Unreal and Blender on paid plans.",
+  "summary": "AI 3D generator (text, image or editable templates) for game-ready props, with AI rigging and animation, retexturing, skyboxes, image generation and pixel-art sprite sheets in the same web app; plugins for Unity, Unreal and Blender on paid plans.",
   "pricing": "Free Guest plan. Plus US$15/month (US$12.50/month billed yearly). Pro US$50/month (US$41.67/month billed yearly).",
   "pricingSource": "https://www.sloyd.ai/pricing",
   "commercial": "paid-only",
   "license": "Free plan: personal-use license. Plus and Pro include a commercial license (you own what you generate; Pro adds reselling).",
   "licenseSource": "https://www.sloyd.ai/pricing",
-  "lastChecked": "2026-10-17",
-  "verdict": "For game-ready props from editable templates with Unity/Unreal plugins; the free plan is personal-use only.",
+  "lastChecked": "2026-10-23",
+  "verdict": "For game-ready props from editable templates with Unity/Unreal plugins, plus rigging, retexturing and image tools on the same plan; the free plan is personal-use only.",
   "bestFor": "Template-based game-ready props",
   "free": "yes",
-  "freeTier": "Free Guest plan; personal use only",
-  "exportFormats": "GLB (API download)",
-  "exportSource": "https://api-dashboard.sloyd.ai/documentation/getting-started",
+  "freeTier": "Free Guest plan: 1 text-to-3D and 1 image-to-3D generation a day, exports of community models only, personal use only",
+  "exportFormats": "GLB, OBJ and FBX (pricing FAQ); free Guest plan exports community models only",
+  "exportSource": "https://www.sloyd.ai/pricing",
   "revenue": "unverified",
   "api": {
    "status": "yes",
