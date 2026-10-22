@@ -1381,8 +1381,8 @@ page('/alternatives/', layout({
   jsonld: [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Alternatives to popular AI game-dev tools', url: URL_('/alternatives/'), mainEntity: { '@type': 'ItemList', itemListElement: ALTERNATIVES.map((a, i) => ({ '@type': 'ListItem', position: i + 1, url: URL_(`/alternatives/${a.slug}/`), name: a.title })) } }],
   body: `<nav class="crumbs"><a href="${L('/')}">All tools</a> › Alternatives</nav>
 <h1 class="page-h">Alternatives to popular AI game-dev tools</h1>
-<p class="page-sub">Looking past the obvious pick? Each page compares a well-known tool with the listed alternatives on free plans, commercial-use terms, engines, API and MCP, using only facts from each vendor's own pages. Also see <a href="${L('/compare/')}">side-by-side comparisons</a> and <a href="${L('/tools/')}">all tools</a>.</p>
-<div class="grid">${ALTERNATIVES.filter(a => bySlug[a.base]).map(a => linkCard({ href: L(`/alternatives/${a.slug}/`), title: a.title, kicker: TASKS[a.task].label, desc: `${a.tools.length} alternatives to ${esc(bySlug[a.base].name)}. ${esc(a.description)}` })).join('\n')}</div>
+<p class="page-sub">Looking past the obvious pick? Each page puts a well-known tool next to the alternatives we list and compares free plans, commercial-use terms, engines, API and MCP. Every fact comes from the vendor's own pages. Also see <a href="${L('/compare/')}">side-by-side comparisons</a> and <a href="${L('/tools/')}">all tools</a>.</p>
+<div class="grid">${ALTERNATIVES.filter(a => bySlug[a.base]).map(a => linkCard({ href: L(`/alternatives/${a.slug}/`), title: a.title, kicker: TASKS[a.task].label, desc: `${a.tools.length} alternatives to ${esc(bySlug[a.base].name)}. ${esc(a.why)}` })).join('\n')}</div>
 ${newsletterBlock()}`,
 }));
 

@@ -119,7 +119,7 @@ export const DISCLOSURE = {
   // H1 and link text. metaTitle is the <title> (the build adds " | GameDev AI Tools"); kept under 60 characters with the suffix.
   title: 'AI-content disclosure rules: Steam and other stores',
   metaTitle: 'Steam & store AI disclosure rules (2026)',
-  description: 'What Steam, Google Play, Apple, Xbox, itch.io, Epic and Fab ask about AI content, with dated sources. We found no Nintendo or PlayStation policy.',
+  description: 'What Steam, Google Play, Apple, Xbox, itch.io, Epic and Fab ask about AI content, with dated sources. We found no public Nintendo or PlayStation policy.',
   checked: '2026-10-22',
   // Direct answer shown right under the headline (and in the Article JSON-LD). Only facts sourced in the sections below.
   answer: 'Yes, Steam asks. Before review you complete a Content Survey with a section on generative AI. Valve says it is concerned with AI-made content that ships with the game and that players consume, such as artwork, sound, narrative and localisation, not efficiency gains from AI dev tools. If your game generates content with AI while it runs, you must also describe the guardrails that stop it generating illegal content. Other stores differ. Google Play asks you to declare AI-generated store-listing images and videos. Apple and the Microsoft Store (which includes Xbox) set rules for apps that generate AI content for players, not for pre-made assets. We found no public AI-content policy from Nintendo or PlayStation.',
@@ -148,7 +148,7 @@ export const DISCLOSURE = {
       s('A label or declaration for pre-made AI assets in a game: Not stated by vendor in the App Review Guidelines.', 'https://developer.apple.com/app-store/review/guidelines/') ] },
     { id: 'microsoft-xbox', h: 'Microsoft Store and Xbox', checked: '2026-10-22', tools: ['inworld-ai', 'convai'], items: [
       s('Policy 11.16 "Live Generative AI Content": products with dynamic content created by generative AI models in response to user inputs must disclose live generative AI in the metadata, note it in Partner Center during submission, keep that content compliant with all Store Policies, and give users a way to report inappropriate content to the developer.', 'https://learn.microsoft.com/en-us/windows/apps/publish/store-policies'),
-      s('Microsoft\'s policies define "Store" to include the Microsoft Store, the Windows Store and "XBOX-branded stores". The current version (7.20) was published 15 September 2026 and takes effect 22 October 2026.', 'https://learn.microsoft.com/en-us/windows/apps/publish/store-policies'),
+      s('Microsoft\'s policies define "Store" to include the Microsoft Store, the Windows Store and "XBOX-branded stores". The current version (7.20) was published 15 September 2026 and took effect 22 October 2026.', 'https://learn.microsoft.com/en-us/windows/apps/publish/store-policies'),
       s('A rule for pre-made AI assets: Not stated by vendor in the Store Policies. ID@Xbox console certification requirements aren\'t public, so we haven\'t checked them.', 'https://learn.microsoft.com/en-us/windows/apps/publish/store-policies') ] },
     { id: 'unity-asset-store', h: 'Unity Asset Store', checked: '2026-10-22', items: [
       s('AI-generated content can be published, sold or given away on the Asset Store, but any package that includes AI or machine-learning generated content must disclose it in the product listing. Submissions that resemble third-party or copyrighted work, plagiarise other publishers or lack significant value can be rejected (Submission Guidelines 1.1.b).', 'https://support.unity.com/hc/en-us/articles/16456407029524') ] },
@@ -188,10 +188,10 @@ export const NEWS = [
     text: 'Two speech-to-speech models, each a complete voice agent: v1 Mini for natural conversation at low cost (ElevenLabs names interactive characters as a fit) and v1 Max for multi-step tasks and tool use. Both support 90+ languages and the ElevenLabs voice library. Use them in ElevenAgents or through a Realtime API that follows OpenAI\'s Realtime spec over WebSocket.',
     source: 'https://elevenlabs.io/blog/realtime', sourceName: 'ElevenLabs blog' },
   { date: '2026-10-19', title: 'Viggle releases JST-2 for 3D scenes, characters and motion', tool: null, type: 'Launch',
-    text: 'One model family generates explorable 3D scenes (Gaussian splats), animation-ready 3D characters from text or an image, and full-body motion from text or video. Free to try in the PINOC browser app; API access and a PINOC MCP server for agents. Scenes are static, with rule-based physics for collisions.',
+    text: 'One model family generates explorable 3D scenes (Gaussian splats), animation-ready 3D characters from text or an image, and full-body motion from text or video. It\'s free to try in the PINOC browser app, with API access and a PINOC MCP server for agents. Scenes are static, with rule-based physics for collisions.',
     source: 'https://viggle.ai/jst2', sourceName: 'Viggle' },
   { date: '2026-10-18', title: 'Tripo open-sources EdenLive, a real-time generative renderer', tool: 'tripo', type: 'Launch',
-    text: 'Feed it a graybox game stream, a normal-map animation or footage, plus a first frame and a prompt, and it renders styled video in real time (the 5B model does 720p at 24+ FPS on one RTX 5090). Code is Apache-2.0 and the 5B and 14B weights are on Hugging Face, but the weights carry mixed licences: the FLUX part used for the workbench\'s first frame is non-commercial. Includes EdenGolem, an agent skill that builds a playable graybox game from a prompt.',
+    text: 'Feed it a greybox game stream, a normal-map animation or footage, plus a first frame and a prompt, and it renders styled video in real time (the 5B model does 720p at 24+ FPS on one RTX 5090). Code is Apache-2.0 and the 5B and 14B weights are on Hugging Face, but the weights carry mixed licences: the FLUX part used for the workbench\'s first frame is non-commercial. Includes EdenGolem, an agent skill that builds a playable greybox game from a prompt.',
     source: 'https://www.tripo3d.ai/research/edenlive', sourceName: 'Tripo AI research' },
   { date: '2026-10-16', title: 'Meshy launches Meshy Edit for local 3D edits', tool: 'meshy', type: 'Launch',
     text: 'Open a model you generated in Meshy, select a part with Lasso or Brush, and describe the change in text or with up to 5 reference images. Only the selected part changes, each edit is saved as a new model and the original is kept. Credits for a failed edit are refunded automatically. Live for all registered users.',
@@ -374,7 +374,7 @@ export const CAN_SELL = {
     metaTitle: 'Can I sell a game made with Midjourney? | GameDev AI Tools',
     metaDesc: 'Yes on any paid plan, but companies earning over US$1M a year need Pro or Mega. You keep ownership after cancelling. Sourced from Midjourney\'s terms.',
     h: 'Can I use Midjourney images in a game I sell?',
-    answer: 'Yes, on any paid plan, with two catches. Midjourney\'s terms say you own the images you create, and that ownership continues if you cancel. But a company (or its employee) earning over US$1,000,000 a year must be on Pro or Mega. Images you upscale from other users stay theirs. Steam\'s Content Survey covers AI-generated art.',
+    answer: 'Yes, on any paid plan, with two catches. Midjourney\'s terms say you own the images you create, and that ownership continues if you cancel. But if the company you run or work for has more than US$1,000,000 a year in revenue, you need Pro or Mega. Images you upscale from other users stay theirs. Steam\'s Content Survey covers AI-generated art.',
     note: 'This summarises Midjourney\'s published terms and help docs on the date shown. It isn\'t legal advice; for a decision about your game, talk to a lawyer.',
     table: { cols: ['Plan', 'Monthly price', 'Annual price', 'Stealth (private) mode', 'Commercial use'], source: MJ_PLANS, rows: [
       ['Basic', 'US$10', 'US$96 (US$8/month)', 'No', 'General Commercial Terms'],
@@ -416,7 +416,7 @@ export const ALTERNATIVES = [
   { slug: 'midjourney-alternatives-game-art', base: 'midjourney', task: 'concept-art', title: 'Midjourney alternatives for game art',
     metaTitle: 'Midjourney alternatives for game art (2026)',
     description: 'AI tools for game art compared with Midjourney: free plans, commercial-use terms, pricing, API and MCP, from each vendor\'s own pages.',
-    why: 'Midjourney has no free plan, images are public by default unless you pay for Pro or Mega, and companies over US$1M a year need Pro or Mega. These tools handle game art with different terms.',
+    why: 'Midjourney has no free plan, images are public by default unless you pay for Pro or Mega, and companies over US$1M a year need Pro or Mega. These tools also make game art, on different terms.',
     tools: ['chatgpt', 'layer-ai', 'leonardo-ai', 'ludo-ai', 'pixellab', 'retro-diffusion', 'scenario'] },
   { slug: 'meshy-alternatives-game-ready-3d', base: 'meshy', task: '3d-models', title: 'Meshy alternatives for game-ready 3D',
     metaTitle: 'Meshy alternatives for game-ready 3D (2026)',
