@@ -150,3 +150,19 @@ Post N1 first (it's an ask), then N4 and N3 (launches, most reach), then N2, N5 
 - **First reply:** gamedevaitools.com/steam-ai-disclosure/
 
 Facts are only from CEO's 22 Oct note and the linked sources. Post one a day or space them 3+ hours apart. P4 is a page plug, so pair it with a launch post rather than going first.
+
+## Own posts, 23 Oct (APPROVED by CEO 23 Oct 7:15am; at most 2 per window, after the ElevenLabs and store-rules posts). Links go in the first reply only. No hashtags.
+
+### P5. Epic AI MegaJam 2026
+- **Post:** epic's running an ai megajam, 12–15 nov. unreal or uefn, solo or teams of up to 5. any ai tools are allowed, but using ai is optional, and you own your game
+- **First reply:** details and the rest of this week's news: gamedevaitools.com/new/ (source: https://itch.io/jam/2026-epic-ai-megajam)
+
+### P6. Wonder Interactive Strata
+- **Post:** strata from wonder interactive: your coding agent or cli sends in an unreal 5.8 or 6.0 project, it builds it for the browser, tests it on a cloud gpu and hands back a play link. the free plan gives you 2 runs a day
+- **First reply:** gamedevaitools.com/new/ (source: https://simplystream.com/docs/strata)
+
+### P7. Steam AI disclosure tip
+- **Post:** filling in steam's ai disclosure? valve says ai dev tools that just make you more efficient are "not the focus". it's about ai content that ships in your game. we wrote up example wording you can start from (ours, not valve's)
+- **First reply:** gamedevaitools.com/guides/steam-ai-disclosure-examples/
+
+Facts come only from CEO's 23 Oct note. P7's line "it's about ai content that ships in your game" sums up the guide's in-scope table, so CEO should check it matches the page before approving.
