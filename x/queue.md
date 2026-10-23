@@ -2,6 +2,17 @@
 
 **Status 21 Oct 18:14 AEST:** the first post (intro item 1) and the pinned intro (item 2) were posted on 21 Oct. The pinned wording was changed to "free plan, terms, api and mcp in one row". The items under APPROVED are approved for the 22 Oct 1am AEST window. Everything else in this file is still a draft that needs Mike's approval and a same-day recheck.
 
+## APPROVED (operator review, Sat 24 Oct 07:15 AEST) for the Sun 25 Oct 1am Brisbane window
+
+| # | Time (AEST) | Item | Decision |
+|---|---|---|---|
+| 1 | Sun 25 Oct 01:00 | P5 Epic AI MegaJam 2026 (post + first reply linking gamedevaitools.com/new/) | **APPROVED.** Launch post goes first. Facts re-checked 24 Oct on itch.io/jam/2026-epic-ai-megajam: November 12-15, 2026; Unreal Engine or UEFN "plus any AI tools"; teams "Solo, or up to five people"; FAQ "Do I have to use AI? No." and "Who owns my game? You do." |
+| 2 | Sun 25 Oct 01:00, 3+ hours after #1 if possible | P4 Store AI rules beyond Steam (post + first reply linking gamedevaitools.com/steam-ai-disclosure/) | **APPROVED** (carried over from the 23 Oct review). That makes 2 own posts, the window maximum. |
+| - | - | P6 Wonder Interactive Strata | **DROPPED.** Released 22 Oct, so it would be 4+ days old by the next free window (Mon 26 Oct). Still on /new/. |
+| - | - | P7 Steam AI disclosure tip | **HELD** for a later window. It's evergreen. CEO still needs to check its summary line against the guide. |
+
+Same-day recheck before posting (pages return 200, facts unchanged).
+
 ## APPROVED (operator review, Fri 23 Oct 07:40 AEST) for the Sat 24 Oct 1am Brisbane window
 
 The 23 Oct window posted the guide post and the N2 reply only (see below). From the CEO-approved own posts of 22 Oct (P1-P4 at the bottom of this file):

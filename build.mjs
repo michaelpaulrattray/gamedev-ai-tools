@@ -751,10 +751,10 @@ const guideTable = g => `<section class="g-table" aria-labelledby="gt-h"><h2 cla
 <div class="table-wrap"><table class="cmp lic-table"><thead><tr>${g.table.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>
 ${g.table.rows.map(r => `<tr><th scope="row">${esc(r.model)}<br>${badge(GT_TONE[r.tone] || GT_TONE.unk, GT_TONE[r.tone] ? r.tone : 'unk')}</th>${[esc(r.asset), nsvText(r.licence) + srcA(r.source, 'licence'), nsvText(r.outputs), nsvText(r.limits), nsvText(r.catch)].map((c, i) => `<td data-label="${esc(g.table.head[i + 1])}">${c}</td>`).join('')}</tr>`).join('\n')}
 </tbody></table></div><p class="note">Each row links to the licence or model card it quotes. Read the full licence for the exact version you use.</p></section>`;
-// Scope-style guides: a plain three-column table (situation, answer, why). No colour: colour is reserved for commercial-use badges.
+// Scope-style guides: a plain table (situation, answer, why; optional per-row source link). No colour: colour is reserved for commercial-use badges.
 const guideScope = g => `<section class="g-table" aria-labelledby="gs-h"><h2 class="g-h" id="gs-h">${esc(g.scope.title || 'At a glance')}</h2>
 <div class="table-wrap"><table class="cmp lic-table"><thead><tr>${g.scope.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>
-${g.scope.rows.map(r => `<tr><th scope="row">${esc(r.situation)}</th>${[nsvText(r.answer), nsvText(r.why)].map((c, i) => `<td data-label="${esc(g.scope.head[i + 1])}">${c}</td>`).join('')}</tr>`).join('\n')}
+${g.scope.rows.map(r => `<tr><th scope="row">${esc(r.situation)}</th>${[nsvText(r.answer), nsvText(r.why) + (r.source ? srcA(r.source, 'source') : '')].map((c, i) => `<td data-label="${esc(g.scope.head[i + 1])}">${c}</td>`).join('')}</tr>`).join('\n')}
 </tbody></table></div>${g.scope.source ? `<p class="note">Source:${srcA(g.scope.source, 'Steamworks Content Survey')} · Checked ${timeEl(g.checked || CHECKED)}</p>` : ''}</section>`;
 // Total step cards in a v2 guide (shared + every path), used when the content.mjs entry has no legacy steps.
 const guideStepCount = g => g.steps.length || (g.shared || []).length + (g.paths || []).reduce((n, p) => n + p.steps.length, 0);

@@ -138,5 +138,10 @@
  "luma-ai": {
   "source": "https://lumalabs.ai/favicons/favicon-black.ico",
   "w": 48
+ },
+ "thrixel": {
+  "source": "https://d2bs507qurgell.cloudfront.net/uploads/2bda3a46-886a-4c85-aed5-51d31b840697/thrixlogo-render-128.png",
+  "w": 96,
+  "note": "thrixel.com favicon; vendor asked us to show it (Madelyn Engler, Thrixel, email 24 Oct 2026)"
  }
 }

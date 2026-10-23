@@ -128,6 +128,21 @@ export const GUIDES = [
     intro: 'Valve\'s Content Survey asks you to describe AI-made content that ships with your game. Here is what is in scope, example wording you can adapt, and what to do after release.',
     steps: [],
   },
+  {
+    // Reference guide (v2): country table, per-country paths and FAQ live in data/guides/who-owns-ai-game-assets.json
+    // (brief: docs/briefs/who-owns-ai-game-assets.md). Reports what sources say; no verdicts on any reader's asset.
+    slug: 'who-owns-ai-game-assets',
+    title: 'Who owns AI-generated game assets? Copyright in Australia, the US, UK and EU',
+    metaTitle: 'Who owns AI-generated game assets? | GameDev AI Tools',
+    description: 'Can you copyright AI-generated game art, code and audio? What Australia, the US, UK and EU say, quoted from linked sources and dated. Not legal advice.',
+    tools: [],
+    task: 'concept-art', engines: [],
+    hero: 'guide-who-owns',
+    flow: [{ label: 'Make the asset', ai: true }, { label: 'Record your input' }, { label: 'Read the tool\'s terms' }, { label: 'Check where you sell' }, { label: 'Ask a lawyer if it matters' }],
+    outcome: 'What Australia\'s Arts Law Centre, the US Copyright Office and courts, the UK Act and government, and the European Parliament have said about owning AI-generated material, how tool terms fit in, and what records to keep.',
+    intro: 'Copyright and a tool\'s terms are two different questions. Here is what each country\'s sources say about AI output, quoted and dated, and what to keep on file.',
+    steps: [],
+  },
 ];
 
 export const DISCLOSURE = {
@@ -199,6 +214,14 @@ export const DISCLOSURE = {
 // Optional per item: type ('Launch' | 'Update' | 'Pricing change' | 'Licence change' | 'Funding'; otherwise inferred from the title,
 // defaulting to 'Update') and why (one sourced line, "Why it matters for game devs"; omitted when not set).
 export const NEWS = [
+  { date: '2026-10-24', title: 'Scenario releases a free 3D Collection of 1,342 AI-generated models on Hugging Face', tool: 'scenario', type: 'Launch',
+    text: 'A public, ungated dataset of 1,342 AI-generated 3D examples (about 39 GB with previews): 1,271 GLB files plus Blender, FBX, PLY, SPZ and VOX outputs. Each example keeps its prompt, source inputs and exact generation settings, so you can compare how different 3D models on Scenario handle the same kind of brief. Licence is CC BY 4.0 with credit to "Scenario". A further 393 Hunyuan-made examples sit in a separate, access-gated dataset under their own licences.',
+    why: 'Free reference meshes you can ship with credit, each with the settings that made it, handy for comparing generators before you pay for one.',
+    source: 'https://huggingface.co/datasets/scenario-labs/3d-collection', sourceName: 'Scenario on Hugging Face' },
+  { date: '2026-10-23', title: 'Roblox Studio beta turns text-to-speech lines into audio assets', tool: null, type: 'Update',
+    text: 'In the Studio beta for Lua asset creation, AssetService:CreateAssetAsync now accepts an AudioTextToSpeech object and saves the result as an audio asset, so NPC lines are generated once in Studio and play instantly in game, with no play-time TTS rate limits. You set the text, voice ID, pitch (-12 to 12) and speed (0.5 to 2), and Roblox supplies a sample script for batches of lines. Limits for now: assets are auto-named TTS_Asset_<id>, with no custom names, descriptions or creator ID.',
+    why: 'Fixed dialogue no longer has to be generated live, so voiced NPCs don\'t wait on rate limits.',
+    source: 'https://devforum.roblox.com/t/studio-beta-text-to-speech-asset-creation-support-in-lua/4950480', sourceName: 'Roblox Developer Forum' },
   { date: '2026-10-23', title: 'Epic announces the 2026 Epic AI MegaJam for Unreal Engine and UEFN', tool: null, type: 'Update',
     text: 'A four-day online jam (12 to 15 November, plus an in-person venue in San Francisco on 14 and 15 November): build a playable game in Unreal Engine or UEFN, solo or in teams of up to five, with any AI tools you like. Using AI is optional (Epic corrected its FAQ on 23 Oct). There are cash prizes and Development Continuation Grants, you can set up agents and MCP before kickoff but not start the game, and the FAQ says you own your game.',
     source: 'https://itch.io/jam/2026-epic-ai-megajam', sourceName: 'Epic Games on itch.io' },
