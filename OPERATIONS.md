@@ -350,3 +350,5 @@ No estimates. If a number isn't available, write "not measured".
 
 - **2026-10-24 (08:55 AEST): ERROR + correction.** The 08:17 Thrixel reply wrongly said the site shows no tool logos; the live site shows logos on every tool page (checked thrixel, meshy, pixellab). Cause: draft written from a stale log note, not checked against the live site. Correction email cancelled by Mike (08:54): no further reply to Thrixel. New rule (Mike, no exceptions): every claim in any email/DM/post, especially about our own site, is verified against the live page or source before sending.
 - **2026-10-24: Badge redesigned**, because Mike said the old one looked weak. New light/dark SVGs (site gradient mark, "LISTED ON / GameDev AI Tools" with gradient "AI Tools", gradient border) replaced in place at /assets/badge/listed-{light,dark}.svg, same 200x44 size, so existing embeds upgrade automatically. Commit 079a648; live checks passed.
+
+- **2026-10-24 (09:14 AEST): Thrixel logo correction sent** (Mike approved the wording). It corrects the 08:17 reply: the site does show logos, and Thrixel's is live on /tools/thrixel/. To madelyn@, cc press@; checked in Sent.
