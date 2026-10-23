@@ -60,3 +60,11 @@ Not covered: Reddit's JSON search was blocked from the box, so I couldn't cross-
 - Stefan_3D_AI's own "Day 22" RTS: decent dark-fantasy look but a prototype UI and no build. He's a curator/creator account.
 - Tripo- and Meshy-featured items (the Little Prince playbook by @Saccc_c, TokenGremlin, techartist_, the Sandbox level): one-hour or two-day demos or workflow pieces, not shippable games at the bar.
 - The broad min_faves:100 video search was dominated by tool and repo listicles and the WeaselPit AI-clone scam story. No new game passes.
+
+## Pass 3 (Showcase scout routine, 2026-10-23 10:05 AEST)
+Searched X (tool-account posts from Tripo, Meshy, Cascadeur, Hunyuan3D, Sloyd since 16 Oct; Next Fest / Steam demo / itch posts mentioning AI tools since 18 Oct; "my game" + AI tool posts since 19 Oct). Most Next Fest chatter is anti-AI-slop posts, not AI-made games.
+- **SOULLOOP (@SoulloopGame): still PASSES, DM ask briefed.** New since pass 1: Early Access 3 November (post https://x.com/SoulloopGame/status/2113359778374361157), still near-daily devlogs (parry vs ULTRAKILL, key-spawn bug, damage math). X account shows 1 follower via the API, but the Steam page and devlog history make it a genuine creator.
+- **Nightshoal (@RUSuper): still PASSES, DM ask briefed.** New: a side browser game, Chalk Runner, made with Opus 5.5 (https://x.com/RUSuper/status/2113165724684276156); not a showcase pick (stickman, below the bar).
+- **AI Apocalypse (@scuffedstudioz, Scuffed Studios, Steam 4652030): REJECTED.** Free Next Fest demo, Steam AI disclosure (Gemini card art and portraits, some ElevenLabs SFX). Store screenshots are menus and a node map (screens: /workspace/x/media/showcase/aiapocalypse-steam-*.jpg); nothing sells it in 5 seconds, so below the Crowned In Steel / Bring It bar. Posts are UTM-tagged promos with 0 likes.
+- **Malibu Club Cocktail Bar Simulator (@pamukcu_alper, Steam 5336380): REJECTED.** No demo yet ("missed Next Fest", demo not released); account is mostly Turkish argument replies and culture-war posts.
+- Tripo-reposted items this week (EdenLive, Tripothon demo days, @techartist_ 2-day Opus demo, TokenGremlin): tool demos, not games. After the Wind: still watchlist until its playtest (aimed for end of November).
