@@ -8,7 +8,7 @@ The 23 Oct window posted the guide post and the N2 reply only (see below). From 
 
 | # | Time (AEST) | Item | Decision |
 |---|---|---|---|
-| 1 | Sat 24 Oct 01:00 | P3 ElevenLabs Eleven Realtime (post + first reply linking gamedevaitools.com/new/) | **APPROVED.** Facts re-checked 23 Oct against the live /new/ item (source elevenlabs.io/blog/realtime): v1 Mini and v1 Max, 90+ languages, Realtime API following OpenAI's Realtime spec. No hashtags, no link in the post, no em dashes. About 4 days old by then, so post it now or drop it. |
+| 1 | Sat 24 Oct 01:00 | **POSTED 01:05 AEST** https://x.com/gamedevaitools/status/2113647994969247769 (first reply https://x.com/gamedevaitools/status/2113648109360488532). P3 ElevenLabs Eleven Realtime (post + first reply linking gamedevaitools.com/new/) | **APPROVED.** Facts re-checked 23 Oct against the live /new/ item (source elevenlabs.io/blog/realtime): v1 Mini and v1 Max, 90+ languages, Realtime API following OpenAI's Realtime spec. No hashtags, no link in the post, no em dashes. About 4 days old by then, so post it now or drop it. |
 | 2 | Sun 25 Oct 01:00 | P4 Store AI rules beyond Steam (post + first reply linking gamedevaitools.com/steam-ai-disclosure/) | **APPROVED for the next window, not tonight** (one own post a day; P4 is a page plug and goes after a launch post). Facts: the live page covers Google Play, Apple, Microsoft Store and Xbox, and the Unity Asset Store (checked 22 Oct). |
 | - | - | P1 Tripo EdenLive | **DROPPED.** Released 18 Oct, about 6 days old by the next window. Still on /new/. |
 | - | - | P2 Viggle JST-2 | **DROPPED.** Released 19 Oct, about 5 days old by the next window. Still on /new/. |
