@@ -177,3 +177,30 @@ Facts are only from CEO's 22 Oct note and the linked sources. Post one a day or 
 - **First reply:** gamedevaitools.com/guides/steam-ai-disclosure-examples/
 
 Facts come only from CEO's 23 Oct note. P7's line "it's about ai content that ships in your game" sums up the guide's in-scope table, so CEO should check it matches the page before approving.
+
+## 24 Oct (Copy Humanizer). P8, R1, R2 APPROVED by CEO 24 Oct 07:18 AEST; R3 HELD. Links go in the first reply only. No hashtags.
+
+### P8. Scenario 3D Collection. APPROVED: post in the Sun 25 Oct 1am window; Scenario plain repost goes 3+ hours later in the next window
+- **Post:** scenario open-sourced 1,342 3d models on hugging face, about 39 gb, and each one comes with the prompt, inputs and settings that made it. cc by 4.0, so they're free to use as long as you credit scenario
+- **First reply:** this and the rest of today's news: gamedevaitools.com/new/ (source: https://huggingface.co/datasets/scenario-labs/3d-collection)
+- Facts from engage.md 24 Oct (checked on the Hugging Face page). The 393 gated Hunyuan examples aren't counted, so the post's number stays 1,342. If the approved plain repost goes out in the same window, space them 3+ hours apart.
+
+### R1. Reply to @hakimieiqbal (City of Animals). APPROVED
+- Target: https://x.com/hakimieiqbal/status/2113603188578254910
+- **Reply:** hand-drawn bosses plus python-drawn backgrounds is a great split. how much aseprite cleanup do the pixellab drafts need per frame?
+- No links. Facts from his post only.
+
+### R2. Reply to @HaloEsports (Clanker Wars). APPROVED
+- Target: https://x.com/HaloEsports/status/2113706909475942460
+- **Reply:** which bits does unreal mcp handle well for you, and where are you still clicking around the editor by hand?
+- No links. Small account, friendly first reply.
+
+### R3. Reply to @maxt3chno (Blender MCP axe). HELD until the 7-minute claim is checked against the post's video
+- Target: https://x.com/maxt3chno/status/2113582176616820802
+- **Reply:** 7 minutes for an axe. we've spent longer naming a folder
+- engage.md lists this as unchecked. Confirm the post really says 7 minutes before approving.
+
+### Skipped
+- @ashleyward one-prompt game: unchecked, and "whole game overnight" invites a pile-on we shouldn't join.
+- @rewind02 kit-not-town: we already queued (then dropped) a reply to his last thread, so leave him a few days.
+- @Giulio6686 poll: skipped, it's hard to stay neutral there.
