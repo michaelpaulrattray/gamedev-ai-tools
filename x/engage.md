@@ -25,3 +25,14 @@ Copy Humanizer writes the final wording. Facts must stay sourced.
 - Type: quote post, discussion question. Angle: ask game devs whether auto-fitting one garment across different body types would save them time, and what they use for it today (manual reweighting, Marvelous Designer, etc.). Say it's a beta announcement; no claims about pricing, quality or access.
 - Re-checked 24 Oct 07:00 AEST: still nothing on customuse.com (changelog's latest entry is 23 Oct, Nodes Editor, with no Smart Mesh entry, and /smart-mesh returns 404). Customuse replies on X say it is in Customuse studio, not free, with a tutorial promised. Still don't describe access or pricing.
 - Status: candidate, wording pending (Copy Humanizer).
+
+## 2026-10-24 (07:15 AEST) home-feed scroll (candidates, not yet checked against sources)
+- https://x.com/ashleyward/status/2113426982729908272 (@ashleyward): whole game from one prompt overnight with ChatGPT + Tripo in Unity/Blender. Suggested: reply asking what needed hand fixes. (liked)
+- https://x.com/rewind02/status/2113275919213142431 (@rewind02): build a kit, not a town (Claude + Blender + image gen). Suggested: quote/reply on kit-first workflow. (liked)
+- https://x.com/maxt3chno/status/2113582176616820802 (@maxt3chno): 3D axe via Blender MCP in 7 min. Suggested: reply. (liked)
+- https://x.com/0x_Anni/status/2113727265548939656 (@0x_Anni): staged agent 3D assets (blockout, colour, light). (liked)
+- https://x.com/Giulio6686/status/2113510747216941159 (@Giulio6686): poll, would AI art stop you buying an indie game (49K views). Discussion only; careful tone, link our Steam disclosure guide only if natural.
+- https://x.com/parmuzin1992/status/2113551340022456343 (@parmuzin1992): first game, Claude/Codex code, AI art, Suno music. Showcase candidate for Tue scout.
+- https://x.com/Belbizaz/status/2113674457210556568 (@Belbizaz): Frog King Simulator (Opus + three.js). Showcase candidate.
+- https://x.com/UnrealEngine/status/2113692223921606793 (@UnrealEngine): UE 5.8 animate rig controls on the model. Not AI; possible repost only if relevant. (liked)
+- Leads to verify on vendor pages before any site use: Kalshi claim that Epic offers US$50,000 for AI vibe-coded games (https://x.com/Kalshi/status/2113688150686187722, betting account; likely the AI MegaJam, check itch.io); MyLab browser AI game tool (https://x.com/BachVHoang/status/2112849933296717830); Paperdoll AI wearables (https://x.com/GrimoriaOnline/status/2112593751067570686); Dessa speech-to-speech (https://x.com/RagavanThurair/status/2113671324400861645).
