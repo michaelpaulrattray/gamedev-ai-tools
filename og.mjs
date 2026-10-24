@@ -86,7 +86,8 @@ export async function createOg({ outDir, logoFor }) {
   const T = templates(arts);
   const cacheDir = 'node_modules/.cache/og';
   fs.mkdirSync(cacheDir, { recursive: true });
-  const salt = crypto.createHash('sha1').update(fs.readFileSync(new URL(import.meta.url))).digest('hex');
+  // Salt covers this file and the category art, so swapping an og/art image re-renders the cards that use it.
+  const salt = crypto.createHash('sha1').update(fs.readFileSync(new URL(import.meta.url))).update(Object.values(arts).join('')).digest('hex');
   let rendered = 0, cached = 0;
   const jobs = [];
   return {

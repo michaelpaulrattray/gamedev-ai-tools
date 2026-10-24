@@ -7,12 +7,12 @@ import { SPONSOR_OFFERS, BUSINESS_EMAIL, AFFILIATE_NOTE } from './config.mjs';
 import { loadBookings, resolveBookings } from './sponsors.mjs';
 import { createOg, OG_W, OG_H } from './og.mjs';
 
-const HOME_DESC = 'Free directory of AI tools for game developers. Filter by task, engine, free plan and commercial use. Pricing and licence terms sourced from each vendor.';
+const HOME_DESC = 'Find and compare the latest AI tools for making games: what\'s new, the best tool for each job, what it costs and how to use it.';
 const SITE = {
   name: 'GameDev AI Tools',
   origin: process.env.SITE_ORIGIN || 'https://gamedevaitools.com',
   base: process.env.SITE_BASE ?? '', // e.g. '/gamedev-ai-tools' for a GitHub Pages project path
-  description: 'A free directory of AI tools for game developers. Filter by task (concept art, 3D models, textures, animation, voice, music, NPCs, code, levels, localisation, QA, trailers), engine, free plan and whether it is safe to ship commercially.',
+  description: 'Find and compare the latest AI tools for making games: concept art, 3D models, textures, animation, voice, music, NPCs, code, levels, localisation, QA and trailers. What\'s new, what\'s best for each job, what it costs and how to use it.',
   updated: '2026-10-17',
 };
 // Signup form is shown only when explicitly enabled AND both Resend env vars exist.
@@ -162,7 +162,8 @@ ${compact ? '' : `<p class="verdict">${esc(t.verdict)}</p>\n`}<div class="card-f
 function linkCard({ href, title, kicker = '', desc = '', media = '', foot = '', cls = '', attrs = '', h = 'h3' }) {
   return `<article class="card is-link${cls ? ' ' + cls : ''}"${attrs}>${media ? `<div class="card-media">${media}</div>` : ''}${kicker ? `<span class="kicker">${kicker}</span>` : ''}<${h}><a class="card-link" href="${esc(href)}">${esc(title)}</a></${h}>${desc ? `<p class="card-desc">${desc}</p>` : ''}${foot}</article>`;
 }
-const artImg = (page, { eager = false } = {}) => `<img src="${catImg(page)}" alt="" width="640" height="480"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
+const artSrcset = page => `${L(`/assets/img/${page}-640.webp`)} 640w, ${catImg(page)} 1280w`;
+const artImg = (page, { eager = false, sizes = '(max-width:720px) 100vw, 420px' } = {}) => `<img src="${catImg(page)}" srcset="${artSrcset(page)}" sizes="${sizes}" alt="" width="1280" height="720"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
 // Guide art: a dedicated hero image (src/assets/img/<hero>.webp) when present, otherwise the task's category art.
 const guideArtPage = g => g.hero && fs.existsSync(`src/assets/img/${g.hero}.webp`) ? g.hero : TASKS[g.task].page;
 // Pipeline strip: the guide's stages as connected nodes; AI stages show stacked logos of the guide's tools.
@@ -262,7 +263,7 @@ ${sponsorSide()}
 <footer class="site-footer"><div class="wrap">
 <div class="foot-grid">
 <div class="foot-brand-col"><a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a>
-<p class="foot-tag">An independent directory of AI tools for game developers. Commercial-use terms sourced and dated, categories ranked on evidence.</p>
+<p class="foot-tag">Find and compare the latest AI tools for making games: what's new, what's best for each job, what it costs and how to use it.</p>
 ${footerSignup()}</div>
 <nav class="foot-col" aria-label="Explore"><h2>Explore</h2><a href="${L('/tools/')}">All tools</a><a href="${L('/category/')}">Best by category</a><a href="${L('/guides/')}">Guides</a><a href="${L('/compare/')}">Compare tools</a><a href="${L('/alternatives/')}">Alternatives</a><a href="${L('/new/')}">New this week</a>${DEALS.length ? `<a href="${L('/deals/')}">Deals</a>` : ''}</nav>
 <nav class="foot-col" aria-label="Resources"><h2>Resources</h2><a href="${L('/cheat-sheet/')}">Can I ship it? cheat sheet</a><a href="${L('/steam-ai-disclosure/')}">Steam AI disclosure</a><a href="${L('/guides/open-weights-model-licences/')}">Open-weights licences</a><a href="${L('/how-we-rank/')}">How we rank</a><a href="${L('/badge/')}">"Listed on" badge</a></nav>
@@ -284,7 +285,7 @@ const page = (p, html, { sitemap = true } = {}) => { write(p === '/' ? 'index.ht
 function newsletterBlock({ heading, text } = {}) {
   if (!NEWSLETTER_ON) return `<section class="newsletter soon" id="newsletter">
 <h2>Newsletter: coming soon</h2>
-<p>We're planning a short email about new AI tools for game devs and changes to their pricing and licences. Signup isn't open yet, and this form collects nothing.</p>
+<p>A short weekly email: new AI tools for game devs, the best launches and price changes. Signup isn't open yet, and this form collects nothing.</p>
 <form onsubmit="return false"><input type="email" placeholder="you@example.com" disabled aria-label="Email (coming soon)"><button type="button" disabled>Coming soon</button></form>
 </section>`;
   return `<section class="newsletter" id="newsletter">
@@ -298,7 +299,7 @@ ${HONEYPOT}
 </section>`;
 }
 
-const tile = (c, n) => `<a class="tile" href="${L(`/category/${c.page}/`)}"><img src="${catImg(c.page)}" alt="" width="640" height="480" loading="lazy" decoding="async"><span class="tile-body"><strong>${esc(c.label)}</strong><span>${n} ${n === 1 ? 'tool' : 'tools'}</span></span></a>`;
+const tile = (c, n) => `<a class="tile" href="${L(`/category/${c.page}/`)}"><img src="${catImg(c.page)}" srcset="${artSrcset(c.page)}" sizes="(max-width:720px) 50vw, 300px" alt="" width="1280" height="720" loading="lazy" decoding="async"><span class="tile-body"><strong>${esc(c.label)}</strong><span>${n} ${n === 1 ? 'tool' : 'tools'}</span></span></a>`;
 
 // ---------- News helpers (type tag inferred only from the entry's own title; "Why it matters" only when the entry has it) ----------
 function newsType(n) {
@@ -349,15 +350,9 @@ for (const n of recentNews) if (n.tool && bySlug[n.tool] && !newRow.some(x => x.
 // Row = optional active sponsor card + tools, max 4 cards, column count matched to the card count so there's never a gap.
 const NEW_MAX = Math.min(newRow.length, SPONSOR ? 3 : 4);
 const NEW_COLS = { 1: 'g2 m2', 2: 'g2 m2', 3: 'g3 t3', 4: 'g4 m2' }[NEW_MAX + (SPONSOR ? 1 : 0)] || 'g4 m2';
-const HOME_TITLE = 'Which AI tools can you legally ship in a paid game?';
+const HOME_TITLE = 'The best AI tools for making games';
 // Direct answer to the H1 (also the og:image sub line), from the same counts as the cheat sheet. Handles 0 and 1.
-const HOME_SUB = (() => {
-  const y = sheetCounts.yes, pd = sheetCounts.paid, n = tools.length;
-  const first = y === 0 ? `none of our ${n} tools let you ship free-plan output in a paid game`
-    : `${y} of our ${n} ${n === 1 ? 'tool' : 'tools'} ${y === 1 ? 'lets' : 'let'} you ship free-plan output in a paid game`;
-  const second = pd ? `, and ${pd} more ${pd === 1 ? 'needs' : 'need'} a paid plan` : '';
-  return `Going by each vendor's published terms, ${first}${second}. Every price and licence term links to the vendor's page, with the date we checked it.`;
-})();
+const HOME_SUB = `What's new, the best tool for each job, what it costs and how to use it. ${tools.length} tools across ${Object.keys(TASKS).length} game-dev jobs, updated every week.`;
 // Homepage and /tools/ are built near the end (after rankings) — see "Home + tools pages".
 
 // ---------- Rankings (data/rankings.json + published fit score; method on /how-we-rank/) ----------
@@ -1261,64 +1256,60 @@ const SHIP_DATA = Object.fromEntries(tools.map(t => [t.slug, {
 // Home shows 3 guide cards (+3 resource cards = two full rows): the featured guide, then the two newest. All guides are on /guides/.
 const HOME_GUIDES = [GUIDES[0], ...GUIDES.slice(1).slice(-2).reverse()];
 page('/', layout({
-  title: `${SITE.name}: AI tools for game developers, ranked`,
+  title: `${SITE.name}: the best AI tools for making games`,
   description: HOME_DESC,
   pathname: '/',
-  og: ogFile('home', 'page', { title: HOME_TITLE, sub: HOME_SUB, chips: [{ label: `${tools.length} tools` }, { label: `${Object.keys(TASKS).length} tasks` }, { label: 'Sourced and dated' }] }),
+  og: ogFile('home', 'page', { title: HOME_TITLE, sub: HOME_SUB, chips: [{ label: `${tools.length} tools` }, { label: `${Object.keys(TASKS).length} jobs ranked` }, { label: 'Updated weekly' }] }),
   jsonld: [{
     '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: URL_('/'), description: SITE.description,
     potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: URL_('/tools/') + '?q={search_term_string}' }, 'query-input': 'required name=search_term_string' },
   }],
   body: `
 <section class="uh-hero">
-<div class="uh-hero-art"><img src="${L('/assets/img/hero.webp')}" srcset="${L('/assets/img/hero-960.webp')} 960w, ${L('/assets/img/hero.webp')} 1680w" sizes="(max-width:720px) 100vw, 72vw" alt="" width="1680" height="720" fetchpriority="high" decoding="async"></div>
+<div class="uh-hero-art"><img src="${L('/assets/img/hero.webp')}" srcset="${L('/assets/img/hero-960.webp')} 1200w, ${L('/assets/img/hero.webp')} 2400w" sizes="(max-width:720px) 100vw, 72vw" alt="" width="2400" height="1029" fetchpriority="high" decoding="async">${['level-generation', 'npc-dialogue', 'trailers-marketing', 'animation'].map((p, i) => `<img class="uh-reel" style="--d:${(i + 1) * 6}s" src="${catImg(p)}" alt="" width="1280" height="720" loading="lazy" decoding="async">`).join('')}</div>
 <div class="uh-hero-txt">
-<p class="uh-checked"><span class="dot"></span>Free, independent directory · Checked ${timeEl(SITE.updated)}</p>
-<h1>Which AI tools can you legally ship in a paid game?</h1>
-<p class="sub">Commercial-use terms for ${tools.length} AI tools, sourced from each vendor and dated, plus a ranked pick for every part of game dev.</p>
-<form class="searchbar" action="${L('/tools/')}" method="get" role="search">${ICON_SEARCH}<input name="q" type="search" placeholder="Search tools, e.g. pixel art, voice, Godot" aria-label="Search tools" autocomplete="off"><button type="submit" class="sb-go">Search</button></form>
-<div class="uh-cta"><a class="btn" href="${L('/category/')}">Best tool for each job</a><a class="btn btn-ghost" href="${L('/cheat-sheet/')}">Can I ship it? cheat sheet</a></div>
-<ul class="hero-stats"><li><b>${tools.length}</b> tools</li><li><b>${Object.keys(TASKS).length}</b> categories ranked</li><li><b>${sheetCounts.yes}</b> safe to ship on a free plan</li></ul>
+<p class="uh-checked"><span class="dot"></span>${recentNews.length ? `${recentNews.length} ${recentNews.length === 1 ? 'update' : 'updates'} this week` : 'Updated weekly'} · ${tools.length} tools tracked</p>
+<h1>The best AI tools for making games.</h1>
+<p class="sub">What's new, the top pick for every job, what each tool costs and how to use it in your pipeline. Search ${tools.length} tools for art, 3D, audio, code and more.</p>
+<form class="searchbar" action="${L('/tools/')}" method="get" role="search">${ICON_SEARCH}<input name="q" type="search" placeholder="Try pixel art, voice, Godot, 3D models" aria-label="Search tools" autocomplete="off"><button type="submit" class="sb-go">Search</button></form>
+<div class="uh-cta"><a class="btn" href="${L('/tools/')}">Browse all tools</a><a class="btn btn-ghost" href="${L('/category/')}">Best for each job</a></div>
 </div>
 </section>
-${topPicks.length ? `<section class="uh-sec" aria-labelledby="tp-h">
-<div class="sec-head"><h2 id="tp-h">Top picks <span class="sec-sub">backed by independent tests</span></h2><a class="btn btn-ghost btn-sm" href="${L('/how-we-rank/')}">How we rank</a></div>
-<div class="uh-picks">${topPicks.map(({ k, r, joint }) => `<a class="uh-pick" href="${L(`/category/${TASKS[k].page}/`)}"><span class="uh-pick-logos">${logo(r.t, 44)}${joint ? logo(joint.t, 44) : ''}</span><span class="uh-pick-cat">${esc(TASKS[k].label)}</span><b>${esc(joint ? `${r.t.name} / ${joint.t.name}` : r.t.name)}</b><span class="uh-rank">${joint ? 'Joint #1' : '#1'}</span></a>`).join('')}</div>
-</section>` : ''}
 ${newRow.length ? `<section class="uh-sec" aria-labelledby="new-h">
-<div class="sec-head"><h2 id="new-h">New &amp; updated this week</h2><a class="btn btn-ghost btn-sm" href="${L('/new/')}">View all</a></div>
+<div class="sec-head"><h2 id="new-h">New this week</h2><a class="btn btn-ghost btn-sm" href="${L('/new/')}">View all news</a></div>
 <div class="uh-news">${sponsorCard({ compact: true })}
-${newRow.slice(0, SPONSOR ? 3 : 4).map(({ t, n }) => `<article class="uh-news-card"><div class="uh-news-art">${artImg(TASKS[t.tasks[0]].page)}${logo(t, 52)}</div><div class="uh-news-body"><p class="uh-date">${timeEl(n.date, true)} · ${esc(t.name)}</p><h3><a class="card-link" href="${toolUrl(t)}">${esc(n.title)}</a></h3><p class="summary">${esc(t.summary)}</p><span class="badges">${newsBadge(n)}${isNsv(t.commercial) ? '' : licBadge(t)}</span></div></article>`).join('\n')}</div>
+${newRow.slice(0, SPONSOR ? 3 : 4).map(({ t, n }) => `<article class="uh-news-card"><div class="uh-news-art">${artImg(TASKS[t.tasks[0]].page)}${logo(t, 52)}</div><div class="uh-news-body"><p class="uh-date">${timeEl(n.date, true)} · ${esc(t.name)}</p><h3><a class="card-link" href="${toolUrl(t)}">${esc(n.title)}</a></h3><p class="summary">${esc(t.summary)}</p><span class="badges">${newsBadge(n)}${badge(cardSub(t), 'neutral')}</span></div></article>`).join('\n')}</div>
 </section>` : ''}
-<section class="uh-sec uh-split" aria-labelledby="ship-h">
-<div class="uh-split-txt"><p class="uh-eyebrow">Quick check</p><h2 id="ship-h">Can I ship it?</h2><p>Pick a tool to see whether what it makes can go in a game you sell, with the catch and a link to the vendor's own terms.</p><a class="btn btn-ghost" href="${L('/cheat-sheet/')}">See every tool at once</a></div>
-<div class="card ship"><label class="ship-pick"><span class="sr-only">Tool</span><select id="ship-sel"><option value="">Choose a tool…</option>${tools.map(t => `<option value="${t.slug}">${esc(t.name)}</option>`).join('')}</select></label>
-<div class="ship-out" id="ship-out" aria-live="polite"><p class="ship-empty">Your answer appears here.</p></div></div>
-</section>
 <section class="uh-sec" aria-labelledby="best-h">
 <h2 id="best-h" class="uh-big">The best tool for every job.</h2>
-<p class="uh-lede">Every category is ranked: on independent quality tests where they exist, otherwise on fit for game developers. Pick a job to see the full list.</p>
+<p class="uh-lede">Twelve parts of game development, each with a ranked shortlist. Where independent tests exist we rank on those, otherwise on features, price and fit for game devs.</p>
 <div class="uh-tiles">${CAT_GROUPS.flatMap(gr => gr.keys).map(k => { const R = RANKED[k], r = R && R.rows[0], c = TASKS[k]; return `<a class="uh-tile" href="${L(`/category/${c.page}/`)}">${artImg(c.page)}<span class="uh-tile-body"><strong>${esc(c.label)} <span aria-hidden="true">→</span></strong>${r ? `<span class="uh-tile-top">${logo(r.t, 22)}#1 ${esc(r.t.name)}${R.nEvidence ? '<i class="best-ev" title="Ranked on independent tests">●</i>' : ''}</span>` : ''}</span></a>`; }).join('')}</div>
-<p class="best-note"><i class="best-ev">●</i> ranked on independent tests · others ranked on features. <a href="${L('/how-we-rank/')}">How we rank</a></p>
+<p class="best-note"><i class="best-ev">●</i> ranked on independent tests · others ranked on features, price and fit. <a href="${L('/how-we-rank/')}">How we rank</a></p>
 </section>
-<section class="uh-sec uh-band" aria-labelledby="at-h"><div><h2 id="at-h">Browse all ${tools.length} tools</h2><p>Search and filter by task, engine, free plan and whether you can ship the output commercially.</p>
-<p class="quick" id="engines"><span>By engine:</span>${engineList.map(({ e, n }) => chip(`${e.label} (${n})`, { href: L(`/engine/${e.page}/`) })).join('')}</p></div>
-<a class="btn" href="${L('/tools/')}">Browse all tools</a></section>
+<section class="uh-sec" aria-labelledby="cmp-h">
+<div class="sec-head"><h2 id="cmp-h">Head to head</h2><a class="btn btn-ghost btn-sm" href="${L('/compare/')}">All ${COMPARE.length} comparisons</a></div>
+<div class="uh-vs">${COMPARE.slice(0, 6).map(([a, b]) => { const A = bySlug[a], B = bySlug[b]; return `<a class="uh-vs-card" href="${L(`/compare/${a}-vs-${b}/`)}"><span class="uh-vs-logos">${logo(A, 48)}<i>vs</i>${logo(B, 48)}</span><b>${esc(A.name)} vs ${esc(B.name)}</b><span class="uh-vs-cat">${esc(TASKS[A.tasks.find(x => B.tasks.includes(x)) || A.tasks[0]].label)}</span></a>`; }).join('')}</div>
+</section>
 <section class="uh-sec res" aria-labelledby="res-h">
-<div class="sec-head"><h2 id="res-h">Guides and resources</h2><a class="btn btn-ghost btn-sm" href="${L('/guides/')}">View all</a></div>
+<div class="sec-head"><h2 id="res-h">Learn how to use them</h2><a class="btn btn-ghost btn-sm" href="${L('/guides/')}">All guides</a></div>
 <div class="grid g3">
-${HOME_GUIDES.map(g => linkCard({ href: L(`/guides/${g.slug}/`), kicker: esc(g.kind || 'Workflow guide'), title: g.title, media: artImg(guideArtPage(g)), foot: `${flowStrip(g)}<div class="card-foot"><span class="facts-line">${g.steps.length} steps</span></div>` })).join('\n')}
-${linkCard({ href: L('/steam-ai-disclosure/'), kicker: 'Store rules', title: DISCLOSURE.title, desc: esc(DISCLOSURE.description) })}
-${linkCard({ href: L('/compare/'), kicker: 'Comparisons', title: `${COMPARE.length} side-by-side comparisons`, desc: 'Built only from published pricing, specs and licence terms.' })}
-${linkCard({ href: L('/cheat-sheet/'), kicker: 'Cheat sheet', title: 'AI tools you can legally ship in a paid game', desc: 'Free-plan commercial use, the plan you need and the catch, for every tool.' })}
+${HOME_GUIDES.map(g => linkCard({ href: L(`/guides/${g.slug}/`), kicker: esc(g.kind || 'Workflow guide'), title: g.title, media: artImg(guideArtPage(g)), foot: `<div class="card-foot"><span class="facts-line">${g.steps.length} steps</span></div>` })).join('\n')}
 </div>
 </section>
+<section class="uh-sec uh-band" aria-labelledby="at-h"><div><h2 id="at-h">What does it cost?</h2><p>Filter all ${tools.length} tools by free plan, pricing, engine and job, then compare the ones that fit your budget.</p>
+<p class="quick" id="engines"><span>By engine:</span>${engineList.map(({ e, n }) => chip(`${e.label} (${n})`, { href: L(`/engine/${e.page}/`) })).join('')}</p></div>
+<a class="btn" href="${L('/tools/')}">Filter all tools</a></section>
+<section class="uh-sec uh-split" aria-labelledby="ship-h">
+<div class="uh-split-txt"><p class="uh-eyebrow">Selling your game?</p><h2 id="ship-h">Check a tool's commercial terms</h2><p>Pick a tool to see what its terms say about using its output in a commercial game, with a link to the vendor's own page.</p><a class="btn btn-ghost" href="${L('/cheat-sheet/')}">All tools at a glance</a></div>
+<div class="card ship"><label class="ship-pick"><span class="sr-only">Tool</span><select id="ship-sel"><option value="">Choose a tool…</option>${tools.map(t => `<option value="${t.slug}">${esc(t.name)}</option>`).join('')}</select></label>
+<div class="ship-out" id="ship-out" aria-live="polite"><p class="ship-empty">The answer appears here.</p></div></div>
+</section>
 <section class="uh-sec" aria-labelledby="how-h">
-<h2 id="how-h" class="uh-big">Every listing is sourced and dated. <span class="uh-accent">Rankings you can check.</span></h2>
+<h2 id="how-h" class="uh-big">Researched by hand. <span class="uh-accent">Updated every week.</span></h2>
 <div class="uh-how">
-<div class="uh-how-card"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg><h3>Sourced</h3><p>Pricing and commercial-use notes come from each vendor's own pages, and every listing links to its source.</p></div>
-<div class="uh-how-card"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><h3>Dated</h3><p>Each tool shows the date we last checked it. Anything the vendor doesn't clearly state is marked "Not stated by vendor".</p></div>
-<div class="uh-how-card"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><h3>Rankings you can check</h3><p>Ranked by independent quality tests where they exist, then by fit for game devs. Sponsors and affiliate links never change a listing, its rank or its verdict. <a href="${L('/how-we-rank/')}">How we rank</a></p></div>
+<div class="uh-how-card"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><h3>Every tool, one place</h3><p>Pricing, free plans, engine support, APIs and the catch for ${tools.length} tools, straight from each vendor's own pages.</p></div>
+<div class="uh-how-card"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><h3>Always current</h3><p>Launches, price changes and new versions land on the site every week, and each listing shows when we last checked it.</p></div>
+<div class="uh-how-card"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><h3>Rankings you can check</h3><p>Independent tests first, then features, price and fit. Sponsors and affiliate links never change a rank. <a href="${L('/how-we-rank/')}">How we rank</a></p></div>
 </div>
 </section>
 ${newsletterBlock()}`,
