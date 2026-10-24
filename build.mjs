@@ -1253,6 +1253,36 @@ const SHIP_DATA = Object.fromEntries(tools.map(t => [t.slug, {
   n: t.name, u: toolUrl(t), l: LOGOS.has(t.slug) ? L(`/assets/logos/${t.slug}.png`) : '', s: SHIP_SHORT[t.commercial] || NSV_TEXT, tone: licTone(t),
   a: quickAnswer(t), c: isNsv(t.license) ? '' : (t.license.length > 240 ? t.license.slice(0, 237).replace(/\s+\S*$/, '') + '…' : t.license), src: t.licenseSource || '',
 }]));
+// Intent search (src/assets/search.js): what people type for each job -> that job's ranked top 3 + its comparisons.
+// Keywords are matched by prefix both ways, so "modelling" hits "model" and "anim" hits "animation".
+const SEARCH_KW = {
+  'concept-art': ['concept', 'art', '2d', 'sprite', 'pixel', 'illustration', 'drawing', 'painting', 'image', 'icon', 'character design', 'portrait', 'ui', 'skybox', 'background', 'tileset', 'asset'],
+  '3d-models': ['3d', 'model', 'modelling', 'modeling', 'mesh', 'sculpt', 'prop', 'asset', 'retopology', 'topology', 'glb', 'fbx', 'character'],
+  'textures': ['texture', 'material', 'pbr', 'shader', 'normal', 'uv', 'tileable', 'seamless', 'skybox', 'hdri', 'surface'],
+  'animation': ['animation', 'animate', 'animating', 'rig', 'rigging', 'mocap', 'motion', 'capture', 'keyframe', 'pose', 'lip', 'retarget', 'walk cycle'],
+  'voice': ['voice', 'voices', 'tts', 'speech', 'text to speech', 'dialogue', 'acting', 'actor', 'narration', 'dub', 'dubbing', 'lip sync', 'vo'],
+  'audio': ['music', 'soundtrack', 'song', 'score', 'composer', 'audio', 'sound', 'sfx', 'effects', 'ambience', 'foley'],
+  'npc': ['npc', 'npcs', 'character', 'companion', 'conversation', 'dialogue', 'chatbot', 'ai character', 'behaviour', 'behavior', 'llm'],
+  'code': ['code', 'coding', 'programming', 'programmer', 'script', 'scripting', 'debug', 'copilot', 'blueprint', 'gdscript', 'c#', 'cpp', 'shader'],
+  'level': ['level', 'levels', 'terrain', 'world', 'map', 'procedural', 'environment', 'landscape', 'dungeon', 'layout', 'worldbuilding'],
+  'localisation': ['localisation', 'localization', 'translate', 'translation', 'language', 'languages', 'subtitle', 'l10n'],
+  'qa': ['qa', 'test', 'testing', 'tester', 'playtest', 'playtesting', 'bug', 'bugs', 'quality'],
+  'marketing': ['trailer', 'marketing', 'video', 'promo', 'store page', 'capsule', 'social', 'ads', 'advert', 'screenshot', 'launch'],
+};
+const searchTool = t => ({ n: t.name, s: t.slug, u: toolUrl(t), l: LOGOS.has(t.slug) ? L(`/assets/logos/${t.slug}.png`) : '', i: initials(t.name), h: hue(t.slug), c: TASKS[t.tasks[0]].label });
+const SEARCH_CMPS = COMPARE.map(([a, b]) => ({ a, b, t: `${bySlug[a].name} vs ${bySlug[b].name}`, u: L(`/compare/${a}-vs-${b}/`) }));
+const SEARCH_DATA = {
+  toolsUrl: L('/tools/'), cmpAll: L('/compare/'),
+  cats: Object.keys(TASKS).filter(k => RANKED[k]).map(k => ({
+    label: TASKS[k].label, u: L(`/category/${TASKS[k].page}/`), count: RANKED[k].rows.length,
+    kw: [...new Set([...SEARCH_KW[k] || [], ...TASKS[k].label.toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length > 1)])],
+    top: RANKED[k].rows.slice(0, 3).map(r => ({ ...searchTool(r.t), r: r.n, p: cardSub(r.t), ev: r.tier === 'evidence' })),
+    cmp: SEARCH_CMPS.map((p, i) => [p, i]).filter(([p]) => bySlug[p.a].tasks.includes(k) && bySlug[p.b].tasks.includes(k)).map(([, i]) => i),
+  })),
+  cmps: SEARCH_CMPS,
+  tools: tools.map(searchTool),
+  engines: engineList.map(({ e, n }) => ({ n: e.label, u: L(`/engine/${e.page}/`), c: n })),
+};
 // Home shows 3 guide cards (+3 resource cards = two full rows): the featured guide, then the two newest. All guides are on /guides/.
 const HOME_GUIDES = [GUIDES[0], ...GUIDES.slice(1).slice(-2).reverse()];
 page('/', layout({
@@ -1271,7 +1301,7 @@ page('/', layout({
 <p class="uh-checked"><span class="dot"></span>${recentNews.length ? `${recentNews.length} ${recentNews.length === 1 ? 'update' : 'updates'} this week` : 'Updated weekly'} · ${tools.length} tools tracked</p>
 <h1>The best AI tools for making games.</h1>
 <p class="sub">What's new, the top pick for every job, what each tool costs and how to use it in your pipeline. Search ${tools.length} tools for art, 3D, audio, code and more.</p>
-<form class="searchbar" action="${L('/tools/')}" method="get" role="search">${ICON_SEARCH}<input name="q" type="search" placeholder="Try pixel art, voice, Godot, 3D models" aria-label="Search tools" autocomplete="off"><button type="submit" class="sb-go">Search</button></form>
+<form class="searchbar" data-smart action="${L('/tools/')}" method="get" role="search">${ICON_SEARCH}<input name="q" type="search" placeholder="What are you making? Try animation, 3D models, music" aria-label="Search by what you're making, or by tool name" autocomplete="off"><button type="submit" class="sb-go">Search</button></form>
 <div class="uh-cta"><a class="btn" href="${L('/tools/')}">Browse all tools</a><a class="btn btn-ghost" href="${L('/category/')}">Best for each job</a></div>
 </div>
 </section>
@@ -1313,7 +1343,9 @@ ${HOME_GUIDES.map(g => linkCard({ href: L(`/guides/${g.slug}/`), kicker: esc(g.k
 </div>
 </section>
 ${newsletterBlock()}`,
-  scripts: `<script>window.SHIP=${JSON.stringify(SHIP_DATA).replace(/</g, '\\u003c')};
+  scripts: `<script>window.SEARCH=${JSON.stringify(SEARCH_DATA).replace(/</g, '\\u003c')};</script>
+<script src="${L('/assets/search.js')}" defer></script>
+<script>window.SHIP=${JSON.stringify(SHIP_DATA).replace(/</g, '\\u003c')};
 (function(){var D=window.SHIP,s=document.getElementById('ship-sel'),o=document.getElementById('ship-out');if(!s)return;
 function e(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 s.addEventListener('change',function(){var d=D[s.value];if(!d){return;}
