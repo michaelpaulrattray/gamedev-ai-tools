@@ -100,6 +100,16 @@ Owner: Mike Paul (Brisbane, Australia/Brisbane). Business inbox: hello@gamedevai
 | 2026-10-23 | Ultimate Engine CoPilot | blueprints.lab@gamedevcore.com | you're listed | sent 07:28 AEST; body read back from Sent and correct | |
 | 2026-10-23 | Marble (World Labs) | support@worldlabs.ai | you're listed | sent 07:28 AEST; body read back from Sent and correct | |
 | 2026-10-23 | Hunyuan3D | hunyuan3d@tencent.com | you're listed | sent 07:29 AEST; body read back from Sent and correct | |
+| 2026-10-24 | Skybox AI | support@blockadelabs.com | you're listed | sent 11:02 AEST; draft checked in compose before Send, confirmed in Sent | |
+| 2026-10-24 | Cascadeur | info@cascadeur.com | you're listed | sent 11:03 AEST; draft checked in compose before Send, confirmed in Sent | |
+| 2026-10-24 | DeepMotion Animate 3D | marketing@deepmotion.com | you're listed | sent 11:04 AEST; draft checked in compose before Send, confirmed in Sent | |
+| 2026-10-24 | Rokoko Vision | hi@rokoko.com | you're listed | sent 11:04 AEST; draft checked in compose before Send, confirmed in Sent | |
+| 2026-10-24 | Ludus AI | hello@ludusengine.com | you're listed | sent 11:05 AEST; draft checked in compose before Send, confirmed in Sent | |
+| 2026-10-24 | Cursor | hi@cursor.com | you're listed | sent 11:05 AEST; draft checked in compose before Send, confirmed in Sent | |
+| 2026-10-24 | Windsurf | hello@windsurf.com | you're listed | sent 11:06 AEST; draft checked in compose before Send, confirmed in Sent | |
+| 2026-10-24 | ElevenLabs | press@elevenlabs.io | you're listed | sent 11:06 AEST; draft checked in compose before Send, confirmed in Sent | |
+| 2026-10-24 | Inworld AI | info@inworld.ai | you're listed | sent 11:07 AEST; draft checked in compose before Send, confirmed in Sent | |
+| 2026-10-24 | Charisma.ai | hello@charisma.ai | you're listed | sent 11:08 AEST; draft checked in compose before Send, confirmed in Sent | |
 
 ## X (@gamedevaitools) rules
 - Account labelled as automated (X's automated-account label, managed by Mike's account).
@@ -352,3 +362,4 @@ No estimates. If a number isn't available, write "not measured".
 - **2026-10-24: Badge redesigned**, because Mike said the old one looked weak. New light/dark SVGs (site gradient mark, "LISTED ON / GameDev AI Tools" with gradient "AI Tools", gradient border) replaced in place at /assets/badge/listed-{light,dark}.svg, same 200x44 size, so existing embeds upgrade automatically. Commit 079a648; live checks passed.
 
 - **2026-10-24 (09:14 AEST): Thrixel logo correction sent** (Mike approved the wording). It corrects the 08:17 reply: the site does show logos, and Thrixel's is live on /tools/thrixel/. To madelyn@, cc press@; checked in Sent.
+- **2026-10-24 (11:08 AEST): Daily outreach send, 10 of 10 sent.** READY "you're listed" drafts sent one per browser task from hello@ web Gmail, exactly as Copy Humanizer left them: Skybox AI, Cascadeur, DeepMotion Animate 3D, Rokoko Vision, Ludus AI, Cursor, Windsurf, ElevenLabs, Inworld AI, Charisma.ai (11:02-11:08 AEST). Fact gate, checked fresh this run by curl of the live site: all 10 listing URLs return 200; each quoted commercial-use label matches the live page header (not stated by vendor: Skybox AI, Rokoko Vision, Ludus AI; paid plans only: Cascadeur, DeepMotion, ElevenLabs; allowed: Cursor, Windsurf, Inworld AI, Charisma.ai); each quoted pricing label matches (Free tier + paid for all quoted except Charisma.ai, Pay as you go); /badge/ is live, says the badge is free and optional, offers a copyable HTML snippet, and lists all 10 tools; homepage says free directory and /compare/ says "Compare AI tools side by side". None of the 10 were in the outreach log before. Each draft read back before Send (recipient, subject, tool name, listing link behind words, no other tool named); Skybox read back from Sent before the rest. Today's "you're listed" count: 10 of 10. No errors.
