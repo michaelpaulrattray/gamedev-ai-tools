@@ -1,5 +1,6 @@
 // Static site generator. Usage: npm install (once) then node build.mjs  -> writes ./dist
 // Pages are plain HTML from template helpers; the only dependencies (satori, @resvg/resvg-js) render share images (og.mjs).
+import { markSvg, listedBadge, rankedBadge, LISTED as BADGE_LISTED, RANKED as BADGE_RANKED } from './badges.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { CHECKED, GUIDES, DISCLOSURE, NEWS, COMPARE, ENGINE_HUBS, CAN_SELL, ALTERNATIVES } from './content.mjs';
@@ -100,7 +101,7 @@ const logo = (t, size = 44, eager = false) => LOGOS.has(t.slug)
   : `<span class="tlogo mono" aria-hidden="true" style="--h:${hue(t.slug)};width:${size}px;height:${size}px">${esc(initials(t.name))}</span>`;
 const catImg = page => L(`/assets/img/${page}.webp`);
 const ICON_SEARCH = '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
-const MARK = '<svg aria-hidden="true" width="28" height="28" viewBox="0 0 32 32"><defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#gm)"/><path d="M9 13h4m-2-2v4" stroke="#0b0d14" stroke-width="2.2" stroke-linecap="round"/><circle cx="20" cy="12.5" r="1.6" fill="#0b0d14"/><circle cx="23" cy="15.5" r="1.6" fill="#0b0d14"/><path d="M7 19c0-3 1.5-5 5-5h8c3.5 0 5 2 5 5v1.5c0 2-2.4 2.8-3.8 1.3L19 19.5h-6l-2.2 2.3C9.4 23.3 7 22.5 7 20.5z" fill="none" stroke="#0b0d14" stroke-width="2"/></svg>';
+const MARK = markSvg({ size: 28 }).replace('<svg ', '<svg aria-hidden="true" ');
 const srcA = (url, label = 'source') => url ? ` <a class="src" href="${esc(url)}"${url.startsWith('/') ? '' : ' rel="noopener nofollow" target="_blank"'}>${label}</a>` : '';
 const engineText = t => t.engines.filter(e => ENGINES[e]).map(e => ENGINES[e]).join(', ') || 'Any (standard file export / engine-agnostic)';
 const isNsv = v => v === undefined || v === null || v === '' || v === 'unverified';
@@ -251,9 +252,11 @@ function layout({ title, description, pathname, body, jsonld = [], scripts = '',
 ${jsonld.map(ld).join('\n')}
 </head>
 <body>
-<header class="site-header"><div class="wrap">
-<a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a>
-<nav><a href="${L('/tools/')}">Tools</a><a href="${L('/category/')}">Categories</a><a class="hide-sm" href="${L('/guides/')}">Guides</a><a class="hide-sm" href="${L('/compare/')}">Compare</a><a class="hide-sm" href="${L('/alternatives/')}">Alternatives</a><a class="hide-sm" href="${L('/new/')}">New</a>${DEALS.length ? `<a href="${L('/deals/')}">Deals</a>` : ''}<a class="nav-cta" href="${L('/submit/')}">Submit a tool</a></nav>
+<header class="site-header"><div class="wrap hdr">
+<a class="logo" href="${L('/')}" aria-label="GameDev AI Tools home">${MARK}<span class="wordmark">GAMEDEV <b>AI TOOLS</b></span></a>
+<nav class="hdr-nav" aria-label="Main"><a href="${L('/tools/')}">Tools</a><a href="${L('/category/')}">Best by job</a><a href="${L('/compare/')}">Compare</a><a href="${L('/guides/')}">Guides</a><a href="${L('/new/')}">News</a>${DEALS.length ? `<a href="${L('/deals/')}">Deals</a>` : ''}</nav>
+<form class="hdr-search" action="${L('/tools/')}" method="get" role="search">${ICON_SEARCH}<input name="q" type="search" placeholder="Search tools" aria-label="Search tools" autocomplete="off"></form>
+<a class="btn btn-sm hdr-cta" href="${L('/submit/')}">Submit a tool</a>
 </div></header>
 ${sponsorStrip()}
 <main class="wrap">
@@ -262,7 +265,7 @@ ${body}
 ${sponsorSide()}
 <footer class="site-footer"><div class="wrap">
 <div class="foot-grid">
-<div class="foot-brand-col"><a class="logo" href="${L('/')}">${MARK}<span>GameDev <b>AI Tools</b></span></a>
+<div class="foot-brand-col"><a class="logo" href="${L('/')}" aria-label="GameDev AI Tools home">${MARK}<span class="wordmark">GAMEDEV <b>AI TOOLS</b></span></a>
 <p class="foot-tag">Find and compare the latest AI tools for making games: what's new, what's best for each job, what it costs and how to use it.</p>
 ${footerSignup()}</div>
 <nav class="foot-col" aria-label="Explore"><h2>Explore</h2><a href="${L('/tools/')}">All tools</a><a href="${L('/category/')}">Best by category</a><a href="${L('/guides/')}">Guides</a><a href="${L('/compare/')}">Compare tools</a><a href="${L('/alternatives/')}">Alternatives</a><a href="${L('/new/')}">New this week</a>${DEALS.length ? `<a href="${L('/deals/')}">Deals</a>` : ''}</nav>
@@ -1300,22 +1303,37 @@ ${newsletterBlock()}`,
 }));
 
 // ---------- Badge ----------
-const BADGE_W = 200, BADGE_H = 44;
-const badgeSnippet = (slug, theme) => `<a href="${URL_(`/tools/${slug}/`)}"><img src="${URL_(`/assets/badge/listed-${theme}.svg`)}" alt="Listed on GameDev AI Tools" width="${BADGE_W}" height="${BADGE_H}"></a>`;
+// Best confident top-3 rank per tool (primary job first on ties) -> a "Ranked" badge; everyone listed gets "Listed on".
+const BADGE_RANK = Object.fromEntries(tools.map(t => {
+  const rs = t.tasks.map(k => ({ k, r: rankOf(t.slug, k) })).filter(x => x.r && x.r.n <= 3 && (x.r.conf ? x.r.conf === 'confident' : x.r.tier === 'evidence'));
+  rs.sort((x, y) => x.r.n - y.r.n || (x.k === t.tasks[0] ? -1 : 1));
+  const x = rs[0];
+  return [t.slug, x ? { n: x.r.n, joint: RANKED[x.k].rows.filter(r => r.n === x.r.n).length > 1, label: TASKS[x.k].label, k: x.k } : null];
+}).filter(([, v]) => v));
+const badgeImg = (src, alt, w, hgt) => `<img src="${src}" alt="${esc(alt)}" width="${w}" height="${hgt}">`;
+const listedSnippet = (slug, theme) => `<a href="${URL_(`/tools/${slug}/`)}">${badgeImg(URL_(`/assets/badge/listed-${theme}.svg`), 'Listed on GameDev AI Tools', BADGE_LISTED.w, BADGE_LISTED.h)}</a>`;
+const rankedSnippet = (slug, theme) => { const R = BADGE_RANK[slug]; return R ? `<a href="${URL_(`/category/${TASKS[R.k].page}/`)}">${badgeImg(URL_(`/assets/badge/rank/${slug}-${theme}.svg`), `${R.joint ? 'Joint ' : ''}#${R.n} in ${R.label} on GameDev AI Tools`, BADGE_RANKED.w, BADGE_RANKED.h)}</a>` : ''; };
 page('/badge/', layout({
-  title: `"Listed on GameDev AI Tools" badge | ${SITE.name}`,
-  description: 'Is your tool listed on GameDev AI Tools? Add a "Listed on GameDev AI Tools" badge to your site, in light or dark, linking to your listing.',
+  title: `Badges for listed tools | ${SITE.name}`,
+  description: 'Is your tool listed or ranked on GameDev AI Tools? Add a "Listed on" or "Ranked" badge to your site, in light or dark, linking to your listing.',
   pathname: '/badge/',
-  body: `<h1 class="page-h">"Listed on GameDev AI Tools" badge</h1>
-<p class="page-sub">If your tool is listed here, you're welcome to show this badge on your site. It links to your listing. It's optional and free, and it doesn't change your listing.</p>
-<div class="badge-demo"><div class="bd light"><img src="${L('/assets/badge/listed-light.svg')}" alt="Listed on GameDev AI Tools (light)" width="${BADGE_W}" height="${BADGE_H}"><span>Light</span></div><div class="bd dark"><img src="${L('/assets/badge/listed-dark.svg')}" alt="Listed on GameDev AI Tools (dark)" width="${BADGE_W}" height="${BADGE_H}"><span>Dark</span></div></div>
-<label class="badge-pick">Your tool <select id="badge-tool">${tools.map(t => `<option value="${t.slug}">${esc(t.name)}</option>`).join('')}</select></label>
-<h2 class="sub-h">Light badge</h2>
-<textarea class="snippet" id="snip-light" readonly rows="3">${esc(badgeSnippet(tools[0].slug, 'light'))}</textarea>
-<h2 class="sub-h">Dark badge</h2>
-<textarea class="snippet" id="snip-dark" readonly rows="3">${esc(badgeSnippet(tools[0].slug, 'dark'))}</textarea>
-<p class="note">Pick your tool above and the snippets update with your listing's URL. Without JavaScript, replace <code>${esc(tools[0].slug)}</code> with your tool's slug from its listing URL. Not listed yet? <a href="${L('/submit/')}">Submit your tool</a>.</p>`,
-  scripts: `<script>(function(){var s=document.getElementById('badge-tool');function u(){['light','dark'].forEach(function(th){document.getElementById('snip-'+th).value='<a href="${URL_('/tools/')}'+s.value+'/"><img src="${URL_('/assets/badge/listed-')}'+th+'.svg" alt="Listed on GameDev AI Tools" width="${BADGE_W}" height="${BADGE_H}"></a>';});}s.addEventListener('change',u);document.querySelectorAll('.snippet').forEach(function(t){t.addEventListener('focus',function(){t.select();});});})();</script>`,
+  body: `<h1 class="page-h">Badges for listed tools</h1>
+<p class="page-sub">If your tool is listed here, you're welcome to show a badge on your site. Tools ranked in the top 3 of a job also get a ranking badge, which updates itself if the rank changes. Badges are free and optional, and never affect a listing or a rank.</p>
+<label class="badge-pick">Your tool <select id="badge-tool">${tools.map(t => `<option value="${t.slug}">${esc(t.name)}${BADGE_RANK[t.slug] ? ` (#${BADGE_RANK[t.slug].n} ${esc(TASKS[BADGE_RANK[t.slug].k].label)})` : ''}</option>`).join('')}</select></label>
+<section class="badge-set" id="badge-ranked"${BADGE_RANK[tools[0].slug] ? '' : ' hidden'}><h2 class="sub-h">Ranking badge</h2>
+<div class="badge-demo"><div class="bd dark"><img id="rk-dark" src="${BADGE_RANK[tools[0].slug] ? L(`/assets/badge/rank/${tools[0].slug}-dark.svg`) : ''}" alt="Ranking badge (dark)" width="${BADGE_RANKED.w}" height="${BADGE_RANKED.h}"><span>Dark</span></div><div class="bd light"><img id="rk-light" src="${BADGE_RANK[tools[0].slug] ? L(`/assets/badge/rank/${tools[0].slug}-light.svg`) : ''}" alt="Ranking badge (light)" width="${BADGE_RANKED.w}" height="${BADGE_RANKED.h}"><span>Light</span></div></div>
+<textarea class="snippet" id="snip-rk-dark" readonly rows="3">${esc(rankedSnippet(tools[0].slug, 'dark'))}</textarea>
+<textarea class="snippet" id="snip-rk-light" readonly rows="3">${esc(rankedSnippet(tools[0].slug, 'light'))}</textarea></section>
+<section class="badge-set"><h2 class="sub-h">"Listed on" badge</h2>
+<div class="badge-demo"><div class="bd dark"><img src="${L('/assets/badge/listed-dark.svg')}" alt="Listed on GameDev AI Tools (dark)" width="${BADGE_LISTED.w}" height="${BADGE_LISTED.h}"><span>Dark</span></div><div class="bd light"><img src="${L('/assets/badge/listed-light.svg')}" alt="Listed on GameDev AI Tools (light)" width="${BADGE_LISTED.w}" height="${BADGE_LISTED.h}"><span>Light</span></div></div>
+<textarea class="snippet" id="snip-dark" readonly rows="3">${esc(listedSnippet(tools[0].slug, 'dark'))}</textarea>
+<textarea class="snippet" id="snip-light" readonly rows="3">${esc(listedSnippet(tools[0].slug, 'light'))}</textarea></section>
+<p class="note">Pick your tool above and the snippets update with your links. Not listed yet? <a href="${L('/submit/')}">Submit your tool</a>.</p>`,
+  scripts: `<script>window.BADGES={rank:${JSON.stringify(Object.fromEntries(Object.entries(BADGE_RANK).map(([k, v]) => [k, { n: v.n, j: v.joint, l: v.label, u: URL_(`/category/${TASKS[v.k].page}/`) }]))).replace(/</g, '\\u003c')},tools:'${URL_('/tools/')}',img:'${URL_('/assets/badge/')}',local:'${L('/assets/badge/')}',lw:${BADGE_LISTED.w},lh:${BADGE_LISTED.h},rw:${BADGE_RANKED.w},rh:${BADGE_RANKED.h}};
+(function(){var B=window.BADGES,s=document.getElementById('badge-tool');function e(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function u(){var v=s.value,R=B.rank[v];['dark','light'].forEach(function(th){document.getElementById('snip-'+th).value='<a href="'+B.tools+v+'/"><img src="'+B.img+'listed-'+th+'.svg" alt="Listed on GameDev AI Tools" width="'+B.lw+'" height="'+B.lh+'"></a>';
+if(R){document.getElementById('rk-'+th).src=B.local+'rank/'+v+'-'+th+'.svg';document.getElementById('snip-rk-'+th).value='<a href="'+R.u+'"><img src="'+B.img+'rank/'+v+'-'+th+'.svg" alt="'+e((R.j?'Joint ':'')+'#'+R.n+' in '+R.l+' on GameDev AI Tools')+'" width="'+B.rw+'" height="'+B.rh+'"></a>';}});
+document.getElementById('badge-ranked').hidden=!R;}s.addEventListener('change',u);u();})();</script>`,
 }));
 
 // ---------- Privacy (wording approved by Mike 2026-10-17; analytics, affiliate, payments and email sections added 2026-10-17 per Mike's policy) ----------
@@ -1658,6 +1676,12 @@ ${newsMd}
 
 // ---------- Static assets, sitemap, robots, 404 ----------
 fs.cpSync('src/assets', path.join(out, 'assets'), { recursive: true });
+// Badges (text rendered to paths by satori): one "Listed on" pair, plus a ranking pair per top-3 tool.
+fs.mkdirSync(path.join(out, 'assets/badge/rank'), { recursive: true });
+for (const th of ['dark', 'light']) {
+  fs.writeFileSync(path.join(out, `assets/badge/listed-${th}.svg`), await listedBadge(th));
+  for (const [slug, R] of Object.entries(BADGE_RANK)) fs.writeFileSync(path.join(out, `assets/badge/rank/${slug}-${th}.svg`), await rankedBadge(th, R));
+}
 if (OG) await OG.flush();
 // Root-level verification files (e.g. Google Search Console), copied byte-for-byte; never in the sitemap.
 if (fs.existsSync('src/root')) fs.cpSync('src/root', out, { recursive: true });

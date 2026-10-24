@@ -2,6 +2,7 @@
 // Deterministic: same input -> same PNG. Rendered PNGs are cached by content hash in node_modules/.cache/og
 // (kept between Vercel builds), so unchanged images cost nothing on the next build.
 // Images used: our own brand mark, stored tool logos (src/assets/logos) and our category art (og/art = JPEG copies of src/assets/img).
+import { markSvg } from './badges.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -15,7 +16,7 @@ export const TONES = {
   unk: { bg: 'rgba(100,116,139,0.22)', fg: '#cbd5e1', bd: 'rgba(100,116,139,0.5)' },
   accent: { bg: 'rgba(139,92,246,0.18)', fg: '#c4b5fd', bd: 'rgba(139,92,246,0.5)' },
 };
-const MARK_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 32 32"><defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#gm)"/><path d="M9 13h4m-2-2v4" stroke="#0b0d14" stroke-width="2.2" stroke-linecap="round"/><circle cx="20" cy="12.5" r="1.6" fill="#0b0d14"/><circle cx="23" cy="15.5" r="1.6" fill="#0b0d14"/><path d="M7 19c0-3 1.5-5 5-5h8c3.5 0 5 2 5 5v1.5c0 2-2.4 2.8-3.8 1.3L19 19.5h-6l-2.2 2.3C9.4 23.3 7 22.5 7 20.5z" fill="none" stroke="#0b0d14" stroke-width="2"/></svg>';
+const MARK_SVG = markSvg({ size: 64 });
 const MARK = 'data:image/svg+xml;base64,' + Buffer.from(MARK_SVG).toString('base64');
 
 const h = (type, style = {}, children = [], props = {}) => ({ type, props: { ...props, style: { display: 'flex', ...style }, children } });
@@ -34,7 +35,7 @@ function logoEl(lg, size) {
   return h('div', { ...box, alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: Math.round(size * 0.36), backgroundImage: `linear-gradient(135deg, ${hsl2hex(lg.hue, 70, 45)}, ${hsl2hex((lg.hue + 50) % 360, 70, 35)})` }, lg.mono);
 }
 const badgeEl = (label, tone = 'accent', size = 30) => { const t = TONES[tone] || TONES.accent; return h('div', { alignItems: 'center', fontSize: size, fontWeight: 600, color: t.fg, background: t.bg, border: `2px solid ${t.bd}`, borderRadius: 999, padding: `${Math.round(size * 0.3)}px ${Math.round(size * 0.75)}px` }, label); };
-const brand = () => h('div', { alignItems: 'center', gap: 16 }, [h('img', { width: 52, height: 52 }, [], { src: MARK, width: 52, height: 52 }), h('div', { fontSize: 30, fontWeight: 600, color: C.text }, [text('GameDev ', {}), text('AI Tools', { fontWeight: 800, color: '#c4b5fd', marginLeft: 8 })])]);
+const brand = () => h('div', { alignItems: 'center', gap: 16 }, [h('img', { width: 52, height: 52 }, [], { src: MARK, width: 52, height: 52 }), h('div', { fontSize: 28, fontWeight: 800, letterSpacing: 1, color: C.text }, [text('GAMEDEV ', {}), text('AI TOOLS', { color: '#a78bfa', marginLeft: 8 })])]);
 const footer = (s = 'gamedevaitools.com · sourced and dated') => h('div', { fontSize: 24, color: C.dim, alignItems: 'center', width: '100%' }, [text(s, {})]);
 // Root has no padding (satori sizes padding outside width); an inner box with margins gives the 64/56px safe area.
 const PX = 64, PY = 52;
