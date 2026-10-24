@@ -230,7 +230,7 @@ function layout({ title, description, pathname, body, jsonld = [], scripts = '',
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b0d14">
+<meta name="theme-color" content="#101014">
 <meta name="color-scheme" content="dark">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
@@ -243,6 +243,8 @@ function layout({ title, description, pathname, body, jsonld = [], scripts = '',
 <meta property="og:site_name" content="${SITE.name}">${ogTags}
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
+<link rel="preload" href="${L('/assets/fonts/inter-latin.woff2')}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="${L('/assets/fonts/inter-tight-latin.woff2')}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${L('/assets/style.css')}">${head}
 <script defer src="/_vercel/insights/script.js"></script>
 ${jsonld.map(ld).join('\n')}
@@ -1256,7 +1258,6 @@ const SHIP_DATA = Object.fromEntries(tools.map(t => [t.slug, {
   n: t.name, u: toolUrl(t), l: LOGOS.has(t.slug) ? L(`/assets/logos/${t.slug}.png`) : '', s: SHIP_SHORT[t.commercial] || NSV_TEXT, tone: licTone(t),
   a: quickAnswer(t), c: isNsv(t.license) ? '' : (t.license.length > 240 ? t.license.slice(0, 237).replace(/\s+\S*$/, '') + '…' : t.license), src: t.licenseSource || '',
 }]));
-const homeBest = CAT_GROUPS.map(gr => `<div class="best-col"><h3>${esc(gr.h)}</h3><ul>${gr.keys.map(k => { const R = RANKED[k], r = R && R.rows[0]; return r ? `<li><a href="${L(`/category/${TASKS[k].page}/`)}"><span class="best-cat">${esc(TASKS[k].label)}</span><span class="best-tool">${logo(r.t, 22)}${esc(r.t.name)}${R.nEvidence ? '<i class="best-ev" title="Ranked on independent tests">●</i>' : ''}</span></a></li>` : ''; }).join('')}</ul></div>`).join('');
 // Home shows 3 guide cards (+3 resource cards = two full rows): the featured guide, then the two newest. All guides are on /guides/.
 const HOME_GUIDES = [GUIDES[0], ...GUIDES.slice(1).slice(-2).reverse()];
 page('/', layout({
@@ -1269,34 +1270,42 @@ page('/', layout({
     potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: URL_('/tools/') + '?q={search_term_string}' }, 'query-input': 'required name=search_term_string' },
   }],
   body: `
-<section class="hero hero2">
-<div class="hero-main">
-<p class="eyebrow"><span class="dot"></span><span>Free, independent directory · Checked ${timeEl(SITE.updated)}</span></p>
-<h1>Which AI tools can you legally ship in a <span class="grad">paid game?</span></h1>
+<section class="uh-hero">
+<div class="uh-hero-art"><img src="${L('/assets/img/hero.webp')}" srcset="${L('/assets/img/hero-960.webp')} 960w, ${L('/assets/img/hero.webp')} 1680w" sizes="(max-width:720px) 100vw, 72vw" alt="" width="1680" height="720" fetchpriority="high" decoding="async"></div>
+<div class="uh-hero-txt">
+<p class="uh-checked"><span class="dot"></span>Free, independent directory · Checked ${timeEl(SITE.updated)}</p>
+<h1>Which AI tools can you legally ship in a paid game?</h1>
 <p class="sub">Commercial-use terms for ${tools.length} AI tools, sourced from each vendor and dated, plus a ranked pick for every part of game dev.</p>
-<ul class="hero-stats"><li><b>${tools.length}</b> tools</li><li><b>${Object.keys(TASKS).length}</b> categories ranked</li><li><b>${sheetCounts.yes}</b> safe to ship on a free plan</li></ul>
 <form class="searchbar" action="${L('/tools/')}" method="get" role="search">${ICON_SEARCH}<input name="q" type="search" placeholder="Search tools, e.g. pixel art, voice, Godot" aria-label="Search tools" autocomplete="off"><button type="submit" class="sb-go">Search</button></form>
-<p class="quick"><span>Popular:</span>${['3d-models', 'concept-art', 'audio', 'voice', 'code'].map(k => chip(TASKS[k].label, { href: L(`/category/${TASKS[k].page}/`) })).join('')}</p>
+<div class="uh-cta"><a class="btn" href="${L('/category/')}">Best tool for each job</a><a class="btn btn-ghost" href="${L('/cheat-sheet/')}">Can I ship it? cheat sheet</a></div>
+<ul class="hero-stats"><li><b>${tools.length}</b> tools</li><li><b>${Object.keys(TASKS).length}</b> categories ranked</li><li><b>${sheetCounts.yes}</b> safe to ship on a free plan</li></ul>
 </div>
-${topPicks.length ? `<aside class="hero-picks" aria-labelledby="hp-h"><h2 id="hp-h">Top picks <small>backed by independent tests</small></h2>${topPicks.map(({ k, r, joint }) => `<a class="hpick" href="${L(`/category/${TASKS[k].page}/`)}">${logo(r.t, 36)}<span class="hp-txt"><small>${esc(TASKS[k].label)}</small><b>${esc(joint ? `${r.t.name} / ${joint.t.name}` : r.t.name)}</b></span><span class="hp-n">${joint ? 'Joint #1' : '#1'}</span></a>`).join('')}<a class="hp-all" href="${L('/category/')}">Best tool for every category →</a></aside>` : ''}
 </section>
-<section class="card ship" aria-labelledby="ship-h">
-<div class="ship-q"><span class="kicker">Quick check</span><h2 id="ship-h">Can I ship it?</h2><p>Pick a tool to see whether what it makes can go in a game you sell.</p>
-<label class="ship-pick"><span class="sr-only">Tool</span><select id="ship-sel"><option value="">Choose a tool…</option>${tools.map(t => `<option value="${t.slug}">${esc(t.name)}</option>`).join('')}</select></label></div>
-<div class="ship-out" id="ship-out" aria-live="polite"><p class="ship-empty">Your answer appears here, with the catch and a link to the vendor's terms. Want them all at once? <a href="${L('/cheat-sheet/')}">See the cheat sheet</a>.</p></div>
-</section>
-<section aria-labelledby="best-h"><div class="sec-head"><h2 id="best-h">Best for each job</h2><a href="${L('/category/')}">All categories →</a></div>
-<div class="best-grid">${homeBest}</div>
-<p class="best-note"><i class="best-ev">●</i> ranked on independent tests · others ranked on features. <a href="${L('/how-we-rank/')}">How we rank</a></p></section>
-${newRow.length ? `<section aria-labelledby="new-h">
-<div class="sec-head"><h2 id="new-h">New &amp; updated this week</h2><a href="${L('/new/')}">All news →</a></div>
-<div class="grid ${NEW_COLS} new-row">${sponsorCard({ compact: true })}
-${newRow.slice(0, NEW_MAX).map(({ t, n }) => toolCard(t, { compact: true, note: `<p class="card-note">${newsBadge(n)}${timeEl(n.date, true)}</p><p class="note-title">${esc(n.title)}</p>\n` })).join('\n')}</div>
+${topPicks.length ? `<section class="uh-sec" aria-labelledby="tp-h">
+<div class="sec-head"><h2 id="tp-h">Top picks <span class="sec-sub">backed by independent tests</span></h2><a class="btn btn-ghost btn-sm" href="${L('/how-we-rank/')}">How we rank</a></div>
+<div class="uh-picks">${topPicks.map(({ k, r, joint }) => `<a class="uh-pick" href="${L(`/category/${TASKS[k].page}/`)}"><span class="uh-pick-logos">${logo(r.t, 44)}${joint ? logo(joint.t, 44) : ''}</span><span class="uh-pick-cat">${esc(TASKS[k].label)}</span><b>${esc(joint ? `${r.t.name} / ${joint.t.name}` : r.t.name)}</b><span class="uh-rank">${joint ? 'Joint #1' : '#1'}</span></a>`).join('')}</div>
 </section>` : ''}
-<section class="card all-tools" aria-labelledby="at-h"><div><h2 id="at-h">Browse all ${tools.length} tools</h2><p>Search and filter by task, engine, free plan and whether you can ship the output commercially.</p></div>
-<div class="at-side"><a class="btn" href="${L('/tools/')}">Browse all tools →</a><p class="quick" id="engines"><span>By engine:</span>${engineList.map(({ e, n }) => chip(`${e.label} (${n})`, { href: L(`/engine/${e.page}/`) })).join('')}</p></div></section>
-<section class="res" aria-labelledby="res-h">
-<div class="sec-head"><h2 id="res-h">Guides and resources</h2><a href="${L('/guides/')}">All guides →</a></div>
+${newRow.length ? `<section class="uh-sec" aria-labelledby="new-h">
+<div class="sec-head"><h2 id="new-h">New &amp; updated this week</h2><a class="btn btn-ghost btn-sm" href="${L('/new/')}">View all</a></div>
+<div class="uh-news">${sponsorCard({ compact: true })}
+${newRow.slice(0, SPONSOR ? 3 : 4).map(({ t, n }) => `<article class="uh-news-card"><div class="uh-news-art">${artImg(TASKS[t.tasks[0]].page)}${logo(t, 52)}</div><div class="uh-news-body"><p class="uh-date">${timeEl(n.date, true)} · ${esc(t.name)}</p><h3><a class="card-link" href="${toolUrl(t)}">${esc(n.title)}</a></h3><p class="summary">${esc(t.summary)}</p><span class="badges">${newsBadge(n)}${isNsv(t.commercial) ? '' : licBadge(t)}</span></div></article>`).join('\n')}</div>
+</section>` : ''}
+<section class="uh-sec uh-split" aria-labelledby="ship-h">
+<div class="uh-split-txt"><p class="uh-eyebrow">Quick check</p><h2 id="ship-h">Can I ship it?</h2><p>Pick a tool to see whether what it makes can go in a game you sell, with the catch and a link to the vendor's own terms.</p><a class="btn btn-ghost" href="${L('/cheat-sheet/')}">See every tool at once</a></div>
+<div class="card ship"><label class="ship-pick"><span class="sr-only">Tool</span><select id="ship-sel"><option value="">Choose a tool…</option>${tools.map(t => `<option value="${t.slug}">${esc(t.name)}</option>`).join('')}</select></label>
+<div class="ship-out" id="ship-out" aria-live="polite"><p class="ship-empty">Your answer appears here.</p></div></div>
+</section>
+<section class="uh-sec" aria-labelledby="best-h">
+<h2 id="best-h" class="uh-big">The best tool for every job.</h2>
+<p class="uh-lede">Every category is ranked: on independent quality tests where they exist, otherwise on fit for game developers. Pick a job to see the full list.</p>
+<div class="uh-tiles">${CAT_GROUPS.flatMap(gr => gr.keys).map(k => { const R = RANKED[k], r = R && R.rows[0], c = TASKS[k]; return `<a class="uh-tile" href="${L(`/category/${c.page}/`)}">${artImg(c.page)}<span class="uh-tile-body"><strong>${esc(c.label)} <span aria-hidden="true">→</span></strong>${r ? `<span class="uh-tile-top">${logo(r.t, 22)}#1 ${esc(r.t.name)}${R.nEvidence ? '<i class="best-ev" title="Ranked on independent tests">●</i>' : ''}</span>` : ''}</span></a>`; }).join('')}</div>
+<p class="best-note"><i class="best-ev">●</i> ranked on independent tests · others ranked on features. <a href="${L('/how-we-rank/')}">How we rank</a></p>
+</section>
+<section class="uh-sec uh-band" aria-labelledby="at-h"><div><h2 id="at-h">Browse all ${tools.length} tools</h2><p>Search and filter by task, engine, free plan and whether you can ship the output commercially.</p>
+<p class="quick" id="engines"><span>By engine:</span>${engineList.map(({ e, n }) => chip(`${e.label} (${n})`, { href: L(`/engine/${e.page}/`) })).join('')}</p></div>
+<a class="btn" href="${L('/tools/')}">Browse all tools</a></section>
+<section class="uh-sec res" aria-labelledby="res-h">
+<div class="sec-head"><h2 id="res-h">Guides and resources</h2><a class="btn btn-ghost btn-sm" href="${L('/guides/')}">View all</a></div>
 <div class="grid g3">
 ${HOME_GUIDES.map(g => linkCard({ href: L(`/guides/${g.slug}/`), kicker: esc(g.kind || 'Workflow guide'), title: g.title, media: artImg(guideArtPage(g)), foot: `${flowStrip(g)}<div class="card-foot"><span class="facts-line">${g.steps.length} steps</span></div>` })).join('\n')}
 ${linkCard({ href: L('/steam-ai-disclosure/'), kicker: 'Store rules', title: DISCLOSURE.title, desc: esc(DISCLOSURE.description) })}
@@ -1304,12 +1313,12 @@ ${linkCard({ href: L('/compare/'), kicker: 'Comparisons', title: `${COMPARE.leng
 ${linkCard({ href: L('/cheat-sheet/'), kicker: 'Cheat sheet', title: 'AI tools you can legally ship in a paid game', desc: 'Free-plan commercial use, the plan you need and the catch, for every tool.' })}
 </div>
 </section>
-<section class="how" aria-labelledby="how-h">
-<div class="sec-head"><h2 id="how-h">How listings work</h2><a href="${L('/about/')}">About us →</a></div>
-<div class="how-grid">
-<div class="card"><h3>Sourced</h3><p>Pricing and commercial-use notes come from each vendor's own pages, and every listing links to its source.</p></div>
-<div class="card"><h3>Dated</h3><p>Each tool shows the date we last checked it. Anything the vendor doesn't clearly state is marked "Not stated by vendor".</p></div>
-<div class="card"><h3>Rankings you can check</h3><p>Categories are ranked by independent quality tests where they exist, then by fit for game devs, with sources. Sponsors and affiliate links never change a listing, its rank or its verdict. <a href="${L('/how-we-rank/')}">How we rank</a></p></div>
+<section class="uh-sec" aria-labelledby="how-h">
+<h2 id="how-h" class="uh-big">Every listing is sourced and dated. <span class="uh-accent">Rankings you can check.</span></h2>
+<div class="uh-how">
+<div class="uh-how-card"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg><h3>Sourced</h3><p>Pricing and commercial-use notes come from each vendor's own pages, and every listing links to its source.</p></div>
+<div class="uh-how-card"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><h3>Dated</h3><p>Each tool shows the date we last checked it. Anything the vendor doesn't clearly state is marked "Not stated by vendor".</p></div>
+<div class="uh-how-card"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><h3>Rankings you can check</h3><p>Ranked by independent quality tests where they exist, then by fit for game devs. Sponsors and affiliate links never change a listing, its rank or its verdict. <a href="${L('/how-we-rank/')}">How we rank</a></p></div>
 </div>
 </section>
 ${newsletterBlock()}`,
