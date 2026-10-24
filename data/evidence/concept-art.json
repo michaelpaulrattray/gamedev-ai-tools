@@ -1,0 +1,258 @@
+{
+ "task": "concept-art",
+ "checked": "2026-10-24",
+ "tools": {
+  "midjourney": {
+   "bench": [],
+   "reviews": [
+    {
+     "source": "Provimedia blog",
+     "url": "https://www.provimedia.de/en/blog/ai-image-generation-2026-best-tools",
+     "date": "2026-05-10 (stated current as of July 2026)",
+     "summary": "German digital agency says it ran a 10-task prompt set, including an anime/game asset task, but publishes no per-task results. Calls Midjourney the benchmark for aesthetics and style consistency, and weakest of the leaders on text.",
+     "score": 75
+    }
+   ],
+   "users": [
+    {
+     "source": "Trustpilot",
+     "url": "https://www.trustpilot.com/review/midjourney.com",
+     "detail": "1.7/5 from 372 reviews",
+     "score": 17.5
+    },
+    {
+     "source": "Product Hunt",
+     "url": "https://www.producthunt.com/products/midjourney/reviews",
+     "detail": "4.7/5 from 81 reviews",
+     "score": 92.5
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "V8.1 renders standard jobs roughly 4-5x faster than earlier versions, with native 2K output (reported by third-party write-ups of Midjourney's announcement).",
+     "url": "https://vidmuse.ai/blog/midjourney-v8-1-review"
+    }
+   ],
+   "strengths": [
+    "default aesthetic and style exploration for concept art (consensus of desk reviews)",
+    "consistent visual style across a set"
+   ],
+   "weaknesses": [
+    "weaker prompt adherence and in-image text than the API leaders",
+    "no official public API; no free plan",
+    "Trustpilot dominated by billing and cancellation complaints"
+   ],
+   "examples": []
+  },
+  "chatgpt": {
+   "bench": [
+    {
+     "source": "Artificial Analysis text-to-image arena",
+     "url": "https://artificialanalysis.ai/image/leaderboard/text-to-image",
+     "detail": "Elo: GPT Image 2.5 Flare (max) #2 of 106",
+     "score": 99.0
+    },
+    {
+     "source": "Artificial Analysis image editing arena",
+     "url": "https://artificialanalysis.ai/image/leaderboard/editing",
+     "detail": "Elo: GPT Image 2.5 Flare (max) #2 of 76",
+     "score": 98.7
+    }
+   ],
+   "reviews": [
+    {
+     "source": "Provimedia blog",
+     "url": "https://www.provimedia.de/en/blog/ai-image-generation-2026-best-tools",
+     "date": "2026-05-10",
+     "summary": "Strong prompt fidelity and text; less expressive aesthetics than Midjourney.",
+     "score": 60
+    }
+   ],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Images 2.5 (2026-09-08) claims up to 50% lower latency than Images 2.0, with better lighting, textures and subject preservation; it adds Sketch, Templates and comment-based edits (as reported by press).",
+     "url": "https://openai.com/index/introducing-chatgpt-images-2-5/"
+    }
+   ],
+   "strengths": [
+    "tops both Artificial Analysis image boards (generation and editing)",
+    "prompt adherence and text rendering",
+    "conversational, iterative editing"
+   ],
+   "weaknesses": [
+    "sprite sheets and true low-colour pixel art still weak (HN users)",
+    "'sameness' / recognisable house style; less expressive than Midjourney",
+    "anatomy errors in complex scenes"
+   ],
+   "examples": []
+  },
+  "leonardo-ai": {
+   "bench": [
+    {
+     "source": "Artificial Analysis text-to-image arena",
+     "url": "https://artificialanalysis.ai/image/leaderboard/text-to-image",
+     "detail": "Elo: Lucid Origin Ultra (Leonardo's own model, Aug 2025) #89 of 106",
+     "score": 16.2
+    }
+   ],
+   "reviews": [],
+   "users": [
+    {
+     "source": "Trustpilot",
+     "url": "https://www.trustpilot.com/review/leonardo.ai",
+     "detail": "4.7/5 from 1,544 reviews",
+     "score": 92.5
+    }
+   ],
+   "vendorClaims": [],
+   "strengths": [
+    "cheap entry with a free daily allowance",
+    "many models in one place (own Lucid/Phoenix plus third-party)"
+   ],
+   "weaknesses": [
+    "Leonardo's own models rank in the bottom fifth of both arenas",
+    "pixel output needs downscaling/cleanup (desk reviews)",
+    "style less consistent than custom-trained tools"
+   ],
+   "examples": []
+  },
+  "scenario": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Recommends Flux 2, Z-Image or Qwen Image as custom-training bases; any generated output can be used to train a custom model in one click.",
+     "url": "https://www.scenario.com/features/train"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "layer-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Customer Tripledot says Layer tripled its production speed (customer quote on Layer's own site).",
+     "url": "https://layer.ai/enterprise"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "pixellab": {
+   "bench": [],
+   "reviews": [
+    {
+     "source": "Techsy",
+     "url": "https://techsy.io/en/blog/best-ai-game-asset-generators",
+     "date": "2026-10-21",
+     "summary": "Tested an 8-frame top-down walk cycle and a 4-direction set. The first six frames held shape and palette; frames 7-8 drifted (belt shift, shadow flicker), fixable quickly in Aseprite. Judged a head start, not final art.",
+     "score": 70
+    }
+   ],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Generates 4/8-direction rotations, skeleton- and text-driven animations, tilesets, maps and UI elements; offers an Aseprite extension, a Pixelorama-based editor and an API.",
+     "url": "https://www.pixellab.ai/docs"
+    }
+   ],
+   "strengths": [
+    "4/8-direction rotations and sprite animation",
+    "holds shape and palette across most frames (Techsy test)"
+   ],
+   "weaknesses": [
+    "animation drifts in later frames; needs a human cleanup pass",
+    "UI navigation (competitor review)"
+   ],
+   "examples": []
+  },
+  "retro-diffusion": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Models trained with experienced pixel artists for grid-aligned, limited-palette output; also distributed via Replicate, Poe and Scenario.",
+     "url": "https://runware.ai/blog/retro-diffusion-creating-authentic-pixel-art-with-ai-at-scale"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "ludo-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Sprite Generator turns one sprite into an animation set with pose, sequence and transition tools; 30+ art styles; exports for Unity, Godot, Unreal and GameMaker.",
+     "url": "https://www.gamedeveloper.com/press-release/ludo-ai-upgrades-sprite-generator-with-pose-generator-sequence-and-transition-tools-and-updated-export-options"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "runway": {
+   "bench": [],
+   "reviews": [],
+   "users": [
+    {
+     "source": "Trustpilot",
+     "url": "https://www.trustpilot.com/review/runwayml.com",
+     "detail": "1.2/5 from 372 reviews",
+     "score": 5.0
+    }
+   ],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "skybox-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "sloyd": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "unity-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "dreamlands": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  }
+ },
+ "notes": "Missing tools to consider: Google Nano Banana (Gemini image models, in Gemini app / AI Studio), Recraft, Adobe Firefly, Krea, Ideogram, FLUX.2 / ComfyUI (local, open weights), Sprite AI / Sprixen (pixel-art sprite generators)"
+}

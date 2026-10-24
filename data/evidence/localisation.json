@@ -1,0 +1,61 @@
+{
+ "task": "localisation",
+ "checked": "2026-10-24",
+ "tools": {
+  "crowdin": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Translate with any LLM or MT engine (pre-translation, AI context enrichment); no single default engine, so MT benchmarks can't be mapped to the product.",
+     "url": "https://crowdin.com/game-localization"
+    },
+    {
+     "text": "Unity Localization package integration; Unreal asset management; 700+ integrations, 100+ file formats, 50+ QA checks.",
+     "url": "https://crowdin.com/game-localization"
+    },
+    {
+     "text": "Game customers shown include Minecraft, Rust, PUBG, CS2, Dota 2, Factorio; SCS Software localises into 47 languages with 200+ community translators.",
+     "url": "https://crowdin.com/blog/lessons-on-game-localization-from-scs-software"
+    },
+    {
+     "text": "Internal tests: adding an AI file summary to the pre-translation prompt improves quality about 6% on average (self-reported).",
+     "url": "https://crowdin.com/blog/whats-new-at-crowdin-april-2025"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": [],
+   "note": "The only hands-on reviews are from 2021, before Crowdin's AI features, so they aren't counted."
+  },
+  "gridly": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Unity and Unreal plugins; AI pre-translation with engines of your choice (Google, Amazon MT; OpenAI and DeepL integrations); no single default engine named.",
+     "url": "https://www.gridly.com/continous-game-localization"
+    },
+    {
+     "text": "Game customers in case studies/testimonials: Playrix, tinyBuild, Hi-Rez, 11 bit studios, Game Science, CM Games, Belka Games, Rovio, Milestone, Elden Pixels.",
+     "url": "https://www.gridly.com/continous-game-localization"
+    },
+    {
+     "text": "Case-study numbers: CM Games -90% file processing time, Milestone 80% time saved on uploads, Rovio LQA 4x faster (all vendor-published).",
+     "url": "https://www.gridly.com/case-studies/milestone/"
+    },
+    {
+     "text": "2025: added TMS and CAT to its CMS in one platform; Gridly's own blog says over 80% of clients come from gaming.",
+     "url": "https://www.gridly.com/blog/interview-with-gridly-ceo/"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": [],
+   "note": "The only hands-on review is from 2021, before Gridly's 2025 rebuild, so it isn't counted."
+  }
+ },
+ "notes": "Missing tools to consider: Lokalise, Phrase (ex-Memsource), Localazy, Weblate, Smartling / XTM / memoQ, LocalizeDirect (LocDirect), Unity Localization package / Unreal Localization Dashboard"
+}

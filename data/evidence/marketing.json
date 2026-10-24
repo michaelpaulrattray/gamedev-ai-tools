@@ -1,0 +1,139 @@
+{
+ "task": "marketing",
+ "checked": "2026-10-24",
+ "tools": {
+  "runway": {
+   "bench": [
+    {
+     "source": "Artificial Analysis Video Arena",
+     "url": "https://artificialanalysis.ai/video/leaderboard/text-to-video",
+     "detail": "Elo, AA-Video-T2V-Silent v2.1 (text-to-video, no audio): Runway Gen-4.5 (720p) #24 of 32",
+     "score": 25.8
+    },
+    {
+     "source": "Artificial Analysis Video Arena",
+     "url": "https://artificialanalysis.ai/video/leaderboard/image-to-video",
+     "detail": "Elo, AA-Video-I2V-Silent v1.0 (image-to-video, no audio): Runway Gen-4.5 (720p) #25 of 81",
+     "score": 70.0
+    }
+   ],
+   "reviews": [
+    {
+     "source": "UD",
+     "url": "https://www.ud.hk/en/blogs/insight/article/2026-05-04-ai-video-tools-comparison",
+     "date": "2026-05-04",
+     "summary": "Same six prompts run through Veo 3.1, Gen-4.5 and Kling 3.0. Gen-4.5 was rated the clear winner for camera control, motion brush and character consistency across shots, second for realistic humans (good lighting, stiff arms), and behind Veo on prompt adherence. It also lacks native audio.",
+     "score": 60
+    }
+   ],
+   "users": [
+    {
+     "source": "Trustpilot (runwayml.com)",
+     "url": "https://www.trustpilot.com/review/runwayml.com",
+     "detail": "1.2/5 from 372 reviews",
+     "score": 5.0
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "At launch (Dec 2025), Runway said Gen-4.5 was the world's top-rated video model, citing #1 on the Artificial Analysis T2V board at 1,247 Elo as of 30 Nov 2025. That board has since been replaced by v2.1, where Gen-4.5 is 24th of 32 (silent).",
+     "url": "https://nofilmschool.com/runway-gen-4-5-video-model"
+    },
+    {
+     "text": "Runway's app and MCP now also offer third-party models, including Kling 3.0/O3 (Sep 2026) and Seedance 2.5 Draft Mode (Oct 2026), plus Mirelo SFX 2.0 for sound (Oct 2026).",
+     "url": "https://releasebot.io/updates/runwayai/runwayai"
+    }
+   ],
+   "strengths": [
+    "Fine camera and motion control (motion brush, keyframes)",
+    "Character consistency across shots",
+    "Good lighting on human subjects"
+   ],
+   "weaknesses": [
+    "No native audio",
+    "Mid-to-low rank on the current AA text-to-video board",
+    "Weaker prompt adherence than Veo 3.1 in one same-prompt test"
+   ],
+   "examples": [],
+   "note": "Runway's app also offers third-party models (Kling, Seedance); these scores are for Runway's own Gen-4.5."
+  },
+  "luma-ai": {
+   "bench": [],
+   "reviews": [
+    {
+     "source": "Analytics Vidhya: I tried the new Ray3 AI video maker",
+     "url": "https://www.analyticsvidhya.com/blog/2025/09/ray3-ai-video-maker/",
+     "date": "2025-09-22",
+     "summary": "Hands-on with four prompts plus image-to-video. The best clip was high quality and followed lighting details, and image animation worked well. Other clips showed objects morphing or vanishing, shaky motion and weak handling of unusual concepts. The verdict was impressive but far from ideal.",
+     "score": 45
+    }
+   ],
+   "users": [
+    {
+     "source": "Trustpilot (lumalabs.ai)",
+     "url": "https://www.trustpilot.com/review/lumalabs.ai",
+     "detail": "1.4/5 from 71 reviews",
+     "score": 10.0
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Ray3.14 (Jan 2026) claimed native 1080p and about 4x faster, 3x cheaper generation than Ray3.",
+     "url": "https://secure.businesswire.com/news/home/20260126744711/en/Luma-AI-Launches-Ray3.14-Eliminating-Quality-Speed-Cost-Tradeoff-in-Generative-Video"
+    },
+    {
+     "text": "Ray3.2 (9 Jun 2026) is pitched as frame-level control with continuity across cuts. Luma publishes a self-run 'Ray3 Evaluation Report'.",
+     "url": "https://lumalabs.ai/"
+    }
+   ],
+   "strengths": [
+    "Image-to-video animation of a reference image",
+    "Film-like look, with HDR/EXR output on Ray3 (from feature coverage)"
+   ],
+   "weaknesses": [
+    "Objects morph or vanish in complex scenes (Ray3)",
+    "No native audio in any Ray version",
+    "Current Ray3.2 has no independent benchmark or review"
+   ],
+   "examples": [],
+   "note": "Luma's current model is Ray3.2 (June 2026); the only leaderboard entry is the older Ray 3, so it isn't counted."
+  },
+  "layer-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "mirelo": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "SFX 2.0 promises synced audio for video and can change the sound while keeping the video's dialogue. The homepage shows no benchmarks or comparisons.",
+     "url": "https://mirelo.ai/"
+    },
+    {
+     "text": "Mirelo SFX 2.0 became available inside Runway MCP on 15 Oct 2026 (paid plans).",
+     "url": "https://releasebot.io/updates/runwayai/runwayai"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "world-labs-marble": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  }
+ },
+ "notes": "Missing tools to consider: Kling 3.0 / Kling 3.0 Omni / O3 (Kuaishou), Dreamina Seedance 2.0 / 2.5 (ByteDance), Google Veo 3.1 (Flow / Gemini) and Gemini Omni Flash, Wan 3.0 (Alibaba), MiniMax H3 / Hailuo, HeyGen Video 1, OpenAI Sora 2 / Sora 2 Pro"
+}

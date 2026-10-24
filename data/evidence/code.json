@@ -1,0 +1,308 @@
+{
+ "task": "code",
+ "checked": "2026-10-24",
+ "tools": {
+  "claude-code": {
+   "bench": [
+    {
+     "source": "Terminal-Bench 4.0",
+     "url": "https://snorkel.ai/leaderboard/terminal-bench/",
+     "detail": "Terminal-Bench 4.0 agent leaderboard (66 terminal tasks; harness + model): Claude Code + Opus 5.5 #1 of 23",
+     "score": 100.0
+    },
+    {
+     "source": "Artificial Analysis Coding Agent Index v2.0",
+     "url": "https://artificialanalysis.ai/agents/coding-agents",
+     "detail": "Coding Agent Index v2.0 (FrontierCode v1.1 + Terminal-Bench 4.0 + SWE-Atlas-QnA-AA; agent variants): Claude Code + Opus 5.5 (max) #1 of 24",
+     "score": 100.0
+    },
+    {
+     "source": "GameDevBench",
+     "url": "https://github.com/waynchi/gamedevbench",
+     "detail": "GameDevBench all configurations (333 Godot game-dev tasks, pass@1): Claude Code + claude-opus-5.5 (xhigh) #1 of 21",
+     "score": 100.0
+    },
+    {
+     "source": "Terminal-Bench 2.1",
+     "url": "https://snorkel.ai/leaderboard/terminal-bench-2-1/",
+     "detail": "Terminal-Bench 2.1 agent leaderboard: Claude Code + Claude Fable 5 #2 of 18",
+     "score": 94.1
+    }
+   ],
+   "reviews": [
+    {
+     "source": "StraySpark blog: Claude Code vs Cursor vs Windsurf for Unreal Engine",
+     "url": "https://www.strayspark.studio/blog/claude-code-vs-cursor-vs-windsurf-unreal-engine-2026",
+     "date": "2026-04-17",
+     "summary": "Months of UE5 C++ use with all three tools. Claude Code was the main recommendation for MCP-driven editor automation and multi-file refactors (first-try compile in 7 of 10 runs of an inventory-component refactor). Downsides: no built-in IntelliSense, slower startup and higher daily token cost.",
+     "score": 75
+    },
+    {
+     "source": "StraySpark blog: Cursor 3 vs Claude Code for UE5 Development",
+     "url": "https://www.strayspark.studio/blog/cursor-3-vs-claude-code-ue5-development-may-2026",
+     "date": "2026-05-14",
+     "summary": "Based on the studio's own UE 5.7 use, no measurements. Claude Code is preferred for large existing C++ codebases, consistent refactors, long builds and MCP; neither tool can edit Blueprint .uasset files. Recommends using both tools.",
+     "score": 75
+    }
+   ],
+   "users": [
+    {
+     "source": "Product Hunt",
+     "url": "https://www.producthunt.com/products/claude-code/reviews",
+     "detail": "5.0/5 from 811 reviews",
+     "score": 100.0
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Default model is Opus 5.5 on Pro, Max, Team, Enterprise and API; Fable must be picked explicitly.",
+     "url": "https://code.claude.com/docs/en/model-config"
+    }
+   ],
+   "strengths": [
+    "top of every product-level agent board found (Terminal-Bench 4.0, AA Coding Agent Index, GameDevBench Godot, GameEngineBench UE5)",
+    "reliable multi-file C++ refactors and deep MCP/editor automation (StraySpark)",
+    "fastest and most polished in Ars one-shot game test"
+   ],
+   "weaknesses": [
+    "higher per-task cost (AA: ~$11.42/task with Opus 5.5; StraySpark: $25-40/day on Opus)",
+    "no built-in IntelliSense; terminal-first",
+    "can't edit Blueprint .uasset; weak at generating Unity scene layouts"
+   ],
+   "examples": []
+  },
+  "cursor": {
+   "bench": [
+    {
+     "source": "Terminal-Bench 2.1",
+     "url": "https://snorkel.ai/leaderboard/terminal-bench-2-1/",
+     "detail": "Terminal-Bench 2.1 agent leaderboard: Cursor CLI + Grok 4.5 #5 of 18",
+     "score": 76.5
+    },
+    {
+     "source": "Vals.ai Terminal-Bench 2.1",
+     "url": "https://www.vals.ai/benchmarks/terminal-bench-2-1",
+     "detail": "Terminal-Bench 2.1 (Vals runs; mostly Terminus 2 harness, plus one Cursor CLI row): Cursor CLI + Composer 2.5 (Cursor's own model) #41 of 76",
+     "score": 46.7
+    }
+   ],
+   "reviews": [
+    {
+     "source": "StraySpark blog: Claude Code vs Cursor vs Windsurf for Unreal Engine",
+     "url": "https://www.strayspark.studio/blog/claude-code-vs-cursor-vs-windsurf-unreal-engine-2026",
+     "date": "2026-04-17",
+     "summary": "Cursor had the most polished UE IntelliSense (clangd), UE-aware tab completion and the best diff review. Its Composer refactors were ragged and missed call sites, it needs a hand-maintained .cursorignore, and MCP setup is fiddlier. Best for VS Code teams and small surgical edits.",
+     "score": 60
+    },
+    {
+     "source": "StraySpark blog: Cursor 3 vs Claude Code for UE5 Development",
+     "url": "https://www.strayspark.studio/blog/cursor-3-vs-claude-code-ue5-development-may-2026",
+     "date": "2026-05-14",
+     "summary": "Cursor 3's parallel agents suit many independent edits, greenfield work and Slate/UMG iteration, but parallelism doesn't help with sequential UE compiles. Composer 2 trailed Claude on UE reflection code (UPROPERTY/UCLASS).",
+     "score": 60
+    }
+   ],
+   "users": [
+    {
+     "source": "Product Hunt",
+     "url": "https://www.producthunt.com/products/cursor/reviews",
+     "detail": "5.0/5 from 973 reviews",
+     "score": 100.0
+    },
+    {
+     "source": "Trustpilot (cursor.com)",
+     "url": "https://www.trustpilot.com/review/cursor.com",
+     "detail": "1.5/5 from 350 reviews",
+     "score": 12.5
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Auto has Cost, Balance and Intelligence modes; individual plans get Cost mode, which bills as a Cursor-model request.",
+     "url": "https://cursor.com/docs/models"
+    }
+   ],
+   "strengths": [
+    "best UE IntelliSense, tab completion and diff review UI (StraySpark)",
+    "parallel agents for many independent edits (StraySpark)",
+    "free plan / familiar VS Code base"
+   ],
+   "weaknesses": [
+    "multi-file refactors miss call sites in UE C++ (StraySpark)",
+    "own Composer model mid-table on Terminal-Bench 2.1 (Vals #41/76)",
+    "billing and usage-limit complaints dominate Trustpilot"
+   ],
+   "examples": []
+  },
+  "github-copilot": {
+   "bench": [],
+   "reviews": [],
+   "users": [
+    {
+     "source": "Product Hunt",
+     "url": "https://www.producthunt.com/products/github-copilot/reviews",
+     "detail": "4.8/5 from 35 reviews",
+     "score": 95.0
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Agent mode runs locally, in Copilot CLI or as a cloud coding agent; Auto model selection includes Claude Opus 5.5 and GPT-6 models.",
+     "url": "https://docs.github.com/en/copilot/reference/ai-models/supported-models"
+    }
+   ],
+   "strengths": [
+    "fast inline completions for boilerplate (Product Hunt reviewers)",
+    "widest IDE coverage; access to frontier Claude and GPT models via Auto"
+   ],
+   "weaknesses": [
+    "confident but wrong suggestions / invented APIs (PH, Unity forum)",
+    "weaker on large multi-file tasks than Cursor or Claude Code (PH reviewers)"
+   ],
+   "examples": [],
+   "note": "No benchmark tests Copilot as a product; it picks among several models, so model-only leaderboard results aren't credited."
+  },
+  "windsurf": {
+   "bench": [],
+   "reviews": [
+    {
+     "source": "StraySpark blog: Claude Code vs Cursor vs Windsurf for Unreal Engine",
+     "url": "https://www.strayspark.studio/blog/claude-code-vs-cursor-vs-windsurf-unreal-engine-2026",
+     "date": "2026-04-17",
+     "summary": "Windsurf's aggressive indexing and autonomous Cascade runs were strong and it was cheapest. But first indexing of a UE project took 15-45 min with heavy RAM, completion was less UE-aware, large refactors cascaded into errors and MCP felt bolted on. Suited to solo devs on a budget.",
+     "score": 45
+    }
+   ],
+   "users": [
+    {
+     "source": "Product Hunt (Windsurf)",
+     "url": "https://www.producthunt.com/products/windsurf/reviews",
+     "detail": "4.7/5 from 68 reviews",
+     "score": 92.5
+    },
+    {
+     "source": "Trustpilot (windsurf.com)",
+     "url": "https://www.trustpilot.com/review/windsurf.com",
+     "detail": "1.4/5 from 58 reviews",
+     "score": 10.0
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Devin Desktop is the new name for Windsurf; plans and pricing unchanged; 'Fusion' pairs a lead model with a SWE-2 sidekick.",
+     "url": "https://devin.ai/desktop"
+    }
+   ],
+   "strengths": [
+    "strong autonomous agent runs and semantic indexing (StraySpark)",
+    "lowest cost of the IDE options (StraySpark)"
+   ],
+   "weaknesses": [
+    "slow first index and heavy RAM on UE projects (StraySpark)",
+    "large refactors cascade into errors (StraySpark)",
+    "billing/quota complaints dominate Trustpilot"
+   ],
+   "examples": [],
+   "note": "Windsurf is now Devin Desktop (Cognition). The #2 Artificial Analysis result belongs to Cognition's Devin Fusion CLI, not the IDE, so it isn't counted."
+  },
+  "chatgpt": {
+   "bench": [
+    {
+     "source": "Terminal-Bench 4.0",
+     "url": "https://snorkel.ai/leaderboard/terminal-bench/",
+     "detail": "Terminal-Bench 4.0 agent leaderboard: Codex + GPT-6 Astra (tied with Codex + GPT-6.1 Sol at 58.2%) #3 of 23",
+     "score": 90.9
+    },
+    {
+     "source": "Artificial Analysis Coding Agent Index v2.0",
+     "url": "https://artificialanalysis.ai/agents/coding-agents/comparisons/codex-vs-opencode",
+     "detail": "Coding Agent Index v2.0: Codex + GPT-6 Astra (max) #7 of 24",
+     "score": 73.9
+    },
+    {
+     "source": "GameDevBench",
+     "url": "https://github.com/waynchi/gamedevbench",
+     "detail": "GameDevBench all configurations: Codex + gpt-6.1-sol (xhigh) #2 of 21",
+     "score": 95.0
+    }
+   ],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "For complex coding and agentic work use GPT-6.1 Sol; GPT-6 Astra is the most capable model.",
+     "url": "https://learn.chatgpt.com/docs/models"
+    }
+   ],
+   "strengths": [
+    "consistently #2 product on agent boards, effectively tied with Claude Code on Godot GameDevBench",
+    "much cheaper per task than Claude Code at similar scores (AA cost data)",
+    "won Ars one-shot Minesweeper build"
+   ],
+   "weaknesses": [
+    "behind Claude Code on Terminal-Bench 4.0 and AA index",
+    "slow generation in Ars test",
+    "far behind Claude Code on UE5 C++ in GameEngineBench (older models)"
+   ],
+   "examples": []
+  },
+  "unity-ai": {
+   "bench": [],
+   "reviews": [
+    {
+     "source": "Darko Unity blog: Unity AI Assistant review: not ready for real work",
+     "url": "https://darkounity.com/blog/unity-ai-assistant-review-not-ready-for-real-work",
+     "date": "2026-05-08",
+     "summary": "Open-beta test: a one-prompt world-generation benchmark stalled at layer 2, another build hung on 'Preparing' for over 4,500 s, and a drivable-car script failed with bad colliders. Verdict: not ready for production work. Notes the assistant used Gemini 2.0 Flash for tool calling.",
+     "score": 30
+    }
+   ],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Unity AI isn't trained on your code or data by default; open beta for all Unity 6 users from May 2026.",
+     "url": "https://discussions.unity.com/t/unity-ai-s-open-beta-now-live-for-unity-6/1718560"
+    }
+   ],
+   "strengths": [
+    "native editor integration and engine knowledge",
+    "useful for debugging, profiling and project audits (forum users)"
+   ],
+   "weaknesses": [
+    "unreliable on multi-step tasks; stalls and makes unrequested changes",
+    "opaque, spiking credit costs",
+    "setup and connection breakage (MCP, relay, BYO keys)"
+   ],
+   "examples": []
+  },
+  "ludus-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Up to 10x faster and 6x cheaper than a standard MCP setup (self-measured on Ludus 1.0, 4 tasks, Sept 2026); syncs Blueprints, C++, assets and levels live; UE 5.4-5.8.",
+     "url": "https://ludusengine.com/"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "ultimate-engine-copilot": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Calls itself the most comprehensive AI copilot for Unreal, with 1,655 native tools; works with hosted AI, your own keys or local LLMs.",
+     "url": "https://www.gamedevcore.com/"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  }
+ },
+ "notes": "Missing tools to consider: Bezi, Coplay / Unity MCP bridges, JetBrains AI / Junie (Rider), Google Antigravity CLI / Gemini CLI, Meta Muse Code, OpenCode / Kimi Code (open, low-cost harnesses), Devin Fusion CLI (Cognition), Godot-specific assistants (Ziva, Summer Engine)"
+}

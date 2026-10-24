@@ -1,0 +1,151 @@
+{
+ "task": "voice",
+ "checked": "2026-10-24",
+ "tools": {
+  "elevenlabs": {
+   "bench": [
+    {
+     "source": "Artificial Analysis - Provider Voice Arena Leaderboard",
+     "url": "https://artificialanalysis.ai/text-to-speech/leaderboard",
+     "detail": "Provider Voice leaderboard (Speech Arena Elo): Eleven v4 Turbo (eleven_v4_turbo) #1 of 98",
+     "score": 100.0
+    },
+    {
+     "source": "Artificial Analysis - Controlled Voice Leaderboard",
+     "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/controlled-voice",
+     "detail": "Controlled Voice leaderboard (Elo): Eleven v4 Turbo #4 of 46",
+     "score": 93.3
+    },
+    {
+     "source": "Coval TTS benchmarks",
+     "url": "https://benchmarks.coval.ai/tts",
+     "detail": "TTS latency leaderboard, sorted by time to first audio (TTFA): ElevenLabs Eleven v4 Turbo #12 of 28",
+     "score": 59.3
+    }
+   ],
+   "reviews": [],
+   "users": [
+    {
+     "source": "Product Hunt",
+     "url": "https://www.producthunt.com/products/elevenlabs/reviews",
+     "detail": "4.9/5 from 221 reviews",
+     "score": 97.5
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Eleven v4 / v4 Turbo released 2026-09-28; claims ~75% blind preference over Cartesia Sonic 3.6, Inworld TTS-2 and two Gemini TTS models in its own tests; v4 Turbo ~100 ms median inference, ~150 ms to first speech; 90+ languages; instant clones from ~10 s of audio.",
+     "url": "https://elevenlabs.io/blog/eleven-v4"
+    },
+    {
+     "text": "Docs: eleven_v4 is the flagship highest-quality model; eleven_v4_turbo the flagship real-time model (~100 ms inference); Flash v2.5 ~75 ms; Turbo v2/v2.5 deprecated.",
+     "url": "https://elevenlabs.io/docs/models"
+    }
+   ],
+   "strengths": [
+    "Top of Artificial Analysis blind-vote boards with v4 / v4 Turbo",
+    "Wide emotional range via audio tags (anger, whispers, shouts)",
+    "Strong voice cloning and large voice library"
+   ],
+   "weaknesses": [
+    "Misreads invented names; intense lines can break pronunciation",
+    "Credit-based pricing gets expensive; billing complaints on Trustpilot",
+    "Mid-pack on measured streaming latency (Coval #12 of 28)"
+   ],
+   "examples": []
+  },
+  "inworld-ai": {
+   "bench": [
+    {
+     "source": "Artificial Analysis - Provider Voice Arena Leaderboard",
+     "url": "https://artificialanalysis.ai/text-to-speech/leaderboard",
+     "detail": "Provider Voice leaderboard (Speech Arena Elo): Realtime TTS-2 (inworld-tts-2) #6 of 98",
+     "score": 94.8
+    },
+    {
+     "source": "Artificial Analysis - Controlled Voice Leaderboard",
+     "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/controlled-voice",
+     "detail": "Controlled Voice leaderboard (Elo): Realtime TTS-2 #7 of 46",
+     "score": 86.7
+    },
+    {
+     "source": "Coval TTS benchmarks",
+     "url": "https://benchmarks.coval.ai/tts",
+     "detail": "TTS latency leaderboard, sorted by TTFA: Realtime TTS-2 Flash (inworld-tts-2-flash) #2 of 28",
+     "score": 96.3
+    }
+   ],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Realtime TTS-2 GA 2026-08-31 (preview 2026-05-05); 100+ languages, natural-language voice direction and inline [laugh]/[sigh] tags; sub-200 ms median time to first audio; 'Games and media' solution with Latitude testimonial.",
+     "url": "https://inworld.ai/blog/realtime-tts-2"
+    },
+    {
+     "text": "Docs: TTS-2 is 'flagship, top-ranked' with 100 ms P90 server-side TTFB; TTS-2 Flash 20 ms P90; TTS-1/TTS-1 Max discontinued 2026-06-15; 1.5 Max/Mini deprecated.",
+     "url": "https://docs.inworld.ai/docs/tts/tts-models"
+    },
+    {
+     "text": "Pricing per 1M characters: TTS-2 $25 on free On-Demand tier down to $12.50 on Growth (as low as $5 enterprise); Flash $15 down to $7.",
+     "url": "https://inworld.ai/pricing"
+    }
+   ],
+   "strengths": [
+    "Top-10 on both Artificial Analysis blind boards with TTS-2",
+    "TTS-2 Flash among the fastest measured (Coval 62 ms TTFA)",
+    "Cheaper per character than ElevenLabs list prices"
+   ],
+   "weaknesses": [
+    "Mid-table on the cloned-voice Humanness Index (#12 of 21)",
+    "No independent hands-on reviews found",
+    "Fast model churn: TTS-1 and 1.5 retired within a year"
+   ],
+   "examples": [],
+   "note": "Vapi's Humanness Index isn't counted for either tool: ElevenLabs' current model isn't on it, so it can't compare them fairly."
+  },
+  "convai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Character voices come from third-party providers: Google Cloud, Microsoft Azure, OpenAI and ElevenLabs. No default provider is named.",
+     "url": "https://docs.convai.com/api-docs/convai-playground/character-customization/language-and-speech"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "charisma-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Pricing page lists an AI voice library and custom AI voice integration (PRO, $5 per 50,000 credits ~ 200 experience minutes) and premium AI voices (Enterprise). TTS provider not named.",
+     "url": "https://charisma.ai/pricing"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "gridly": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Homepage: 'Text to speech' automation to 'speed up your video production with AI-generated voiceover files'; game customers named include tinyBuild, 11 bit studios, Hi-Rez, Game Science, Belka Games.",
+     "url": "https://www.gridly.com/"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  }
+ },
+ "notes": "Missing tools to consider: Cartesia (Sonic 3.6), Alibaba Qwen-Audio-3.1-TTS-Plus, Google Gemini 3.8 Flash TTS, Fish Audio (Drama 3 / S2.1 Pro, open-weight S-series), Speechify Simba 3.2, Resemble AI / Chatterbox (MIT open source), Local runtime TTS: Kokoro, Piper, xVASynth"
+}

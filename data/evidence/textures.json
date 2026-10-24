@@ -1,0 +1,307 @@
+{
+ "task": "textures",
+ "checked": "2026-10-24",
+ "tools": {
+  "skybox-ai": {
+   "bench": [],
+   "reviews": [
+    {
+     "source": "One More Vision",
+     "url": "https://note.com/onemorevision/n/n4200b277a8d1?hl=en",
+     "date": "2024-11-25",
+     "summary": "A professional archviz TD used Skybox AI panoramas as skyboxes and HDR environment lights in 3ds Max and Blender. They found no seam or projection problems and clearly better Japanese streetscapes than an SD 1.5 360-LoRA workflow. They judged Flux comparable but licence-restricted, and Skybox AI the more stable option.",
+     "score": 75
+    }
+   ],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "8K panoramas with seamless wrap; 16K and HDRI/depth/mesh export on higher tiers; official Unity plugin and REST API",
+     "url": "https://www.blockadelabs.com/"
+    },
+    {
+     "text": "Says over 1.5 million creators have used Skybox AI",
+     "url": "https://www.blockadelabs.com/post/how-to-make-a-skybox-with-ai-complete-guide-2026"
+    }
+   ],
+   "strengths": [
+    "seam-free 360 wrap in hands-on tests",
+    "usable as environment lighting (HDR) as well as backdrop",
+    "Unity plugin and API for pipelines"
+   ],
+   "weaknesses": [
+    "occasional seams/artifacts in complex scenes and close-up depth",
+    "little control over object placement",
+    "free plan is preview-only"
+   ],
+   "examples": [],
+   "note": "No benchmark exists for skybox or tileable-material generators; the one usable review is from 2024."
+  },
+  "meshy": {
+   "bench": [
+    {
+     "source": "Top 3D AI arena",
+     "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+     "detail": "ELO, Textured board: Meshy 7.1 #3 of 21",
+     "score": 90.0
+    },
+    {
+     "source": "3D Arena",
+     "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+     "detail": "ELO, render board (appearance of rendered output): Meshy-7 #5 of 24",
+     "score": 82.6
+    }
+   ],
+   "reviews": [],
+   "users": [
+    {
+     "source": "Trustpilot",
+     "url": "https://www.trustpilot.com/review/meshy.ai",
+     "detail": "4.7/5 from 3,888 reviews",
+     "score": 92.5
+    },
+    {
+     "source": "Community threads (15 read)",
+     "url": "https://news.ycombinator.com/item?id=50094084",
+     "detail": "4 positive, 7 mixed, 4 negative",
+     "score": 50.0
+    },
+    {
+     "source": "X posts (16 read)",
+     "url": "https://x.com/Anima_Labs/status/2113926591990444360",
+     "detail": "8 positive, 6 mixed, 2 negative",
+     "score": 68.8
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "AI Texturing works best on props, buildings and weapons; humans, characters and animals still need improvement; supply UVs or auto-UV quality may be limited",
+     "url": "https://docs.meshy.ai/ai-texturing"
+    }
+   ],
+   "strengths": [
+    "most polished textures in a same-prompt test",
+    "full PBR map sets and retexturing of uploaded meshes",
+    "strong on hard-surface/architectural materials"
+   ],
+   "weaknesses": [
+    "organic and stylized materials weaker",
+    "characters/creatures textured less well (vendor admits)",
+    "auto-UVs limit quality on unwrapped meshes"
+   ],
+   "examples": []
+  },
+  "tripo": {
+   "bench": [
+    {
+     "source": "Top 3D AI arena",
+     "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+     "detail": "ELO, Textured board: Tripo AI v3.1 #1 of 21",
+     "score": 100.0
+    }
+   ],
+   "reviews": [],
+   "users": [
+    {
+     "source": "Trustpilot",
+     "url": "https://www.trustpilot.com/review/tripo3d.ai",
+     "detail": "4.4/5 from 506 reviews",
+     "score": 85.0
+    },
+    {
+     "source": "Community threads (10 read)",
+     "url": "https://news.ycombinator.com/item?id=49897498",
+     "detail": "4 positive, 2 mixed, 4 negative",
+     "score": 50.0
+    },
+    {
+     "source": "X posts (22 read)",
+     "url": "https://x.com/luccacerf/status/2102478608274989225",
+     "detail": "10 positive, 6 mixed, 6 negative",
+     "score": 59.1
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Tripo 3.0 texturing model generates PBR textures for existing meshes from text, image or style references (as listed on Scenario's model catalogue)",
+     "url": "https://www.scenario.com/models/tripo-30-texturing"
+    }
+   ],
+   "strengths": [
+    "top of the blind textured-model board (Sep 2026)",
+    "fast"
+   ],
+   "weaknesses": [
+    "texture detail can trail Meshy",
+    "texturing results vary (user report)"
+   ],
+   "examples": []
+  },
+  "hyper3d-rodin": {
+   "bench": [
+    {
+     "source": "Top 3D AI arena",
+     "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+     "detail": "ELO, Textured board: Rodin Gen 2.5 #2 of 21",
+     "score": 95.0
+    }
+   ],
+   "reviews": [],
+   "users": [
+    {
+     "source": "Trustpilot",
+     "url": "https://www.trustpilot.com/review/hyper3d.ai",
+     "detail": "2.7/5 from 56 reviews",
+     "score": 42.5
+    },
+    {
+     "source": "Community threads (7 read)",
+     "url": "https://news.ycombinator.com/item?id=47161689",
+     "detail": "4 positive, 2 mixed, 1 negative",
+     "score": 71.4
+    },
+    {
+     "source": "X posts (10 read)",
+     "url": "https://x.com/motorsep/status/2112959340667928917",
+     "detail": "6 positive, 4 mixed, 0 negative",
+     "score": 80.0
+    }
+   ],
+   "vendorClaims": [],
+   "strengths": [
+    "#2 on the blind textured board despite weak geometry rank",
+    "PBR materials on hard-surface assets"
+   ],
+   "weaknesses": [
+    "downloaded textures can look weaker than the preview (user reports)",
+    "UV/texture accuracy for use in other software (user reports)"
+   ],
+   "examples": []
+  },
+  "hunyuan3d": {
+   "bench": [
+    {
+     "source": "3D Arena",
+     "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+     "detail": "ELO, render board: Hunyuan3D-2.1 (open) #9 of 24",
+     "score": 65.2
+    }
+   ],
+   "reviews": [],
+   "users": [
+    {
+     "source": "Community threads (10 read)",
+     "url": "https://news.ycombinator.com/item?id=50072357",
+     "detail": "4 positive, 4 mixed, 2 negative",
+     "score": 60.0
+    },
+    {
+     "source": "X posts (3 read)",
+     "url": "https://x.com/Stefan_3D_AI/status/2050542201625842076",
+     "detail": "2 positive, 1 mixed, 0 negative",
+     "score": 83.3
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Hunyuan3D-Paint-2.1 PBR pipeline beats 2.0 on Tencent's own texture metrics (CLIP-FID 24.78 vs 26.44); texture generation needs about 21 GB VRAM",
+     "url": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [
+    "texture stage needs roughly 20 GB+ VRAM (creator could not run it on a 6 GB laptop; seen in search snippet only)"
+   ],
+   "examples": []
+  },
+  "sloyd": {
+   "bench": [
+    {
+     "source": "Top 3D AI arena",
+     "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+     "detail": "ELO, Textured board: Sloyd AI v3 #6 of 21",
+     "score": 75.0
+    }
+   ],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Sloyd 2.0 text-prompt texturing assistant, also for already generated models, 256 to 2K resolution",
+     "url": "https://www.sloyd.ai/blog/introducing-sloyd-2-0"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [
+    "retexturing lags its generation quality (vendor reply to a user review, unverified)"
+   ],
+   "examples": []
+  },
+  "scenario": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Scenario Texture: in-house tileable top-down texture generator up to 4K, with PBR map export and a 3D preview viewer",
+     "url": "https://help.scenario.com/articles/3312894507-scenario-texture-the-essentials"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "leonardo-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "layer-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Generates PBR-ready base textures for artists to refine, 512 to 4096 px per target platform",
+     "url": "https://layer.ai/use-cases/texture-generation"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "ludo-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "3D generator outputs PBR maps (albedo, metallic, roughness) and has a re-texturing mode that keeps the mesh; separate Texture Generator with API/MCP",
+     "url": "https://ludo.ai/blog/level-up-3d-assets-new-physically-based-rendering-pbr-textures"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "unity-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Material Generator makes tileable PBR materials from text/reference images; positioned for prototyping and placeholder assets; Generators also offer third-party models from Scenario and Layer",
+     "url": "https://unity.com/blog/unity-ai-material-generator"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  }
+ },
+ "notes": "Missing tools to consider: Adobe Substance 3D Sampler (Text-to-Texture, Image-to-Material), Ubisoft La Forge CHORD (ComfyUI), StableProjectorz, Dream Textures (Blender add-on), StableGen (Blender add-on), ArmorLab, Hyper3D OmniCraft (HDRI/skybox), Cinevva Skybox Generator"
+}

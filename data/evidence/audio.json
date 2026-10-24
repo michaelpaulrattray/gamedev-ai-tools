@@ -1,0 +1,226 @@
+{
+ "task": "audio",
+ "checked": "2026-10-24",
+ "tools": {
+  "suno": {
+   "bench": [
+    {
+     "source": "Artificial Analysis Music Arena, AA-Music-Vocal v1.1",
+     "url": "https://artificialanalysis.ai/music/leaderboard/vocals",
+     "detail": "Vocals (songs with singing; model writes its own lyrics): Suno v6 #1 of 13",
+     "score": 100.0
+    },
+    {
+     "source": "Artificial Analysis Music Arena, AA-Music-Instrumental v1.1",
+     "url": "https://artificialanalysis.ai/music/leaderboard/instrumental",
+     "detail": "Instrumental: Suno v6 #1 of 19",
+     "score": 100.0
+    }
+   ],
+   "reviews": [
+    {
+     "source": "MusicTech",
+     "url": "https://musictech.com/reviews/music-production/suno-studio-review/",
+     "date": "2026-01-13",
+     "summary": "Reviews Suno Studio, the browser DAW. The output sounds professional, control is finer than before, and stem and MIDI downloads make it much more useful in a DAW. Results are inconsistent, with some artefacts and a steep learning curve. Stem splitting is hit-and-miss.",
+     "score": 60
+    },
+    {
+     "source": "eesel AI blog",
+     "url": "https://www.eesel.ai/blog/suno-v6-review",
+     "date": "2026-09-10",
+     "summary": "First-day look at v6. The writer finds it more controllable and more templated, an improvement for structured pop. Retiring v5.5 is the main pain point. Most of its quality evidence is quoted Reddit reactions (muffled mixes, buried vocals) rather than its own tests.",
+     "score": 60
+    }
+   ],
+   "users": [
+    {
+     "source": "Trustpilot",
+     "url": "https://www.trustpilot.com/review/suno.com",
+     "detail": "1.5/5 from 196 reviews",
+     "score": 12.5
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "v6 family (v6, v6-wild, v6-mini) launched 2026-09-09. v6 and v6-wild are for Pro/Premier, v6-mini for everyone. Older models are retired.",
+     "url": "https://suno.com/release-notes/introducing-v6"
+    }
+   ],
+   "strengths": [
+    "#1 on both Artificial Analysis blind-vote music boards (vocal and instrumental), Oct 2026",
+    "Stem and MIDI downloads from Suno Studio (MusicTech)",
+    "Strong full songs with vocals, fast (Unite.AI)"
+   ],
+   "weaknesses": [
+    "Inconsistent results and some audio artefacts (MusicTech)",
+    "Heavy user backlash against v6 (muffled mixes); older models retired with no fallback (MusicTech news 2026-09-21, eesel)",
+    "Trustpilot dominated by billing and support complaints"
+   ],
+   "examples": [],
+   "note": "Benchmarks rate Suno v6 first, but users dislike v6's mixes and the retirement of older models; Sony and UMG have filed a new lawsuit over v6."
+  },
+  "aiva": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "stable-audio": {
+   "bench": [
+    {
+     "source": "Artificial Analysis Music Arena, AA-Music-Instrumental v1.1",
+     "url": "https://artificialanalysis.ai/music/leaderboard/instrumental",
+     "detail": "Instrumental: Stable Audio 3 Large #8 of 19",
+     "score": 61.1
+    }
+   ],
+   "reviews": [
+    {
+     "source": "StraySpark blog: AI sound design pipeline for indie games",
+     "url": "https://www.strayspark.studio/blog/ai-sound-design-indie-games-pipeline",
+     "date": "2026-03-24",
+     "summary": "Good for ambient beds, atmospheric loops and music sketches. Less precise for specific foley, complex prompts can cause artefacts, and small changes to the wording can swing quality a lot.",
+     "score": 60
+    }
+   ],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Stable Audio 3.0 family released 2026-05-20: Small SFX, Small and Medium are open weights; Large is API/self-host only. Medium and Large make up to about 6 min 20 s. Trained on licensed data. An enterprise licence is needed above $1M revenue.",
+     "url": "https://techcrunch.com/2026/05/20/stability-ai-release-a-new-audio-model-that-can-create-six-minute-songs/"
+    }
+   ],
+   "strengths": [
+    "Ambient beds and atmospheric loops (StraySpark, Dubspot)",
+    "Stable Audio 3 Large mid-table (#8/19) on the AA instrumental blind vote"
+   ],
+   "weaknesses": [
+    "Less precise for specific foley; quality swings with prompt wording (StraySpark)",
+    "No vocals; weaker song structure (Dubspot)"
+   ],
+   "examples": []
+  },
+  "soundraw": {
+   "bench": [],
+   "reviews": [],
+   "users": [
+    {
+     "source": "Trustpilot",
+     "url": "https://www.trustpilot.com/review/soundraw.io",
+     "detail": "2.0/5 from 33 reviews",
+     "score": 25.0
+    }
+   ],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [
+    "Trustpilot reviewers report billing/cancellation problems and 'rudimentary' output; no text prompts (Trustpilot)"
+   ],
+   "examples": []
+  },
+  "mubert": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "beatoven": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "mirelo": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Mirelo SFX 2.0 (2026-10-14). In Mirelo's own blind tests (25 crowd raters x 30 videos per pair), raters preferred it over Sony Woosh 81% vs 9%, Kling Foley 63% vs 18%, Sonilo 46% vs 33%, and over the native audio of Veo 3.1 Fast, MiniMax, Seedance and Kling. Keeps dialogue and replaces music. Up to 10 min. Has an API and MCP; Roblox plugin 'coming soon'.",
+     "url": "https://mirelo.ai/blog/mirelo-sfx-2-0"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "elevenlabs": {
+   "bench": [
+    {
+     "source": "Artificial Analysis Music Arena, AA-Music-Vocal v1.1",
+     "url": "https://artificialanalysis.ai/music/leaderboard/vocals",
+     "detail": "Vocals: Eleven Music v2.5 #7 of 13",
+     "score": 50.0
+    },
+    {
+     "source": "Artificial Analysis Music Arena, AA-Music-Instrumental v1.1",
+     "url": "https://artificialanalysis.ai/music/leaderboard/instrumental",
+     "detail": "Instrumental: Eleven Music v2.5 #11 of 19",
+     "score": 44.4
+    }
+   ],
+   "reviews": [
+    {
+     "source": "StraySpark blog: AI sound design pipeline for indie games",
+     "url": "https://www.strayspark.studio/blog/ai-sound-design-indie-games-pipeline",
+     "date": "2026-03-24",
+     "summary": "ElevenLabs Sound Effects is strong for organic and environmental sounds and creature vocals, and gives several variations per prompt, which game audio needs. It is weak on tonal or musical and UI sounds, and short percussive clips can have edge artefacts.",
+     "score": 75
+    }
+   ],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [
+    "SFX: organic and environmental sounds, several variations per prompt (StraySpark)",
+    "Eleven Music mid-table on both AA blind-vote boards"
+   ],
+   "weaknesses": [
+    "SFX: UI and tonal sounds inconsistent; edge artefacts on short percussive clips (StraySpark)",
+    "Music: each newer Eleven Music version scores no better than v1 on AA instrumental"
+   ],
+   "examples": []
+  },
+  "unity-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "mureka": {
+   "bench": [
+    {
+     "source": "Artificial Analysis Music Arena",
+     "url": "https://artificialanalysis.ai/music/leaderboard",
+     "detail": "Vocals: Mureka #3 of 13",
+     "score": 83.3
+    },
+    {
+     "source": "Artificial Analysis Music Arena",
+     "url": "https://artificialanalysis.ai/music/leaderboard",
+     "detail": "Instrumental: Mureka #3 of 19",
+     "score": 88.9
+    }
+   ],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  }
+ },
+ "notes": "Missing tools to consider: Mureka (V9 / V9.5), Google Lyria 3 / Lyria 3 Pro (via Gemini / Vertex AI / ProducerAI), MiniMax Music (2.5+ / 2.6 / 3.0), Sonilo (Sound Effects 1.0, video-to-SFX), OptimizerAI, Krotos Studio, Adobe Firefly (Generate Sound Effects), Stable Audio 3 open weights (Small SFX / Medium) self-hosted"
+}

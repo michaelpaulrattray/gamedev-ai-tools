@@ -1,0 +1,100 @@
+{
+ "voice": {
+  "drop": {
+   "inworld-ai": [
+    "Humanness Index"
+   ]
+  },
+  "notes": {
+   "inworld-ai": "Vapi's Humanness Index isn't counted for either tool: ElevenLabs' current model isn't on it, so it can't compare them fairly."
+  }
+ },
+ "code": {
+  "drop": {
+   "github-copilot": [
+    "model only"
+   ],
+   "claude-code": [
+    "GameEngineBench"
+   ],
+   "chatgpt": [
+    "GameEngineBench"
+   ]
+  },
+  "notes": {
+   "github-copilot": "No benchmark tests Copilot as a product; it picks among several models, so model-only leaderboard results aren't credited.",
+   "windsurf": "Windsurf is now Devin Desktop (Cognition). The #2 Artificial Analysis result belongs to Cognition's Devin Fusion CLI, not the IDE, so it isn't counted."
+  }
+ },
+ "audio": {
+  "bench_add": {
+   "mureka": [
+    {
+     "source": "Artificial Analysis Music Arena",
+     "url": "https://artificialanalysis.ai/music/leaderboard",
+     "detail": "Vocals: Mureka #3 of 13",
+     "score": 83.3
+    },
+    {
+     "source": "Artificial Analysis Music Arena",
+     "url": "https://artificialanalysis.ai/music/leaderboard",
+     "detail": "Instrumental: Mureka #3 of 19",
+     "score": 88.9
+    }
+   ]
+  },
+  "notes": {
+   "suno": "Benchmarks rate Suno v6 first, but users dislike v6's mixes and the retirement of older models; Sony and UMG have filed a new lawsuit over v6."
+  }
+ },
+ "textures": {
+  "users_from": "3d-models",
+  "users_from_tools": [
+   "meshy",
+   "tripo",
+   "hyper3d-rodin",
+   "hunyuan3d"
+  ],
+  "drop": {
+   "hyper3d-rodin": [
+    "Trustpilot"
+   ]
+  },
+  "notes": {
+   "skybox-ai": "No benchmark exists for skybox or tileable-material generators; the one usable review is from 2024."
+  }
+ },
+ "marketing": {
+  "drop": {
+   "luma-ai": [
+    "Ray 3 (released"
+   ]
+  },
+  "notes": {
+   "luma-ai": "Luma's current model is Ray3.2 (June 2026); the only leaderboard entry is the older Ray 3, so it isn't counted.",
+   "runway": "Runway's app also offers third-party models (Kling, Seedance); these scores are for Runway's own Gen-4.5."
+  }
+ },
+ "localisation": {
+  "drop_urls": [
+   "https://sourceforge.net/software/product/Crowdin/",
+   "https://localizationacademy.com/?p=1606",
+   "https://localizationacademy.com/?p=3546"
+  ],
+  "notes": {
+   "crowdin": "The only hands-on reviews are from 2021, before Crowdin's AI features, so they aren't counted.",
+   "gridly": "The only hands-on review is from 2021, before Gridly's 2025 rebuild, so it isn't counted."
+  }
+ },
+ "npc": {
+  "notes": {
+   "charisma-ai": "Charisma now markets itself mainly for corporate training and brand campaigns; its Unity and Unreal plugins haven't been updated since Sept 2025.",
+   "inworld-ai": "Inworld has retired Character Studio and now positions itself as voice and model infrastructure."
+  }
+ },
+ "level": {
+  "notes": {
+   "hunyuanworld": "Tencent has replaced HunyuanWorld 1.0 with HY-World 2.0 (Apr 2026)."
+  }
+ }
+}

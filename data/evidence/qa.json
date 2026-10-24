@@ -1,0 +1,73 @@
+{
+ "task": "qa",
+ "checked": "2026-10-24",
+ "tools": {
+  "modl-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Agents test from the screen with plain-language tasks; no SDK, plugins or code changes; bug reports with visuals and severity scores; CI triggers.",
+     "url": "https://modl.ai/"
+    },
+    {
+     "text": "Android and desktop today; iOS in development; best for structured/UI-driven mobile genres; very fast-paced gameplay not fully supported yet. No named customers or numbers on the site.",
+     "url": "https://modl.ai/"
+    },
+    {
+     "text": "Aug 2026 six-month MoU with QA services firm Side for product development and commercial pilots.",
+     "url": "https://side.inc/news/side-and-modl-ai-sign-memorandum-of-understanding"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "nunu-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Agents play via screen and touch/keyboard/mouse from plain-English instructions on PC, iOS, Android; console coming soon; optional SDK; multiplayer agents.",
+     "url": "https://nunu.ai/"
+    },
+    {
+     "text": "Customers save up to 50% on manual QA costs; case studies listed for Stormforge, Hogwarts Legacy and Pokemon Emerald (the latter two look like demos, not customers).",
+     "url": "https://nunu.ai/"
+    },
+    {
+     "text": "Google Cloud partnership; agents powered by Gemini models (partner blog).",
+     "url": "https://cloud.google.com/blog/products/gaming/co-op-mode-the-ai-partners-driving-the-the-future-of-gaming/"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "razer-qa-companion": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Beta with over 50 game studios (unnamed); built on Amazon Bedrock; JIRA integration; performance bug detection; on AWS Marketplace since Nov 2025.",
+     "url": "https://www.razer.com/newsroom/company-news/razer-qa-companion-available-on-aws-marketplace"
+    },
+    {
+     "text": "GDC 2026 update: zero-integration, vision-based detection of physics/rendering/animation bugs with repro steps and video; test cases from prompts or GDDs; autonomous agents in development.",
+     "url": "https://www.razer.com/newsroom/company-news/razer-at-gdc-2026"
+    },
+    {
+     "text": "GDC 2026 closed session for 10 indie PC studios to run it on their own builds; no feedback published.",
+     "url": "https://www.razer.ai/qac-gdc-26/"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  }
+ },
+ "notes": "Missing tools to consider: GameDriver, Regression Games, Tencent WeTest, Keywords Studios (Mighty Build and Test: BuildBot/TestBot/ProofBot), Nodemori, Unity Test Framework / Unreal Gauntlet + Automation, PlaytestCloud / Side playtest (with Razer Cortex), Filuta AI, Unakin, QA.tech"
+}

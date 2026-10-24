@@ -1,0 +1,106 @@
+{
+ "task": "npc",
+ "checked": "2026-10-24",
+ "tools": {
+  "convai": {
+   "bench": [],
+   "reviews": [
+    {
+     "source": "StraySpark blog: 'Setting Up AI-Powered NPCs in Unreal Engine with MCP Automation'",
+     "url": "https://www.strayspark.studio/blog/ai-npcs-unreal-engine-mcp-automation",
+     "date": "2026-03-23",
+     "summary": "Compares Inworld, Convai and NVIDIA ACE for UE5 NPCs. Convai is recommended for open-world and simulation games because of environment awareness, with 300-800 ms responses 'in our testing', but its Unreal plugin is called less polished than Inworld's.",
+     "score": 60
+    }
+   ],
+   "users": [
+    {
+     "source": "Community threads (10 read)",
+     "url": "https://forum.convai.com/t/troubleshooting-latency-issues-across-all-characters/5958",
+     "detail": "1 positive, 3 mixed, 6 negative",
+     "score": 25.0
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Updated Unreal plugin on Fab claims sub-200 ms conversational latency over WebRTC, plus NeuroSync facial animation and hands-free voice.",
+     "url": "https://convai.com/blog/quick-setup-guide-conversational-ai-unreal-engine-convai-fab-plugin"
+    },
+    {
+     "text": "Voices from Google Cloud, Azure, OpenAI or ElevenLabs.",
+     "url": "https://docs.convai.com/api-docs/convai-playground/character-customization/language-and-speech"
+    }
+   ],
+   "strengths": [
+    "Quickest route to a talking 3D character with Unreal/Unity plugins",
+    "Characters can perceive the scene and trigger actions",
+    "Active development (SDK repos updated weekly)"
+   ],
+   "weaknesses": [
+    "Response latency of several seconds reported in 2026",
+    "Plugin breakage on engine updates and when packaging",
+    "Lip-sync and long-response bugs in recent SDKs"
+   ],
+   "examples": []
+  },
+  "charisma-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Homepage now reads 'Immersive conversational AI for online training and campaigns'; sections are Training & Development and Brand. Logos: Warner Bros, Sky, BBC, DreamWorks, Oxford University, Epic MegaGrant. Games appear only as a 'Puss in Boots minigame' image.",
+     "url": "https://charisma.ai/"
+    },
+    {
+     "text": "PRO pay-as-you-go $5 per 50,000 credits (~200 experience minutes) with SDK publishing to web, VR or game engines; Enterprise aimed at Training & Development or Marketing.",
+     "url": "https://charisma.ai/pricing"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": [],
+   "note": "Charisma now markets itself mainly for corporate training and brand campaigns; its Unity and Unreal plugins haven't been updated since Sept 2025."
+  },
+  "inworld-ai": {
+   "bench": [],
+   "reviews": [
+    {
+     "source": "StraySpark blog: 'Setting Up AI-Powered NPCs in Unreal Engine with MCP Automation'",
+     "url": "https://www.strayspark.studio/blog/ai-npcs-unreal-engine-mcp-automation",
+     "date": "2026-03-23",
+     "summary": "Recommends Inworld as the place to start prototyping and the best fit for story-driven RPG/adventure NPCs, with a more polished Unreal plugin than Convai, but slower responses (about 0.5-1.5 s).",
+     "score": 75
+    }
+   ],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Legacy Character Studio retired; developers should rebuild with the Unity AI Runtime SDK or Unreal Agent Runtime SDK, which ship Character templates (dialogue, emotion, voice, lip-sync).",
+     "url": "https://docs.inworld.ai/character-studio-deprecation.md"
+    },
+    {
+     "text": "Docs home now lists only two products, Voice (TTS/STT/Realtime API) and Inference (model router); no game-NPC product on the landing page.",
+     "url": "https://docs.inworld.ai/docs/introduction"
+    },
+    {
+     "text": "Realtime TTS-2 page has a 'Games and media' solution and a Latitude (Voyage) testimonial.",
+     "url": "https://inworld.ai/blog/realtime-tts-2"
+    }
+   ],
+   "strengths": [
+    "Strong, cheap TTS layer (see voice job benchmarks)",
+    "Unity/Unreal Character templates for building in-engine",
+    "Was rated the more polished Unreal plugin (StraySpark, Mar 2026)"
+   ],
+   "weaknesses": [
+    "Stepped back from turnkey NPC studio to B2B voice/inference infrastructure",
+    "Legacy Character Studio retired; more engineering needed now",
+    "Little recent independent NPC feedback"
+   ],
+   "examples": [],
+   "note": "Inworld has retired Character Studio and now positions itself as voice and model infrastructure."
+  }
+ },
+ "notes": "Missing tools to consider: NVIDIA ACE (Audio2Face, Riva, on-device SLMs), Player2, LLM for Unity (undreamai/LLMUnity), Roll-your-own with an LLM API or a local model (Ollama, WebLLM)"
+}

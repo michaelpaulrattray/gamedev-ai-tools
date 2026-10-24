@@ -1,0 +1,102 @@
+{
+ "task": "level",
+ "checked": "2026-10-24",
+ "tools": {
+  "world-labs-marble": {
+   "bench": [],
+   "reviews": [
+    {
+     "source": "design4real blog: World Labs Marble in practical testing",
+     "url": "https://design4real.de/en/world-labs-marble-practical-test/",
+     "date": "2026-09-26",
+     "summary": "Hands-on in browser, VR headset and game engines. Worlds look striking at the centre but blur toward the edges, and the convincing walkable area is small. Paid splat exports carry the same blur, and the splat-derived meshes were poor. In Unity/Unreal, splats were GPU-heavy and mixing them with meshes caused depth and collision problems. Judged good for concept work and early experiments, not production or real-time.",
+     "score": 45
+    },
+    {
+     "source": "QbitAI",
+     "url": "https://m.sohu.com/a/1007297931_610300",
+     "date": "2026-04-09",
+     "summary": "Same input image (a Minecraft-style render) through Marble 1.1 and 1.1-Plus. 1.1 produced a navigable world in about 3-5 minutes with a faithful reproduction, little noise and fuller lighting. 1.1-Plus gave a wider world but took twice as long and looked noticeably softer. The author recommends 1.1.",
+     "score": 75
+    }
+   ],
+   "users": [
+    {
+     "source": "Community threads (7 read)",
+     "url": "https://news.ycombinator.com/item?id=45902732",
+     "detail": "2 positive, 2 mixed, 3 negative",
+     "score": 42.9
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Marble 1.1 (Apr 2026) became the default, with claimed better lighting/contrast and fewer artifacts at the same 1,500 credits per world. 1.1 Plus expands world size for extra credits.",
+     "url": "https://radiancefields.com/world-labs-releases-marble-1.1-and-marble-1.1-plus"
+    },
+    {
+     "text": "Exports full (2M) and 500k Gaussian splats (PLY/SPZ) plus collider and high-quality GLB meshes. Unity and Unreal splat plugin guides are in the docs.",
+     "url": "https://docs.worldlabs.ai/marble/export/specs"
+    }
+   ],
+   "strengths": [
+    "Fast single-image to navigable world",
+    "Faithful to the input image, with good lighting (1.1)",
+    "Splat/mesh export with engine plugin paths"
+   ],
+   "weaknesses": [
+    "Small convincing area; blurs away from the centre",
+    "Splat-derived meshes are poor",
+    "Splats are GPU-heavy and awkward to mix with meshes in engines"
+   ],
+   "examples": []
+  },
+  "hunyuanworld": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "README (Jul 2025) claims it beats Diffusion360, MVDiffusion, PanFusion, LayerPano3D, Director3D, WonderJourney and DimensionX on BRISQUE, NIQE, Q-Align and CLIP for panorama and world generation. These are self-reported, with no protocol details.",
+     "url": "https://github.com/Tencent-Hunyuan/HunyuanWorld-1.0"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": [],
+   "note": "Tencent has replaced HunyuanWorld 1.0 with HY-World 2.0 (Apr 2026)."
+  },
+  "dreamlands": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Generates style-consistent concept art, then 3D props, true-scale wall/door/window kits and whole buildings from a floor plan. The showcase is a Georgian estate with 334 props, built 'in a single day', exported to Unreal.",
+     "url": "https://dreamlands.ai/"
+    },
+    {
+     "text": "Live on Google Cloud Marketplace for studios (28 Mar 2026). A self-serve plan for indie/solo users is behind a waitlist, with a preview announced 25 May 2026.",
+     "url": "https://dreamlands.ai/blog"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "ludus-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Places generated 3D models, materials, Niagara effects and sounds into the project with collision. It also claims PCG graph generation and rule-based scatter, plus a demo of 'dressing' a greybox hangar. Testimonials on the site don't mention level building.",
+     "url": "https://ludusengine.com/"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  }
+ },
+ "notes": "Missing tools to consider: Tencent HY-World 2.0, Google DeepMind Genie 3 / Project Genie, FlashWorld (open source), Runway GWM Worlds 2"
+}
