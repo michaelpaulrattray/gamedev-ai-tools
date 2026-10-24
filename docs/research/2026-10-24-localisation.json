@@ -1,0 +1,103 @@
+{
+  "task": "localisation",
+  "checked": "2026-10-24",
+  "tools": {
+    "crowdin": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "Localization Academy ('Crowdin - First TMS Experience', TMS UX video series)",
+          "url": "https://localizationacademy.com/?p=1606",
+          "date": "2021-01-12",
+          "author": "Andrej Zito (founder of Localization Academy; ex-Lionbridge/Autodesk)",
+          "independent": true,
+          "summary": "First-impressions walkthrough: set up a project, translated a Word file and a spreadsheet, downloaded German/Czech/Japanese files. The translator editor and file round trip worked well; he criticised the project-manager UI as bland, inconsistent colours and a confusing email-verification flow.",
+          "rating": 60,
+          "verified": true,
+          "note": "STALE: older than 18 months and predates Crowdin AI. Generic document/spreadsheet test, not game localisation. UI-only, the author says it is not a recommendation. No sponsorship or affiliate links seen. Recommend not scoring, or scoring only with a staleness flag."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "G2", "rating": 4.4, "scale": 5, "count": 668, "url": "https://www.g2.com/products/crowdin/reviews", "verified": false, "note": "G2 returned 403 to our fetcher. Search snippets disagree on the count (668 and 711); Crowdin's own game-localisation page says 759 G2 reviews. Snippet-only, so not scored per runbook. Covers the whole Crowdin product, not just games."},
+          {"platform": "Capterra", "rating": 4.7, "scale": 5, "count": 175, "url": "https://www.capterra.com/p/163509/Crowdin/reviews/", "verified": false, "note": "403 to our fetcher (also capterra.co.uk/.com.br, GetApp, Software Advice). Figure from a search snippet only; not scored. The snippet said most reviews are 2023-2024; one Sept 2025 volunteer-translator review calls it among the best for game localisation."},
+          {"platform": "Trustpilot", "rating": 3.8, "scale": 5, "count": 18, "url": "https://www.trustpilot.com/review/crowdin.com", "verified": true, "note": "Below the 25-review threshold; not scorable. 78% 5-star, 22% 1-star; Trustpilot says no reviews in the last 12 months (latest seen Oct 2025)."},
+          {"platform": "Product Hunt", "rating": 5.0, "scale": 5, "count": 1, "url": "https://www.producthunt.com/products/crowdin/reviews", "verified": true, "note": "One review, about 2 years old. Not scorable."},
+          {"platform": "SourceForge (aggregate)", "rating": 4.5, "scale": 5, "count": 944, "url": "https://sourceforge.net/software/product/Crowdin/", "verified": true, "note": "Only 19 native SourceForge reviews; the other 925 are imported 'third-party' ratings. Aggregated, so not usable as a primary review-site rating."}
+        ],
+        "mentions": [
+          {"url": "https://community.crowdin.com/t/unity-integration-doesnt-work/6170", "date": "2024-01-04", "sentiment": "neutral", "note": "Unity plugin v0.4.1 pushed empty files; fixed by matching language codes (en vs en_US). Troubleshooting on the vendor's own forum, not a quality verdict.", "verified": true},
+          {"url": "https://forums.factorio.com/viewtopic.php?p=536801", "date": "2021", "sentiment": "neutral", "note": "Factorio translators: Crowdin completion % differed from in-game %. Old and about workflow, not AI output.", "verified": false},
+          {"url": "https://forums.factorio.com/viewtopic.php?p=516471", "date": "2020", "sentiment": "mixed", "note": "Modder: Crowdin wrapped rich-text translations in quotes that showed in game. Old.", "verified": false}
+        ],
+        "sampled": 3,
+        "note": "No scorable community sample: game-dev forum threads (Unity, Unreal, Godot, HN) that judge Crowdin or Crowdin AI output quality in the last 18 months were not found. Reddit/X skipped by instruction. The threads above are listed for context only."
+      },
+      "vendor_claims": [
+        {"text": "Translate with any LLM or MT engine (pre-translation, AI context enrichment); no single default engine, so MT benchmarks can't be mapped to the product.", "url": "https://crowdin.com/game-localization"},
+        {"text": "Unity Localization package integration; Unreal asset management; 700+ integrations, 100+ file formats, 50+ QA checks.", "url": "https://crowdin.com/game-localization"},
+        {"text": "Game customers shown include Minecraft, Rust, PUBG, CS2, Dota 2, Factorio; SCS Software localises into 47 languages with 200+ community translators.", "url": "https://crowdin.com/blog/lessons-on-game-localization-from-scs-software"},
+        {"text": "Internal tests: adding an AI file summary to the pre-translation prompt improves quality about 6% on average (self-reported).", "url": "https://crowdin.com/blog/whats-new-at-crowdin-april-2025"}
+      ],
+      "strengths": [
+        "Translator editor and file round trip work well (Localization Academy, 2021)",
+        "Widely used for community/volunteer game translation (SCS, Factorio, ARK, Path of Titans projects observed)"
+      ],
+      "weaknesses": [
+        "Project-manager UI judged bland and inconsistent (Localization Academy, 2021)"
+      ],
+      "examples": [],
+      "notes": "Evidence is thin and mostly unverifiable: no benchmark (engine is user-chosen), one stale independent review, and the review-site ratings with 25+ reviews (G2, Capterra) could not be opened. Vendor-published game case studies (SCS Software, Wildlife Studios, Coffee Stain, Chess.com) are not independent. Alconost's Clash of Kings write-up was not used: Alconost is a localisation vendor historically linked to Crowdin. SEO list pages (gitnux, wifitalents, worldmetrics, ones.com, pickmysoft, askmebazaar), Wayline and Locize (competitors), Localizely and Lokalise blogs (competitors) and maestra.ai (competing vendor) were excluded."
+    },
+    "gridly": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "Localization Academy ('Gridly - First TMS Experience', TMS UX video series)",
+          "url": "https://localizationacademy.com/?p=3546",
+          "date": "2021-05-13",
+          "author": "Andrej Zito",
+          "independent": true,
+          "summary": "Free-trial walkthrough importing a CSV and exporting German/Czech/Japanese. Clean, recognisable spreadsheet-style UI and working language detection, but he struggled to find the import tutorial, couldn't easily see how translation happens inside Gridly, and had trouble getting files back out. Called it pretty decent overall.",
+          "rating": 50,
+          "verified": true,
+          "note": "STALE: older than 18 months and predates Gridly's March 2025 TMS/CAT rebuild and its AI features. Not a game-specific test; UI-only, not a recommendation. Recommend not scoring, or only with a staleness flag."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "G2", "rating": 4.7, "scale": 5, "count": 50, "url": "https://www.g2.com/products/gridly/reviews", "verified": false, "note": "403 to our fetcher. Snippets conflict: 4.7 from 50 reviews (product page) vs 4.8 from 34 (seller/compare page). Snippet-only; not scored. Snippets mention game-industry reviewers praising the spreadsheet UI and engine hookups, and complaints about lag on large grids, confusing permissions and browser issues outside Chrome."},
+          {"platform": "Product Hunt", "rating": null, "scale": 5, "count": 0, "url": "https://www.producthunt.com/products/gridly", "verified": true, "note": "No reviews yet."},
+          {"platform": "Capterra", "rating": null, "scale": 5, "count": null, "url": null, "verified": false, "note": "No Capterra listing for Gridly found (search returned unrelated 'Grid' and 'Gridzy')."}
+        ],
+        "mentions": [],
+        "sampled": 0,
+        "note": "No independent forum threads about Gridly found (Unreal forum, Unity Discussions, HN searched). Gridly's Unreal plugin GitHub repo has 9 open issues, all dated 2021-2022 (compile failure, empty-string import bugs, API keys exported in pak files); not sentiment, but suggests the public UE plugin repo is little maintained: https://github.com/gridly-spreadsheet-CMS/Gridly-UE4-Plugin/issues (verified)."
+      },
+      "vendor_claims": [
+        {"text": "Unity and Unreal plugins; AI pre-translation with engines of your choice (Google, Amazon MT; OpenAI and DeepL integrations); no single default engine named.", "url": "https://www.gridly.com/continous-game-localization"},
+        {"text": "Game customers in case studies/testimonials: Playrix, tinyBuild, Hi-Rez, 11 bit studios, Game Science, CM Games, Belka Games, Rovio, Milestone, Elden Pixels.", "url": "https://www.gridly.com/continous-game-localization"},
+        {"text": "Case-study numbers: CM Games -90% file processing time, Milestone 80% time saved on uploads, Rovio LQA 4x faster (all vendor-published).", "url": "https://www.gridly.com/case-studies/milestone/"},
+        {"text": "2025: added TMS and CAT to its CMS in one platform; Gridly's own blog says over 80% of clients come from gaming.", "url": "https://www.gridly.com/blog/interview-with-gridly-ceo/"}
+      ],
+      "strengths": [
+        "Familiar spreadsheet-style grid UI (Localization Academy, 2021)"
+      ],
+      "weaknesses": [
+        "Import/export flow and where translation happens were unclear to a first-time user (Localization Academy, 2021)"
+      ],
+      "examples": [],
+      "notes": "Gridly was built by LocalizeDirect (Swedish game-localisation vendor) and spun out in 2022, so LocalizeDirect content about Gridly is not independent. The Belka Games pieces (Gridly blog; LocWorld 2025 session co-presented with a Gridly employee) are vendor-hosted/sponsored. MultiLingual 'Gridly vs Google Sheets' looked advertorial and was not opened. Strong game focus is real (vendor customer list), but no independent review since the 2025 rebuild was found."
+    }
+  },
+  "missing_tools": [
+    {"name": "Lokalise", "why": "Major TMS with large G2 base (search snippet: 4.7 from ~731 reviews, unverified); used by game studios; competitor reviews note no native Unity/Unreal plugin."},
+    {"name": "Phrase (ex-Memsource)", "why": "Large enterprise TMS with AI/MT orchestration; Gridly integrates with it."},
+    {"name": "Localazy", "why": "Developer-focused TMS with Unity plugin and free tier; popular with indies."},
+    {"name": "Weblate", "why": "Open-source/self-hostable; used by Godot itself and many open-source games."},
+    {"name": "Smartling / XTM / memoQ", "why": "Enterprise TMS/CAT used by larger publishers and LSPs."},
+    {"name": "LocalizeDirect (LocDirect)", "why": "Game-specific localisation management system from Gridly's parent company; a service vendor as much as a tool."},
+    {"name": "Unity Localization package / Unreal Localization Dashboard", "why": "Free built-in baselines most indies start from; useful comparison anchor."}
+  ],
+  "caveats": "No benchmark applies: both tools let users choose their MT/LLM engine, so WMT-style model results cannot be attributed to either product. G2, Capterra, GetApp, Software Advice, TrustRadius and Gartner all returned 403; their figures are search-snippet only and marked unverified (a proxy-reader workaround was blocked and not pursued). The only independent hands-on reviews found are 2021 UI first-impressions from one author, both stale and not game-specific. Reddit and X were skipped by instruction. Under the runbook, neither tool currently has a scorable reviews or users signal unless a person can open the G2 pages and confirm counts; with G2 confirmed, both would have a users signal only (Provisional)."
+}

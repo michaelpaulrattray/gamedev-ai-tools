@@ -1067,3 +1067,8 @@ a.mu-rank:hover{color:var(--text);border-color:var(--accent)}
 .uh-tile-top .tlogo{border-radius:999px;border:0}.uh-tile-top .tlogo.mono{font-size:.45rem}
 @media (max-width:1020px){.uh-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:720px){.uh-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.uh-tile-body{left:12px;right:12px;bottom:10px}.uh-tile-body strong{font-size:.9rem}.uh-go{width:18px;height:18px}.uh-tile-top{font-size:.7rem}}
+/* thin-evidence notice (category + comparison pages) */
+.thin-note{display:flex;gap:12px;align-items:flex-start;margin:16px 0 0;padding:14px 16px;border-radius:14px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.28);color:#e4e4ea;font-size:.9rem;line-height:1.55}
+.thin-note svg{flex:0 0 auto;color:#fcd34d;margin-top:2px}
+.thin-note b{color:#fcd34d}
+.matchup+.thin-note{margin-top:14px}

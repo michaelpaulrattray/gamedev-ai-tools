@@ -1,0 +1,477 @@
+{
+  "task": "audio",
+  "checked": "2026-10-24",
+  "tools": {
+    "suno": {
+      "benchmarks": [
+        {
+          "source": "Artificial Analysis Music Arena, AA-Music-Vocal v1.1",
+          "url": "https://artificialanalysis.ai/music/leaderboard/vocals",
+          "board": "Vocals (songs with singing; model writes its own lyrics)",
+          "model_version": "Suno v6",
+          "rank": 1,
+          "board_size": 13,
+          "value": "Elo 1147 (95% CI 1127-1167), 2,610 samples; statistical rank range 1-2",
+          "score": 100.0,
+          "date": "v1.1 board, reported 2026-10-07 (AlphaSignal); page itself is undated",
+          "independent": true,
+          "verified": true,
+          "note": "Blind pairwise votes by Artificial Analysis's recruited private evaluators; public arena votes are not counted. Tracks come from the providers' API endpoints at default settings. Free Suno users get v6-mini, which ranks #2 (Elo 1130); percentile 91.7."
+        },
+        {
+          "source": "Artificial Analysis Music Arena, AA-Music-Instrumental v1.1",
+          "url": "https://artificialanalysis.ai/music/leaderboard/instrumental",
+          "board": "Instrumental",
+          "model_version": "Suno v6",
+          "rank": 1,
+          "board_size": 19,
+          "value": "Elo 1148 (95% CI 1126-1170), 2,208 samples",
+          "score": 100.0,
+          "date": "v1.1 board, reported 2026-10-07; page undated",
+          "independent": true,
+          "verified": true,
+          "note": "v6-mini (free tier) ranks #2 here (Elo 1114); percentile 94.4."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "MusicTech",
+          "url": "https://musictech.com/reviews/music-production/suno-studio-review/",
+          "date": "2026-01-13",
+          "author": "Alex Holmes",
+          "independent": true,
+          "hands_on": true,
+          "summary": "Reviews Suno Studio, the browser DAW. The output sounds professional, control is finer than before, and stem and MIDI downloads make it much more useful in a DAW. Results are inconsistent, with some artefacts and a steep learning curve. Stem splitting is hit-and-miss.",
+          "rating": 60,
+          "verified": true,
+          "note": "MusicTech scored it 6 (out of 10). This covers the v5-era Studio, before v6. The page carries a generic affiliate-commission disclosure."
+        },
+        {
+          "outlet": "Unite.AI",
+          "url": "https://www.unite.ai/suno-review/",
+          "date": "2026-04-23 (updated 2026-07-24)",
+          "author": "Janine Heinrichs",
+          "independent": "unclear",
+          "hands_on": true,
+          "summary": "Tested v5.5 on the free and Pro plans. It quickly makes full songs with strong vocals and is good for ideas and demos. Control over melody and structure is limited, and vocals sometimes miss the requested style.",
+          "rating": 75,
+          "verified": true,
+          "note": "No numeric score, so the rating is our reading of the verdict. The site says it 'may receive compensation' from links to products it reviews. Covers v5.5, which v6 has now replaced."
+        },
+        {
+          "outlet": "eesel AI blog",
+          "url": "https://www.eesel.ai/blog/suno-v6-review",
+          "date": "2026-09-10",
+          "author": "eesel Team (no individual named)",
+          "independent": true,
+          "hands_on": "light",
+          "summary": "First-day look at v6. The writer finds it more controllable and more templated, an improvement for structured pop. Retiring v5.5 is the main pain point. Most of its quality evidence is quoted Reddit reactions (muffled mixes, buried vocals) rather than its own tests.",
+          "rating": 60,
+          "verified": true,
+          "note": "eesel sells helpdesk AI and has no music product. We found no affiliate links. The page is thin on its own testing, so give it low weight."
+        },
+        {
+          "outlet": "StraySpark blog: AI Music for Indie Game Soundtracks (Suno, Udio, Stable Audio)",
+          "url": "https://www.strayspark.studio/blog/ai-music-generation-indie-soundtracks-2026",
+          "date": "2026-04-27",
+          "author": "StraySpark",
+          "independent": true,
+          "hands_on": "not stated",
+          "summary": "Calls Suno v5 the most 'musical' of the three and the best for boss themes and cutscenes, though it can slip into an 'AI sound' and repeats over long tracks.",
+          "rating": null,
+          "verified": true,
+          "note": "DO NOT SCORE. The article contains clear factual errors: it dates Suno v5 to March 2026 (it shipped in Sept 2025), credits 'Udio Pro v3' with MIDI stems while Udio downloads have been off since Oct 2025, and dates Stable Audio 3 to Dec 2025 (it shipped May 2026). It looks machine-written and unverified."
+        },
+        {
+          "outlet": "Dubspot blog: Best AI Music Generators in 2026",
+          "url": "https://blog.dubspot.com/best-ai-music-generators-2026",
+          "date": "2026-10-09 (updated)",
+          "author": "Theo Nakamura",
+          "independent": true,
+          "hands_on": false,
+          "summary": "Ranks Suno first (8.5) as the best all-rounder for songs with vocals.",
+          "rating": null,
+          "verified": true,
+          "note": "DO NOT SCORE. The page says it leans 'on official sources only' (no testing). It has affiliate links."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 1.5, "scale": 5, "count": 196, "url": "https://www.trustpilot.com/review/suno.com", "verified": true, "score": 12.5, "note": "168 reviews in the last 12 months; 73% are 1-star and 12% are 5-star. The page shows 1.7 in some places. Mostly billing, credit and support complaints, plus recent complaints that v6 ignores prompts and sounds poor. Suno does not invite reviews."},
+          {"platform": "Product Hunt", "rating": 4.8, "scale": 5, "count": 19, "url": "https://www.producthunt.com/products/suno/reviews", "verified": true, "score": null, "note": "Under 25 reviews, so don't score. Most are about a year old and praise it as an ideation tool."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {"text": "v6 family (v6, v6-wild, v6-mini) launched 2026-09-09. v6 and v6-wild are for Pro/Premier, v6-mini for everyone. Older models are retired.", "url": "https://suno.com/release-notes/introducing-v6", "verified": false, "note": "Taken from search results and third-party reports (eesel, MusicTech); we did not open the release-notes page itself."}
+      ],
+      "strengths": [
+        "#1 on both Artificial Analysis blind-vote music boards (vocal and instrumental), Oct 2026",
+        "Stem and MIDI downloads from Suno Studio (MusicTech)",
+        "Strong full songs with vocals, fast (Unite.AI)"
+      ],
+      "weaknesses": [
+        "Inconsistent results and some audio artefacts (MusicTech)",
+        "Heavy user backlash against v6 (muffled mixes); older models retired with no fallback (MusicTech news 2026-09-21, eesel)",
+        "Trustpilot dominated by billing and support complaints"
+      ],
+      "examples": [],
+      "notes": "Strong conflict between the blind-vote benchmark and user sentiment. Artificial Analysis's paid evaluator panel puts v6 first by a clear margin. A MusicTech news piece (https://musictech.com/news/industry/suno-ai-update-v6/, 2026-09-21, Emily Swingle) reports near-unanimous r/SunoAI complaints that v6 sounds flat, muddy and muffled. That piece is secondhand reporting of Reddit, so we didn't score it. Sony and UMG filed a new lawsuit over v6 (reported 2026-09-18). For game devs: commercial use needs a paid plan, and Studio's stems/MIDI are a real plus. Suno makes full tracks, not loops or adaptive layers."
+    },
+    "udio": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "Dubspot blog: Best AI Music Generators in 2026",
+          "url": "https://blog.dubspot.com/best-ai-music-generators-2026",
+          "date": "2026-10-09 (updated)",
+          "author": "Theo Nakamura",
+          "independent": true,
+          "hands_on": false,
+          "summary": "Ranks Udio fifth (7.0), as a licensed, artist-style music service in a closed environment where creations cannot be exported.",
+          "rating": null,
+          "verified": true,
+          "note": "DO NOT SCORE. No testing (official sources only)."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 1.5, "scale": 5, "count": 59, "url": "https://www.trustpilot.com/review/udio.com", "verified": true, "score": 12.5, "note": "36 reviews in the last 12 months; 76% are 1-star. Dominated by the download shutdown: paying users say they can't export their tracks. Also complaints about billing and quality. Udio does not invite reviews."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [
+        "Downloads (audio, video, stems) disabled since 2025-10-29 after the UMG settlement (Digital Music News)",
+        "Not on the Artificial Analysis music boards"
+      ],
+      "examples": [],
+      "notes": "Udio is not usable for game audio right now. Digital Music News (https://www.digitalmusicnews.com/2025/10/31/udio-downloads-disabled-umg-deal/, 2025-10-31, verified) reports that all downloads were switched off without warning. Udio then reopened downloads for 48 hours in early November 2025. Secondary sources say a help-centre note dated 2026-02-17 still lists downloads as disabled, and that the licensed 'walled garden' relaunch planned for 2026 has no confirmed date for restoring downloads (unverified). We found no confirmation that the relaunch has happened. We found no independent hands-on review from the last 18 months. Older reviews (e.g. Tom's Guide by Nigel Powell, probably 2024) cover the pre-settlement product and are stale. Consider delisting Udio from 'audio' or flagging it 'no export'. Check udio.com by hand."
+    },
+    "aiva": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "Common Sound (hybridmusic.io)",
+          "url": "https://hybridmusic.io/aiva-review/",
+          "date": "2026-03-04",
+          "author": "Ted",
+          "independent": true,
+          "hands_on": false,
+          "summary": "8/10. Calls it the best AI composition tool for orchestral and cinematic music, mainly because MIDI export gives full editing control. Mentions game devs making intensity layers for adaptive music.",
+          "rating": null,
+          "verified": true,
+          "note": "DO NOT SCORE. No sign of own testing; it is a feature description."
+        },
+        {
+          "outlet": "Loop Fans",
+          "url": "https://music.loop.fans/ai/aiva-ai-music-generator",
+          "date": "2026-03-12 (updated May 2026)",
+          "author": "Loop Fans",
+          "independent": true,
+          "hands_on": false,
+          "summary": "Still the strongest AI tool for composition you can edit, but behind Suno/Udio for finished tracks with vocals.",
+          "rating": null,
+          "verified": true,
+          "note": "DO NOT SCORE. No hands-on evidence, and the page contradicts itself on MIDI export by plan."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 2.8, "scale": 5, "count": 3, "url": "https://www.trustpilot.com/review/aiva.ai", "verified": true, "score": null, "note": "Only 3 reviews (all 1-star: refunds, UI, quality for film scoring), so don't score."},
+          {"platform": "Product Hunt", "rating": null, "scale": 5, "count": 0, "url": "https://www.producthunt.com/products/aiva/reviews", "verified": true, "score": null, "note": "No reviews."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [
+        "Editable MIDI output for orchestral and cinematic scoring (consistent across roundups, none hands-on)"
+      ],
+      "weaknesses": [
+        "No vocals; weak on pop and electronic genres (roundups, not hands-on)"
+      ],
+      "examples": [],
+      "notes": "No independent hands-on review or benchmark found. AIVA is not on the Artificial Analysis boards. The web search budget ran out before a deeper search for AIVA reviews from game-audio forums (VI-Control, KVR) or YouTube. Licensing differs by plan (AIVA keeps copyright on Free/Standard per several roundups); check against aiva.ai."
+    },
+    "stable-audio": {
+      "benchmarks": [
+        {
+          "source": "Artificial Analysis Music Arena, AA-Music-Instrumental v1.1",
+          "url": "https://artificialanalysis.ai/music/leaderboard/instrumental",
+          "board": "Instrumental",
+          "model_version": "Stable Audio 3 Large",
+          "rank": 8,
+          "board_size": 19,
+          "value": "Elo 1014 (95% CI 993-1035), 2,291 samples; statistical rank range 7-12",
+          "score": 61.1,
+          "date": "v1.1, reported 2026-10-07",
+          "independent": true,
+          "verified": true,
+          "note": "UNRESOLVED: we could not confirm which model stableaudio.com runs. The app pages render client-side and showed no model name. Other entries on the same board: Stable Audio 3 Medium #14 (Elo 996, percentile 27.8), Stable Audio 2.5 #16 (Elo 984, percentile 16.7), Stable Audio 3 Small #17 (Elo 946, 11.1). If the app still runs 2.5, use 16.7. Stable Audio has no vocal model, so it is not on the Vocal board."
+        },
+        {
+          "source": "Music Arena (CMU G-CLef), first leaderboard",
+          "url": "https://gclef-cmu.org/blog/posts/250919_MusicArena/",
+          "board": "Instrumental",
+          "model_version": "sao / sao-small (Stable Audio Open)",
+          "rank": 4,
+          "board_size": 5,
+          "value": "sao 924.7 (286 votes); sao-small 782.4 (#5)",
+          "score": null,
+          "date": "votes 2025-07-28 to 2025-08-31",
+          "independent": true,
+          "verified": true,
+          "note": "DO NOT SCORE. This is the open-weights model, not the stableaudio.com service, and the data is from 2025. Suno, Udio and ElevenLabs were not on this board. The live site (music-arena.org, now beta.music-arena.org) returned an empty page."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "StraySpark blog: AI sound design pipeline for indie games",
+          "url": "https://www.strayspark.studio/blog/ai-sound-design-indie-games-pipeline",
+          "date": "2026-03-24",
+          "author": "StraySpark",
+          "independent": true,
+          "hands_on": "partly (a pipeline 'we use in our own projects'; no test log)",
+          "summary": "Good for ambient beds, atmospheric loops and music sketches. Less precise for specific foley, complex prompts can cause artefacts, and small changes to the wording can swing quality a lot.",
+          "rating": 60,
+          "verified": true,
+          "note": "No model version given. The '45 seconds' clip limit it cites matches older Stable Audio versions, so details may be stale. The article promotes StraySpark's own Unreal MCP product; we found no affiliate links for the audio tools."
+        },
+        {
+          "outlet": "Dubspot blog: Stable Audio 3 review",
+          "url": "https://blog.dubspot.com/stable-audio-3-review",
+          "date": "2026-05-26",
+          "author": "Marcus Feld",
+          "independent": true,
+          "hands_on": "not stated",
+          "summary": "7.8/10. Calls Stable Audio 3 Stability's most useful audio release yet: strong for ambient, foley, SFX and instrumental loops, with long coherent tracks. No vocals, and rhythmic genres and song structure are weaker.",
+          "rating": null,
+          "verified": true,
+          "note": "DO NOT SCORE unless hands-on testing is confirmed: the verdict rests on 'praise from working producers'. Mostly about the open-weight models, and the stableaudio.com app isn't mentioned. Has affiliate links for other products."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": null, "scale": 5, "count": null, "url": "https://www.trustpilot.com/review/stableaudio.com", "verified": true, "score": null, "note": "404: there is no Trustpilot profile for stableaudio.com."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {"text": "Stable Audio 3.0 family released 2026-05-20: Small SFX, Small and Medium are open weights; Large is API/self-host only. Medium and Large make up to about 6 min 20 s. Trained on licensed data. An enterprise licence is needed above $1M revenue.", "url": "https://techcrunch.com/2026/05/20/stability-ai-release-a-new-audio-model-that-can-create-six-minute-songs/", "verified": true}
+      ],
+      "strengths": [
+        "Ambient beds and atmospheric loops (StraySpark, Dubspot)",
+        "Stable Audio 3 Large mid-table (#8/19) on the AA instrumental blind vote"
+      ],
+      "weaknesses": [
+        "Less precise for specific foley; quality swings with prompt wording (StraySpark)",
+        "No vocals; weaker song structure (Dubspot)"
+      ],
+      "examples": [],
+      "notes": "The key open question is which model the stableaudio.com app runs (2.5 vs 3 Large). The benchmark percentile ranges from 16.7 to 61.1 depending on the answer. Check the app by hand."
+    },
+    "soundraw": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 2.0, "scale": 5, "count": 33, "url": "https://www.trustpilot.com/review/soundraw.io", "verified": true, "score": 25.0, "note": "Only 4 reviews in the last 12 months (latest 2026-02-15). 70% are 1-star, mostly billing and cancellation (annual-plan instalments); a few 5-star reviews for video background music. Soundraw does not invite reviews; it replies to 75% of negatives."},
+          {"platform": "Product Hunt", "rating": null, "scale": 5, "count": null, "url": "https://www.producthunt.com/products/soundraw/reviews", "verified": false, "score": null, "note": "404 at this URL."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [
+        "Trustpilot reviewers report billing/cancellation problems and 'rudimentary' output; no text prompts (Trustpilot)"
+      ],
+      "examples": [],
+      "notes": "No independent hands-on review found. The 2026 roundups we opened (SoftPicker, Dupple) were not hands-on and/or affiliate-heavy, so we didn't use them. Soundraw's own blog 'best AI music generators' posts are vendor content. Not on the Artificial Analysis boards. The search budget ran out before a deeper search."
+    },
+    "mubert": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 1.7, "scale": 5, "count": 24, "url": "https://www.trustpilot.com/review/mubert.com", "verified": true, "score": null, "note": "24 reviews, just under the 25 threshold, so don't score. 88% are 1-star: refunds, cancellations, support, YouTube copyright claims. Reviews cover the company's plans generally (API, Streamers), not specifically Render. Mubert does not invite reviews."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "No independent hands-on review or benchmark found. The roundups we saw describe it as continuous or ambient generative music that can feel loop-based, but none were hands-on (SoftPicker, Dupple; we didn't use them). The search budget ran out before a deeper search."
+    },
+    "beatoven": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": null, "scale": 5, "count": 0, "url": "https://www.trustpilot.com/review/beatoven.ai", "verified": true, "score": null, "note": "No reviews; the profile is unclaimed."},
+          {"platform": "Product Hunt", "rating": 4.8, "scale": 5, "count": 5, "url": "https://www.producthunt.com/products/beatoven-ai/reviews", "verified": true, "score": null, "note": "5 reviews, 2 of them from the founders. Don't score."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "No independent evidence found. The web search budget ran out before a dedicated Beatoven search (its Maestro model, stems, video-to-music). Treat as 'not enough evidence yet'."
+    },
+    "mirelo": {
+      "benchmarks": [
+        {
+          "source": "audio_eval toolkit (GitHub shwj114514/audio_eval; Jiahe Lei, Qiuqiang Kong)",
+          "url": "https://github.com/shwj114514/audio_eval",
+          "board": "Video-to-audio: Movie Gen Audio Bench and 'CineBench (internal eval set)'; text-to-audio: Clotho, AudioCaps",
+          "model_version": "Mirelo v1.6",
+          "rank": null,
+          "board_size": 2,
+          "value": "On video-to-audio, Sonilo SFX 1.0 beats Mirelo v1.6 on most metrics (e.g. DeSync 0.65 vs 0.67 on Movie Gen Bench; Audiobox PQ 6.58 vs 6.05). On text-to-audio, Mirelo trails ElevenLabs SFX v2 and Sonilo on CLAP.",
+          "score": null,
+          "date": "2026 (v0.1.0; results undated)",
+          "independent": "unclear",
+          "verified": true,
+          "note": "DO NOT SCORE. Only 2-3 systems, automatic metrics only (no listening test), and it uses an 'internal' eval set. Sonilo, a competing video-to-SFX product, wins nearly everything and is linked from the page. That looks like a Sonilo-affiliated evaluation, but the page doesn't say so. Not a leaderboard."
+        }
+      ],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": null, "scale": 5, "count": null, "url": "https://www.trustpilot.com/review/mirelo.ai", "verified": true, "score": null, "note": "404: no profile."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {"text": "Mirelo SFX 2.0 (2026-10-14). In Mirelo's own blind tests (25 crowd raters x 30 videos per pair), raters preferred it over Sony Woosh 81% vs 9%, Kling Foley 63% vs 18%, Sonilo 46% vs 33%, and over the native audio of Veo 3.1 Fast, MiniMax, Seedance and Kling. Keeps dialogue and replaces music. Up to 10 min. Has an API and MCP; Roblox plugin 'coming soon'.", "url": "https://mirelo.ai/blog/mirelo-sfx-2-0", "verified": true}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [
+        {"type": "youtube", "url": "https://www.youtube.com/watch?v=sEjgfZrTji0", "title": "Mirelo AI Review Generate AI Sound Effects, Ambient Music & Audio For Videos EP #463", "channel": "Everyday AI", "date": null, "start": null, "verified": true, "note": "Title and channel confirmed via oEmbed. We couldn't read the content; it is not a same-input comparison and probably covers an older version. Don't score."}
+      ],
+      "notes": "No independent benchmark or hands-on review found. Mirelo's vendor blind test and the Sonilo-linked toolkit contradict each other on Mirelo vs Sonilo. Academic video-to-audio benchmarks (VidAudio-Bench arXiv 2604.10542; NVIDIA-linked physical V2A benchmark arXiv 2605.30339) do not name commercial services on their abstract pages. Note that Mirelo is video-to-SFX, which suits cutscenes and trailers more than in-game one-shots."
+    },
+    "elevenlabs": {
+      "benchmarks": [
+        {
+          "source": "Artificial Analysis Music Arena, AA-Music-Vocal v1.1",
+          "url": "https://artificialanalysis.ai/music/leaderboard/vocals",
+          "board": "Vocals",
+          "model_version": "Eleven Music v2.5",
+          "rank": 7,
+          "board_size": 13,
+          "value": "Elo 1015 (95% CI 996-1034), 2,803 samples; range 7-9",
+          "score": 50.0,
+          "date": "v1.1, reported 2026-10-07",
+          "independent": true,
+          "verified": true,
+          "note": "Eleven Music v2 is #9 (999) and Eleven Music (v1) #10 (998)."
+        },
+        {
+          "source": "Artificial Analysis Music Arena, AA-Music-Instrumental v1.1",
+          "url": "https://artificialanalysis.ai/music/leaderboard/instrumental",
+          "board": "Instrumental",
+          "model_version": "Eleven Music v2.5",
+          "rank": 11,
+          "board_size": 19,
+          "value": "Elo 1001 (95% CI 980-1022), 2,236 samples; range 8-15",
+          "score": 44.4,
+          "date": "v1.1, reported 2026-10-07",
+          "independent": true,
+          "verified": true,
+          "note": "The original Eleven Music (v1) ranks higher here: #7, Elo 1021, percentile 66.7. Eleven Music v2 is #9 (1011, percentile 55.6). If the service still lets users pick v1, the 'best current model' rule would use 66.7. We couldn't confirm which versions ElevenLabs currently offers. The three ElevenLabs models' confidence intervals overlap."
+        },
+        {
+          "source": "audio_eval toolkit (GitHub shwj114514/audio_eval)",
+          "url": "https://github.com/shwj114514/audio_eval",
+          "board": "Text-to-audio SFX: Clotho, AudioCaps (automatic metrics)",
+          "model_version": "ElevenLabs SFX v2",
+          "rank": null,
+          "board_size": 3,
+          "value": "Close to Sonilo SFX 1.0 on most metrics (AudioCaps CLAP 0.532 vs 0.537), best on several FD metrics, and well ahead of Mirelo v1.6 on text-to-audio.",
+          "score": null,
+          "date": "2026",
+          "independent": "unclear",
+          "verified": true,
+          "note": "DO NOT SCORE. Likely Sonilo-affiliated and not a leaderboard (see the mirelo entry)."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "StraySpark blog: AI sound design pipeline for indie games",
+          "url": "https://www.strayspark.studio/blog/ai-sound-design-indie-games-pipeline",
+          "date": "2026-03-24",
+          "author": "StraySpark",
+          "independent": true,
+          "hands_on": "partly (a pipeline 'we use in our own projects'; no test log)",
+          "summary": "ElevenLabs Sound Effects is strong for organic and environmental sounds and creature vocals, and gives several variations per prompt, which game audio needs. It is weak on tonal or musical and UI sounds, and short percussive clips can have edge artefacts.",
+          "rating": 75,
+          "verified": true,
+          "note": "SFX only, version not stated (SFX v2 had been out since Sept 2025). The article promotes StraySpark's own Unreal MCP product; we found no affiliate links for the audio tools."
+        },
+        {
+          "outlet": "note.com (Muroi Mio): ElevenLabs sound effects for game development",
+          "url": "https://note.com/miomuroi/n/n0b8906efa0a3?hl=en",
+          "date": "2026-02-13",
+          "author": "Muroi Mio",
+          "independent": false,
+          "hands_on": "light",
+          "summary": "Says quality matches or beats library assets for Unity one-shots. Weak on long loops, and results can't be reproduced exactly.",
+          "rating": null,
+          "verified": true,
+          "note": "EXCLUDED: the post is labelled [PR] and uses a tracked referral link to ElevenLabs."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 3.0, "scale": 5, "count": 1205, "url": "https://www.trustpilot.com/review/elevenlabs.io", "verified": true, "score": null, "note": "DO NOT SCORE for 'audio'. This is the whole company and almost entirely voice/TTS plus billing; no recent review discusses music. The company invites reviews. Use it in the voice job instead, if at all."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [
+        "SFX: organic and environmental sounds, several variations per prompt (StraySpark)",
+        "Eleven Music mid-table on both AA blind-vote boards"
+      ],
+      "weaknesses": [
+        "SFX: UI and tonal sounds inconsistent; edge artefacts on short percussive clips (StraySpark)",
+        "Music: each newer Eleven Music version scores no better than v1 on AA instrumental"
+      ],
+      "examples": [],
+      "notes": "Side tool, light pass. Korben.info has a French hands-on test of Eleven Music from its Aug 2025 launch (https://korben.info/elevenlabs-music-generateur-ia-test-rap-korben.html). It returned 403, so it is unverified and not scored. Older Tom's Guide and VentureBeat SFX tests are from 2024 (SFX v1) and too old."
+    },
+    "unity-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {"ratings": [], "mentions": [], "sampled": 0},
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Side tool, light pass. We found no independent evidence about Unity AI's sound generation. Unity's AI Generators docs redirect into the AI Assistant package, and we couldn't confirm which model powers its sound generator. No benchmark covers it. Not enough evidence."
+    }
+  },
+  "missing_tools": [
+    {"name": "Mureka (V9 / V9.5)", "url": "https://www.mureka.ai/", "verified": false, "why": "#3 on both Artificial Analysis music boards (vocal Elo 1107, instrumental 1084), ahead of every listed tool except Suno. Board entry verified; vendor URL not opened."},
+    {"name": "Google Lyria 3 / Lyria 3 Pro (via Gemini / Vertex AI / ProducerAI)", "url": "https://artificialanalysis.ai/music/leaderboard/instrumental", "verified": true, "why": "#5-6 on both AA boards (Lyria 3 Pro instrumental 1080, vocal 1051). Has a commercial API. Which consumer product exposes it was not checked."},
+    {"name": "MiniMax Music (2.5+ / 2.6 / 3.0)", "url": "https://artificialanalysis.ai/music/leaderboard/vocals", "verified": true, "why": "Mid-table on both AA boards, similar to ElevenLabs; API-first."},
+    {"name": "Sonilo (Sound Effects 1.0, video-to-SFX)", "url": "https://sonilo.com/", "verified": false, "why": "Direct Mirelo competitor. Appears in the audio_eval toolkit and in Mirelo's own blind test (46% vs 33% preference for Mirelo). Possibly behind the audio_eval toolkit."},
+    {"name": "OptimizerAI", "url": "https://www.optimizerai.xyz/", "verified": false, "why": "Game-specific SFX generator (game presets, batch variations, 48 kHz WAV) that StraySpark recommends for weapons, UI and footsteps. Mentioned in the verified StraySpark article; vendor URL not opened."},
+    {"name": "Krotos Studio", "url": null, "verified": false, "why": "Performed AI sound design over real recordings, named in a 2026 game-SFX guide (Cinevva, a competitor page). Unverified beyond that mention."},
+    {"name": "Adobe Firefly (Generate Sound Effects)", "url": null, "verified": false, "why": "Mic-performed timing for SFX; named in the same guide. Unverified."},
+    {"name": "Stable Audio 3 open weights (Small SFX / Medium) self-hosted", "url": "https://techcrunch.com/2026/05/20/stability-ai-release-a-new-audio-model-that-can-create-six-minute-songs/", "verified": true, "why": "Free, local, commercial use below $1M revenue, and includes a dedicated SFX model. Could be listed apart from the stableaudio.com app (or folded in with a label)."}
+  ],
+  "caveats": "1) Benchmarks: the only current independent blind-vote boards are Artificial Analysis AA-Music v1.1 (Vocal: 13 models; Instrumental: 19). They cover Suno, ElevenLabs and Stable Audio only. Udio, AIVA, SOUNDRAW, Mubert, Beatoven and Mirelo are absent. The AA pages are undated; AlphaSignal reported v1.1 on 2026-10-07 with about 37k panel votes. The CMU Music Arena's only published board (Jul-Aug 2025) has no listed commercial service except open Stable Audio, and its live site returned an empty page. We found no independent SFX or video-to-SFX leaderboard. Academic V2A benchmarks didn't name commercial services in their abstracts, and the one comparison with numbers (audio_eval) looks Sonilo-affiliated. 2) Ranks are positions in AA's listed order; AA shows overlapping CI rank ranges, so neighbouring percentiles are not statistically distinct. 3) Open question: which model stableaudio.com runs (2.5 vs 3 Large; the percentile changes from 16.7 to 61.1). For ElevenLabs, whether v1 is still selectable (instrumental 66.7 vs 44.4). 4) Reviews are thin and mostly SEO or affiliate roundups that don't test anything. We excluded those (marked 'DO NOT SCORE'). One StraySpark music article contains clear factual errors and is excluded. MusicTech's Suno Studio review is the strongest independent review found. 5) The WebSearch budget (shared across the session) ran out after about 30 searches, before dedicated searches for Beatoven, Mubert and SOUNDRAW reviews, game-audio forums (VI-Control, KVR, Unity/Godot forums) and YouTube same-input comparisons. Community mentions are therefore 0 for every tool. Reddit/X were skipped by instruction. G2/Capterra were not attempted (usually 403). 6) User ratings are dominated by billing complaints (Suno, Soundraw, Mubert) and Udio's download shutdown; none of the review-site profiles invite reviews. 7) Big picture for game devs: Suno leads the blind-vote quality benchmarks but faces strong v6 user backlash and new label litigation. Udio currently can't export at all."
+}

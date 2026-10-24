@@ -1,0 +1,171 @@
+{
+  "task": "qa",
+  "checked": "2026-10-24",
+  "tools": {
+    "modl-ai": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "Naavik ('The State of AI for Game QA')",
+          "url": "https://naavik.co/ai-gaming/the-state-of-ai-for-game-qa/",
+          "date": "2026-07-21",
+          "author": "Francois Courset",
+          "independent": true,
+          "summary": "Market analysis of AI QA, not a product test. Describes modl.ai's integration-free, vision-based approach via its CTO, who concedes AI QA can't yet judge whether a game is good. Names no customers; says AI-QA startups have not reached Series B scale.",
+          "rating": null,
+          "verified": true,
+          "note": "Not scorable as a review: no hands-on use, product claims come from modl.ai interviews and modl.ai's own survey charts. No sponsorship by QA vendors disclosed (EPAM section is sponsored, unrelated)."
+        },
+        {
+          "outlet": "Expert Reviews ('Side and Modl.ai co-op on video game QA quest')",
+          "url": "https://www.expertreviews.co.uk/technology/gaming/side-and-modl-ai-co-op-on-video-game-qa-quest",
+          "date": "2026-09-04",
+          "author": "Andy White",
+          "independent": true,
+          "summary": "Gamescom 2026 demo plus interviews with modl.ai and Side staff. Says it currently works best on slow-paced games such as puzzle games; modl.ai's founder acknowledges model latency rules out large fast-paced games. No outcomes reported.",
+          "rating": null,
+          "verified": true,
+          "note": "Not scorable: demo watched, not tested; all sources are parties to the Side-modl.ai partnership. Useful only for the stated limitation."
+        },
+        {
+          "outlet": "Naavik Gaming Podcast ('How AI Continues to Reshape Game QA')",
+          "url": "https://naavik.co/podcast/how-ai-continues-to-reshape-game-qa/",
+          "date": "2025-12-16",
+          "author": "Host Devin Becker; guests Christoffer Holmgard and Julian Togelius (both modl.ai co-founders)",
+          "independent": false,
+          "summary": "Vendor voice. Founders describe the move to vision-based agents on uploaded binaries, current focus on casual mobile, and say speed and cost remain constraints.",
+          "rating": null,
+          "verified": true,
+          "note": "Excluded from scoring: vendor interview."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "GetApp", "rating": null, "scale": 5, "count": 0, "url": "https://www.getapp.com/all-software/a/modl/", "verified": false, "note": "403 to our fetcher; search snippet says 0 user ratings."},
+          {"platform": "G2", "rating": null, "scale": 5, "count": null, "url": "https://www.g2.com/products/modl/discuss", "verified": false, "note": "A G2 'discuss' page exists; no rating or count seen; 403."}
+        ],
+        "mentions": [],
+        "sampled": 0,
+        "note": "No independent developer threads about using modl.ai found. aiagentstore.ai comparison pages are AI-generated with inferred scores and were excluded."
+      },
+      "vendor_claims": [
+        {"text": "Agents test from the screen with plain-language tasks; no SDK, plugins or code changes; bug reports with visuals and severity scores; CI triggers.", "url": "https://modl.ai/"},
+        {"text": "Android and desktop today; iOS in development; best for structured/UI-driven mobile genres; very fast-paced gameplay not fully supported yet. No named customers or numbers on the site.", "url": "https://modl.ai/"},
+        {"text": "Aug 2026 six-month MoU with QA services firm Side for product development and commercial pilots.", "url": "https://side.inc/news/side-and-modl-ai-sign-memorandum-of-understanding"}
+      ],
+      "strengths": [
+        "No-integration, vision-based testing (described consistently by Naavik and Expert Reviews, sourced from the vendor)"
+      ],
+      "weaknesses": [
+        "Suited to slow-paced games; latency limits fast-paced/large games (Expert Reviews, quoting the founder)",
+        "No named customers or published results found"
+      ],
+      "examples": [],
+      "notes": "Product pivoted from engine-integrated bots (older Unity/Unreal plugin era) to integration-free vision agents in 2025-2026; older coverage (e.g. 2023-2024 interviews) describes a different product. Side partners with both modl.ai and Razer, so Side statements are not independent of either. modl.ai's 2025 'State of Games QA' survey is vendor research, not evidence about the product. Side MoU page loaded only a headline for us; date (2026-08-27) is from search snippet and the Expert Reviews article."
+    },
+    "nunu-ai": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "Naavik ('The State of AI for Game QA')",
+          "url": "https://naavik.co/ai-gaming/the-state-of-ai-for-game-qa/",
+          "date": "2026-07-21",
+          "author": "Francois Courset",
+          "independent": true,
+          "summary": "Market analysis, not a test. Co-founder says nunu now covers about 50% of the QA stack (up from ~30%); cites nunu's Stormforge case study (30% QA cost cut, 5x faster testing). Notes AAA 3D open worlds are harder than 2D mobile.",
+          "rating": null,
+          "verified": true,
+          "note": "Not scorable: all performance figures are vendor-reported. Stormforge numbers conflict across sources (Naavik: 30% cost cut; nunu case-study title and a newsletter: 50%, 160+ hours/month, 400 tests/month)."
+        },
+        {
+          "outlet": "PocketGamer.biz ('nunu.ai secures $6m to scale AI agents for game QA')",
+          "url": "http://www.pocketgamer.biz/nunuai-secures-6m-to-scale-ai-agents-for-game-qa/",
+          "date": "2025-03-14",
+          "author": "Isa Muhammad",
+          "independent": true,
+          "summary": "Funding news ($6M seed, a16z speedrun/TIRTA; $8M total). No customers named, no product results.",
+          "rating": null,
+          "verified": true,
+          "note": "News only; not a review."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Product Hunt", "rating": null, "scale": 5, "count": null, "url": "https://www.producthunt.com/products/nunu-ai", "verified": true, "note": "404: no Product Hunt product page found."},
+          {"platform": "GetApp / Software Advice AU", "rating": null, "scale": 5, "count": null, "url": "https://www.getapp.com/all-software/a/nunu/", "verified": false, "note": "403; listing exists, no ratings seen."}
+        ],
+        "mentions": [],
+        "sampled": 0,
+        "note": "A laravel.cloud 'aitools' aggregator shows 4.67 from 24 reviews, but the page failed to load (530), the reviews are unattributed and it may not even be the same 'Nunu' product. Excluded. No independent developer threads found; YC launch page has no HN discussion surfaced."
+      },
+      "vendor_claims": [
+        {"text": "Agents play via screen and touch/keyboard/mouse from plain-English instructions on PC, iOS, Android; console coming soon; optional SDK; multiplayer agents.", "url": "https://nunu.ai/"},
+        {"text": "Customers save up to 50% on manual QA costs; case studies listed for Stormforge, Hogwarts Legacy and Pokemon Emerald (the latter two look like demos, not customers).", "url": "https://nunu.ai/"},
+        {"text": "Google Cloud partnership; agents powered by Gemini models (partner blog).", "url": "https://cloud.google.com/blog/products/gaming/co-op-mode-the-ai-partners-driving-the-the-future-of-gaming/"}
+      ],
+      "strengths": [],
+      "weaknesses": [
+        "AAA 3D open worlds harder to automate than 2D mobile (Naavik, via the vendor)"
+      ],
+      "examples": [],
+      "notes": "Only third-party customer story found is Roboto Games / Stormforge (13-person studio, Unity survival game), but it is published by nunu.ai and its figures vary between sources. GDC 2024 Start-Up Spotlight session exists (vendor talk). Google Cloud blog not opened (partner, not independent; verified: false)."
+    },
+    "razer-qa-companion": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "GamesBeat ('Razer flexes AI desktop companion and other new products at GDC')",
+          "url": "https://gamesbeat.com/?p=318909",
+          "date": "2026-03-13",
+          "author": "Alexander Lee",
+          "independent": true,
+          "summary": "GDC 2026 briefing; the hands-on time went to Razer AVA. QA Companion's new agentic tester and video bug detector get one line, with no impressions.",
+          "rating": null,
+          "verified": true,
+          "note": "Not scorable: no hands-on with the QA tool."
+        },
+        {
+          "outlet": "PocketGamer.biz ('Razer reveals AI tools to speed up game development pipelines')",
+          "url": "http://www.pocketgamer.biz/razer-reveals-ai-tools-to-speed-up-game-development-pipelines/",
+          "date": "2026-03-13",
+          "author": "Isa Muhammad",
+          "independent": true,
+          "summary": "Announcement coverage: zero-integration vision-based bug detection, test-case generation from prompts or design docs; autonomous gameplay agents still in development. All claims attributed to Razer.",
+          "rating": null,
+          "verified": true,
+          "note": "News only. KitGuru (2026-03-11, Joao Silva) is the same announcement with no hands-on: https://www.kitguru.net/gaming/joao-silva/razer-goes-all-in-on-ai-at-gdc-2026/ (verified)."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "AWS Marketplace", "rating": null, "scale": 5, "count": 0, "url": "https://aws.amazon.com/marketplace/pp/prodview-tpld76jxextpe", "verified": true, "note": "'No customer reviews yet.' Listing shows US$1,337/month for a 1-month contract, labelled not indicative; enterprise via private offer."}
+        ],
+        "mentions": [],
+        "sampled": 0,
+        "note": "No developer threads found. A Verge-attributed GDC 2026 roundup (seen only via aggregators) mentions Razer showing an AI assistant logging bugs in a shooter; passing mention, original not opened."
+      },
+      "vendor_claims": [
+        {"text": "Beta with over 50 game studios (unnamed); built on Amazon Bedrock; JIRA integration; performance bug detection; on AWS Marketplace since Nov 2025.", "url": "https://www.razer.com/newsroom/company-news/razer-qa-companion-available-on-aws-marketplace"},
+        {"text": "GDC 2026 update: zero-integration, vision-based detection of physics/rendering/animation bugs with repro steps and video; test cases from prompts or GDDs; autonomous agents in development.", "url": "https://www.razer.com/newsroom/company-news/razer-at-gdc-2026"},
+        {"text": "GDC 2026 closed session for 10 indie PC studios to run it on their own builds; no feedback published.", "url": "https://www.razer.ai/qac-gdc-26/"}
+      ],
+      "strengths": [],
+      "weaknesses": [
+        "Autonomous test-running agents not shipped as of the GDC 2026 coverage (PocketGamer.biz, KitGuru)"
+      ],
+      "examples": [],
+      "notes": "Product changed substantially: 2025 version was an engine plugin (Unreal/Unity/C++); 2026 version is zero-integration and vision-based. Keep evidence for the two apart. Razer also co-runs 'Razer Cortex: Playtest Program, powered by Side' (Aug 2025, verified) with an up-to-80% playtest cost claim based on price comparison; that is a different product. Razer GDC 2026 newsroom page and razer.ai/qac-gdc-26 not opened (verified: false)."
+    }
+  },
+  "missing_tools": [
+    {"name": "GameDriver", "why": "Established scripted test automation for Unity/Unreal (owned by Innodata since 2023); not agentic AI but a common comparison point."},
+    {"name": "Regression Games", "why": "Unity-focused automated/no-code testing with LLM-driven bots; Lightspeed 2025 'Game Changers' list. Current funding/product status unclear."},
+    {"name": "Tencent WeTest", "why": "Large incumbent QA platform with AI testing; cited by Naavik."},
+    {"name": "Keywords Studios (Mighty Build and Test: BuildBot/TestBot/ProofBot)", "why": "Largest QA services provider with in-house AI test tools."},
+    {"name": "Nodemori", "why": "Named by Naavik as an AI QA vendor (claims 40% of client QA workload); not otherwise verified."},
+    {"name": "Unity Test Framework / Unreal Gauntlet + Automation", "why": "Free engine-native baselines most teams use."},
+    {"name": "PlaytestCloud / Side playtest (with Razer Cortex)", "why": "Playtesting services increasingly adding AI analysis; relevant if the job includes playtesting."},
+    {"name": "Filuta AI, Unakin, QA.tech", "why": "Listed as nunu.ai/modl.ai competitors by CB Insights; not researched."}
+  ],
+  "caveats": "No benchmarks exist for AI game-QA products. No independent hands-on review, third-party (non-vendor-published) case study, or review-site rating with any reviews was found for any of the three tools; coverage is funding/announcement news, demo-floor pieces and analyst articles that relay vendor claims. Under the runbook none of the three has a scorable bench, reviews or users signal, so all three would be 'Not enough evidence yet' (ranked on fit only). Side is a partner of both modl.ai and Razer. Reddit and X were skipped by instruction; G2/GetApp returned 403."
+}

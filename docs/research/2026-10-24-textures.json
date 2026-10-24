@@ -1,0 +1,407 @@
+{
+  "task": "textures",
+  "checked": "2026-10-24",
+  "tools": {
+    "skybox-ai": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "Knowara (AI tools review site)",
+          "url": "https://knowara.com/ai-tools/image/skybox-ai-blockade-labs-review/",
+          "date": "2026-09 (pricing 'verified as of September 2026'; no explicit publish date)",
+          "author": "Mamun / Knowara AI Tools team",
+          "independent": "unclear",
+          "verified": true,
+          "summary": "Hands-on on the Essential and Standard plans: 40 generations, 12 remixes, 6 Unity mesh imports. It found no visible seam at the wrap point in any of the 40 tests. It made no quality call on HDRI output and noted user reports of prompt misses on complex multi-subject prompts.",
+          "rating": 75,
+          "note": "No affiliate or sponsorship disclosure either way; directory-style review site. No numeric score given by the outlet."
+        },
+        {
+          "outlet": "ToolJunction",
+          "url": "https://www.tooljunction.io/ai-tools/skybox-ai",
+          "date": "2026-03-30 (updated)",
+          "author": "ToolJunction editorial team (unnamed)",
+          "independent": "unclear",
+          "verified": true,
+          "summary": "Claims team testing across several use cases, with no count or plan stated. Quality was 'consistently good (not great)': photoreal and fantasy styles hold together across 360 degrees, but complex scenes show occasional seams and close-up depth artifacts, and object placement is hard to control. Editor rating 4/5.",
+          "rating": 60,
+          "note": "Site sells listings and advertising; no affiliate disclosure. Methodology thin."
+        },
+        {
+          "outlet": "One More Vision (note.com), 'Architectural Visualization CG x AI Utilization Part 18'",
+          "url": "https://note.com/onemorevision/n/n4200b277a8d1?hl=en",
+          "date": "2024-11-25",
+          "author": "Tatsuya Irie, Technical Director, STUDIO55",
+          "independent": true,
+          "verified": true,
+          "summary": "A professional archviz TD used Skybox AI panoramas as skyboxes and HDR environment lights in 3ds Max and Blender. They found no seam or projection problems and clearly better Japanese streetscapes than an SD 1.5 360-LoRA workflow. They judged Flux comparable but licence-restricted, and Skybox AI the more stable option.",
+          "rating": 75,
+          "note": "About 23 months old, so outside the 18-month preference window. Predates newer Blockade models. Replace when a newer independent test appears."
+        }
+      ],
+      "excluded_reviews": [
+        {
+          "outlet": "Cinevva guide 'Best AI Skybox and HDRI Generators for Games in 2026'",
+          "url": "https://app.cinevva.com/es/guides/ai-skybox-generators",
+          "date": "2026-09-05",
+          "verified": true,
+          "independent": false,
+          "reason": "Publisher sells its own competing skybox generator. It names Skybox AI the tool worth paying for in Unity/Unreal production and says it does not describe a hands-on method."
+        },
+        {
+          "outlet": "Sloyd blog 'Best Blockade Labs Skybox AI Alternatives (2026)'",
+          "url": "https://www.sloyd.ai/blog/top-skybox-ai-alternatives-for-360-skybox-generation",
+          "verified": false,
+          "independent": false,
+          "reason": "Competitor (Sloyd sells a skybox generator). Seen only in search snippets: it calls Skybox AI the tool to beat for 32-bit HDRI."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "G2 (Blockade Labs seller page)", "rating": null, "scale": 5, "count": 0, "url": "https://www.g2.com/sellers/blockade-labs", "verified": false, "note": "Search snippet only: 0 reviews. Not opened (G2 usually 403)."},
+          {"platform": "Unity Asset Store ('Skybox AI Generator by Blockade Labs (Subscription)', v2.0.3, Dec 2025)", "rating": null, "scale": 5, "count": 19, "url": "https://assetstore.unity.com/packages/slug/274237", "verified": true, "note": "19 reviews, below the 25 threshold; star average not shown in fetched page. 1,693 favourites."},
+          {"platform": "Trustpilot / Product Hunt", "rating": null, "scale": 5, "count": null, "url": null, "verified": false, "note": "No Trustpilot profile found (blockadelabs.com and .ai return 404); Product Hunt review pages 404."}
+        ],
+        "mentions": [
+          {"url": "https://news.ycombinator.com/item?id=36166511", "date": "2023-06-02", "sentiment": null, "note": "HN launch thread (137 points, 48 comments). Too old for the 18-month window; not sampled."}
+        ],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {"text": "8K panoramas with seamless wrap; 16K and HDRI/depth/mesh export on higher tiers; official Unity plugin and REST API", "url": "https://www.blockadelabs.com/"},
+        {"text": "Says over 1.5 million creators have used Skybox AI", "url": "https://www.blockadelabs.com/post/how-to-make-a-skybox-with-ai-complete-guide-2026"}
+      ],
+      "strengths": ["seam-free 360 wrap in hands-on tests", "usable as environment lighting (HDR) as well as backdrop", "Unity plugin and API for pipelines"],
+      "weaknesses": ["occasional seams/artifacts in complex scenes and close-up depth", "little control over object placement", "free plan is preview-only"],
+      "examples": [],
+      "notes": "No independent benchmark exists for skybox/panorama generators. Only reviews signal available, so this tool would be Provisional. Review-site ratings are absent or below 25 reviews. CG Channel covered Model 3 (8K) in April 2024 as news only (https://www.cgchannel.com/2024/04/blockade-labs-launches-skybox-ai-2/), not a review."
+    },
+    "meshy": {
+      "benchmarks": [
+        {
+          "source": "Top 3D AI arena (top3d.ai), blind head-to-head votes",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Textured board",
+          "model_version": "Meshy 7.1",
+          "rank": 3, "out_of": 21, "value": 1057, "win_rate": 0.561, "votes": 196,
+          "season": "Sep 2026 (1 Sep-1 Oct 2026, final)",
+          "percentile_score": 90.0,
+          "independent": "unclear",
+          "verified": true,
+          "note": "Newest Meshy model but only 196 votes. Meshy 7 ranked #5 (ELO 1050, 1,105 votes, percentile 80.0); Meshy 6 #9 (percentile 60.0). Board judges the whole textured model (mesh + texture), not texture alone. Site run by creator 'Stefan 3D AI', sells ad slots, says rankings are not for sale."
+        },
+        {
+          "source": "3D Arena (Hugging Face), community blind pairwise votes",
+          "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+          "data_url": "https://3d-arena-3d-arena.hf.space/api/leaderboard",
+          "metric": "ELO, render board (appearance of rendered output)",
+          "model_version": "Meshy-7",
+          "rank": 5, "out_of": 24, "value": 1313, "votes": 231,
+          "percentile_score": 82.6,
+          "independent": true,
+          "verified": true,
+          "note": "Meshy-6 ranks #3 (ELO 1353, 1,025 votes, percentile 91.3). Use whichever the runbook treats as 'best current' (both are offered by the service as far as known). Render board mixes geometry and texture; the 3D Arena paper (arXiv 2506.18787) reports textured models get a 144 ELO advantage, so appearance drives votes."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "Coruzant, 'Best AI for 3D Models 2026: Meshy vs Tripo vs Rodin'",
+          "url": "https://coruzant.com/ai/best-ai-for-3d-models-honest-comparison/",
+          "date": "2026-08-31",
+          "author": "Bailey Thomas",
+          "independent": "unclear",
+          "verified": true,
+          "summary": "Same-prompt test of four tools on four named assets, with texture quality as one criterion. Meshy's textures were rated Excellent and the most polished with minimal touch-up; it led overall.",
+          "rating": 90,
+          "note": "No disclosure; body links to meshy.ai only, and the article favours Meshy throughout. Generation count and benchmark method not published. Treat as weak evidence."
+        }
+      ],
+      "excluded_reviews": [
+        {"outlet": "StraySpark blog (AI PBR material pipeline)", "url": "https://www.strayspark.studio/blog/ai-pbr-material-generation-pipeline-blender-unreal", "date": "2026-03-24", "verified": true, "independent": false, "reason": "StraySpark sells a competing AI Material Generator Blender add-on. It calls Meshy the most mature tool for game-ready PBR output, strong on stone/brick/concrete but weaker on organic and stylized materials."},
+        {"outlet": "HackerNoon, Meshy 8K AI texturing test", "url": "https://hackernoon.com/lang/es/i-ran-the-same-models-through-meshy-8k-ai-texturing-resolution-detail-and-de-lighting", "date": "2026-07-23", "verified": true, "independent": false, "reason": "Author is a designer at Meshy; Business Blogging Program; referral links."},
+        {"outlet": "e-architect 'Meshy vs Tripo AI 3D texture generation'", "url": "https://mail.e-architect.com/articles/meshy-vs-tripo-ai-3d-texture-generation", "date": "2026-08-01", "verified": true, "independent": "unclear", "reason": "No testing described; links only to meshy.ai. Not a hands-on review."},
+        {"outlet": "Unite.AI Meshy review", "url": "https://www.unite.ai/meshy-ai-review/", "date": "2026-07-21", "verified": true, "independent": false, "reason": "Affiliate-heavy (10 goto links for Meshy/Tripo/Sloyd); no texture findings."},
+        {"outlet": "image-to-3d.ai '8 Best AI Texture Generators'", "url": "https://image-to-3d.ai/blog/best-ai-texture-generator/", "verified": true, "independent": false, "reason": "Vendor ranks its own texture generator first."}
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 4.7, "scale": 5, "count": 3888, "url": "https://www.trustpilot.com/review/meshy.ai", "date_checked": "2026-10-24", "verified": true, "score": 92.5, "note": "Whole product, not texturing specifically. 3,560 of 3,888 reviews in the last 12 months suggests invited reviews. 84% 5-star, 3% 1-star."},
+          {"platform": "Product Hunt", "rating": 4.9, "scale": 5, "count": 22, "url": "https://www.producthunt.com/products/meshy/reviews", "verified": false, "note": "From the 3d-models research notes; under 25 reviews, do not score."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {"text": "AI Texturing works best on props, buildings and weapons; humans, characters and animals still need improvement; supply UVs or auto-UV quality may be limited", "url": "https://docs.meshy.ai/ai-texturing"}
+      ],
+      "strengths": ["most polished textures in a same-prompt test", "full PBR map sets and retexturing of uploaded meshes", "strong on hard-surface/architectural materials"],
+      "weaknesses": ["organic and stylized materials weaker", "characters/creatures textured less well (vendor admits)", "auto-UVs limit quality on unwrapped meshes"],
+      "examples": [],
+      "notes": "No independent test of Meshy's retexture-an-uploaded-mesh feature or its tileable texture generator was found. Benchmarks measure textured generation, not retexturing."
+    },
+    "tripo": {
+      "benchmarks": [
+        {
+          "source": "Top 3D AI arena (top3d.ai), blind head-to-head votes",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Textured board",
+          "model_version": "Tripo AI v3.1",
+          "rank": 1, "out_of": 21, "value": 1094, "win_rate": 0.663, "votes": 914,
+          "season": "Sep 2026 (final)",
+          "percentile_score": 100.0,
+          "independent": "unclear",
+          "verified": true,
+          "note": "Whole textured model judged (mesh + texture). Tripo also #1 on the geometry board, so texture vs. shape can't be separated. TripoSR on 3D Arena is a different open model and is not used."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "Coruzant, 'Best AI for 3D Models 2026: Meshy vs Tripo vs Rodin'",
+          "url": "https://coruzant.com/ai/best-ai-for-3d-models-honest-comparison/",
+          "date": "2026-08-31",
+          "author": "Bailey Thomas",
+          "independent": "unclear",
+          "verified": true,
+          "summary": "Texture quality rated Good. It was the fastest tool but sometimes trailed Meshy on texture detail.",
+          "rating": 60,
+          "note": "Same caveats as for Meshy (no disclosure, thin methodology, Meshy-leaning)."
+        }
+      ],
+      "excluded_reviews": [
+        {"outlet": "StraySpark blog (AI PBR material pipeline)", "url": "https://www.strayspark.studio/blog/ai-pbr-material-generation-pipeline-blender-unreal", "date": "2026-03-24", "verified": true, "independent": false, "reason": "Sells a competing AI material generator. It says Tripo is better for organic and layered materials, with less reliable tiling and 2K native max."}
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 4.4, "scale": 5, "count": 506, "url": "https://www.trustpilot.com/review/tripo3d.ai", "date_checked": "2026-10-24", "verified": true, "score": 85.0, "note": "Whole product. 81% 5-star, 11% 1-star; 1-stars mostly billing/refunds. One May 2026 5-star review says texturing gives varied results."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {"text": "Tripo 3.0 texturing model generates PBR textures for existing meshes from text, image or style references (as listed on Scenario's model catalogue)", "url": "https://www.scenario.com/models/tripo-30-texturing"}
+      ],
+      "strengths": ["top of the blind textured-model board (Sep 2026)", "fast"],
+      "weaknesses": ["texture detail can trail Meshy", "texturing results vary (user report)"],
+      "examples": [],
+      "notes": "Scenario's catalogue page was seen only in search results (not opened); kept as a vendor claim."
+    },
+    "hyper3d-rodin": {
+      "benchmarks": [
+        {
+          "source": "Top 3D AI arena (top3d.ai), blind head-to-head votes",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Textured board",
+          "model_version": "Rodin Gen 2.5",
+          "rank": 2, "out_of": 21, "value": 1066, "win_rate": 0.614, "votes": 1034,
+          "season": "Sep 2026 (final)",
+          "percentile_score": 95.0,
+          "independent": "unclear",
+          "verified": true,
+          "note": "Rodin is only #14 of 21 on the geometry board, so its textured-board rank points to strong texture/appearance specifically."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "Coruzant, 'Best AI for 3D Models 2026: Meshy vs Tripo vs Rodin'",
+          "url": "https://coruzant.com/ai/best-ai-for-3d-models-honest-comparison/",
+          "date": "2026-08-31",
+          "author": "Bailey Thomas",
+          "independent": "unclear",
+          "verified": true,
+          "summary": "Texture quality rated High, with hard-surface detail and PBR materials praised. There is no separate written texture verdict.",
+          "rating": 75,
+          "note": "Same caveats as above."
+        }
+      ],
+      "excluded_reviews": [
+        {"outlet": "image-to-3d.ai", "url": "https://image-to-3d.ai/blog/best-ai-texture-generator/", "verified": true, "independent": false, "reason": "Vendor-authored. It found Rodin's texture quality average and free downloads capped at 1K."}
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 2.7, "scale": 5, "count": 56, "url": "https://www.trustpilot.com/review/hyper3d.ai", "date_checked": "2026-10-24", "verified": true, "score": 42.5, "note": "50% 1-star, mostly cancellation/renewal billing. Texture-specific comments are mixed: one 'too good', others want better consistency between preview and download and more accurate UVs/textures."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": ["#2 on the blind textured board despite weak geometry rank", "PBR materials on hard-surface assets"],
+      "weaknesses": ["downloaded textures can look weaker than the preview (user reports)", "UV/texture accuracy for use in other software (user reports)"],
+      "examples": [],
+      "notes": "Hyper3D also sells OmniCraft (32-bit HDR panorama/skybox tool), which is relevant to skyboxes but not covered here (see missing_tools)."
+    },
+    "hunyuan3d": {
+      "benchmarks": [
+        {
+          "source": "3D Arena (Hugging Face), community blind pairwise votes",
+          "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+          "data_url": "https://3d-arena-3d-arena.hf.space/api/leaderboard",
+          "metric": "ELO, render board",
+          "model_version": "Hunyuan3D-2.1 (open)",
+          "rank": 9, "out_of": 24, "value": 1272, "votes": 2213,
+          "percentile_score": 65.2,
+          "independent": true,
+          "verified": true,
+          "note": "Correct open model. The render board mixes geometry and texture."
+        }
+      ],
+      "excluded_benchmarks": [
+        {"source": "top3d.ai Sep 2026 Textured board", "url": "https://top3d.ai/leaderboard/seasons/sep-26", "detail": "Hunyuan 3D v3.1 #7 of 21", "verified": true, "reason": "Tencent's hosted v3.1, not the open 2.1 we list."}
+      ],
+      "reviews": [],
+      "excluded_reviews": [
+        {"outlet": "Coruzant", "url": "https://coruzant.com/ai/best-ai-for-3d-models-honest-comparison/", "date": "2026-08-31", "verified": true, "independent": "unclear", "reason": "Rated 'Hunyuan3D' texture Medium (usable concepts, cleanup needed) but does not say which version. Likely the hosted 3.x, so not used for the open 2.1."}
+      ],
+      "users": {"ratings": [], "mentions": [], "sampled": 0},
+      "vendor_claims": [
+        {"text": "Hunyuan3D-Paint-2.1 PBR pipeline beats 2.0 on Tencent's own texture metrics (CLIP-FID 24.78 vs 26.44); texture generation needs about 21 GB VRAM", "url": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1", "verified": false}
+      ],
+      "strengths": [],
+      "weaknesses": ["texture stage needs roughly 20 GB+ VRAM (creator could not run it on a 6 GB laptop; seen in search snippet only)"],
+      "examples": [],
+      "notes": "No independent hands-on test of the open Paint 2.1 texture model was found. The VRAM point comes from search snippets (Tencent model card, The Local Lab Patreon), not opened pages."
+    },
+    "sloyd": {
+      "benchmarks": [
+        {
+          "source": "Top 3D AI arena (top3d.ai), blind head-to-head votes",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Textured board",
+          "model_version": "Sloyd AI v3",
+          "rank": 6, "out_of": 21, "value": 1050, "win_rate": 0.528, "votes": 884,
+          "season": "Sep 2026 (final)",
+          "percentile_score": 75.0,
+          "independent": "unclear",
+          "verified": true,
+          "note": "Covers Sloyd's textured generation, not its separate retexturing tool."
+        }
+      ],
+      "reviews": [],
+      "excluded_reviews": [
+        {"outlet": "Unite.AI Sloyd review", "url": "https://www.unite.ai/sloyd-ai-review/", "date": "2025-12-11 (updated 2026-03-30)", "verified": true, "independent": false, "reason": "Affiliate compensation disclosed; no texture or retexture assessment."}
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 3.7, "scale": 5, "count": 19, "url": "https://www.trustpilot.com/review/sloyd.ai", "verified": false, "note": "Figure from today's 3d-models research notes; under 25 reviews, do not score. A 1-star review reportedly says retexturing stalls, and Sloyd's reply admits its newest texturing algorithm is not yet in the retexture workflow (search snippet, not opened)."},
+          {"platform": "Capterra", "rating": 4.2, "scale": 5, "count": 47, "url": "https://www.capterra.com/p/10015811/Sloyd/reviews", "verified": false, "note": "Capterra returned 403; snippet only. Do not score."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {"text": "Sloyd 2.0 text-prompt texturing assistant, also for already generated models, 256 to 2K resolution", "url": "https://www.sloyd.ai/blog/introducing-sloyd-2-0", "verified": false}
+      ],
+      "strengths": [],
+      "weaknesses": ["retexturing lags its generation quality (vendor reply to a user review, unverified)"],
+      "examples": [],
+      "notes": "Only benchmark signal available. The Sloyd skybox generator was not researched."
+    },
+    "scenario": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {"platform": "Product Hunt", "rating": 5.0, "scale": 5, "count": 3, "url": "https://www.producthunt.com/products/scenario/reviews", "verified": true, "note": "3 reviews, 1-2 years old, about character consistency rather than textures. Do not score."},
+          {"platform": "Trustpilot", "rating": 3.2, "scale": 5, "count": 1, "url": "https://www.trustpilot.com/review/scenario.com", "verified": false, "note": "From the 3d-models notes; 1 review."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {"text": "Scenario Texture: in-house tileable top-down texture generator up to 4K, with PBR map export and a 3D preview viewer", "url": "https://help.scenario.com/articles/3312894507-scenario-texture-the-essentials", "verified": false}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "No independent texture evidence found. Scenario also resells third-party texturing models (Tripo, Meshy), so its pages are not independent for those tools."
+    },
+    "leonardo-ai": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "DEV Community",
+          "url": "https://dev.to/muhammad_talhamalikmal/leonardo-ai-has-two-features-midjourney-doesnt-heres-how-to-use-them-for-game-dev-2c5h",
+          "date": "2026-07-22",
+          "author": "Muhammad Talha Malik (Unity developer)",
+          "independent": "unclear",
+          "verified": true,
+          "summary": "A practitioner write-up of the 3D Texture Generation feature, which outputs albedo, normal and roughness maps. It works well on worn, irregular surfaces (stone, wood, rust, aged paint) but poorly on skin and fur and on regular patterns like brick and tile.",
+          "rating": 45,
+          "note": "Hands-on use implied by the settings detail but not explicitly claimed. Links to the author's external guide; no affiliate disclosure."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 4.7, "scale": 5, "count": 1544, "url": "https://www.trustpilot.com/review/leonardo.ai", "date_checked": "2026-10-24", "verified": true, "score": 92.5, "note": "Whole product, dominated by image generation and support praise; no review mentions texture generation. Trustpilot says the company has not invited customers recently. Weak relevance to this job."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": ["good on worn/weathered surfaces (one practitioner)"],
+      "weaknesses": ["weak on regular patterns like brick and tile", "weak on skin and fur"],
+      "examples": [],
+      "notes": "Consider whether a whole-product Trustpilot rating should count for a texture ranking when no review mentions textures."
+    },
+    "layer-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 3.2, "scale": 5, "count": 1, "url": "https://www.trustpilot.com/review/layer.ai", "verified": true, "note": "1 review (1-star, about UI/pricing). Do not score."},
+          {"platform": "G2", "rating": 5.0, "scale": 5, "count": 2, "url": "https://g2.com/sellers/layer-data-ltd", "verified": false, "note": "Search snippet only."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {"text": "Generates PBR-ready base textures for artists to refine, 512 to 4096 px per target platform", "url": "https://layer.ai/use-cases/texture-generation", "verified": false}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "No independent texture evidence found."
+    },
+    "ludo-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": null, "scale": 5, "count": 0, "url": "https://www.trustpilot.com/review/ludo.ai", "verified": true, "note": "No reviews."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {"text": "3D generator outputs PBR maps (albedo, metallic, roughness) and has a re-texturing mode that keeps the mesh; separate Texture Generator with API/MCP", "url": "https://ludo.ai/blog/level-up-3d-assets-new-physically-based-rendering-pbr-textures", "verified": false}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Stork.ai gives Ludo's asset tool 25/100, but that is a 'defensibility' rating seen only in a snippet, not a hands-on review. Not used."
+    },
+    "unity-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {"ratings": [], "mentions": [], "sampled": 0},
+      "vendor_claims": [
+        {"text": "Material Generator makes tileable PBR materials from text/reference images; positioned for prototyping and placeholder assets; Generators also offer third-party models from Scenario and Layer", "url": "https://unity.com/blog/unity-ai-material-generator", "verified": false}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "No independent hands-on review of the Unity 6.2+ Material/Texture2D Generators found. GameFromScratch reviewed the older Muse tools (2024-04-25), a different product, so it is not used."
+    }
+  },
+  "missing_tools": [
+    {"name": "Adobe Substance 3D Sampler (Text-to-Texture, Image-to-Material)", "url": "https://experienceleague.adobe.com/en/docs/substance-3d-sampler/using/features-and-workflows/generative-workflows", "why": "Industry-standard material tool with generative tileable textures (beta). Most roundups list it as the professional reference.", "verified": false},
+    {"name": "Ubisoft La Forge CHORD (ComfyUI)", "url": "https://blog.comfy.org/p/ubisoft-open-sources-the-chord-model", "why": "Open PBR material model (Dec 2025): one texture to base colour/normal/height/roughness/metalness. Research-only licence.", "verified": true},
+    {"name": "StableProjectorz", "url": "https://stableprojectorz.com/", "why": "Free local SD-based tool for texturing existing 3D models with projections; keeps original UVs.", "verified": false},
+    {"name": "Dream Textures (Blender add-on)", "url": "https://github.com/carson-katri/dream-textures", "why": "Free local texture generation in Blender; listed in comparisons.", "verified": false},
+    {"name": "StableGen (Blender add-on)", "url": null, "why": "Open-source Blender texturing stack (SDXL/FLUX). Mentioned in a StraySpark post.", "verified": false},
+    {"name": "ArmorLab", "url": "https://armorlab.org/", "why": "Usual free offline pick for AI PBR map generation in roundups.", "verified": false},
+    {"name": "Hyper3D OmniCraft (HDRI/skybox)", "url": "https://hyper3d.ai/", "why": "Recommended in skybox roundups for true 32-bit HDR panoramas. Main rival to Skybox AI.", "verified": false},
+    {"name": "Cinevva Skybox Generator", "url": "https://app.cinevva.com/guides/ai-skybox-generators", "why": "Free browser skybox generator with 8K and depth maps (LDR only), per the vendor's own guide.", "verified": true},
+    {"name": "GenPBR", "url": null, "why": "Deterministic albedo-to-PBR map derivation; not generative but often compared.", "verified": false}
+  ],
+  "caveats": "Texture-specific independent evidence is very thin. No blind benchmark exists for tileable PBR material generators or for skybox/panorama generators. The only benchmarks (top3d.ai Textured board, 3D Arena render board) judge whole textured 3D models, so mesh quality leaks into the scores. Rodin's split (#2 textured vs #14 geometry) is the clearest texture-specific signal. Most texture 'comparisons' are vendor-authored (Meshy, Tripo, Hyper3D, 3D AI Studio, image-to-3d.ai, PLAYTEX, Lovart, Cinevva, Sloyd, StraySpark) and were excluded. Coruzant is the only multi-tool same-prompt review with texture verdicts, and its independence is unclear. Review-site ratings (Trustpilot) are whole-product and rarely mention textures. Reddit and X were not sampled by design. Forum searches (Polycount, Blender Artists, Unity Discussions, Hacker News) found no recent threads on output quality, so community sampling is 0 for every tool. No Sketchfab or YouTube examples were collected. Percentile scores use 100*(N-rank)/(N-1)."
+}

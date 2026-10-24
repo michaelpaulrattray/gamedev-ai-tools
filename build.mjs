@@ -427,6 +427,9 @@ for (const key of Object.keys(TASKS)) {
   rows.forEach((r, i) => { r.n = i + 1; r.label = (R.labels && R.labels[r.t.slug]) || ''; });
   RANKED[key] = { checked: R.checked || CHECKED, rows, nEvidence: ev.length };
 }
+// Thin evidence: fewer than 2 tools in the job have a confident, evidence-based rank. Pages say so plainly.
+const thinJob = key => { const R = RANKED[key]; return !R || R.rows.filter(r => r.tier === 'evidence').length < 2; };
+const thinNote = (label, { compare = false } = {}) => `<aside class="thin-note" role="note"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16.5v.01"/></svg><div><b>Not much independent evidence yet.</b> ${compare ? 'Few independent tests or reviews exist for these tools' : `Few independent tests, reviews or user reports exist for ${esc(label.toLowerCase())} tools`}, so ${compare ? 'this comparison leans' : 'this list leans'} on what each tool offers (job focus, engine support, price) and marks ranks as provisional. We'll update it as evidence appears. Know of a test or review? <a href="${mailto(`Evidence for ${label}`)}">Send it to us</a>.</div></aside>`;
 const rankOf = (slug, key) => { const R = RANKED[key]; const r = R && R.rows.find(x => x.t.slug === slug); return r || null; };
 // Category rank card body for evidence-scored rows: score, the four signals, strengths/watch-outs, sources on demand.
 const CONF_TXT = { confident: 'Ranked on independent evidence', provisional: 'Provisional: one kind of evidence', fit: 'Not enough evidence yet: game-dev fit only' };
@@ -617,7 +620,7 @@ for (const [key, c] of Object.entries(TASKS)) {
 <header class="cat-hero">${artImg(c.page, { eager: true })}<div>
 <h1>Best ${esc(c.h1)}</h1>
 ${RANKED[key] ? `<p>${list.length} tools, ranked ${RANKED[key].nEvidence ? 'first by independent quality tests where they exist, then by fit for game devs' : 'by fit for game devs (we found no independent quality tests for these tools yet)'}. Paid placements never change the order. <a href="${L('/how-we-rank/')}">How we rank</a> · Checked ${timeEl(RANKED[key].checked)}</p>` : `<p>${list.length} tools, in alphabetical order (not ranked yet). Check each tool's commercial-use notes before you ship assets in a game.</p>`}
-</div></header>
+${thinJob(key) ? thinNote(c.label) : ''}</div></header>
 ${catFilters(list)}
 ${catTable(list, RANKED[key])}<p class="cat-empty" hidden>No tools match these filters. <button type="button" class="linkish" data-reset>Clear filters</button></p></div>
 ${list.length > 1 ? `<div class="cmp-row" style="margin-top:6px"><span>Compare side by side:</span>${cp.map(cmpChip).join('')}<a class="chip c-muted" href="${L(`/compare/?task=${key}`)}">Pick any two →</a></div>` : ''}
@@ -1155,6 +1158,7 @@ for (const [a, b, curated] of ALL_PAIRS) {
 <h1 class="page-h cmp-h1">${esc(A.name)} vs ${esc(B.name)}</h1>
 <p class="page-sub">${esc(TASKS[pairTask(A, B)].label)} · checked ${timeEl(CHECKED)} · <a href="${L(`/compare/?task=${pairTask(A, B)}`)}">Compare different tools</a></p>
 ${matchup(A, B, pairTask(A, B))}
+${(() => { const k = pairTask(A, B), rA = rankOf(A.slug, k), rB = rankOf(B.slug, k); return [rA, rB].every(r => !r || r.tier !== 'evidence') ? thinNote(TASKS[k].label, { compare: true }) : ''; })()}
 ${pickIf(A, B, pairTask(A, B))}
 ${scoresSection(A, B, pairTask(A, B))}
 ${examplesSection(A, B, pairTask(A, B))}
