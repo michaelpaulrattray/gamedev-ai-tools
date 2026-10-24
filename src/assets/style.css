@@ -1055,3 +1055,17 @@ a.mu-rank:hover{color:var(--text);border-color:var(--accent)}
 .badge-demo .bd.dark{background:#16161b}.badge-demo .bd.light{background:#f4f4f7}
 .badge-demo .bd span{font-size:.78rem;color:var(--muted)}
 .badge-demo .bd.light span{color:#5b5b66}
+/* homepage job tiles, Unreal-style: 4 across, one bold label + circled arrow on a strong bottom fade, #1 pick as a solid pill */
+.uh-tiles{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.uh-tile{aspect-ratio:16/10;border-radius:14px}
+.uh-tile:after{background:linear-gradient(180deg,rgba(16,16,20,0) 38%,rgba(16,16,20,.55) 62%,rgba(16,16,20,.94) 100%)}
+.uh-tile-body{left:16px;right:16px;bottom:14px;flex-direction:row;align-items:center;gap:8px}
+.uh-tile-body strong{font-size:1.08rem;font-weight:700;line-height:1.2;text-shadow:0 1px 12px rgba(0,0,0,.6)}
+.uh-go{flex:0 0 auto;transition:transform .2s}.uh-tile:hover .uh-go{transform:translateX(3px)}
+.uh-tile-top{position:absolute;top:10px;left:10px;display:inline-flex;align-items:center;gap:6px;max-width:calc(100% - 20px);padding:4px 10px 4px 4px;border-radius:999px;background:rgba(16,16,20,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.1);font-size:.76rem;font-weight:600;color:#fff;opacity:0;transform:translateY(-4px);transition:opacity .2s,transform .2s}
+.uh-tile-top span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uh-tile-top .tlogo{border-radius:999px;border:0}.uh-tile-top .tlogo.mono{font-size:.45rem}
+.uh-tile:hover .uh-tile-top,.uh-tile:focus-visible .uh-tile-top{opacity:1;transform:none}
+@media (hover:none){.uh-tile-top{opacity:1;transform:none}}
+@media (max-width:1020px){.uh-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:720px){.uh-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.uh-tile-body{left:12px;right:12px;bottom:10px}.uh-tile-body strong{font-size:.9rem}.uh-go{width:18px;height:18px}.uh-tile-top{font-size:.7rem}}
