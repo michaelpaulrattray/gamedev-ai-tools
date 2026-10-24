@@ -1,0 +1,1916 @@
+{
+  "task": "3d-models",
+  "checked": "2026-10-24",
+  "tools": {
+    "meshy": {
+      "benchmarks": [
+        {
+          "source": "3D Arena (Hugging Face, community blind pairwise votes)",
+          "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+          "data_url": "https://3d-arena-3d-arena.hf.space/api/leaderboard",
+          "metric": "ELO (render board)",
+          "value": 1353,
+          "rank": 3,
+          "out_of": 24,
+          "votes": 1025,
+          "model_version": "Meshy-6",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": null
+        },
+        {
+          "source": "3D Arena (Hugging Face, community blind pairwise votes)",
+          "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+          "data_url": "https://3d-arena-3d-arena.hf.space/api/leaderboard",
+          "metric": "ELO (render board)",
+          "value": 1313,
+          "rank": 5,
+          "out_of": 24,
+          "votes": 231,
+          "model_version": "Meshy-7",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": "Few votes so far (231); rating still volatile."
+        },
+        {
+          "source": "3D Arena (Hugging Face, community blind pairwise votes)",
+          "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+          "data_url": "https://3d-arena-3d-arena.hf.space/api/leaderboard",
+          "metric": "ELO (render board)",
+          "value": 1003,
+          "rank": 23,
+          "out_of": 24,
+          "votes": 964,
+          "model_version": "Meshy-5",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": null
+        },
+        {
+          "source": "3D Arena (Hugging Face, community blind pairwise votes)",
+          "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+          "data_url": "https://3d-arena-3d-arena.hf.space/api/leaderboard?vote_type=topology",
+          "metric": "ELO (topology board)",
+          "value": 1328,
+          "rank": 3,
+          "out_of": 21,
+          "votes": 574,
+          "model_version": "Meshy-6",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": null
+        },
+        {
+          "source": "3D Arena (Hugging Face, community blind pairwise votes)",
+          "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+          "data_url": "https://3d-arena-3d-arena.hf.space/api/leaderboard?vote_type=topology",
+          "metric": "ELO (topology board)",
+          "value": 1273,
+          "rank": 5,
+          "out_of": 21,
+          "votes": 183,
+          "model_version": "Meshy-7",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": null
+        },
+        {
+          "source": "3D Arena (Hugging Face, community blind pairwise votes)",
+          "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+          "data_url": "https://3d-arena-3d-arena.hf.space/api/leaderboard?vote_type=topology",
+          "metric": "ELO (topology board)",
+          "value": 1108,
+          "rank": 13,
+          "out_of": 21,
+          "votes": 555,
+          "model_version": "Meshy-5",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": null
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Textured board",
+          "value": 1057,
+          "rank": 3,
+          "out_of": 21,
+          "win_rate": 0.561,
+          "votes": 196,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Meshy 7.1",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Textured board",
+          "value": 1050,
+          "rank": 5,
+          "out_of": 21,
+          "win_rate": 0.582,
+          "votes": 1105,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Meshy 7",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Textured board",
+          "value": 1041,
+          "rank": 9,
+          "out_of": 21,
+          "win_rate": 0.509,
+          "votes": 914,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Meshy 6",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Geometry board",
+          "value": 1122,
+          "rank": 3,
+          "out_of": 21,
+          "win_rate": 0.69,
+          "votes": 406,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Meshy 7",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Geometry board",
+          "value": 1041,
+          "rank": 11,
+          "out_of": 21,
+          "win_rate": 0.75,
+          "votes": 40,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Meshy 7.1",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Only 40 votes; unreliable."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Low Poly board",
+          "value": 999,
+          "rank": 5,
+          "out_of": 10,
+          "win_rate": 0.528,
+          "votes": 400,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Meshy T2",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Segmentation board",
+          "value": 1057,
+          "rank": 3,
+          "out_of": 7,
+          "win_rate": 0.598,
+          "votes": 249,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Meshy 6 Auto Split",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard",
+          "metric": "ELO, Overall (live, season in progress) board",
+          "value": 1086,
+          "rank": 3,
+          "out_of": 21,
+          "win_rate": 0.623,
+          "votes": 531,
+          "season": "Oct 2026 season (live, partial)",
+          "model_version": "Meshy 7.1",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard",
+          "metric": "ELO, Overall (live, season in progress) board",
+          "value": 1084,
+          "rank": 4,
+          "out_of": 21,
+          "win_rate": 0.64,
+          "votes": 872,
+          "season": "Oct 2026 season (live, partial)",
+          "model_version": "Meshy 7",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Step1X-3D paper (StepFun/LightIllusions, arXiv 2505.07747) - competitor-authored automatic metrics",
+          "url": "https://arxiv.org/html/2505.07747",
+          "metric": "CLIP-Score (texture) / Uni3D-I (geometry), 110 in-the-wild images",
+          "value": {
+            "clip_score": 0.796,
+            "uni3d_i": 0.357
+          },
+          "rank": "lowest texture CLIP-score of 6 models compared",
+          "out_of": 6,
+          "model_version": "Meshy-4",
+          "date": "2025-05",
+          "date_checked": "2026-10-24",
+          "independent": false,
+          "verified": true,
+          "note": "Old model version; authors build a competing model."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "3Dnatives (3Dnatives Lab)",
+          "url": "https://www.3dnatives.com/en/3dnatives-lab-meshy-ai-3d-model-generator-23092026/",
+          "date": "2026-09-23",
+          "author": "Lily-Swann Frost",
+          "independent": true,
+          "verified": true,
+          "model_version": "Meshy 7.1",
+          "summary": "Nine photo/AI-image inputs exported as 3MF for printing: all passed the slicer, but only 2 of 9 were single closed solids, hidden sides were invented and small text was lost. Judged good value for simple display objects, not for accurate parts.",
+          "rating": 65,
+          "focus": "3D printing, not game assets"
+        },
+        {
+          "outlet": "StraySpark blog",
+          "url": "https://www.strayspark.studio/blog/generative-3d-tools-comparison-meshy-rodin-tripo-csm-2026",
+          "date": "2026-04-23 (updated 2026-09-25)",
+          "author": null,
+          "independent": true,
+          "verified": true,
+          "model_version": "Meshy 5",
+          "summary": "Same eight prompts through Meshy, Rodin, Tripo and CSM, judged for UE5 use. Meshy was the most consistent all-rounder (won crystal test, strong on architecture, second on hard-surface) but sometimes added unrequested details.",
+          "rating": 75,
+          "note": "Studio sells mesh-cleanup and MCP tools (adjacent, not a generator); single-author qualitative judgement; Meshy 5 is now two versions old."
+        },
+        {
+          "outlet": "Fuser (fuser.studio)",
+          "url": "https://fuser.studio/articles/meshy-vs-rodin-vs-tripo",
+          "date": "2026-09-28",
+          "author": null,
+          "independent": false,
+          "verified": true,
+          "model_version": "Meshy 7",
+          "summary": "One product photo, one run each: Meshy 7 gave the most immediately usable game asset (about 30k triangles with full PBR maps) but was the slowest and most expensive of the three.",
+          "rating": 80,
+          "note": "Fuser is an aggregator that sells access to these models as canvas nodes; single sample."
+        },
+        {
+          "outlet": "HackerNoon",
+          "url": "https://hackernoon.com/how-i-stress-tested-3-ai-3d-generators-on-the-same-inputs-what-the-numbers-actually-show",
+          "date": "2026-06-03",
+          "author": "Marcus Chen (Technical Artist at Meshy)",
+          "independent": false,
+          "verified": true,
+          "model_version": "Meshy 6",
+          "summary": "Meshy employee's API test vs Tripo 3.1 and Rodin Gen-2.5: Meshy won textured single-view comparisons and was fastest at text-to-3D, but came last on white-mesh geometry and the author admits it merges parts and leaves holes on complex shapes.",
+          "rating": 60,
+          "note": "Vendor-authored; sample sizes not reported."
+        },
+        {
+          "outlet": "Cinevva guide",
+          "url": "https://app.cinevva.com/guides/ai-3d-model-generators",
+          "date": "2026-07-17 (updated 2026-09-14)",
+          "author": null,
+          "independent": false,
+          "verified": true,
+          "model_version": "Meshy (current at time)",
+          "summary": "Editorial roundup (no test run) recommending Meshy for hosted generation and editing, with topology options and a low-poly mode; notes download limits on the free tier.",
+          "rating": null,
+          "note": "Cinevva sells its own 3D generator; explicitly editorial, not a benchmark. No rating assigned."
+        },
+        {
+          "outlet": "All3DP",
+          "url": "https://all3dp.com/1/we-tested-meshy-6-can-ai-finally-generate-good-3d-printable-models-from-photos/",
+          "date": null,
+          "author": null,
+          "independent": true,
+          "verified": false,
+          "model_version": "Meshy 6",
+          "summary": "Hands-on 3D-printing test of Meshy 6 from photos; page returned 403 so contents not read. Search snippet indicated 10 reference photos produced 10 separate models rather than one merged model.",
+          "rating": null
+        },
+        {
+          "outlet": "All3DP",
+          "url": "https://all3dp.com/1/we-tested-meshy-7-1-does-the-new-ultra-4k-really-improve-3d-prints/",
+          "date": null,
+          "author": null,
+          "independent": true,
+          "verified": false,
+          "model_version": "Meshy 7.1",
+          "summary": "Test of Meshy 7.1 Ultra 4K output for printing; page returned 403. Search snippet said the 4K version came out hollow while 2K was solid, and higher resolution did not automatically mean more printable.",
+          "rating": null
+        }
+      ],
+      "users": {
+        "ratings": [
+          {
+            "platform": "Trustpilot",
+            "rating": 4.7,
+            "scale": 5,
+            "count": 3888,
+            "url": "https://www.trustpilot.com/review/meshy.ai",
+            "date_checked": "2026-10-24",
+            "verified": true,
+            "note": "3,560 of the reviews are from the last 12 months (suggests invited reviews). Low-star reviews mostly about downloads behind Pro plan and credits. A May 2026 third-party summary (StackSheriff) cited 2.0 from 13 reviews, so the profile changed a lot."
+          },
+          {
+            "platform": "Product Hunt",
+            "rating": 4.9,
+            "scale": 5,
+            "count": 22,
+            "url": "https://www.producthunt.com/products/meshy/reviews",
+            "date_checked": "2026-10-24",
+            "verified": true
+          },
+          {
+            "platform": "G2",
+            "rating": 4.7,
+            "scale": 5,
+            "count": "400+",
+            "url": "https://www.g2.com/products/meshy/reviews",
+            "date_checked": "2026-10-24",
+            "verified": false,
+            "note": "G2 returned 403. Figure from StackSheriff (checked 2026-05-05) and Meshy's own Nov 2025 press release; not confirmed on G2."
+          },
+          {
+            "platform": "Capterra",
+            "rating": null,
+            "scale": 5,
+            "count": null,
+            "url": null,
+            "verified": false,
+            "note": "No Capterra listing found; Gitnux figures (4.9/800+ and 4.75) are unsourced and contradictory, not recorded."
+          }
+        ],
+        "mentions": [
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=50094084",
+            "date": "2026-10-14",
+            "sentiment": "pos",
+            "note": "Hobbyist re-skinning a game with felt-toy assets says Meshy makes excellent meshes.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=49961791",
+            "date": "2026-10-05",
+            "sentiment": "neg",
+            "note": "Hobby game dev tried Meshy among other AI tools, never satisfied, hired a human 3D artist instead.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=49561336",
+            "date": "2026-09-04",
+            "sentiment": "pos",
+            "note": "Recommends Meshy and Tripo as good options with free credits.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=49542571",
+            "date": "2026-09-02",
+            "sentiment": "mixed",
+            "note": "Uses Meshy to bake detail textures onto self-made low-poly silhouettes rather than using its geometry directly.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=49402917",
+            "date": "2026-08-22",
+            "sentiment": "neg",
+            "note": "Calls output from Meshy (and other gen-AI) mediocre.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=48155261",
+            "date": "2026-05-15",
+            "sentiment": "neg",
+            "note": "Complains Meshy meshes run to hundreds of thousands of triangles; still tens of thousands after retopology.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=48154167",
+            "date": "2026-05-15",
+            "sentiment": "mixed",
+            "note": "Likes Meshy character generation for 3D printing but says costs add up quickly.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=48151585",
+            "date": "2026-05-15",
+            "sentiment": "pos",
+            "note": "Rates Meshy near the top for object quality, citing texturing and auto-rigging.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47829724",
+            "date": "2026-04-20",
+            "sentiment": "pos",
+            "note": "After trying many image-to-3D models, says Meshy's is the best; open TRELLIS far behind.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47831047",
+            "date": "2026-04-20",
+            "sentiment": "mixed",
+            "note": "Agrees output is strong but finds Meshy's web UI gamified and opaque.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47159348",
+            "date": "2026-02-25",
+            "sentiment": "neg",
+            "note": "Says Meshy, Tripo, Rodin and Luma all fail to give clean topology, textures and UVs; only slightly better than TRELLIS.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Blender Artists",
+            "url": "https://blenderartists.org/t/retexturing-ai-assets/1645653",
+            "date": "2026-06-19",
+            "sentiment": "mixed",
+            "note": "Meshy user (also tried Rodin, Tripo) cannot find a workflow to fix parts the AI textured wrongly; forum replies hostile to AI.",
+            "verified": true
+          },
+          {
+            "source": "Blender Artists",
+            "url": "https://blenderartists.org/t/rope-lashing-tips-and-use-of-ai/1620739",
+            "date": "2025-11-28",
+            "sentiment": "mixed",
+            "note": "Used Meshy image-to-3D plus light Blender cleanup as a time-saver; another user points out texture artifacts and intersecting geometry.",
+            "verified": true
+          },
+          {
+            "source": "Blender Artists",
+            "url": "https://blenderartists.org/t/retarget-fat-game-character/1629759",
+            "date": "2026-02-05",
+            "sentiment": "mixed",
+            "note": "Meshy-generated game character had to be decimated and hand-rigged; weights deform badly when retargeting Mixamo animation.",
+            "verified": true
+          },
+          {
+            "source": "Blender Artists",
+            "url": "https://blenderartists.org/t/meshy-draft-to-low-poly-model/1601986",
+            "date": "2025-07-16",
+            "sentiment": "mixed",
+            "note": "Indie dev hires an artist to turn a Meshy draft into a rigged low-poly model, i.e. treats output as concept only.",
+            "verified": true
+          }
+        ],
+        "sampled": 15,
+        "reddit": "Not sampled: reddit.com is blocked for both WebFetch and WebSearch in this environment."
+      },
+      "vendor_claims": [
+        {
+          "claim": "Meshy says Meshy 7 leads Tripo 3.1 and Rodin 2.5 on all three metrics of its own internal geometry-alignment benchmark (sample size and date not disclosed).",
+          "url": "https://www.meshy.ai/compare"
+        },
+        {
+          "claim": "Meshy reports a 97% slicer/print pass rate from its own internal test.",
+          "url": "https://www.meshy.ai/compare"
+        },
+        {
+          "claim": "Meshy cites a study of 1,331 senior 3D artists preferring Meshy 6 over Tripo 3.1 63.8% of the time (relayed via search results; not opened on the vendor page in this pass).",
+          "url": "https://www.meshy.ai/compare",
+          "verified": false
+        },
+        {
+          "claim": "Meshy employee's HackerNoon test: Meshy 6 beat Rodin Gen-2.5 83.9% in textured single-view blind votes.",
+          "url": "https://hackernoon.com/how-i-stress-tested-3-ai-3d-generators-on-the-same-inputs-what-the-numbers-actually-show"
+        }
+      ],
+      "strengths": [
+        "consistent textured output with full PBR maps",
+        "sensible default poly budget for real-time use",
+        "top-3 in both independent blind-vote arenas"
+      ],
+      "weaknesses": [
+        "merges parts / holes on complex shapes",
+        "invents unseen sides; small detail and text lost",
+        "credit costs and paywalled downloads"
+      ],
+      "examples": [
+        {
+          "type": "sketchfab",
+          "url": "https://sketchfab.com/3d-models/ff69bc6de8584bb4b2d6fac0b5a1d2ed",
+          "embed_url": "https://sketchfab.com/models/ff69bc6de8584bb4b2d6fac0b5a1d2ed/embed",
+          "title": "SpaceShip Fighter - Version 2 [MESHY 6]",
+          "author": "EthanfromEngland",
+          "licence": "CC Attribution",
+          "embedding": true,
+          "faces": 11506,
+          "published": "2026-06-03",
+          "verified": true,
+          "note": "Description says mesh and textures generated by Meshy, but also 'remeshed and texture compressed'. Author links a Meshy referral code."
+        },
+        {
+          "type": "sketchfab",
+          "url": "https://sketchfab.com/3d-models/5c243122d4994356b06c95a8f2e5e0e3",
+          "embed_url": "https://sketchfab.com/models/5c243122d4994356b06c95a8f2e5e0e3/embed",
+          "title": "A bowl of Ramen [MESHY 6]",
+          "author": "EthanfromEngland",
+          "licence": "CC Attribution",
+          "embedding": true,
+          "faces": 10190,
+          "published": "2026-03-04",
+          "verified": true,
+          "note": "Description: mesh and textures generated by Meshy; no edits mentioned."
+        },
+        {
+          "type": "youtube",
+          "url": "https://www.youtube.com/watch?v=ixbJUHhEItM",
+          "title": "I Compared 6 Image-to-3D Tools for Game Dev (Meshy, Hunyuan 3D, Rodin, 3DAI Studio & More)",
+          "channel": "Building Aeon",
+          "date": "2025-11-19",
+          "timestamp": "10:56 (final comparison and ratings); Meshy section 7:00",
+          "verified": true,
+          "note": "Same character reference through Hunyuan 3D, Tripo, Ludo, Rodin, Meshy, 3DAI Studio. Verdict not read (no transcript access)."
+        },
+        {
+          "type": "youtube",
+          "url": "https://www.youtube.com/watch?v=juQSXp5KlZc",
+          "title": "I Tested 5 AI Image to 3D Tools for Industrial Design",
+          "channel": "Design with Viktor",
+          "date": "2026-07-31",
+          "timestamp": "8:50 (side-by-side comparison)",
+          "verified": true,
+          "note": "Same reference image through Hunyuan 3D, Tripo, Meshy, Hyper3D Rodin, TRELLIS 2. Verdict not read."
+        }
+      ],
+      "notes": "Evidence spans Meshy 5 to 7.1. Independent arenas: 3D Arena has Meshy-6 #3/24 (render) and #3/21 (topology); top3d.ai Sep-2026 season has Meshy 7.1 #3 textured, Meshy 7 #3 geometry, and Meshy 7.1/7 #3-4 on the live October board. Meshy-7 on 3D Arena has only 231 votes."
+    },
+    "tripo": {
+      "benchmarks": [
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Textured board",
+          "value": 1094,
+          "rank": 1,
+          "out_of": 21,
+          "win_rate": 0.663,
+          "votes": 914,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Tripo AI v3.1",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Geometry board",
+          "value": 1146,
+          "rank": 1,
+          "out_of": 21,
+          "win_rate": 0.847,
+          "votes": 334,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Tripo AI v3.1",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Low Poly board",
+          "value": 1098,
+          "rank": 1,
+          "out_of": 10,
+          "win_rate": 0.714,
+          "votes": 91,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Tripo P2.0",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Only 91 votes for P2.0. Tripo P1.0 also #3 (1054, 476 votes) and Tripo 3.1 Retopo #4 (1015)."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Segmentation board",
+          "value": 1092,
+          "rank": 1,
+          "out_of": 7,
+          "win_rate": 0.698,
+          "votes": 248,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Tripo Segmentation v2.1",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Smart UV board",
+          "value": 1029,
+          "rank": 1,
+          "out_of": 2,
+          "win_rate": 0.663,
+          "votes": 98,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Tripo Smart UV",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Only two entrants and 98 votes; weak signal."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard",
+          "metric": "ELO, Overall (live, season in progress) board",
+          "value": 1109,
+          "rank": 1,
+          "out_of": 21,
+          "win_rate": 0.713,
+          "votes": 647,
+          "season": "Oct 2026 season (live, partial)",
+          "model_version": "Tripo AI v3.1",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Seed3D 2.0 paper (ByteDance Seed, arXiv 2605.13862) - competitor-run blind paired study, 60 raters with 3D background, 200+ image prompts",
+          "url": "https://arxiv.org/html/2605.13862",
+          "metric": "Seed3D 2.0 win rate vs this model (shape-only); lower = baseline stronger",
+          "value": 0.928,
+          "rank": "weakest of 4 shape baselines reported (Hunyuan3D-3.1 55.2%, HiTem v2.0 79.2%, Rodin Gen2 v1.9 89.6%, Tripo 3.0 92.8%)",
+          "out_of": 4,
+          "model_version": "Tripo 3.0",
+          "date": "2026-04-22",
+          "date_checked": "2026-10-24",
+          "independent": false,
+          "verified": true,
+          "note": "Authored by a competitor; only Seed3D-vs-baseline rates, not a ranking among baselines. Indirect only."
+        },
+        {
+          "source": "Step1X-3D paper (StepFun/LightIllusions, arXiv 2505.07747) - competitor-authored automatic metrics",
+          "url": "https://arxiv.org/html/2505.07747",
+          "metric": "CLIP-Score (texture) / Uni3D-I (geometry)",
+          "value": {
+            "clip_score": 0.848,
+            "uni3d_i": 0.366
+          },
+          "rank": "highest Uni3D-I of 6 models",
+          "out_of": 6,
+          "model_version": "Tripo v2.5",
+          "date": "2025-05",
+          "date_checked": "2026-10-24",
+          "independent": false,
+          "verified": true,
+          "note": "Old version; competitor-authored."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "StraySpark blog",
+          "url": "https://www.strayspark.studio/blog/generative-3d-tools-comparison-meshy-rodin-tripo-csm-2026",
+          "date": "2026-04-23",
+          "author": null,
+          "independent": true,
+          "verified": true,
+          "model_version": "Tripo P1",
+          "summary": "Best on the stylised cartoon prompt and the fastest tool, but judged the wrong style for hard-surface work and only roughly adequate for architecture blockouts.",
+          "rating": 60,
+          "note": "Tested Tripo P1 (low-poly model), not Tripo 3.x; single-author qualitative."
+        },
+        {
+          "outlet": "HackerNoon",
+          "url": "https://hackernoon.com/how-i-stress-tested-3-ai-3d-generators-on-the-same-inputs-what-the-numbers-actually-show",
+          "date": "2026-06-03",
+          "author": "Marcus Chen (Meshy employee)",
+          "independent": false,
+          "verified": true,
+          "model_version": "Tripo v3.1",
+          "summary": "Even in a Meshy employee's test, Tripo 3.1 won blind white-mesh geometry votes (77.9% vs Rodin single-view), had the cleanest topology, was fastest at image-to-3D and cheapest per call.",
+          "rating": 85,
+          "note": "Competitor-authored, which if anything biases against Tripo; sample sizes unreported."
+        },
+        {
+          "outlet": "Fuser (fuser.studio)",
+          "url": "https://fuser.studio/articles/meshy-vs-rodin-vs-tripo",
+          "date": "2026-09-28",
+          "author": null,
+          "independent": false,
+          "verified": true,
+          "model_version": "Tripo 2.5",
+          "summary": "Fastest and cheapest, cleanest speaker grille, but default output baked everything into one colour texture (chrome looked matte grey) and some details were invented; recommended for drafts and blockouts.",
+          "rating": 55,
+          "note": "Aggregator reselling access; tested the older Tripo 2.5 at defaults, one sample."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {
+            "platform": "Trustpilot",
+            "rating": 4.4,
+            "scale": 5,
+            "count": 506,
+            "url": "https://www.trustpilot.com/review/tripo3d.ai",
+            "date_checked": "2026-10-24",
+            "verified": true,
+            "note": "81% 5-star but 11% 1-star; 1-star reviews dominated by unexpected charges, cancellation and refund problems. Output complaints: distortions, missing parts, inconsistent textures."
+          },
+          {
+            "platform": "Product Hunt",
+            "rating": 4.8,
+            "scale": 5,
+            "count": 13,
+            "url": "https://www.producthunt.com/products/tripo-ai/reviews",
+            "date_checked": "2026-10-24",
+            "verified": true
+          },
+          {
+            "platform": "G2",
+            "rating": null,
+            "scale": 5,
+            "count": null,
+            "url": null,
+            "verified": false,
+            "note": "Not found / G2 blocked."
+          }
+        ],
+        "mentions": [
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=49897498",
+            "date": "2026-09-29",
+            "sentiment": "pos",
+            "note": "Says dedicated 3D models such as Tripo3D are much better than general multimodal models at 3D.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=49561336",
+            "date": "2026-09-04",
+            "sentiment": "pos",
+            "note": "Recommends Tripo (and Meshy) for low-poly work, notes free credits.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47410455",
+            "date": "2026-03-17",
+            "sentiment": "pos",
+            "note": "Automated game-generation pipeline uses Tripo3D for 3D assets at roughly 30-60 cents each.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47404581",
+            "date": "2026-03-16",
+            "sentiment": "neg",
+            "note": "Asks whether Tripo3D topology is still so bad that small edits need a full retopology.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=43492179",
+            "date": "2025-03-27",
+            "sentiment": "mixed",
+            "note": "Had OK experiences with Tripo for retopology and auto-rigging, but says it is early days.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47159348",
+            "date": "2026-02-25",
+            "sentiment": "neg",
+            "note": "Lumps Tripo with Meshy/Rodin/Luma as lacking clean topology, textures and UVs.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Godot Forum",
+            "url": "https://forum.godotengine.org/t/my-current-project-psychedelic-rpg/142131",
+            "date": "2026-07-29",
+            "sentiment": "pos",
+            "note": "Indie dev built card-game characters with Tripo image-to-3D plus Mixamo and says it works well for them.",
+            "verified": true
+          },
+          {
+            "source": "Godot Forum",
+            "url": "https://forum.godotengine.org/t/my-current-project-psychedelic-rpg/142131",
+            "date": "2026-07-29",
+            "sentiment": "neg",
+            "note": "Sceptical user's free Tripo test of a car photo was still generating after 30+ minutes.",
+            "verified": true
+          },
+          {
+            "source": "Godot Forum",
+            "url": "https://forum.godotengine.org/t/turrent-defence-simulator-indev-4-7-5/127327/99",
+            "date": "2026-05-19",
+            "sentiment": "neg",
+            "note": "Dev rejects Tripo and AI modelling in general and decides to learn Blender (attitude, not a quality test).",
+            "verified": true
+          },
+          {
+            "source": "Blender Artists",
+            "url": "https://blenderartists.org/t/retexturing-ai-assets/1645653",
+            "date": "2026-06-19",
+            "sentiment": "mixed",
+            "note": "User of Meshy/Rodin/Tripo struggles to fix wrongly interpreted materials on generated models.",
+            "verified": true
+          }
+        ],
+        "sampled": 10,
+        "reddit": "Not sampled (reddit.com blocked in this environment)."
+      },
+      "vendor_claims": [
+        {
+          "claim": "Tripo's March 2026 press release says H3.1/3.1 improves input alignment, geometry accuracy, texture quality and speed over earlier versions (no numbers).",
+          "url": "https://programminginsider.com/tripo-ai-introduces-h3-1-advancing-high-fidelity-ai-3d-generation-for-production/",
+          "verified": false
+        },
+        {
+          "claim": "Tripo's chief scientist told 80.lv that Smart Mesh produces game-ready assets with clean edge flow in under five seconds.",
+          "url": "https://80.lv/articles/how-tripo-is-tackling-clean-topology-for-its-3d-asset-pipeline",
+          "verified": false
+        }
+      ],
+      "strengths": [
+        "best blind-vote geometry and textured scores (top3d.ai Sep 2026)",
+        "clean topology / low-poly and retopo options",
+        "fast and cheap per generation"
+      ],
+      "weaknesses": [
+        "billing/cancellation complaints on Trustpilot",
+        "older/default modes bake flat single-colour textures",
+        "less suited to hard-surface style (one test)"
+      ],
+      "examples": [
+        {
+          "type": "sketchfab",
+          "url": "https://sketchfab.com/3d-models/d360d485ffe74d2f9b4782778dbae9ec",
+          "embed_url": "https://sketchfab.com/models/d360d485ffe74d2f9b4782778dbae9ec/embed",
+          "title": "Kiosco Tripo",
+          "author": "vmmaniac",
+          "licence": "CC Attribution",
+          "embedding": true,
+          "faces": 65712,
+          "published": "2026-05-05",
+          "verified": true,
+          "note": "Title/tag indicate Tripo generation from a reference image; no edits stated; model version not stated."
+        },
+        {
+          "type": "sketchfab",
+          "url": "https://sketchfab.com/3d-models/3069b06b3c844610a929523265b6083b",
+          "embed_url": "https://sketchfab.com/models/3069b06b3c844610a929523265b6083b/embed",
+          "title": "Anime Girl by Tripo",
+          "author": "AI3Duser1",
+          "licence": "CC Attribution",
+          "embedding": true,
+          "faces": 476530,
+          "published": "2026-02-10",
+          "verified": true,
+          "note": "Description says created with Tripo and links Tripo Studio with utm/invite codes; account looks Tripo-affiliated (marketing upload), so may be cherry-picked."
+        },
+        {
+          "type": "youtube",
+          "url": "https://www.youtube.com/watch?v=iqQ4j_oXD8k",
+          "title": "We Tested 6 AI 3D Model Generators: Fast3D, Rodin, Hi3D, Meshy, Neural4D and Tripo A",
+          "channel": "3Dnatives",
+          "date": "2026-10-05",
+          "timestamp": "4:47 (Neural4D vs Tripo AI); 2:11 Hi3D vs Meshy; 0:50 Fast3D vs Rodin",
+          "verified": true,
+          "note": "Pairs, not all-vs-all; each pair gets a different prompt, so Tripo/Meshy/Rodin are not compared on the same input. Verdict not read."
+        },
+        {
+          "type": "youtube",
+          "url": "https://www.youtube.com/watch?v=dlDdaVNCtZo",
+          "title": "Tripo3D vs Meshy vs Hunyuan3D vs Rodin: Which AI 3D Generator Wins?",
+          "channel": "AI WORLDWIDE",
+          "date": "2026-09-28",
+          "timestamp": null,
+          "verified": true,
+          "independent": false,
+          "note": "Same character and head references across four tools, but description promotes Tripo invite/discount codes - treat as Tripo-sponsored."
+        }
+      ],
+      "notes": "Do NOT attribute 3D Arena's TripoSR (#20/24 render, 1081; #20/21 topology, 980) or TripoSG (#8/21 topology, 1221) to Tripo's commercial service - these are open-source research models. Current commercial Tripo (v3.1, P1/P2) is not on 3D Arena; it is on top3d.ai, where it was #1 on all five boards in the Sep 2026 season and #1 on the live Oct board. Sloyd's own blog (vendor) also reported Tripo v3.1 #1 on an Aug 2026 top3d.ai snapshot."
+    },
+    "hyper3d-rodin": {
+      "benchmarks": [
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Textured board",
+          "value": 1066,
+          "rank": 2,
+          "out_of": 21,
+          "win_rate": 0.614,
+          "votes": 1034,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Rodin Gen 2.5",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Geometry board",
+          "value": 999,
+          "rank": 14,
+          "out_of": 21,
+          "win_rate": 0.512,
+          "votes": 324,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Rodin Gen 2.5",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Low Poly board",
+          "value": 993,
+          "rank": 6,
+          "out_of": 10,
+          "win_rate": 0.536,
+          "votes": 317,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Hyper3D Rodin Gen-2.5",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Segmentation board",
+          "value": 891,
+          "rank": 7,
+          "out_of": 7,
+          "win_rate": 0.307,
+          "votes": 254,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Rodin Gen-2.5",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard",
+          "metric": "ELO, Overall (live, season in progress) board",
+          "value": 1072,
+          "rank": 5,
+          "out_of": 21,
+          "win_rate": 0.592,
+          "votes": 748,
+          "season": "Oct 2026 season (live, partial)",
+          "model_version": "Rodin Gen 2.5",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Seed3D 2.0 paper (ByteDance Seed, arXiv 2605.13862) - competitor-run blind paired study",
+          "url": "https://arxiv.org/html/2605.13862",
+          "metric": "Seed3D 2.0 win rate vs this model (lower = baseline stronger)",
+          "value": {
+            "textured": 0.899,
+            "shape_only": 0.896
+          },
+          "rank": "Seed3D's largest textured margin was against Rodin; 3rd of 4 on shape-only",
+          "out_of": 4,
+          "model_version": "Rodin Gen2 v1.9",
+          "date": "2026-04-22",
+          "date_checked": "2026-10-24",
+          "independent": false,
+          "verified": true,
+          "note": "Competitor-authored, indirect."
+        },
+        {
+          "source": "Step1X-3D paper (arXiv 2505.07747) - competitor-authored automatic metrics",
+          "url": "https://arxiv.org/html/2505.07747",
+          "metric": "CLIP-Score (texture) / Uni3D-I (geometry)",
+          "value": {
+            "clip_score": 0.845,
+            "uni3d_i": 0.27
+          },
+          "rank": "lowest Uni3D-I of 6",
+          "out_of": 6,
+          "model_version": "Rodin v1.5",
+          "date": "2025-05",
+          "date_checked": "2026-10-24",
+          "independent": false,
+          "verified": true,
+          "note": "Very old version."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "StraySpark blog",
+          "url": "https://www.strayspark.studio/blog/generative-3d-tools-comparison-meshy-rodin-tripo-csm-2026",
+          "date": "2026-04-23",
+          "author": null,
+          "independent": true,
+          "verified": true,
+          "model_version": "Rodin Gen-2",
+          "summary": "Clear winner on hard-surface/mechanical prompts, but textures were weaker and its stylised cartoon result missed the brief; topology needs a retopo pass.",
+          "rating": 65
+        },
+        {
+          "outlet": "Fuser (fuser.studio)",
+          "url": "https://fuser.studio/articles/meshy-vs-rodin-vs-tripo",
+          "date": "2026-09-28",
+          "author": null,
+          "independent": false,
+          "verified": true,
+          "model_version": "Rodin Gen-2.5 (High)",
+          "summary": "Only model that rendered chrome as real metal and carved the most detail into geometry, but at 500k triangles with a noisy grille; recommended for close-up renders, not real-time.",
+          "rating": 70,
+          "note": "Aggregator reselling access; single sample."
+        },
+        {
+          "outlet": "HackerNoon",
+          "url": "https://hackernoon.com/how-i-stress-tested-3-ai-3d-generators-on-the-same-inputs-what-the-numbers-actually-show",
+          "date": "2026-06-03",
+          "author": "Marcus Chen (Meshy employee)",
+          "independent": false,
+          "verified": true,
+          "model_version": "Rodin Gen-2.5",
+          "summary": "Tracked fine input detail but had weaker overall structure and logic errors such as wrong finger counts; highest face count and price, trailed Meshy on textured votes.",
+          "rating": 45
+        },
+        {
+          "outlet": "Dupple",
+          "url": "https://dupple.com/tools/rodin-ai",
+          "date": "2026-05",
+          "author": null,
+          "independent": false,
+          "verified": true,
+          "model_version": "Rodin Gen-2 / 2.5",
+          "summary": "Editorial listing (no own test) calling Rodin the priciest per polygon with the heaviest meshes; cites an unlinked SimInsights trial finding about 1 in 10 generations client-ready across Rodin, Meshy and Tripo.",
+          "rating": null,
+          "note": "Affiliate links disclosed; no hands-on test, so not rated."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {
+            "platform": "Trustpilot",
+            "rating": 2.7,
+            "scale": 5,
+            "count": 56,
+            "url": "https://www.trustpilot.com/review/hyper3d.ai",
+            "date_checked": "2026-10-24",
+            "verified": true,
+            "note": "50% 1-star, mostly cancellation/renewal charges and slow support; positive reviews praise mesh quality and clean topology; some criticise textures/UVs. Count shown as 56 (12 months) but AI summary says 64."
+          },
+          {
+            "platform": "Product Hunt",
+            "rating": null,
+            "scale": 5,
+            "count": null,
+            "url": null,
+            "verified": false,
+            "note": "No Product Hunt review page found."
+          }
+        ],
+        "mentions": [
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47161689",
+            "date": "2026-02-26",
+            "sentiment": "pos",
+            "note": "Thinks Rodin is probably the best 3D asset generator.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47158255",
+            "date": "2026-02-25",
+            "sentiment": "pos",
+            "note": "Lists Rodin among proprietary tools offering clean topology and PBR textures.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47159348",
+            "date": "2026-02-25",
+            "sentiment": "neg",
+            "note": "Disputes that: Rodin, Tripo, Meshy, Luma don't give clean topology/UVs.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=45129037",
+            "date": "2025-09-04",
+            "sentiment": "neutral",
+            "note": "Show HN project used Hyper3D-Rodin for its 3D fruit models.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Blender Artists",
+            "url": "https://blenderartists.org/t/need-help-with-this-model-noob/1605753",
+            "date": "2025-08-10",
+            "sentiment": "mixed",
+            "note": "Beginner needed hundreds of Rodin attempts for a tank about 90% right (wheels squashed, sprockets not round) but says the hull and turret were near-perfect.",
+            "verified": true
+          },
+          {
+            "source": "Blender Artists",
+            "url": "https://blenderartists.org/t/retexturing-ai-assets/1645653",
+            "date": "2026-06-19",
+            "sentiment": "mixed",
+            "note": "Has used Rodin, still no good workflow to fix misinterpreted materials.",
+            "verified": true
+          },
+          {
+            "source": "Godot Forum",
+            "url": "https://forum.godotengine.org/t/from-sketch-to-screen-easy-character-creation-animation-in-godot/123551",
+            "date": "2025-09-28",
+            "sentiment": "pos",
+            "note": "Tutorial using Hyper3D for T-pose characters then Mixamo; other users welcomed it.",
+            "verified": true
+          },
+          {
+            "source": "Godot Forum",
+            "url": "https://forum.godotengine.org/t/how-to-make-a-character-creation-system/101172/17",
+            "date": "2025-02-12",
+            "sentiment": "pos",
+            "note": "Recommends drawing a character and running it through hyper3d.ai, then decimating, as a base mesh.",
+            "verified": true
+          }
+        ],
+        "sampled": 8,
+        "reddit": "Not sampled (reddit.com blocked)."
+      },
+      "vendor_claims": [
+        {
+          "claim": "Hyper3D/press coverage calls Gen-2.5 the first 3D model able to generate at the tens-of-millions-of-faces level (no benchmark given).",
+          "url": "https://www.ifanr.com/1669869",
+          "verified": false
+        },
+        {
+          "claim": "Hyper3D's own blog 'review' of Rodin is vendor-hosted marketing.",
+          "url": "https://hyper3d.ai/blog/hyper3d-rodin",
+          "verified": false
+        }
+      ],
+      "strengths": [
+        "fine geometric and hard-surface detail",
+        "realistic materials (metal) - #2 textured on top3d.ai",
+        "many quality tiers incl. quad mode"
+      ],
+      "weaknesses": [
+        "very dense meshes / highest face counts and price",
+        "weak segmentation and mid-table geometry votes",
+        "poor Trustpilot (billing/cancellation)"
+      ],
+      "examples": [
+        {
+          "type": "sketchfab",
+          "url": "https://sketchfab.com/3d-models/25e25fca5b5d4fd091913945c0a684ff",
+          "embed_url": "https://sketchfab.com/models/25e25fca5b5d4fd091913945c0a684ff/embed",
+          "title": "Lemon Shack",
+          "author": "alexandrawr89",
+          "licence": "CC Attribution",
+          "embedding": true,
+          "faces": 38068,
+          "published": "2026-03-07",
+          "verified": true,
+          "note": "Description says generated by Rodin Gen-2 from a Nano Banana reference image, for a fangame. No edits stated."
+        },
+        {
+          "type": "sketchfab",
+          "url": "https://sketchfab.com/3d-models/9b80bc88352f409f884957d285cabb06",
+          "embed_url": "https://sketchfab.com/models/9b80bc88352f409f884957d285cabb06/embed",
+          "title": "Test / furniture / Hyper3D Rodin",
+          "author": "william_lit8",
+          "licence": "CC Attribution",
+          "embedding": true,
+          "faces": 40000,
+          "published": "2025-07-11",
+          "verified": true,
+          "note": "Single-photo reconstruction test via the paid Rodin API; version not stated."
+        },
+        {
+          "type": "youtube",
+          "url": "https://www.youtube.com/watch?v=G7hURz3IdBI",
+          "title": "3D AI BATTLE ROYALE Tripo ai vs Meshy ai vs Hunyuan3D vs Rodin ai WHO WINS",
+          "channel": "Geeky Haven",
+          "date": "2025-06-12",
+          "timestamp": "0:50 (Tripo tests); 3:15 Rodin; 4:40 Meshy",
+          "verified": true,
+          "note": "Same test images (chibi, anime figurine, mecha) across Tripo, Rodin, Meshy, Hunyuan3D 2.5. Older versions; verdict not read."
+        }
+      ],
+      "notes": "Rodin is not on 3D Arena. On top3d.ai it is strong for textured (2nd Sep season) but weak on geometry (14th) and segmentation (last). Several sources tested different generations (Gen-2, Gen2 v1.9, Gen-2.5)."
+    },
+    "hunyuan3d": {
+      "benchmarks": [
+        {
+          "source": "3D Arena (Hugging Face, community blind pairwise votes)",
+          "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+          "data_url": "https://3d-arena-3d-arena.hf.space/api/leaderboard",
+          "metric": "ELO (render board)",
+          "value": 1283,
+          "rank": 8,
+          "out_of": 24,
+          "votes": 5246,
+          "model_version": "Hunyuan3D-2",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": null
+        },
+        {
+          "source": "3D Arena (Hugging Face, community blind pairwise votes)",
+          "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+          "data_url": "https://3d-arena-3d-arena.hf.space/api/leaderboard",
+          "metric": "ELO (render board)",
+          "value": 1272,
+          "rank": 9,
+          "out_of": 24,
+          "votes": 2213,
+          "model_version": "Hunyuan3D-2.1",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": null
+        },
+        {
+          "source": "3D Arena (Hugging Face, community blind pairwise votes)",
+          "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+          "data_url": "https://3d-arena-3d-arena.hf.space/api/leaderboard?vote_type=topology",
+          "metric": "ELO (topology board)",
+          "value": 1358,
+          "rank": 1,
+          "out_of": 21,
+          "votes": 857,
+          "model_version": "Hunyuan3D-2",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": null
+        },
+        {
+          "source": "3D Arena (Hugging Face, community blind pairwise votes)",
+          "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+          "data_url": "https://3d-arena-3d-arena.hf.space/api/leaderboard?vote_type=topology",
+          "metric": "ELO (topology board)",
+          "value": 1312,
+          "rank": 4,
+          "out_of": 21,
+          "votes": 827,
+          "model_version": "Hunyuan3D-2.1",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": null
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Textured board",
+          "value": 1046,
+          "rank": 7,
+          "out_of": 21,
+          "win_rate": 0.553,
+          "votes": 968,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Hunyuan 3D v3.1 (hosted, not open weights)",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Geometry board",
+          "value": 1079,
+          "rank": 6,
+          "out_of": 21,
+          "win_rate": 0.635,
+          "votes": 342,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Hunyuan 3D v3.1 (hosted)",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Low Poly board",
+          "value": 923,
+          "rank": 8,
+          "out_of": 10,
+          "win_rate": 0.371,
+          "votes": 472,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Hunyuan 3D Retopo",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Segmentation board",
+          "value": 1064,
+          "rank": 2,
+          "out_of": 7,
+          "win_rate": 0.628,
+          "votes": 239,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Hunyuan 3D v3.1 Part Splitter",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Smart UV board",
+          "value": 971,
+          "rank": 2,
+          "out_of": 2,
+          "win_rate": 0.337,
+          "votes": 98,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Hunyuan Semantic UV",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard",
+          "metric": "ELO, Overall (live, season in progress) board",
+          "value": 1026,
+          "rank": 10,
+          "out_of": 21,
+          "win_rate": 0.588,
+          "votes": 713,
+          "season": "Oct 2026 season (live, partial)",
+          "model_version": "Hunyuan 3D v3.1 (hosted)",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Seed3D 2.0 paper (ByteDance Seed, arXiv 2605.13862) - competitor-run blind paired study",
+          "url": "https://arxiv.org/html/2605.13862",
+          "metric": "Seed3D 2.0 win rate vs this model (lower = baseline stronger)",
+          "value": {
+            "textured": 0.69,
+            "shape_only": 0.552
+          },
+          "rank": "strongest of 4 commercial shape baselines reported",
+          "out_of": 4,
+          "model_version": "Hunyuan3D-3.1 (hosted)",
+          "date": "2026-04-22",
+          "date_checked": "2026-10-24",
+          "independent": false,
+          "verified": true,
+          "note": "Refers to hosted 3.1, not open 2.x."
+        },
+        {
+          "source": "Step1X-3D paper (arXiv 2505.07747)",
+          "url": "https://arxiv.org/html/2505.07747",
+          "metric": "CLIP-Score / Uni3D-I",
+          "value": {
+            "clip_score": 0.829,
+            "uni3d_i": 0.352
+          },
+          "rank": null,
+          "out_of": 6,
+          "model_version": "Hunyuan3D 2.0",
+          "date": "2025-05",
+          "date_checked": "2026-10-24",
+          "independent": false,
+          "verified": true
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "Cinevva guide",
+          "url": "https://app.cinevva.com/guides/ai-3d-model-generators",
+          "date": "2026-07-17 (updated 2026-09-14)",
+          "author": null,
+          "independent": false,
+          "verified": true,
+          "model_version": "Hunyuan3D 2.1 open weights / 3.x hosted",
+          "summary": "Editorial (untested) view that open 2.1 has the strongest open PBR texturing stack, hosted 3.x has better geometry, and the licence excludes EU, UK and South Korea.",
+          "rating": null,
+          "note": "Vendor-owned guide, no test; not rated."
+        }
+      ],
+      "users": {
+        "ratings": [],
+        "mentions": [
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=50072357",
+            "date": "2026-10-13",
+            "sentiment": "pos",
+            "note": "Ran Hunyuan3D locally on macOS via CoreML with good speed-ups.",
+            "version_if_known": "open weights",
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=49549264",
+            "date": "2026-09-03",
+            "sentiment": "neg",
+            "note": "Says Hunyuan3D and other models runnable under 96GB VRAM give barely usable, prototype-only output.",
+            "version_if_known": "open weights",
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=48374315",
+            "date": "2026-06-02",
+            "sentiment": "pos",
+            "note": "Built a fun local asset pipeline with FLUX + Hunyuan3D-2.1 for simple games with their kids.",
+            "version_if_known": "2.1",
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=48157620",
+            "date": "2026-05-16",
+            "sentiment": "neg",
+            "note": "Only 4 of 30 objects outside typical training data worked; topology poor.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=48159144",
+            "date": "2026-05-16",
+            "sentiment": "pos",
+            "note": "Counters that it is great for blocking out scenes before image/video passes.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47940964",
+            "date": "2026-04-28",
+            "sentiment": "mixed",
+            "note": "Hunyuan 3D Studio (hosted) good with generous free credits; texturing subpar but modelling+retopo+unwrap then manual texturing works.",
+            "version_if_known": "hosted studio",
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47167717",
+            "date": "2026-02-26",
+            "sentiment": "mixed",
+            "note": "Better than TRELLIS mostly, but far below a $500 human-made model.",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47165493",
+            "date": "2026-02-26",
+            "sentiment": "mixed",
+            "note": "Hunyuan 3.1 has great resolution but messy topology and textures.",
+            "version_if_known": "3.1 hosted",
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47161637",
+            "date": "2026-02-26",
+            "sentiment": "pos",
+            "note": "Hunyuan 3D 3.0 results beat cheap human work from five years ago.",
+            "version_if_known": "3.0 hosted",
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=46319468",
+            "date": "2025-12-18",
+            "sentiment": "mixed",
+            "note": "Calls it state of the art for open source but wants Sparc3D-level quality locally.",
+            "version_if_known": "open weights",
+            "verified": true
+          }
+        ],
+        "sampled": 10,
+        "reddit": "Not sampled (reddit.com blocked). r/StableDiffusion would be the main community for local Hunyuan3D."
+      },
+      "vendor_claims": [
+        {
+          "claim": "Tencent's 2.1 release markets production-ready PBR materials; the HF/GitHub model card itself publishes no competitor benchmark.",
+          "url": "https://huggingface.co/tencent/Hunyuan3D-2.1"
+        }
+      ],
+      "strengths": [
+        "best open-weights model on 3D Arena (#1 topology board for 2.0)",
+        "free to run locally; PBR texture model included",
+        "hosted 3.1 strong at part splitting"
+      ],
+      "weaknesses": [
+        "needs ~29GB VRAM for shape+texture (10GB shape only)",
+        "licence excludes EU, UK and South Korea",
+        "inconsistent on unusual objects; messy topology"
+      ],
+      "examples": [
+        {
+          "type": "sketchfab",
+          "url": "https://sketchfab.com/3d-models/9126a4f6eff3464fbc53ee545c36b3f6",
+          "embed_url": "https://sketchfab.com/models/9126a4f6eff3464fbc53ee545c36b3f6/embed",
+          "title": "Potato Chap",
+          "author": "Norod",
+          "licence": "CC Attribution",
+          "embedding": true,
+          "faces": 40000,
+          "published": "2025-06-26",
+          "verified": true,
+          "note": "Created from an image using Hunyuan3D-2.1; no edits stated."
+        },
+        {
+          "type": "sketchfab",
+          "url": "https://sketchfab.com/3d-models/c5ed346318d641afb3d42c12dafa1df2",
+          "embed_url": "https://sketchfab.com/models/c5ed346318d641afb3d42c12dafa1df2/embed",
+          "title": "taichi grandpa test using Hunyuan3D-2:",
+          "author": "jeanpierre3d",
+          "licence": "CC Attribution",
+          "embedding": true,
+          "faces": 40000,
+          "published": "2025-02-02",
+          "verified": true,
+          "note": "Description says no retouching; notes fine hair rendered badly."
+        },
+        {
+          "type": "sketchfab",
+          "url": "https://sketchfab.com/3d-models/e4df91e6e8ee4724868849a0b6c51119",
+          "embed_url": "https://sketchfab.com/models/e4df91e6e8ee4724868849a0b6c51119/embed",
+          "title": "Pumpkin Scarecrow - Halloween Pack",
+          "author": "lonnieh",
+          "licence": "CC Attribution",
+          "embedding": true,
+          "faces": 22366,
+          "published": "2026-08-31",
+          "verified": true,
+          "note": "Hunyuan3D-2.1 shape+PBR, then optimised to ~23k tris - lightly processed, game-weight example."
+        }
+      ],
+      "notes": "Keep open 2.0/2.1 (3D Arena) separate from Tencent's hosted 3.x (top3d.ai, Seed3D paper, most HN praise). Licence check (GitHub LICENSE): Tencent Hunyuan Community License, territory excludes EU, UK, South Korea. VRAM per README: 10GB shape, 21GB texture, 29GB both. HF downloads last month: 78,978."
+    },
+    "sloyd": {
+      "benchmarks": [
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Textured board",
+          "value": 1050,
+          "rank": 6,
+          "out_of": 21,
+          "win_rate": 0.528,
+          "votes": 884,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Sloyd AI v3",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+          "metric": "ELO, Geometry board",
+          "value": 1048,
+          "rank": 8,
+          "out_of": 21,
+          "win_rate": 0.599,
+          "votes": 307,
+          "season": "Sep 2026 season (completed, 1 Sep-1 Oct 2026)",
+          "model_version": "Sloyd AI v3",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        },
+        {
+          "source": "Top 3D AI arena (top3d.ai, blind head-to-head community votes)",
+          "url": "https://top3d.ai/leaderboard",
+          "metric": "ELO, Overall (live, season in progress) board",
+          "value": 1019,
+          "rank": 12,
+          "out_of": 21,
+          "win_rate": 0.484,
+          "votes": 587,
+          "season": "Oct 2026 season (live, partial)",
+          "model_version": "Sloyd AI v3",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "note": "Run by YouTube creator 'Stefan 3D AI'; site sells sponsored banner/newsletter slots but states rankings are never for sale. No vendor tie disclosed either way."
+        }
+      ],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {
+            "platform": "Trustpilot",
+            "rating": 3.7,
+            "scale": 5,
+            "count": 19,
+            "url": "https://www.trustpilot.com/review/sloyd.ai",
+            "date_checked": "2026-10-24",
+            "verified": true,
+            "note": "Unclaimed profile; 58% 5-star, 37% 1-star. Negatives: billing/refunds, stalled retexturing, Roblox import issues, high minimum poly count."
+          }
+        ],
+        "mentions": [
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=47213492",
+            "date": "2026-03-02",
+            "sentiment": "neg",
+            "note": "Says sloyd.ai couldn't even place a simple SVG onto a rectangular base (CAD-style task).",
+            "version_if_known": null,
+            "verified": true
+          },
+          {
+            "source": "Hacker News",
+            "url": "https://news.ycombinator.com/item?id=46697107",
+            "date": "2026-01-20",
+            "sentiment": "neutral",
+            "note": "Lists Sloyd alongside Meshy and Hyper3D as AI asset tools.",
+            "version_if_known": null,
+            "verified": true
+          }
+        ],
+        "sampled": 2,
+        "reddit": "Not sampled (reddit.com blocked)."
+      },
+      "vendor_claims": [
+        {
+          "claim": "Sloyd's blog republishes the top3d.ai arena (Aug 3 2026 snapshot) showing Sloyd AI v3 3rd of 8 listed at 1015 ELO; the live independent board now has it 12th of 21.",
+          "url": "https://www.sloyd.ai/blog/ai-3d-model-generator-rankings"
+        },
+        {
+          "claim": "Sloyd says its parametric engine can generate millions of unique assets in real time.",
+          "url": "https://sloyd.ai",
+          "verified": false
+        }
+      ],
+      "strengths": [
+        "mid-table blind-vote results (6th textured, 8th geometry Sep 2026)",
+        "template/parametric low-poly props (secondary sources only)"
+      ],
+      "weaknesses": [
+        "limited to its template categories for parametric mode",
+        "billing/refund complaints",
+        "no independent hands-on review found"
+      ],
+      "examples": [],
+      "notes": "No independent editorial review or credible Sketchfab example found. Sketchfab results titled 'Sloyd vs SupaVoxel' are SupaVoxel outputs (SEO spam) - do not use. The only Sloyd-tagged Sketchfab item checked ('sign', Standard licence) was textured in Substance, so not representative."
+    },
+    "thrixel": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Launched publicly 2026-10-08 with $3M seed (Sierra Ventures); founder Rana Hanocka (UChicago). Part-segmented models aimed at AI agents via MCP. Too new: no benchmarks, reviews or user ratings found. Sources: https://dealroom.co/news/160982-thrixel-raises-3m-to-build-3d-assets-ai-agents-can-actually-use/ and https://www.startupresearcher.com/news/thrixel-raises-usd3-million-for-ai-3d-creation-platform (search results only, not opened)."
+    },
+    "bake3d": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "No independent review, benchmark entry or user rating found. Only hit was a promotional-looking listicle (onrec.com) ranking it 'best overall' without evidence - not recorded as a review."
+    },
+    "dreamlands": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Dreamlands 1.0 opened to the public around 2026-10-08 (GamesBeat exclusive launch coverage, https://gamesbeat.com/?p=336534, not opened). Positioned as world-building/texturing/procedural buildings rather than single-object generation. No quality reviews or ratings found."
+    },
+    "scenario": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {
+            "platform": "Trustpilot",
+            "rating": 3.2,
+            "scale": 5,
+            "count": 1,
+            "url": "https://www.trustpilot.com/review/scenario.com",
+            "date_checked": "2026-10-24",
+            "verified": true,
+            "note": "Single review; meaningless."
+          }
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [
+        "hosts many third-party 3D models (Hunyuan 3.1, Tripo 3.1/P2, Meshy 7.1, Rodin Gen-2.5, Hitem3D, Sparc3D, TRELLIS 2) behind one interface"
+      ],
+      "weaknesses": [
+        "no own 3D model - quality equals whichever hosted model is chosen"
+      ],
+      "examples": [],
+      "notes": "Scenario is an aggregator for 3D (see https://help.scenario.com/en/articles/comparing-generative-3d-models/, Oct 2026). Its 3D quality should be inferred from the underlying models; its help/blog content about those models is independent:false."
+    },
+    "retro-diffusion": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Could not confirm any 3D/low-poly mesh generation feature: homepage and listings describe 2D pixel art only; the RDBlend Blender add-on (https://paultron.itch.io/rdblend, search result only) applies pixel-art textures to 3D. Consider removing from the 3D-model job unless a source for the feature exists."
+    },
+    "unity-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {
+          "claim": "Unity positions its in-editor 3D Object Generator (open beta) for simple single-part placeholder props, tagging output as AI-generated.",
+          "url": "https://unity.com/blog/unity-ai-3d-object-generator",
+          "verified": false
+        }
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "No independent quality review found; Unity Discussions forum blocked (403) so no user sample. Underlying 3D model provider not established in this pass."
+    }
+  },
+  "general_sources": [
+    {
+      "title": "3D Arena leaderboard (render + topology boards, JSON API)",
+      "url": "https://3d-arena-3d-arena.hf.space/api/leaderboard",
+      "note": "24 models on render board, 21 on topology board. #1 render 'PicGen3D' = CSM/Cube (display name from dataset config), 1416 ELO, 4,374 votes. Methodology paper arXiv 2506.18787. Current commercial Tripo and Rodin are absent."
+    },
+    {
+      "title": "3D Arena: An Open Platform for Generative 3D Evaluation",
+      "url": "https://huggingface.co/papers/2506.18787",
+      "note": "Methodology; finds textured models gain ~144 ELO over untextured - so texture strongly drives votes."
+    },
+    {
+      "title": "Top 3D AI arena - September 2026 season",
+      "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+      "note": "16,503 blind votes, 21 tools, five boards (textured, geometry, low poly, segmentation, smart UV). Includes current Tripo, Meshy, Rodin, Hunyuan 3.1 hosted, Sloyd."
+    },
+    {
+      "title": "Top 3D AI live leaderboard (Oct 2026, partial season)",
+      "url": "https://top3d.ai/leaderboard",
+      "note": "Header showed '0 votes cast', inconsistent with per-tool W/L; treat live numbers cautiously."
+    },
+    {
+      "title": "Top 3D AI advertise page",
+      "url": "https://top3d.ai/advertise",
+      "note": "Sells sponsored banners/articles; states rankings and arena outcomes are never for sale."
+    },
+    {
+      "title": "Seed3D 2.0 (ByteDance Seed)",
+      "url": "https://arxiv.org/html/2605.13862",
+      "note": "Competitor blind study; gives Seed3D-vs-baseline win rates only."
+    },
+    {
+      "title": "Step1X-3D (StepFun)",
+      "url": "https://arxiv.org/html/2505.07747",
+      "note": "2025 metrics for Tripo v2.5, Rodin v1.5, Meshy-4, Hunyuan3D 2.0 - outdated versions."
+    },
+    {
+      "title": "The AI Rankings - best AI 3D model generators",
+      "url": "https://theairankings.com/best-ai-3d-model-generators/",
+      "note": "Secondary summary of top3d.ai seasons; operator not identified."
+    },
+    {
+      "title": "StraySpark generative 3D tools comparison",
+      "url": "https://www.strayspark.studio/blog/generative-3d-tools-comparison-meshy-rodin-tripo-csm-2026",
+      "note": "Notes Alphabet acquired CSM (closing 2026-01-24) and csm.ai no longer resolves - relevant because CSM/Cube is #1 on 3D Arena render board."
+    },
+    {
+      "title": "HN discussion: An autopsy of AI-generated 3D slop",
+      "url": "https://news.ycombinator.com/item?id=47157841",
+      "note": "Feb 2026 thread with practitioner views on Rodin/Tripo/Meshy/Hunyuan topology; linked article (aircada.com) only tests TRELLIS and is by a human-modelling vendor."
+    }
+  ],
+  "caveats": "Reddit could not be sampled at all (reddit.com blocked for both fetch and search), so 'users.mentions' rely on Hacker News, Blender Artists and Godot Forum; counts are smaller than the 5-10 target for Rodin and Sloyd. G2 and Capterra were not reachable (403/no listing); Meshy's G2 4.7 is unverified. All3DP pages returned 403 (recorded as verified:false). YouTube comparison videos were verified (title, channel, date, chapter timestamps via page metadata) but transcripts could not be retrieved, so their verdicts are NOT recorded and they are listed as examples, not rated reviews. No truly independent, multi-input, multi-tool editorial test of current versions (Tripo 3.1 / Meshy 7.x / Rodin Gen-2.5) was found from CG/game-dev outlets (80.lv, CG Channel, Game Developer, Creative Bloq, TechRadar); the closest are StraySpark (April 2026, older versions), 3Dnatives (Meshy only, printing focus), and non-independent Fuser and HackerNoon (Meshy employee) tests. top3d.ai is the only arena with current commercial Tripo/Rodin; its operator is a YouTube creator who sells ad placements, and independence could not be fully established. Meshy's '63.8% preferred over Tripo 3.1' claim was seen only via search summaries; the fetched /compare page described internal geometry metrics instead. Version drift is large: evidence ranges from Meshy-4/Rodin v1.5 (2025) to Meshy 7.1/Tripo P2 (Oct 2026)."
+}

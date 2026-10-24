@@ -1,0 +1,290 @@
+{
+  "task": "animation",
+  "checked": "2026-10-24",
+  "tools": {
+    "cascadeur": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "Creative Bloq (syndicated on Yahoo Tech)",
+          "url": "https://tech.yahoo.com/general/articles/cascadeur-2024-2-review-automated-180000242.html",
+          "date": "2024-09-14",
+          "author": "Paul Hatton",
+          "independent": true,
+          "summary": "Hands-on review of version 2024.2. It calls the release a worthwhile upgrade mainly for the physics automation: AutoPhysics turns rough keys into more plausible motion. Caveats: AutoPhysics was still alpha, blendshapes were limited, and the free tier can't export or be used commercially.",
+          "rating": 75,
+          "verified": true,
+          "note": "Older than 2025; no numeric score was given, so the rating is our reading of the verdict."
+        },
+        {
+          "outlet": "TATO Studio (blog + YouTube same-footage comparison of ~9-14 video-mocap tools)",
+          "url": "https://tato.studio/blog/best-ai-video-to-mocap",
+          "date": "2025-08-21",
+          "author": "TATO Studio (CGI trailer/cinematics studio; no mocap product, no affiliate disclosures seen)",
+          "independent": true,
+          "summary": "Judged as a video-to-mocap tool, Cascadeur's capture lost energy and sometimes twisted or floated, with no finger tracking. Its editing and cleanup tools were the strongest in the test, and TATO recommends it for refining rough mocap from other tools.",
+          "rating": 60,
+          "verified": true,
+          "note": "Rated for the video-mocap use only. Cascadeur's core keyframe/physics product is not what this test measured."
+        },
+        {
+          "outlet": "StraySpark blog: AI Auto-Rigging Showdown 2026 (Tripo, Meshy, Cascadeur, AccuRig, Mixamo in UE5/Blender)",
+          "url": "https://www.strayspark.studio/blog/ai-auto-rigging-showdown-2026-tripo-meshy-cascadeur-mixamo",
+          "date": "2026-05-14",
+          "author": "StraySpark (no individual named)",
+          "independent": true,
+          "summary": "Hands-on test with one humanoid character. Cascadeur's auto-rig was only adequate, but AutoPosing added believable weight and balance, and its FBX export was the cleanest and most retarget-ready in the comparison. About 30 minutes for a 2-second custom clip. Treated as a separate category used alongside Tripo or Meshy.",
+          "rating": 75,
+          "verified": true,
+          "note": "StraySpark is a game studio that sells unrelated UE/Blender tools (MCP servers) and has its own affiliate programme. It has no stake in these products. One tester, no numeric scores."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Product Hunt", "rating": 4.8, "scale": 5, "count": 26, "url": "https://www.producthunt.com/products/cascadeur/reviews", "verified": true, "note": "The newest reviews are about 2 years old, the rest about 3."},
+          {"platform": "Capterra", "rating": 5.0, "scale": 5, "count": 1, "url": "https://www.capterra.com/p/10015822/Cascadeur/", "verified": false, "note": "Figure from a search snippet; the page returned 403 to our fetcher. One review is not a meaningful sample."},
+          {"platform": "Apple App Store (mobile app 'Cascadeur: 3D animation', Nekki)", "rating": 4.3, "scale": 5, "count": 312, "url": "https://apps.apple.com/us/app/id1612834671", "verified": true, "note": "This is the separate mobile app, not the desktop product. Reviews mention crashes and limb glitches."},
+          {"platform": "Trustpilot", "rating": null, "scale": 5, "count": 0, "url": "https://www.trustpilot.com/review/cascadeur.com", "verified": true, "note": "No reviews."},
+          {"platform": "Steam", "rating": null, "scale": null, "count": null, "url": null, "verified": false, "note": "We could not find a Steam listing. Steam store search, the storesearch API and the community app search all returned no Cascadeur app on 2026-10-24, and cascadeur.com/download offers direct download only. If the team knows the app ID, check it by hand."},
+          {"platform": "G2", "rating": null, "scale": 5, "count": null, "url": "https://g2.com/products/cascadeur/reviews", "verified": false, "note": "G2 returned 403. Rating unknown."}
+        ],
+        "mentions": [
+          {"source": "Reddit r/gamedev: 'Did you use Cascadeur (animation soft)? Your honest feedback?'", "url": "https://reddit.com/r/gamedev/comments/1pdyrsw/did_you_use_cascadeur_animation_soft_your_honest/", "mirror_url": "https://reddit.sentinel-team.org/posts/1pdyrsw/snapshots/2025-12-05T06%3A10%3A43.544998Z", "date": "2025 (snapshot taken 2025-12-05; exact post date not confirmed)", "sentiment": "mixed", "note": "Feedback thread started by the Cascadeur team. Of the 13 comments captured, about 4 are positive, 2 mixed, 3 negative and the rest neutral. Praise covers AutoPosing, AutoPhysics and convenience. Complaints cover the monthly subscription, custom-rig and auto-rig errors, missing shape keys, and poor fit for stylised animation.", "verified": false, "verified_note": "Reddit blocks our fetcher. Content was read from a third-party snapshot mirror."},
+          {"source": "Blender Artists: 'Cascadeur adds Rag doll physics'", "url": "https://blenderartists.org/t/cascadeur-adds-rag-doll-physics/1560268", "date": "2024-11-28 to 2025-08-11", "sentiment": "mixed", "note": "The most active poster is very enthusiastic about the animation tools but thinks the ragdoll trails Endorphin. Others are wary of the AI branding and of backlash from anti-AI peers.", "verified": true},
+          {"source": "Reallusion forum: 'Motion capture with a video only'", "url": "https://forum.reallusion.com/FindPost555919.aspx", "date": "c. 2024 (shown as '2 years ago')", "sentiment": "pos", "note": "One user recommends Cascadeur for cleaning up mocap and says it gives medium-quality animation from video.", "verified": true},
+          {"source": "Reallusion forum: 'Mocap AI shakey stuff Foot sliding shenanigans'", "url": "https://forum.reallusion.com/PrintTopic519932.aspx", "date": "2022-07 to 2023-08", "sentiment": "pos", "note": "Users praise the UI and easier rigging and use it to clean up physics and timing. The free version was then capped at 300 frames.", "verified": true},
+          {"source": "OpenGameArt forum: 'Does anyone here have experience with animating tool called Cascadeur?'", "url": "https://opengameart.org/forumtopic/does-anyone-here-have-experience-with-animating-tool-called-cascadeur", "date": "2022-12-24", "sentiment": "mixed", "note": "The poster first found editing existing animation confusing and under-documented. They then solved it by locking bones and concluded it saves a lot of time. Older source.", "verified": true}
+        ],
+        "sampled": 5
+      },
+      "vendor_claims": [
+        {"claim": "Cascadeur's AI features (AutoPosing, AI inbetweening, AI motion generation) produce natural poses and motion from few controls. Nekki says it used Cascadeur for Shadow Fight 4: Arena combat animation.", "url": "https://cascadeur.com/"},
+        {"claim": "The vendor's own docs say AI inbetweening is humanoid-only, needs a standard AutoPosing rig, and only partly succeeds on locomotion and interactions.", "url": "https://cascadeur.com/help/category/278"}
+      ],
+      "strengths": ["physics-aware posing that adds weight and balance", "strong mocap cleanup and editing", "clean, retarget-ready FBX export"],
+      "weaknesses": ["unusual UI and learning curve", "subscription cost; free tier can't export commercially", "humanoid-focused; weaker for stylised motion, shape keys, and video mocap that loses energy"],
+      "examples": [
+        {"type": "youtube", "url": "https://www.youtube.com/watch?v=C9DtwBCb-rg", "title": "Which AI Video to Mocap is The Best? Comparison (2025)", "channel": "TATO", "date": "2025 (companion blog dated 2025-08-21)", "timestamp": null, "verified": true, "note": "Same footage through ~9+ tools, including Cascadeur, DeepMotion, Rokoko Vision, Move AI and QuickMagic, per the companion blog. Title and channel verified via oEmbed. We could not read the video page for chapters."},
+        {"type": "youtube", "url": "https://www.youtube.com/watch?v=2NDMmzFwwxA", "title": "QuickMagic vs Rokoko vs Cascadeur (Video to 3D Animation)", "channel": "Royal Skies", "date": null, "timestamp": null, "verified": true, "note": "Title and channel verified via oEmbed. Date and verdict not readable. Royal Skies has also made Rokoko tutorials that link to Rokoko, so independence is unclear."},
+        {"type": "youtube", "url": "https://www.youtube.com/watch?v=W8NnOvNs4cM", "title": "ROKOKO vs Move vs Cascadeur vs DeepMotion: Which is better for a limited Budget?", "channel": "Apologue", "date": null, "timestamp": null, "verified": true, "note": "Title and channel verified via oEmbed. We could not read the content or verdict."},
+        {"type": "sketchfab", "url": "https://sketchfab.com/3d-models/flurry-kick-combo-animation-2356c3504a8942deb2a74b0d874a65e6", "title": "Flurry Kick Combo Animation", "author": "CurvePointStudios", "licence": "none shown (standard Sketchfab terms)", "embed": "https://sketchfab.com/models/2356c3504a8942deb2a74b0d874a65e6/embed", "date": "2025-08-14", "verified": true, "note": "The description says it was animated in Cascadeur."},
+        {"type": "sketchfab", "url": "https://sketchfab.com/3d-models/v2-robot-animations-7cfddf43d3624f28be4772a1d0a4b51b", "title": "V2 Robot animations", "author": "kanki_projects", "licence": "CC Attribution", "embed": "https://sketchfab.com/models/7cfddf43d3624f28be4772a1d0a4b51b/embed", "date": "2024-11-26", "verified": true, "note": "The description says it was animated with Cascadeur and merged in Blender."}
+      ],
+      "notes": "Current version 2026.2.3 (dated 2026-10-01 on the download page) runs on Windows, Mac and Linux. Licence types are Free, Indie, Pro, Teams and Educational. Cascadeur is mainly a keyframe/physics animation and mocap-cleanup tool rather than a video-mocap tool, so compare it on that job. We found no independent quantitative benchmark. Editorial coverage (CG Channel, Digital Production, Creative Bloq 2025.1 news) describes features and does not test them."
+    },
+    "deepmotion": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "TATO Studio (blog + YouTube same-footage comparison)",
+          "url": "https://tato.studio/blog/best-ai-video-to-mocap",
+          "date": "2025-08-21",
+          "author": "TATO Studio",
+          "independent": true,
+          "summary": "On the shared test clip (jumping, crouching, basic movement), DeepMotion showed noticeable twitching and foot sliding. TATO lists no pros and says it may not suit more complex animation. Move AI and QuickMagic were rated above it.",
+          "rating": 40,
+          "verified": true
+        },
+        {
+          "outlet": "StraySpark blog: AI Motion Capture for Indie Devs in 2026",
+          "url": "https://www.strayspark.studio/blog/ai-mocap-indie-developers-2026-comparison",
+          "date": "2026-03-24",
+          "author": "StraySpark",
+          "independent": true,
+          "summary": "Practitioner guide, not a same-footage test. It rates DeepMotion's body capture good, face capture limited and fingers basic, and places it below Move.ai multi-camera for body quality.",
+          "rating": 60,
+          "verified": true,
+          "note": "StraySpark sells unrelated UE tools. It says it used these tools in production but describes no controlled method."
+        },
+        {
+          "outlet": "3D Next",
+          "url": "https://3dnext.com/reviews/deepmotion-ai-animation/",
+          "date": "c. 2025 (heading says 'DeepMotion Review 2025')",
+          "author": null,
+          "independent": false,
+          "summary": "Gives 4.5/5 and praises walk cycles and crowd/secondary motion, noting occasional foot sliding and physics glitches. It cites statistics with no method and gives contradictory prices, so it reads as promotional.",
+          "rating": 75,
+          "verified": true,
+          "note": "Flagged non-independent or low-reliability: no author, no methodology, inconsistent figures."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "G2", "rating": 4.0, "scale": 5, "count": 3, "url": "https://www.g2.com/sellers/deepmotion", "verified": false, "note": "From a search snippet; G2 returned 403. Reviews reportedly from 2023, at least one incentivised."},
+          {"platform": "Techjockey", "rating": 4.6, "scale": 5, "count": 4, "url": "https://www.techjockey.com/us/detail/deepmotion", "verified": false, "note": "From a search snippet only."},
+          {"platform": "Trustpilot", "rating": null, "scale": 5, "count": null, "url": "https://www.trustpilot.com/review/deepmotion.com", "verified": true, "note": "No Trustpilot profile (404)."},
+          {"platform": "Product Hunt", "rating": null, "scale": 5, "count": null, "url": "https://www.producthunt.com/products/deepmotion/reviews", "verified": true, "note": "Page 404. No review page found."}
+        ],
+        "mentions": [
+          {"source": "Reallusion forum: 'Rokoko Video - proof of concept' (page 5)", "url": "https://forum.reallusion.com/528782/Rokoko-Video-proof-of-concept?PageIndex=5", "date": "2023-01 to 2023-12", "sentiment": "pos", "note": "One user found DeepMotion's results far better than Rokoko Vision single-camera and praised its finger tracking, though the free tier is small.", "verified": true},
+          {"source": "Reallusion forum: 'Mocap AI shakey stuff Foot sliding shenanigans'", "url": "https://forum.reallusion.com/PrintTopic519932.aspx", "date": "2022-07 to 2023-08", "sentiment": "mixed", "note": "Users say foot sliding is fixable, but after that DeepMotion/Plask output still needs fixes for rotating limbs and torso twist.", "verified": true},
+          {"source": "Unity Discussions: 'Character floating on Y'", "url": "https://discussions.unity.com/t/character-floating-on-y/876114", "date": "2022-03-25", "sentiment": "neg", "note": "A DeepMotion-generated clip drifted vertically because the feet weren't locked to the ground. No fix was confirmed.", "verified": true}
+        ],
+        "sampled": 3
+      },
+      "vendor_claims": [
+        {"claim": "DeepMotion aims to be the largest AI-generated 3D animation platform. The homepage relies on testimonials (e.g. Corridor Digital) and partner logos and gives no measured figures.", "url": "https://www.deepmotion.com/"},
+        {"claim": "Foot-locking modes (Auto/Always/Never/Grounding) and a motion-smoothing dial reduce gliding and jitter. The vendor notes that heavy smoothing can cost accuracy.", "url": "https://www.deepmotion.com/article/foot-locking"},
+        {"claim": "SayMotion 1.5 (text-to-motion) was trained on an expanded dataset of about 400k clips and supports inpainting and chained prompts. It is full-body humanoid only, as reported by CG Channel from vendor information.", "url": "https://www.cgchannel.com/?p=156294"}
+      ],
+      "strengths": ["browser-based, no hardware, many export formats", "adequate for standard locomotion and gestures", "foot-locking and smoothing controls"],
+      "weaknesses": ["twitching/jitter and foot sliding", "struggles with complex motion; limb and torso twist", "face and finger capture basic"],
+      "examples": [
+        {"type": "youtube", "url": "https://www.youtube.com/watch?v=C9DtwBCb-rg", "title": "Which AI Video to Mocap is The Best? Comparison (2025)", "channel": "TATO", "date": "2025", "timestamp": null, "verified": true, "note": "Same-footage comparison that includes DeepMotion."},
+        {"type": "youtube", "url": "https://www.youtube.com/watch?v=nB8N9qarmjk", "title": "Quickmagic vs. Deepmotion vs. Cartwheel: Which AI Mocap is BEST?", "channel": "Timmydcreator", "date": null, "timestamp": null, "verified": true, "note": "Title and channel verified via oEmbed. Content and date not readable."},
+        {"type": "youtube", "url": "https://www.youtube.com/watch?v=ev2nPknQz4M", "title": "I Tried Out 4 AI Powered Animation Programs...and Here's What Happened", "channel": "Russell Midfield", "date": "c. 2022", "timestamp": null, "verified": true, "note": "A search summary says it compares Plask, Radical, DeepMotion and Pixcap; we have not confirmed this from the video. Old, so tool versions are outdated."},
+        {"type": "sketchfab", "url": "https://sketchfab.com/3d-models/chibi-hanni-how-sweet-choreography-eda366c301754235a806a4822cf0b2f5", "title": "Chibi Hanni - How Sweet Choreography", "author": "smiffco", "licence": "Free Standard", "embed": "https://sketchfab.com/models/eda366c301754235a806a4822cf0b2f5/embed", "date": "2024-06-07", "verified": true, "note": "The description says the motion was tracked from video with DeepMotion."},
+        {"type": "sketchfab", "url": "https://sketchfab.com/3d-models/deepmotion-saymotion-cricket-75e7a604733344849dc92549eaec1c79", "title": "DeepMotion - SayMotion - Cricket", "author": "ashharakhlaque", "licence": "CC Attribution", "embed": "https://sketchfab.com/models/75e7a604733344849dc92549eaec1c79/embed", "date": "2024-08-18", "verified": true, "note": "Only the title credits SayMotion; the description is empty."},
+        {"type": "sketchfab", "url": "https://sketchfab.com/3d-models/1-5-stationary-downward-elbow-strike-8483c7a2d41a492f97de3a851c8b6288", "title": "1-5 Stationary Downward Elbow Strike", "author": "mitsu.1812", "licence": "none shown (standard Sketchfab terms)", "embed": "https://sketchfab.com/models/8483c7a2d41a492f97de3a851c8b6288/embed", "date": "2025-08-07", "verified": true, "note": "The description names DeepMotion. It is part of a martial-arts series by the same author."}
+      ],
+      "notes": "A 2025 EA SIGGRAPH Asia paper (arXiv 2601.19036) cites DeepMotion and Move.ai only as examples of commercial video mocap needing physics cleanup. It does not score them. We found no independent accuracy benchmark. Third-party pricing claims conflict ($9 to $39+/month), so check the vendor pricing page."
+    },
+    "rokoko-vision": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "TATO Studio (blog + YouTube same-footage comparison)",
+          "url": "https://tato.studio/blog/best-ai-video-to-mocap",
+          "date": "2025-08-21",
+          "author": "TATO Studio",
+          "independent": true,
+          "summary": "Free, with dual-camera support at the time. Output on the test clip was shaky and jumpy and not yet professional-grade. TATO groups it with Plask and Cyan Puppets as budget options for free tests.",
+          "rating": 45,
+          "verified": true,
+          "note": "Tested the pre-3.0 solver. Vision 3.0 (July 2026) is a rebuilt solver, so this result may be outdated."
+        },
+        {
+          "outlet": "StraySpark blog: AI Motion Capture for Indie Devs in 2026",
+          "url": "https://www.strayspark.studio/blog/ai-mocap-indie-developers-2026-comparison",
+          "date": "2026-03-24",
+          "author": "StraySpark",
+          "independent": true,
+          "summary": "Rates 'Rokoko Video' webcam-only body capture fair and face capture good. It ranks below Move.ai and DeepMotion for body capture. This is a guide, not a controlled test.",
+          "rating": 45,
+          "verified": true,
+          "note": "Before Vision 3.0."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Capterra (listing 'Rokoko Vision' / Rokoko Studio)", "rating": null, "scale": 5, "count": 0, "url": "https://www.capterra.com/p/10014709/Rokoko-Vision/", "verified": false, "note": "A search snippet shows 0 reviews. The page itself was not fetched."},
+          {"platform": "Trustpilot (rokoko.com)", "rating": 3.2, "scale": 5, "count": 1, "url": "https://www.trustpilot.com/review/rokoko.com", "verified": true, "note": "The single review is about import costs for hardware, not Vision. Not relevant to Vision quality."}
+        ],
+        "mentions": [
+          {"source": "Reallusion forum: 'Motion capture with a video only'", "url": "https://forum.reallusion.com/FindPost555919.aspx", "date": "c. 2024", "sentiment": "neg", "note": "One tester found foot placement precise but saw strange movements and called the dual-camera setup unusable. Another user criticised the precision of Rokoko's camera solutions. Move.ai with a single iPhone was preferred.", "verified": true},
+          {"source": "Reallusion forum: 'Rokoko Video - proof of concept' (page 5)", "url": "https://forum.reallusion.com/528782/Rokoko-Video-proof-of-concept?PageIndex=5", "date": "2023-12 (latest post c. 2024)", "sentiment": "neg", "note": "One user rated Vision single-camera clearly below DeepMotion. Another reported months of failed uploads and no support reply.", "verified": true},
+          {"source": "Polycount: 'Rokoko a motion capture - New AI tool'", "url": "https://polycount.com/discussion/231922/rokoko-a-motion-capture-new-ai-tool", "date": "c. 2022", "sentiment": "pos", "note": "An early user test of Rokoko Video (Vision's predecessor) reportedly went well. Known only from a search snippet.", "verified": false}
+        ],
+        "sampled": 3
+      },
+      "vendor_claims": [
+        {"claim": "Vision 3.0 (2026-07-16) is a rebuilt monocular solver. Rokoko claims cleaner body motion and processing faster than any competitor, with no benchmark published. It ships without finger tracking and moves into the Rokoko Create web platform.", "url": "https://www.rokoko.com/insights/introducing-rokoko-vision-3-0"},
+        {"claim": "Rokoko compares its own pricing table to QuickMagic and Uthana and claims far more processing minutes per dollar (e.g. Pro: 250 min at $50/month).", "url": "https://www.rokoko.com/insights/introducing-rokoko-vision-3-0"},
+        {"claim": "A 2023 piece on Rokoko's site says Rokoko's internal testing found Vision beat Move AI and AR51 on fidelity and cleanup. This is a self-assessment published on the vendor's own site.", "url": "https://www.rokoko.com/insights/the-best-motion-capture-tools-for-3d-animation-a-2023-comparison-from-daydream-studios"}
+      ],
+      "strengths": ["free entry tier", "plugs into Rokoko Studio retargeting (UE5 Manny, Mixamo, HIK)", "cloud processing, no GPU needed"],
+      "weaknesses": ["shaky/jumpy output and weaker precision in pre-3.0 tests", "upload reliability complaints", "no finger tracking in 3.0; dual-cam and webcam capture retired 2026-08-16"],
+      "examples": [
+        {"type": "youtube", "url": "https://www.youtube.com/watch?v=C9DtwBCb-rg", "title": "Which AI Video to Mocap is The Best? Comparison (2025)", "channel": "TATO", "date": "2025", "timestamp": null, "verified": true, "note": "Same-footage comparison that includes Rokoko Vision (pre-3.0)."},
+        {"type": "youtube", "url": "https://www.youtube.com/watch?v=2NDMmzFwwxA", "title": "QuickMagic vs Rokoko vs Cascadeur (Video to 3D Animation)", "channel": "Royal Skies", "date": null, "timestamp": null, "verified": true, "note": "Title and channel only."},
+        {"type": "sketchfab", "url": "https://sketchfab.com/3d-models/rokoko-vision-single-cam-recording-noah-de-deken-803cffadb65847ce8819ea5c37a62711", "title": "rokoko vision single cam recording noah De Deken", "author": "noah.de.deken", "licence": "none shown (standard Sketchfab terms)", "embed": "https://sketchfab.com/models/803cffadb65847ce8819ea5c37a62711/embed", "date": "2023-10-08", "verified": true, "note": "Pairs with the dual-cam upload below: the same performer captured both ways. Pre-3.0."},
+        {"type": "sketchfab", "url": "https://sketchfab.com/3d-models/rokoko-vision-duo-cam-recording-noah-de-deken-de50be5e6eac4379b2a50a71e9fd72a9", "title": "rokoko vision duo cam recording noah De Deken", "author": "noah.de.deken", "licence": "none shown (standard Sketchfab terms)", "embed": "https://sketchfab.com/models/de50be5e6eac4379b2a50a71e9fd72a9/embed", "date": "2023-10-10", "verified": true, "note": "Dual-camera version. The dual-camera mode has since been retired."}
+      ],
+      "notes": "All independent evidence predates Vision 3.0 (released 2026-07-16), which Rokoko says is a full solver rebuild. Re-test before ranking. The free tier is reportedly now 30 s/month of processing, down from the 2023 single-cam free use; from search snippets of Rokoko's localised pages, not verified on the English page. CG Channel's 2023 launch coverage (https://www.cgchannel.com/2023/09/check-out-free-browser-based-ai-mocap-tool-rokoko-vision/) is news only."
+    },
+    "meshy": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "StraySpark blog: AI Auto-Rigging Showdown 2026",
+          "url": "https://www.strayspark.studio/blog/ai-auto-rigging-showdown-2026-tripo-meshy-cascadeur-mixamo",
+          "date": "2026-05-14",
+          "author": "StraySpark",
+          "independent": true,
+          "summary": "Meshy's auto-rig was fast and clean on a standard humanoid, with a broader motion library than Tripo. Hip and pelvis weighting was off by 5-15 cm, causing foot-IK mismatch and sliding, and non-standard bone names needed manual remapping for UE 5.7. Judged good for prototypes, less so for shipping work. Tripo was named best end-to-end for indies.",
+          "rating": 60,
+          "verified": true
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 4.7, "scale": 5, "count": 3888, "url": "https://www.trustpilot.com/review/meshy.ai", "verified": true, "note": "Covers Meshy overall. 84% of reviews are 5-star and 3% 1-star. Recent reviews shown don't mention rigging or animation."},
+          {"platform": "Product Hunt", "rating": 4.9, "scale": 5, "count": 22, "url": "https://www.producthunt.com/products/meshy/reviews", "verified": true, "note": "'Easy rigging and animations' appears as a pro tag 3 times. One user said rigging works poorly when the model isn't in T- or A-pose."}
+        ],
+        "mentions": [
+          {"source": "Epic Developer Community: 'Can anyone help me properly animate characters from Meshy?'", "url": "https://forums.unrealengine.com/t/can-anyone-help-me-properly-animate-characters-from-meshy/2725344", "date": "2026-05-30", "sentiment": "neg", "note": "The user reports wonky motion after Meshy rig+animate. A reply blames limb orientation and pose and the limits of auto-rigging, and suggests in-engine fixes.", "verified": true}
+        ],
+        "sampled": 1
+      },
+      "vendor_claims": [
+        {"claim": "Auto-rig in under 30 seconds and upload to animated character in under 2 minutes. Supports humanoids, quadrupeds and stylised figures. The library is described as both '600+' and '100+' presets on the same page. The page says animation is free to try.", "url": "https://www.meshy.ai/features/ai-animation-generator"}
+      ],
+      "strengths": ["very fast one-click rig and preset library", "humanoid and quadruped support"],
+      "weaknesses": ["hip/pelvis weighting errors leading to foot sliding", "non-standard bone names need remapping", "poor results if input isn't T- or A-pose"],
+      "examples": [],
+      "notes": "Meshy is primarily a 3D generator, and user ratings mostly reflect generation, not animation. The brief says rigging is paid-only, but the vendor feature page currently says auto-rig and animate are free to try; plan gating is unconfirmed. Sketchfab searches found Meshy-generated meshes but none whose description credits Meshy for the rig or animation; several credit Mixamo instead. No verified Meshy animation example."
+    },
+    "bake3d": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {"ratings": [], "mentions": [], "sampled": 0},
+      "vendor_claims": [
+        {"claim": "Press release (2026-09-29): browser tool turns an image or text into a textured, rigged, animated asset, including non-human forms (wings, tails, wheels). It advises users to check topology and deformation before production.", "url": "https://www.financialcontent.com/article/marketersmedia-2026-9-29-bake3d-introduces-ai-workflow-for-creating-rigged-and-animated-3d-characters", "verified": false}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "We found no independent review, user rating or community discussion. It is very new (press release September 2026). Not researched further, per the brief."
+    },
+    "sloyd": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {"ratings": [], "mentions": [], "sampled": 0},
+      "vendor_claims": [
+        {"claim": "Automatic skeleton fitting with no weight painting, an Animate tool for walk and idle cycles, and Pro-tier video-to-animation and text-to-motion.", "url": "https://sloyd.ai/animations", "verified": false}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Search found a unite.ai review (several languages) that reportedly tried the auto-rig and animate options and called the tool fast but limited for detailed editing, with a restricted free tier. We did not open it, so it is not recorded as a review. Not researched further."
+    },
+    "unity-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {"ratings": [], "mentions": [], "sampled": 0},
+      "vendor_claims": [
+        {"claim": "The Animation Generator offers Text to Motion (Unity's own model) and Video to Motion (Kinetix model) inside the editor. Video input should be one full-body person on a stable camera.", "url": "https://docs.unity3d.com/Packages/com.unity.ai.assistant@2.6/manual/Animation/animation-create.html", "verified": true}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Unity AI arrived in Unity 6.2 (CG Channel, 2025-08-19: https://www.cgchannel.com/?p=169508). It replaced Muse (retired 2025-10-01) and is paid via Unity Points. We found no independent hands-on review of the animation generator. GameFromScratch reviewed the older Muse Animate, which we did not open."
+    }
+  },
+  "missing_tools": [
+    {"name": "Move.ai (Move One / Move Pro)", "url": "https://www.move.ai/", "verified": false, "why": "The independent comparisons we found (TATO 2025, StraySpark 2026, Reallusion forum users) rate it the quality leader for markerless capture, especially multi-camera."},
+    {"name": "QuickMagic", "url": "https://www.quickmagic.ai/", "verified": false, "why": "The most-covered single-camera tool on YouTube in 2025-26, with finger tracking and a low price. TATO rated it a reliable budget pick. Much of the YouTube coverage carries affiliate links."},
+    {"name": "Uthana", "url": "https://uthana.com/resources/best-ai-motion-capture-tools", "verified": true, "why": "Text- and video-to-motion service that appears in most 2026 comparisons. Rokoko benchmarks its pricing against Uthana."},
+    {"name": "Cartwheel", "url": "https://getcartwheel.com/", "verified": false, "why": "Prompt-based (text-to-motion) animation that TATO groups with the high-quality picks."},
+    {"name": "Plask Motion", "url": "https://plask.ai/", "verified": false, "why": "Long-running browser video mocap with a free daily allowance. Quality is judged similar to DeepMotion. Its 2026 status is unclear."},
+    {"name": "Mixamo (Adobe)", "url": "https://www.mixamo.com/", "verified": false, "why": "The free humanoid auto-rigger and motion library that many Meshy and other AI-mesh users still use for rigging. Reportedly unmaintained, with a multi-day outage in June 2025."},
+    {"name": "Tripo (auto-rig)", "url": "https://www.tripo3d.ai/content/en/use-case/the-best-ai-rigging-tool", "verified": false, "why": "Named best end-to-end auto-rig for indies in StraySpark's 2026 hands-on test. Broader skeleton types than Meshy."},
+    {"name": "Reallusion AccuRIG", "url": "https://actorcore.reallusion.com/auto-rig", "verified": false, "why": "Free auto-rigger often cited as a Mixamo alternative, and included in StraySpark's rigging showdown."},
+    {"name": "Kinetix", "url": "https://www.kinetix.tech/", "verified": false, "why": "Its video-to-animation model powers Unity AI's Video to Motion. It is also offered standalone."},
+    {"name": "Anything World", "url": "https://anything.world/", "verified": false, "why": "Auto-rigs and animates non-humanoid models (animals, vehicles), a gap for Mixamo and Meshy."},
+    {"name": "Autodesk Flow Studio (ex-Wonder Studio)", "url": "https://www.autodesk.com/products/flow-studio/overview", "verified": false, "why": "Included in TATO's comparison as a budget pick. Autodesk also acquired RADiCAL's mocap IP in 2026."},
+    {"name": "Meshcapade", "url": "https://meshcapade.com/", "verified": false, "why": "TATO lists it among the high-quality options. A Reallusion user found it better under occlusion but prone to floating and leaning."},
+    {"name": "RADiCAL (do not add)", "url": "https://www.cgchannel.com/?p=175200", "verified": false, "why": "Per CG Channel (2026-04-09), Autodesk acquired the tech and the web portal closed on 2026-07-06, so it is no longer available."}
+  ],
+  "general_sources": [
+    {"title": "TATO Studio: Best AI video-to-mocap tools: a complete comparison (2025-08-21)", "url": "https://tato.studio/blog/best-ai-video-to-mocap", "note": "The best independent same-footage comparison found. It covers 14 tools with qualitative verdicts and no numeric scores."},
+    {"title": "StraySpark: AI Motion Capture for Indie Devs in 2026", "url": "https://www.strayspark.studio/blog/ai-mocap-indie-developers-2026-comparison", "note": "Practitioner guide with qualitative body/face/finger ratings. Not a controlled test."},
+    {"title": "StraySpark: AI Auto-Rigging Showdown 2026", "url": "https://www.strayspark.studio/blog/ai-auto-rigging-showdown-2026-tripo-meshy-cascadeur-mixamo", "note": "Hands-on rig test in UE5 and Blender. One character, one tester."},
+    {"title": "Ray et al., Frontiers in Computer Science 2024: marker-based vs markerless under loose garments", "url": "https://www.frontiersin.org/journals/computer-science/articles/10.3389/fcomp.2024.1379925/full", "note": "Academic MPJPE comparison of method types (VideoPose3D, BlazePose etc.), not commercial products. Useful background: monocular markerless MPJPE was about 8.2 cm on unclothed bodies."},
+    {"title": "Tao, Liu, Ling (EA), 'The Last Mile to Production Readiness' (SIGGRAPH Asia 2025 TC; arXiv 2601.19036)", "url": "https://arxiv.org/html/2601.19036v1", "note": "Physics cleanup for commercial video mocap output. Cites DeepMotion and Move.ai but does not score named tools."},
+    {"title": "GameFromScratch: DeepMotion Animate 3D Alpha Review (2020-12-09)", "url": "https://gamefromscratch.com/deepmotion-animate-3d-alpha-review/", "note": "Old. Gives no quality verdict, only input guidelines."},
+    {"title": "CG Channel: DeepMotion launches SayMotion 1.5 (2024)", "url": "https://www.cgchannel.com/?p=156294", "note": "News coverage of features and limits. No quality judgement."},
+    {"title": "CG Channel: Unity rolls out Unity AI in Unity 6.2 (2025-08-19)", "url": "https://www.cgchannel.com/?p=169508", "note": "Confirms the text-to-motion and Kinetix video-to-motion generators and the Unity Points billing."}
+  ],
+  "caveats": "1) We found no independent quantitative benchmark for any of these tools, such as joint error against optical capture or a published text-to-motion leaderboard. Academic validation papers test research or open-source systems, not DeepMotion, Rokoko Vision, Cascadeur or Meshy. All benchmark arrays are therefore empty. 2) Reddit blocks our fetcher (reddit.com, old.reddit.com and search.json all refused), so community sampling relied on the Reallusion, Blender Artists, Unity, Epic and OpenGameArt forums plus one mirrored r/gamedev thread. Mention counts are low (Cascadeur 5, DeepMotion 3, Rokoko Vision 3, Meshy 1) and many are 2022-2024. 3) We could not read YouTube pages (no description, date or chapters). Titles and channels were verified via oEmbed, but verdicts and timestamps for those comparison videos are unverified, so none were scored as reviews. 4) G2 and Capterra returned 403. Figures from them come from search snippets and are marked verified:false. 5) We found no Steam listing for Cascadeur. 6) All independent Rokoko Vision evidence predates the Vision 3.0 solver rebuild (July 2026). 7) Many 2026 'review' pages (tooliverse, aitoolsbox, wavespeed, mimem, uthana, 3dxdev, itechguides, fbpe mirrors) are aggregator, affiliate or competitor content and were excluded or flagged. 8) Our review ratings translate qualitative verdicts into the 0-100 rubric. None of the sources gave numeric scores except 3D Next (4.5/5, flagged non-independent)."
+}

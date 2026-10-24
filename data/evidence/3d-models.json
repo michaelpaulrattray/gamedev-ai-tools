@@ -1,0 +1,446 @@
+{
+ "task": "3d-models",
+ "checked": "2026-10-24",
+ "tools": {
+  "meshy": {
+   "bench": [
+    {
+     "source": "3D Arena blind vote",
+     "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+     "detail": "Render board: Meshy 6 #3 of 24",
+     "score": 91.3
+    },
+    {
+     "source": "3D Arena blind vote",
+     "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+     "detail": "Topology board: Meshy 6 #3 of 21",
+     "score": 90.0
+    },
+    {
+     "source": "top3d.ai blind arena",
+     "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+     "detail": "Textured board, Sep 2026: Meshy 7.1 #3 of 21",
+     "score": 90.0
+    },
+    {
+     "source": "top3d.ai blind arena",
+     "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+     "detail": "Geometry board, Sep 2026: Meshy 7 #3 of 21",
+     "score": 90.0
+    }
+   ],
+   "reviews": [
+    {
+     "source": "3Dnatives",
+     "url": "https://www.3dnatives.com/en/3dnatives-lab-meshy-ai-3d-model-generator-23092026/",
+     "date": "2026-09-23",
+     "summary": "Nine photo/AI-image inputs exported as 3MF for printing: all passed the slicer, but only 2 of 9 were single closed solids, hidden sides were invented and small text was lost. Judged good value for simple display objects, not for accurate parts.",
+     "score": 65
+    },
+    {
+     "source": "StraySpark blog",
+     "url": "https://www.strayspark.studio/blog/generative-3d-tools-comparison-meshy-rodin-tripo-csm-2026",
+     "date": "2026-04-23 (updated 2026-09-25)",
+     "summary": "Same eight prompts through Meshy, Rodin, Tripo and CSM, judged for UE5 use. Meshy was the most consistent all-rounder (won crystal test, strong on architecture, second on hard-surface) but sometimes added unrequested details.",
+     "score": 75
+    }
+   ],
+   "users": [
+    {
+     "source": "Trustpilot",
+     "url": "https://www.trustpilot.com/review/meshy.ai",
+     "detail": "4.7/5 from 3,888 reviews",
+     "score": 92.5
+    },
+    {
+     "source": "Community threads (15 read)",
+     "url": "https://news.ycombinator.com/item?id=50094084",
+     "detail": "4 positive, 7 mixed, 4 negative",
+     "score": 50.0
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Meshy says Meshy 7 leads Tripo 3.1 and Rodin 2.5 on all three metrics of its own internal geometry-alignment benchmark (sample size and date not disclosed).",
+     "url": "https://www.meshy.ai/compare"
+    },
+    {
+     "text": "Meshy reports a 97% slicer/print pass rate from its own internal test.",
+     "url": "https://www.meshy.ai/compare"
+    },
+    {
+     "text": "Meshy cites a study of 1,331 senior 3D artists preferring Meshy 6 over Tripo 3.1 63.8% of the time (relayed via search results; not opened on the vendor page in this pass).",
+     "url": "https://www.meshy.ai/compare"
+    },
+    {
+     "text": "Meshy employee's HackerNoon test: Meshy 6 beat Rodin Gen-2.5 83.9% in textured single-view blind votes.",
+     "url": "https://hackernoon.com/how-i-stress-tested-3-ai-3d-generators-on-the-same-inputs-what-the-numbers-actually-show"
+    }
+   ],
+   "strengths": [
+    "consistent textured output with full PBR maps",
+    "sensible default poly budget for real-time use",
+    "top-3 in both independent blind-vote arenas"
+   ],
+   "weaknesses": [
+    "merges parts / holes on complex shapes",
+    "invents unseen sides; small detail and text lost",
+    "credit costs and paywalled downloads"
+   ],
+   "examples": [
+    {
+     "type": "sketchfab",
+     "uid": "5c243122d4994356b06c95a8f2e5e0e3",
+     "title": "A bowl of Ramen [MESHY 6]",
+     "author": "EthanfromEngland",
+     "licence": "CC BY",
+     "url": "https://sketchfab.com/3d-models/5c243122d4994356b06c95a8f2e5e0e3"
+    }
+   ]
+  },
+  "tripo": {
+   "bench": [
+    {
+     "source": "top3d.ai blind arena",
+     "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+     "detail": "Textured board, Sep 2026: Tripo 3.1 #1 of 21",
+     "score": 100.0
+    },
+    {
+     "source": "top3d.ai blind arena",
+     "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+     "detail": "Geometry board, Sep 2026: Tripo 3.1 #1 of 21",
+     "score": 100.0
+    }
+   ],
+   "reviews": [
+    {
+     "source": "StraySpark blog",
+     "url": "https://www.strayspark.studio/blog/generative-3d-tools-comparison-meshy-rodin-tripo-csm-2026",
+     "date": "2026-04-23",
+     "summary": "Best on the stylised cartoon prompt and the fastest tool, but judged the wrong style for hard-surface work and only roughly adequate for architecture blockouts.",
+     "score": 60
+    }
+   ],
+   "users": [
+    {
+     "source": "Trustpilot",
+     "url": "https://www.trustpilot.com/review/tripo3d.ai",
+     "detail": "4.4/5 from 506 reviews",
+     "score": 85.0
+    },
+    {
+     "source": "Community threads (10 read)",
+     "url": "https://news.ycombinator.com/item?id=49897498",
+     "detail": "4 positive, 2 mixed, 4 negative",
+     "score": 50.0
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Tripo's March 2026 press release says H3.1/3.1 improves input alignment, geometry accuracy, texture quality and speed over earlier versions (no numbers).",
+     "url": "https://programminginsider.com/tripo-ai-introduces-h3-1-advancing-high-fidelity-ai-3d-generation-for-production/"
+    },
+    {
+     "text": "Tripo's chief scientist told 80.lv that Smart Mesh produces game-ready assets with clean edge flow in under five seconds.",
+     "url": "https://80.lv/articles/how-tripo-is-tackling-clean-topology-for-its-3d-asset-pipeline"
+    }
+   ],
+   "strengths": [
+    "best blind-vote geometry and textured scores (top3d.ai Sep 2026)",
+    "clean topology / low-poly and retopo options",
+    "fast and cheap per generation"
+   ],
+   "weaknesses": [
+    "billing/cancellation complaints on Trustpilot",
+    "older/default modes bake flat single-colour textures",
+    "less suited to hard-surface style (one test)"
+   ],
+   "examples": [
+    {
+     "type": "sketchfab",
+     "uid": "d360d485ffe74d2f9b4782778dbae9ec",
+     "title": "Kiosco Tripo",
+     "author": "vmmaniac",
+     "licence": "CC BY",
+     "url": "https://sketchfab.com/3d-models/d360d485ffe74d2f9b4782778dbae9ec"
+    }
+   ],
+   "note": "Tripo's current models aren't on 3D Arena (only its old open-source TripoSR is), so its benchmark score comes from top3d.ai."
+  },
+  "hyper3d-rodin": {
+   "bench": [
+    {
+     "source": "top3d.ai blind arena",
+     "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+     "detail": "Textured board, Sep 2026: Rodin Gen-2.5 #2 of 21",
+     "score": 95.0
+    },
+    {
+     "source": "top3d.ai blind arena",
+     "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+     "detail": "Geometry board, Sep 2026: Rodin Gen-2.5 #14 of 21",
+     "score": 35.0
+    }
+   ],
+   "reviews": [
+    {
+     "source": "StraySpark blog",
+     "url": "https://www.strayspark.studio/blog/generative-3d-tools-comparison-meshy-rodin-tripo-csm-2026",
+     "date": "2026-04-23",
+     "summary": "Clear winner on hard-surface/mechanical prompts, but textures were weaker and its stylised cartoon result missed the brief; topology needs a retopo pass.",
+     "score": 65
+    }
+   ],
+   "users": [
+    {
+     "source": "Trustpilot",
+     "url": "https://www.trustpilot.com/review/hyper3d.ai",
+     "detail": "2.7/5 from 56 reviews",
+     "score": 42.5
+    },
+    {
+     "source": "Community threads (7 read)",
+     "url": "https://news.ycombinator.com/item?id=47161689",
+     "detail": "4 positive, 2 mixed, 1 negative",
+     "score": 71.4
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Hyper3D/press coverage calls Gen-2.5 the first 3D model able to generate at the tens-of-millions-of-faces level (no benchmark given).",
+     "url": "https://www.ifanr.com/1669869"
+    },
+    {
+     "text": "Hyper3D's own blog 'review' of Rodin is vendor-hosted marketing.",
+     "url": "https://hyper3d.ai/blog/hyper3d-rodin"
+    }
+   ],
+   "strengths": [
+    "fine geometric and hard-surface detail",
+    "realistic materials (metal) - #2 textured on top3d.ai",
+    "many quality tiers incl. quad mode"
+   ],
+   "weaknesses": [
+    "very dense meshes / highest face counts and price",
+    "weak segmentation and mid-table geometry votes",
+    "poor Trustpilot (billing/cancellation)"
+   ],
+   "examples": [
+    {
+     "type": "sketchfab",
+     "uid": "25e25fca5b5d4fd091913945c0a684ff",
+     "title": "Lemon Shack",
+     "author": "alexandrawr89",
+     "licence": "CC BY",
+     "url": "https://sketchfab.com/3d-models/25e25fca5b5d4fd091913945c0a684ff"
+    },
+    {
+     "type": "sketchfab",
+     "uid": "9b80bc88352f409f884957d285cabb06",
+     "title": "Furniture test (Hyper3D Rodin)",
+     "author": "william_lit8",
+     "licence": "CC BY",
+     "url": "https://sketchfab.com/3d-models/9b80bc88352f409f884957d285cabb06"
+    }
+   ]
+  },
+  "hunyuan3d": {
+   "bench": [
+    {
+     "source": "3D Arena blind vote",
+     "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+     "detail": "Render board: Hunyuan3D 2.1 #9 of 24",
+     "score": 65.2
+    },
+    {
+     "source": "3D Arena blind vote",
+     "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
+     "detail": "Topology board: Hunyuan3D 2.1 #4 of 21",
+     "score": 85.0
+    }
+   ],
+   "reviews": [],
+   "users": [
+    {
+     "source": "Community threads (10 read)",
+     "url": "https://news.ycombinator.com/item?id=50072357",
+     "detail": "4 positive, 4 mixed, 2 negative",
+     "score": 60.0
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Tencent's 2.1 release markets production-ready PBR materials; the HF/GitHub model card itself publishes no competitor benchmark.",
+     "url": "https://huggingface.co/tencent/Hunyuan3D-2.1"
+    }
+   ],
+   "strengths": [
+    "best open-weights model on 3D Arena (#1 topology board for 2.0)",
+    "free to run locally; PBR texture model included",
+    "hosted 3.1 strong at part splitting"
+   ],
+   "weaknesses": [
+    "needs ~29GB VRAM for shape+texture (10GB shape only)",
+    "licence excludes EU, UK and South Korea",
+    "inconsistent on unusual objects; messy topology"
+   ],
+   "examples": [
+    {
+     "type": "sketchfab",
+     "uid": "9126a4f6eff3464fbc53ee545c36b3f6",
+     "title": "Potato Chap",
+     "author": "Norod",
+     "licence": "CC BY",
+     "url": "https://sketchfab.com/3d-models/9126a4f6eff3464fbc53ee545c36b3f6"
+    },
+    {
+     "type": "sketchfab",
+     "uid": "e4df91e6e8ee4724868849a0b6c51119",
+     "title": "Pumpkin Scarecrow",
+     "author": "lonnieh",
+     "licence": "CC BY",
+     "url": "https://sketchfab.com/3d-models/e4df91e6e8ee4724868849a0b6c51119"
+    }
+   ],
+   "note": "Scores are for the open-weights 2.1 model we list. Tencent's hosted Hunyuan 3.1 is a different product and isn't counted."
+  },
+  "sloyd": {
+   "bench": [
+    {
+     "source": "top3d.ai blind arena",
+     "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+     "detail": "Textured board, Sep 2026: Sloyd AI v3 #6 of 21",
+     "score": 75.0
+    },
+    {
+     "source": "top3d.ai blind arena",
+     "url": "https://top3d.ai/leaderboard/seasons/sep-26",
+     "detail": "Geometry board, Sep 2026: Sloyd AI v3 #8 of 21",
+     "score": 65.0
+    }
+   ],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Sloyd's blog republishes the top3d.ai arena (Aug 3 2026 snapshot) showing Sloyd AI v3 3rd of 8 listed at 1015 ELO; the live independent board now has it 12th of 21.",
+     "url": "https://www.sloyd.ai/blog/ai-3d-model-generator-rankings"
+    },
+    {
+     "text": "Sloyd says its parametric engine can generate millions of unique assets in real time.",
+     "url": "https://sloyd.ai"
+    }
+   ],
+   "strengths": [
+    "template-based low-poly props"
+   ],
+   "weaknesses": [
+    "limited to its template categories for parametric mode",
+    "billing/refund complaints",
+    "no independent hands-on review found"
+   ],
+   "examples": []
+  },
+  "thrixel": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "bake3d": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "dreamlands": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "scenario": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "retro-diffusion": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "unity-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Unity positions its in-editor 3D Object Generator (open beta) for simple single-part placeholder props, tagging output as AI-generated.",
+     "url": "https://unity.com/blog/unity-ai-3d-object-generator"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  }
+ },
+ "videos": [
+  {
+   "id": "ixbJUHhEItM",
+   "title": "I Compared 6 Image-to-3D Tools for Game Dev",
+   "channel": "Building Aeon",
+   "start": 656,
+   "url": "https://www.youtube.com/watch?v=ixbJUHhEItM&t=656s",
+   "tools": [
+    "hunyuan3d",
+    "tripo",
+    "hyper3d-rodin",
+    "meshy"
+   ]
+  },
+  {
+   "id": "juQSXp5KlZc",
+   "title": "I Tested 5 AI Image to 3D Tools",
+   "channel": "Design with Viktor",
+   "start": 530,
+   "url": "https://www.youtube.com/watch?v=juQSXp5KlZc&t=530s",
+   "tools": [
+    "hunyuan3d",
+    "tripo",
+    "meshy",
+    "hyper3d-rodin"
+   ]
+  },
+  {
+   "id": "G7hURz3IdBI",
+   "title": "3D AI Battle Royale: Tripo vs Meshy vs Hunyuan vs Rodin",
+   "channel": "Geeky Haven",
+   "start": 50,
+   "url": "https://www.youtube.com/watch?v=G7hURz3IdBI&t=50s",
+   "tools": [
+    "tripo",
+    "hyper3d-rodin",
+    "meshy",
+    "hunyuan3d"
+   ]
+  }
+ ]
+}

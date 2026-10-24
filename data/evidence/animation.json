@@ -1,0 +1,324 @@
+{
+ "task": "animation",
+ "checked": "2026-10-24",
+ "tools": {
+  "cascadeur": {
+   "bench": [],
+   "reviews": [
+    {
+     "source": "Creative Bloq",
+     "url": "https://tech.yahoo.com/general/articles/cascadeur-2024-2-review-automated-180000242.html",
+     "date": "2024-09-14",
+     "summary": "Hands-on review of version 2024.2. It calls the release a worthwhile upgrade mainly for the physics automation: AutoPhysics turns rough keys into more plausible motion. Caveats: AutoPhysics was still alpha, blendshapes were limited, and the free tier can't export or be used commercially.",
+     "score": 75
+    },
+    {
+     "source": "TATO Studio",
+     "url": "https://tato.studio/blog/best-ai-video-to-mocap",
+     "date": "2025-08-21",
+     "summary": "Judged as a video-to-mocap tool, Cascadeur's capture lost energy and sometimes twisted or floated, with no finger tracking. Its editing and cleanup tools were the strongest in the test, and TATO recommends it for refining rough mocap from other tools.",
+     "score": 60
+    },
+    {
+     "source": "StraySpark blog",
+     "url": "https://www.strayspark.studio/blog/ai-auto-rigging-showdown-2026-tripo-meshy-cascadeur-mixamo",
+     "date": "2026-05-14",
+     "summary": "Hands-on test with one humanoid character. Cascadeur's auto-rig was only adequate, but AutoPosing added believable weight and balance, and its FBX export was the cleanest and most retarget-ready in the comparison. About 30 minutes for a 2-second custom clip. Treated as a separate category used alongside Tripo or Meshy.",
+     "score": 75
+    }
+   ],
+   "users": [
+    {
+     "source": "Product Hunt",
+     "url": "https://www.producthunt.com/products/cascadeur/reviews",
+     "detail": "4.8/5 from 26 reviews",
+     "score": 95.0
+    },
+    {
+     "source": "Community threads (5 read)",
+     "url": "https://reddit.com/r/gamedev/comments/1pdyrsw/did_you_use_cascadeur_animation_soft_your_honest/",
+     "detail": "2 positive, 3 mixed, 0 negative",
+     "score": 70.0
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Cascadeur's AI features (AutoPosing, AI inbetweening, AI motion generation) produce natural poses and motion from few controls. Nekki says it used Cascadeur for Shadow Fight 4: Arena combat animation.",
+     "url": "https://cascadeur.com/"
+    },
+    {
+     "text": "The vendor's own docs say AI inbetweening is humanoid-only, needs a standard AutoPosing rig, and only partly succeeds on locomotion and interactions.",
+     "url": "https://cascadeur.com/help/category/278"
+    }
+   ],
+   "strengths": [
+    "physics-aware posing that adds weight and balance",
+    "strong mocap cleanup and editing",
+    "clean, retarget-ready FBX export"
+   ],
+   "weaknesses": [
+    "unusual UI and learning curve",
+    "subscription cost; free tier can't export commercially",
+    "humanoid-focused; weaker for stylised motion, shape keys, and video mocap that loses energy"
+   ],
+   "examples": [
+    {
+     "type": "sketchfab",
+     "uid": "7cfddf43d3624f28be4772a1d0a4b51b",
+     "title": "V2 Robot animations",
+     "author": "kanki_projects",
+     "licence": "CC BY",
+     "url": "https://sketchfab.com/3d-models/v2-robot-animations-7cfddf43d3624f28be4772a1d0a4b51b"
+    },
+    {
+     "type": "sketchfab",
+     "uid": "2356c3504a8942deb2a74b0d874a65e6",
+     "title": "Flurry Kick Combo Animation",
+     "author": "CurvePointStudios",
+     "licence": "",
+     "url": "https://sketchfab.com/3d-models/flurry-kick-combo-animation-2356c3504a8942deb2a74b0d874a65e6"
+    }
+   ]
+  },
+  "deepmotion": {
+   "bench": [],
+   "reviews": [
+    {
+     "source": "TATO Studio",
+     "url": "https://tato.studio/blog/best-ai-video-to-mocap",
+     "date": "2025-08-21",
+     "summary": "On the shared test clip (jumping, crouching, basic movement), DeepMotion showed noticeable twitching and foot sliding. TATO lists no pros and says it may not suit more complex animation. Move AI and QuickMagic were rated above it.",
+     "score": 40
+    },
+    {
+     "source": "StraySpark blog",
+     "url": "https://www.strayspark.studio/blog/ai-mocap-indie-developers-2026-comparison",
+     "date": "2026-03-24",
+     "summary": "Practitioner guide, not a same-footage test. It rates DeepMotion's body capture good, face capture limited and fingers basic, and places it below Move.ai multi-camera for body quality.",
+     "score": 60
+    }
+   ],
+   "users": [
+    {
+     "source": "Community threads (3 read)",
+     "url": "https://forum.reallusion.com/528782/Rokoko-Video-proof-of-concept?PageIndex=5",
+     "detail": "1 positive, 1 mixed, 1 negative",
+     "score": 50.0
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "DeepMotion aims to be the largest AI-generated 3D animation platform. The homepage relies on testimonials (e.g. Corridor Digital) and partner logos and gives no measured figures.",
+     "url": "https://www.deepmotion.com/"
+    },
+    {
+     "text": "Foot-locking modes (Auto/Always/Never/Grounding) and a motion-smoothing dial reduce gliding and jitter. The vendor notes that heavy smoothing can cost accuracy.",
+     "url": "https://www.deepmotion.com/article/foot-locking"
+    },
+    {
+     "text": "SayMotion 1.5 (text-to-motion) was trained on an expanded dataset of about 400k clips and supports inpainting and chained prompts. It is full-body humanoid only, as reported by CG Channel from vendor information.",
+     "url": "https://www.cgchannel.com/?p=156294"
+    }
+   ],
+   "strengths": [
+    "browser-based, no hardware, many export formats",
+    "adequate for standard locomotion and gestures",
+    "foot-locking and smoothing controls"
+   ],
+   "weaknesses": [
+    "twitching/jitter and foot sliding",
+    "struggles with complex motion; limb and torso twist",
+    "face and finger capture basic"
+   ],
+   "examples": [
+    {
+     "type": "sketchfab",
+     "uid": "eda366c301754235a806a4822cf0b2f5",
+     "title": "Chibi Hanni - How Sweet Choreography",
+     "author": "smiffco",
+     "licence": "",
+     "url": "https://sketchfab.com/3d-models/chibi-hanni-how-sweet-choreography-eda366c301754235a806a4822cf0b2f5"
+    },
+    {
+     "type": "sketchfab",
+     "uid": "8483c7a2d41a492f97de3a851c8b6288",
+     "title": "Stationary Downward Elbow Strike",
+     "author": "mitsu.1812",
+     "licence": "",
+     "url": "https://sketchfab.com/3d-models/1-5-stationary-downward-elbow-strike-8483c7a2d41a492f97de3a851c8b6288"
+    }
+   ]
+  },
+  "rokoko-vision": {
+   "bench": [],
+   "reviews": [
+    {
+     "source": "TATO Studio",
+     "url": "https://tato.studio/blog/best-ai-video-to-mocap",
+     "date": "2025-08-21",
+     "summary": "Free, with dual-camera support at the time. Output on the test clip was shaky and jumpy and not yet professional-grade. TATO groups it with Plask and Cyan Puppets as budget options for free tests.",
+     "score": 45
+    },
+    {
+     "source": "StraySpark blog",
+     "url": "https://www.strayspark.studio/blog/ai-mocap-indie-developers-2026-comparison",
+     "date": "2026-03-24",
+     "summary": "Rates 'Rokoko Video' webcam-only body capture fair and face capture good. It ranks below Move.ai and DeepMotion for body capture. This is a guide, not a controlled test.",
+     "score": 45
+    }
+   ],
+   "users": [
+    {
+     "source": "Community threads (3 read)",
+     "url": "https://forum.reallusion.com/FindPost555919.aspx",
+     "detail": "1 positive, 0 mixed, 2 negative",
+     "score": 33.3
+    }
+   ],
+   "vendorClaims": [
+    {
+     "text": "Vision 3.0 (2026-07-16) is a rebuilt monocular solver. Rokoko claims cleaner body motion and processing faster than any competitor, with no benchmark published. It ships without finger tracking and moves into the Rokoko Create web platform.",
+     "url": "https://www.rokoko.com/insights/introducing-rokoko-vision-3-0"
+    },
+    {
+     "text": "Rokoko compares its own pricing table to QuickMagic and Uthana and claims far more processing minutes per dollar (e.g. Pro: 250 min at $50/month).",
+     "url": "https://www.rokoko.com/insights/introducing-rokoko-vision-3-0"
+    },
+    {
+     "text": "A 2023 piece on Rokoko's site says Rokoko's internal testing found Vision beat Move AI and AR51 on fidelity and cleanup. This is a self-assessment published on the vendor's own site.",
+     "url": "https://www.rokoko.com/insights/the-best-motion-capture-tools-for-3d-animation-a-2023-comparison-from-daydream-studios"
+    }
+   ],
+   "strengths": [
+    "free entry tier",
+    "plugs into Rokoko Studio retargeting (UE5 Manny, Mixamo, HIK)",
+    "cloud processing, no GPU needed"
+   ],
+   "weaknesses": [
+    "shaky/jumpy output and weaker precision in pre-3.0 tests",
+    "upload reliability complaints",
+    "no finger tracking in 3.0; dual-cam and webcam capture retired 2026-08-16"
+   ],
+   "examples": [
+    {
+     "type": "sketchfab",
+     "uid": "803cffadb65847ce8819ea5c37a62711",
+     "title": "Rokoko Vision single-camera recording",
+     "author": "noah.de.deken",
+     "licence": "",
+     "url": "https://sketchfab.com/3d-models/rokoko-vision-single-cam-recording-noah-de-deken-803cffadb65847ce8819ea5c37a62711"
+    }
+   ],
+   "note": "Reviews predate Vision 3.0 (July 2026), a rebuilt solver. Re-test due."
+  },
+  "meshy": {
+   "bench": [],
+   "reviews": [
+    {
+     "source": "StraySpark blog",
+     "url": "https://www.strayspark.studio/blog/ai-auto-rigging-showdown-2026-tripo-meshy-cascadeur-mixamo",
+     "date": "2026-05-14",
+     "summary": "Meshy's auto-rig was fast and clean on a standard humanoid, with a broader motion library than Tripo. Hip and pelvis weighting was off by 5-15 cm, causing foot-IK mismatch and sliding, and non-standard bone names needed manual remapping for UE 5.7. Judged good for prototypes, less so for shipping work. Tripo was named best end-to-end for indies.",
+     "score": 60
+    }
+   ],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Auto-rig in under 30 seconds and upload to animated character in under 2 minutes. Supports humanoids, quadrupeds and stylised figures. The library is described as both '600+' and '100+' presets on the same page. The page says animation is free to try.",
+     "url": "https://www.meshy.ai/features/ai-animation-generator"
+    }
+   ],
+   "strengths": [
+    "very fast one-click rig and preset library",
+    "humanoid and quadruped support"
+   ],
+   "weaknesses": [
+    "hip/pelvis weighting errors leading to foot sliding",
+    "non-standard bone names need remapping",
+    "poor results if input isn't T- or A-pose"
+   ],
+   "examples": []
+  },
+  "bake3d": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Press release (2026-09-29): browser tool turns an image or text into a textured, rigged, animated asset, including non-human forms (wings, tails, wheels). It advises users to check topology and deformation before production.",
+     "url": "https://www.financialcontent.com/article/marketersmedia-2026-9-29-bake3d-introduces-ai-workflow-for-creating-rigged-and-animated-3d-characters"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "sloyd": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "Automatic skeleton fitting with no weight painting, an Animate tool for walk and idle cycles, and Pro-tier video-to-animation and text-to-motion.",
+     "url": "https://sloyd.ai/animations"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  },
+  "unity-ai": {
+   "bench": [],
+   "reviews": [],
+   "users": [],
+   "vendorClaims": [
+    {
+     "text": "The Animation Generator offers Text to Motion (Unity's own model) and Video to Motion (Kinetix model) inside the editor. Video input should be one full-body person on a stable camera.",
+     "url": "https://docs.unity3d.com/Packages/com.unity.ai.assistant@2.6/manual/Animation/animation-create.html"
+    }
+   ],
+   "strengths": [],
+   "weaknesses": [],
+   "examples": []
+  }
+ },
+ "videos": [
+  {
+   "id": "C9DtwBCb-rg",
+   "title": "Which AI Video to Mocap is The Best? Comparison",
+   "channel": "TATO",
+   "start": 0,
+   "url": "https://www.youtube.com/watch?v=C9DtwBCb-rg",
+   "tools": [
+    "cascadeur",
+    "deepmotion",
+    "rokoko-vision"
+   ]
+  },
+  {
+   "id": "W8NnOvNs4cM",
+   "title": "Rokoko vs Move vs Cascadeur vs DeepMotion",
+   "channel": "Apologue",
+   "start": 0,
+   "url": "https://www.youtube.com/watch?v=W8NnOvNs4cM",
+   "tools": [
+    "rokoko-vision",
+    "cascadeur",
+    "deepmotion"
+   ]
+  },
+  {
+   "id": "2NDMmzFwwxA",
+   "title": "QuickMagic vs Rokoko vs Cascadeur (Video to 3D Animation)",
+   "channel": "Royal Skies",
+   "start": 0,
+   "url": "https://www.youtube.com/watch?v=2NDMmzFwwxA",
+   "tools": [
+    "rokoko-vision",
+    "cascadeur"
+   ]
+  }
+ ],
+ "notes": "No independent benchmarks exist for these commercial tools. Move.ai and QuickMagic rate above our listed video-mocap tools in independent tests and should be added."
+}

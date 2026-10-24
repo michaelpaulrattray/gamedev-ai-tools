@@ -428,7 +428,7 @@ const rankOf = (slug, key) => { const R = RANKED[key]; const r = R && R.rows.fin
 // Category rank card body for evidence-scored rows: score, the four signals, strengths/watch-outs, sources on demand.
 const CONF_TXT = { confident: 'Ranked on independent evidence', provisional: 'Provisional: one kind of evidence', fit: 'Not enough evidence yet: game-dev fit only' };
 const srcListV2 = r => `<ul class="src-list">${r.sources.map(x => `<li><a href="${esc(x.url)}" rel="noopener nofollow" target="_blank">${esc(x.label)}</a>${x.detail ? ` <span>${esc(x.detail)}</span>` : ''}</li>`).join('')}</ul>`;
-const rankNoteV2 = r => `<p class="rank-line"><span class="rank-n">#${r.n}</span>${r.label ? badge(r.label, 'accent') : ''}<span class="rank-score"><b>${r.score}</b>/100</span></p>
+const rankNoteV2 = r => `<p class="rank-line"><span class="rank-n">#${r.n}</span>${r.label ? badge(r.label, 'accent') : ''}${r.conf === 'confident' ? `<span class="rank-score"><b>${r.score}</b>/100</span>` : `<span class="rank-score">${r.conf === 'provisional' ? 'Provisional' : 'Unscored'}</span>`}</p>
 <p class="rank-conf rc-${r.conf}">${CONF_TXT[r.conf]}</p>
 <ul class="rank-sig">${SIGNALS.map(([k, l]) => `<li${r.sig[k] === null ? ' class="is-none"' : ''}><span>${l}</span><span class="rs-track"><span style="width:${r.sig[k] === null ? 0 : Math.round(r.sig[k])}%"></span></span><b>${r.sig[k] === null ? '–' : Math.round(r.sig[k])}</b></li>`).join('')}</ul>
 ${r.strengths.length ? `<p class="rank-pros">${r.strengths.slice(0, 3).map(x => `<span>${esc(x)}</span>`).join('')}</p>` : ''}${r.weaknesses.length ? `<p class="rank-cons"><b>Watch out:</b> ${esc(r.weaknesses.slice(0, 2).join('; '))}</p>` : ''}
@@ -620,7 +620,7 @@ ${catTable(list, RANKED[key])}<p class="cat-empty" hidden>No tools match these f
 ${list.length > 1 ? `<div class="cmp-row" style="margin-top:6px"><span>Compare side by side:</span>${cp.map(cmpChip).join('')}<a class="chip c-muted" href="${L(`/compare/?task=${key}`)}">Pick any two →</a></div>` : ''}
 ${GUIDES.filter(g => g.task === key).map(g => `<section class="rel-guide" aria-label="Related guide">${linkCard({ href: L(`/guides/${g.slug}/`), title: g.title, kicker: 'Related workflow guide', desc: esc(g.outcome), media: artImg(guideArtPage(g)), foot: flowStrip(g, { max: 4 }), cls: 'feature', h: 'h2' })}</section>`).join('\n')}
 ${RANKED[key] ? `<h2 class="sub-h">Why each tool ranks where it does</h2>
-<div class="grid ranked-cards">${RANKED[key].rows.map(r => toolCard(r.t, { attrs: `${catAttrs(r.t)} data-rank="${r.n}" data-alpha="${list.indexOf(r.t)}"`, note: r.sig ? rankNoteV2(r) : `<p class="rank-line"><span class="rank-n">#${r.n}</span>${r.label ? badge(r.label, 'accent') : ''}<span class="rank-tier">${r.tier === 'evidence' ? 'Independent tests' : 'Game-dev fit'}</span></p><p class="rank-why">${esc(r.why)} ${rankSources(r)}</p>\n` })).join('\n')}` : `<h2 class="sub-h">Verdicts</h2>
+<div class="grid ranked-cards">${RANKED[key].rows.map(r => toolCard(r.t, { compact: !!r.sig, attrs: `${catAttrs(r.t)} data-rank="${r.n}" data-alpha="${list.indexOf(r.t)}"`, note: r.sig ? rankNoteV2(r) : `<p class="rank-line"><span class="rank-n">#${r.n}</span>${r.label ? badge(r.label, 'accent') : ''}<span class="rank-tier">${r.tier === 'evidence' ? 'Independent tests' : 'Game-dev fit'}</span></p><p class="rank-why">${esc(r.why)} ${rankSources(r)}</p>\n` })).join('\n')}` : `<h2 class="sub-h">Verdicts</h2>
 <div class="grid">${list.map(t => toolCard(t, { attrs: catAttrs(t) })).join('\n')}`}
 ${sponsorCard({ booking: SPONSORS.get(`category:${c.page}`) })}</div>
 ${newsletterBlock()}`,
@@ -1086,18 +1086,18 @@ function exampleEmbed(x) {
 }
 const EX_JS = `<script>document.addEventListener('click',function(e){var b=e.target.closest('.ex-load');if(!b)return;var f=document.createElement('iframe');f.src=b.dataset.src;f.title=b.getAttribute('aria-label');f.allow='autoplay; fullscreen; xr-spatial-tracking';f.setAttribute('allowfullscreen','');f.loading='lazy';b.replaceWith(f);});</script>`;
 function matchup(A, B, k) {
-  const rA = k && rankOf(A.slug, k), rB = k && rankOf(B.slug, k), v2 = rA && rB && rA.sig && rB.sig;
+  const rA = k && rankOf(A.slug, k), rB = k && rankOf(B.slug, k), v2 = rA && rB && rA.sig && rB.sig, both = v2 && rA.conf === 'confident' && rB.conf === 'confident';
   const side = (t, r) => `<div class="mu-side"><a class="mu-logo" href="${toolUrl(t)}">${logo(t, 72, true)}</a><h2><a href="${toolUrl(t)}">${esc(t.name)}</a></h2>
 ${r ? `<a class="mu-rank" href="${L(`/category/${TASKS[k].page}/`)}">#${r.n} in ${esc(TASKS[k].label)}</a>` : `<span class="mu-rank">${esc(TASKS[t.tasks[0]].label)}</span>`}
-${v2 ? `<div class="mu-score" style="--s:${r.score}"><b>${r.score}</b><small>/100</small></div><span class="mu-conf">${r.conf === 'confident' ? `${r.kinds} kinds of independent evidence` : r.conf === 'provisional' ? 'Provisional: limited evidence' : 'Not enough evidence yet'}</span>` : ''}
+${v2 && r.conf === 'confident' ? `<div class="mu-score" style="--s:${r.score}"><b>${r.score}</b><small>/100</small></div>` : ''}${v2 ? `<span class="mu-conf">${r.conf === 'confident' ? `${r.kinds} kinds of independent evidence` : r.conf === 'provisional' ? 'Provisional: limited evidence' : 'Not enough evidence yet'}</span>` : ''}
 <p class="mu-cta">${visitBtn(t, { label: `Try ${t.name}` })}</p></div>`;
   let verdict = '';
   if (rA && rB) {
     const tie = rA.n === rB.n, best = rA.n <= rB.n ? rA : rB, other = best === rA ? rB : rA;
     verdict = tie ? `Too close to call: both are joint #${rA.n} in ${esc(TASKS[k].label)}. Pick on the strengths below.`
-      : v2 ? `<b>${esc(best.t.name)}</b> edges it for most game devs (${best.score} vs ${other.score}), but it's closer than the ranks suggest on some signals.`
+      : both ? `<b>${esc(best.t.name)}</b> edges it for most game devs (${best.score} vs ${other.score}), but it's closer than the ranks suggest on some signals.`
       : `<b>${esc(best.t.name)}</b> ranks higher in ${esc(TASKS[k].label)} (#${best.n} vs #${other.n}).`;
-    if (v2 && !tie && best.score - other.score >= 10) verdict = `<b>${esc(best.t.name)}</b> is the stronger pick for most game devs (${best.score} vs ${other.score}).`;
+    if (both && !tie && best.score - other.score >= 10) verdict = `<b>${esc(best.t.name)}</b> is the stronger pick for most game devs (${best.score} vs ${other.score}).`;
   }
   return `<section class="matchup" aria-label="${esc(A.name)} vs ${esc(B.name)}"><div class="mu-grid">${side(A, rA)}<span class="mu-vs" aria-hidden="true">VS</span>${side(B, rB)}</div>${verdict ? `<p class="mu-verdict">${verdict} <a href="${L('/how-we-rank/')}">How we score</a></p>` : ''}</section>`;
 }
