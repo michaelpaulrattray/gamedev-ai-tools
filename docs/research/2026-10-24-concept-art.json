@@ -1,0 +1,885 @@
+{
+  "task": "concept-art",
+  "checked": "2026-10-24",
+  "tools": {
+    "midjourney": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "Gizmo Times",
+          "url": "https://www.gizmotimes.com/ai/midjourney-v8-2-vs-chatgpt-images-vs-nano-banana-vs-flux-2-ai-image-generator/51020",
+          "date": "2026-08-10",
+          "author": "Gizmo Times Staff",
+          "independent": true,
+          "hands_on": false,
+          "model_version": "Midjourney V8.2",
+          "summary": "Desk comparison from official docs, with no same-prompt test. Names Midjourney the category winner for artistic direction and style exploration, and its best fit for concept art.",
+          "rating": 75,
+          "score_recommended": false,
+          "verified": true,
+          "note": "The page says outright that it is a feature/workflow comparison, not a lab test. Fails the hands-on rule."
+        },
+        {
+          "outlet": "Provimedia blog",
+          "url": "https://www.provimedia.de/en/blog/ai-image-generation-2026-best-tools",
+          "date": "2026-05-10 (stated current as of July 2026)",
+          "author": "Alexander Weipprecht",
+          "independent": true,
+          "hands_on": "claimed, unverifiable",
+          "model_version": "Midjourney V8.1",
+          "summary": "German digital agency says it ran a 10-task prompt set, including an anime/game asset task, but publishes no per-task results. Calls Midjourney the benchmark for aesthetics and style consistency, and weakest of the leaders on text.",
+          "rating": 75,
+          "score_recommended": "weak: no published outputs",
+          "verified": true,
+          "note": "The agency sells AI training and builds image pipelines for clients; it does not sell the tools it reviews."
+        },
+        {
+          "outlet": "rupertchesman.com",
+          "url": "https://rupertchesman.com/blog-midjourney-vs-nano-banana-vs-chatgpt-images-2026.html",
+          "date": "2026-05-23 (updated 2026-09-03)",
+          "author": "Rupert Chesman",
+          "independent": "unclear",
+          "hands_on": false,
+          "model_version": "Midjourney V8.2",
+          "summary": "No test method described. Rates Midjourney the strongest choice for concept artists and illustrators who value artistic quality over precision.",
+          "rating": 75,
+          "score_recommended": false,
+          "verified": true,
+          "note": "The author sells AI-for-creatives courses. No affiliate links seen."
+        },
+        {
+          "outlet": "Tech Insider (tech-insider.org)",
+          "url": "https://tech-insider.org/best-ai-image-generator-2026/",
+          "date": "2026-06-29 (updated with Sep/Oct 2026 figures)",
+          "author": "Sofia Lindstrom",
+          "independent": true,
+          "hands_on": false,
+          "model_version": "Midjourney V8.1",
+          "summary": "Built from leaderboards and other reviews. Says Midjourney has unmatched default styling for creative work and dominates concept art, but trails the API leaders on prompt adherence.",
+          "rating": 75,
+          "score_recommended": false,
+          "verified": true,
+          "note": null
+        },
+        {
+          "outlet": "DevToolLab",
+          "url": "https://devtoollab.com/blog/best-ai-image-generators",
+          "date": "2026-07-07",
+          "author": "DevToolLab Team",
+          "independent": true,
+          "hands_on": false,
+          "model_version": "Midjourney V8.1",
+          "summary": "No method shown. Recommends Midjourney for concept art, hero images and mood boards, but not where an API or reliable text is needed.",
+          "rating": 75,
+          "score_recommended": false,
+          "verified": true,
+          "note": "The site sells free/pro utility tools but no image generator."
+        },
+        {
+          "outlet": "Nolvia",
+          "url": "https://www.nolvia.ai/wiki/blog/midjourney-v8-2-vs-gpt-image-2-vs-nano-banana-comparison.html",
+          "date": "2026-08-22",
+          "author": "Nolvia Team",
+          "independent": false,
+          "hands_on": "claimed (standardised prompts, no images shown)",
+          "model_version": "Midjourney V8.2 vs GPT Image 2 vs Nano Banana",
+          "summary": "Says Midjourney is the clear winner for artistic and concept work. GPT Image 2 and Nano Banana are recommended for text-heavy and product images.",
+          "rating": 90,
+          "score_recommended": false,
+          "verified": true,
+          "note": "EXCLUDE: Nolvia resells access to all three models in one subscription."
+        },
+        {
+          "outlet": "Pixmax AI",
+          "url": "https://www.pixmax.ai/blog/midjourney-ai-image-model-review.html",
+          "date": "2026-09-22",
+          "author": "Pixmax Update",
+          "independent": false,
+          "hands_on": false,
+          "model_version": "Midjourney V8.2",
+          "summary": "Best for raw aesthetic quality and style control. Weak at in-image text, with no free tier and no official API.",
+          "rating": null,
+          "score_recommended": false,
+          "verified": true,
+          "note": "EXCLUDE: a multi-model platform that hosts and sells Midjourney V8.2 and its rivals."
+        },
+        {
+          "outlet": "NemoVideo",
+          "url": "https://www.nemovideo.com/blog/gpt-image-2-vs-midjourney-vs-nano-banana-pro",
+          "date": "2026 (undated, after May 2026)",
+          "author": "Dora",
+          "independent": false,
+          "hands_on": false,
+          "model_version": "Midjourney V8",
+          "summary": "Built from leaked samples and Arena data. Calls Midjourney V8 the best tool for concept art and illustration.",
+          "rating": null,
+          "score_recommended": false,
+          "verified": true,
+          "note": "EXCLUDE: the publisher sells AI video and image tools."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {
+            "site": "Trustpilot",
+            "rating": 1.7,
+            "scale": 5,
+            "count": 372,
+            "url": "https://www.trustpilot.com/review/midjourney.com",
+            "score": 17.5,
+            "verified": true,
+            "note": "76% 1-star. Skewed by billing complaints (charged after cancelling, annual renewals) and support. There are also some complaints about prompt-following and distorted output. 93 reviews in the last 12 months. Star graphic shows 1.5, number shows 1.7."
+          },
+          {
+            "site": "Product Hunt",
+            "rating": 4.7,
+            "scale": 5,
+            "count": 81,
+            "url": "https://www.producthunt.com/products/midjourney/reviews",
+            "score": 92.5,
+            "verified": true,
+            "note": "Most reviews predate V8: the newest is about 6 months old, the oldest about 3 years. Praise is for polished stylised output for concept art and moodboards. Complaints are limited control, character consistency, price, the Discord workflow and billing."
+          }
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {
+          "text": "V8.1 renders standard jobs roughly 4-5x faster than earlier versions, with native 2K output (reported by third-party write-ups of Midjourney's announcement).",
+          "url": "https://vidmuse.ai/blog/midjourney-v8-1-review",
+          "verified": false
+        }
+      ],
+      "strengths": [
+        "default aesthetic and style exploration for concept art (consensus of desk reviews)",
+        "consistent visual style across a set"
+      ],
+      "weaknesses": [
+        "weaker prompt adherence and in-image text than the API leaders",
+        "no official public API; no free plan",
+        "Trustpilot dominated by billing and cancellation complaints"
+      ],
+      "examples": [],
+      "notes": "Current default is V8.2 (since 2026-07-24, per several secondary sources). Midjourney is NOT on the Artificial Analysis or LMArena boards (no public API), so it has no benchmark evidence. Every review found is either a desk summary or written by a reseller or competitor; I verified no independent hands-on same-prompt test within the search budget. The desk consensus that Midjourney leads on concept-art aesthetics is strong and unanimous, but it does not meet the hands-on rule."
+    },
+    "chatgpt": {
+      "benchmarks": [
+        {
+          "source": "Artificial Analysis text-to-image arena (AA-Image-T2I v2.1, Overall)",
+          "url": "https://artificialanalysis.ai/image/leaderboard/text-to-image",
+          "metric": "Elo",
+          "value": 1207,
+          "rank": 2,
+          "out_of": 106,
+          "percentile": 99.05,
+          "model_version": "GPT Image 2.5 Flare (max)",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": "Sunburst (max) is #1 at 1222 (percentile 100). I credit Flare because it is the API default, and a hands-on report suggests it is ChatGPT's default variant, though OpenAI hasn't confirmed this. GPT Image 2 (high) is #3 (1186). No style or game-art sub-board exists."
+        },
+        {
+          "source": "Artificial Analysis image editing arena",
+          "url": "https://artificialanalysis.ai/image/leaderboard/editing",
+          "metric": "Elo",
+          "value": 1182,
+          "rank": 2,
+          "out_of": 76,
+          "percentile": 98.67,
+          "model_version": "GPT Image 2.5 Flare (max)",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": "Sunburst (max) is #1 at 1199."
+        },
+        {
+          "source": "LMArena (arena.ai) text-to-image, via llmreference.com mirror",
+          "url": "https://arena.ai/leaderboard/text-to-image",
+          "mirror_url": "https://www.llmreference.com/benchmark/lmarena-text-to-image",
+          "metric": "Arena score",
+          "value": 1398,
+          "rank": 2,
+          "out_of": 82,
+          "percentile": 98.77,
+          "model_version": "GPT Image 2.5 Flare",
+          "date_checked": "2026-10-24 (snapshot 2026-10-07)",
+          "independent": true,
+          "verified": false,
+          "note": "arena.ai returned 403, so the figures come from a third-party mirror and are unverified at source. Marked preliminary. Sunburst is #1 at 1425."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "Gizmo Times",
+          "url": "https://www.gizmotimes.com/ai/midjourney-v8-2-vs-chatgpt-images-vs-nano-banana-vs-flux-2-ai-image-generator/51020",
+          "date": "2026-08-10",
+          "author": "Gizmo Times Staff",
+          "independent": true,
+          "hands_on": false,
+          "model_version": "ChatGPT Images 2.0 / GPT Image 2",
+          "summary": "Desk comparison. Wins ease of use, text-led creation and iterative editing, but is not positioned for stylised concept art.",
+          "rating": 60,
+          "score_recommended": false,
+          "verified": true,
+          "note": "Covers the previous model (2.0), not 2.5."
+        },
+        {
+          "outlet": "Provimedia blog",
+          "url": "https://www.provimedia.de/en/blog/ai-image-generation-2026-best-tools",
+          "date": "2026-05-10",
+          "author": "Alexander Weipprecht",
+          "independent": true,
+          "hands_on": "claimed, unverifiable",
+          "model_version": "gpt-image-2",
+          "summary": "Strong prompt fidelity and text; less expressive aesthetics than Midjourney.",
+          "rating": 60,
+          "score_recommended": "weak",
+          "verified": true,
+          "note": "Previous model version."
+        },
+        {
+          "outlet": "DevToolLab",
+          "url": "https://devtoollab.com/blog/best-ai-image-generators",
+          "date": "2026-07-07",
+          "author": "DevToolLab Team",
+          "independent": true,
+          "hands_on": false,
+          "model_version": "GPT Image 2",
+          "summary": "Called the safest default for general generation and editing, with no art-specific verdict.",
+          "rating": 60,
+          "score_recommended": false,
+          "verified": true,
+          "note": null
+        }
+      ],
+      "users": {
+        "ratings": [
+          {
+            "site": "Trustpilot",
+            "rating": 1.6,
+            "scale": 5,
+            "count": 3834,
+            "url": "https://www.trustpilot.com/review/chatgpt.com",
+            "score": 15,
+            "verified": true,
+            "note": "Covers all of ChatGPT (mostly chat, limits, billing and support), not image generation specifically. A few reviews complain about image edits and guardrails. I recommend NOT scoring it for concept-art."
+          }
+        ],
+        "mentions": [
+          {
+            "url": "https://news.ycombinator.com/item?id=49614720",
+            "source": "Hacker News: 'ChatGPT Images 2.5' (384 points, 449 comments)",
+            "date": "2026-09-08",
+            "model_version": "GPT Image 2.5",
+            "sentiment": "mixed",
+            "note": "Hands-on users praise reference-following and speed. Complaints: hands/anatomy, detail loss on edits, 'ChatGPT look' sameness; 'still can't make sprite sheets'; pixel-art models do better. I read only the first ~100k of 212k characters."
+          },
+          {
+            "url": "https://news.ycombinator.com/item?id=47852835",
+            "source": "Hacker News: 'ChatGPT Images 2.0' (1049 points, 975 comments)",
+            "date": "2026-04-21",
+            "model_version": "GPT Image 2",
+            "sentiment": "mixed",
+            "note": "Leans negative. Praise for prompt adherence; complaints about anatomy in crowds, counting/grid failures, pixel-art requests coming back with too many colours, and sameness. Previous model. Only the first ~100k of 390k characters read."
+          }
+        ],
+        "sampled": 2
+      },
+      "vendor_claims": [
+        {
+          "text": "Images 2.5 (2026-09-08) claims up to 50% lower latency than Images 2.0, with better lighting, textures and subject preservation; it adds Sketch, Templates and comment-based edits (as reported by press).",
+          "url": "https://openai.com/index/introducing-chatgpt-images-2-5/",
+          "verified": false
+        }
+      ],
+      "strengths": [
+        "tops both Artificial Analysis image boards (generation and editing)",
+        "prompt adherence and text rendering",
+        "conversational, iterative editing"
+      ],
+      "weaknesses": [
+        "sprite sheets and true low-colour pixel art still weak (HN users)",
+        "'sameness' / recognisable house style; less expressive than Midjourney",
+        "anatomy errors in complex scenes"
+      ],
+      "examples": [],
+      "notes": "OpenAI says GPT Image 2.5 is available to all ChatGPT users (free and paid, per press). ChatGPT shows one model; the API splits it into Flare (default) and Sunburst. OpenAI has not confirmed which variant ChatGPT uses (MindStudio: https://www.mindstudio.ai/blog/gpt-image-25-pricing-access). Both variants are #1/#2, so the choice barely changes the score. No independent hands-on art review of 2.5 was found."
+    },
+    "leonardo-ai": {
+      "benchmarks": [
+        {
+          "source": "Artificial Analysis text-to-image arena (AA-Image-T2I v2.1, Overall)",
+          "url": "https://artificialanalysis.ai/image/leaderboard/text-to-image",
+          "metric": "Elo",
+          "value": 877,
+          "rank": 89,
+          "out_of": 106,
+          "percentile": 16.19,
+          "model_version": "Lucid Origin Ultra (Leonardo's own model, Aug 2025)",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": "Other Leonardo-made models: Lucid Origin Fast #91 (860), Phoenix 0.9 Ultra #97 (833), Phoenix 1.0 Fast #98 (827). Leonardo has no Leonardo model on the editing board."
+        },
+        {
+          "source": "LMArena (arena.ai) text-to-image, via llmreference.com mirror",
+          "url": "https://arena.ai/leaderboard/text-to-image",
+          "mirror_url": "https://www.llmreference.com/benchmark/lmarena-text-to-image",
+          "metric": "Arena score",
+          "value": 1013,
+          "rank": 75,
+          "out_of": 82,
+          "percentile": 8.64,
+          "model_version": "Lucid Origin",
+          "date_checked": "2026-10-24 (snapshot 2026-10-07)",
+          "independent": true,
+          "verified": false,
+          "note": "From the mirror; arena.ai returned 403. The mirror does not name the provider, but Lucid Origin is Leonardo's model."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "Techpoint Africa",
+          "url": "https://techpoint.africa/guide/leonardo-ai-review/",
+          "date": "2025-04-01",
+          "author": "Fredrick Eghosa",
+          "independent": "unclear",
+          "hands_on": true,
+          "model_version": "Phoenix 1.0, Flux Dev, Flux Schnell (pre-Lucid Origin)",
+          "summary": "After a week of use: portraits mostly good with some odd eyes; stylised concept art 'kind of flat'; Midjourney keeps an edge on detail.",
+          "rating": 50,
+          "score_recommended": "flag: older than 18 months and predates the Lucid Origin rebuild",
+          "verified": true,
+          "note": "The page carries 'PARTNER' / 'In Partnership With' labels; it is unclear whether this review is sponsored."
+        },
+        {
+          "outlet": "DevToolLab",
+          "url": "https://devtoollab.com/blog/best-ai-image-generators",
+          "date": "2026-07-07",
+          "author": "DevToolLab Team",
+          "independent": true,
+          "hands_on": false,
+          "model_version": "Lucid Origin",
+          "summary": "Best free-to-cheap option for high-volume game assets and concept variations; doesn't match the top tools on photorealism or text.",
+          "rating": 60,
+          "score_recommended": false,
+          "verified": true,
+          "note": null
+        },
+        {
+          "outlet": "Techsy",
+          "url": "https://techsy.io/en/blog/best-ai-game-asset-generators",
+          "date": "2026-10-21",
+          "author": "Mert Batur",
+          "independent": true,
+          "hands_on": false,
+          "model_version": "unspecified",
+          "summary": "No hands-on test of Leonardo. Calls it the versatile 2D-plus-textures pick, with less consistent style than a trained Scenario model.",
+          "rating": 60,
+          "score_recommended": false,
+          "verified": true,
+          "note": null
+        }
+      ],
+      "users": {
+        "ratings": [
+          {
+            "site": "Trustpilot",
+            "rating": 4.7,
+            "scale": 5,
+            "count": 1544,
+            "url": "https://www.trustpilot.com/review/leonardo.ai",
+            "score": 92.5,
+            "verified": true,
+            "note": "87% 5-star, 9% 1-star. Recent reviews are dominated by praise for support staff rather than output quality. The claimed profile (May 2024) says the company hasn't invited reviews recently. The star graphic shows 4.5 and the number shows 4.7, and count labels differ (1,544 / 2K)."
+          },
+          {
+            "site": "Product Hunt",
+            "rating": 5.0,
+            "scale": 5,
+            "count": 4,
+            "url": "https://www.producthunt.com/products/leonardo-ai",
+            "score": null,
+            "verified": true,
+            "note": "Below the 25-review threshold; do not score."
+          }
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [
+        "cheap entry with a free daily allowance",
+        "many models in one place (own Lucid/Phoenix plus third-party)"
+      ],
+      "weaknesses": [
+        "Leonardo's own models rank in the bottom fifth of both arenas",
+        "pixel output needs downscaling/cleanup (desk reviews)",
+        "style less consistent than custom-trained tools"
+      ],
+      "examples": [],
+      "notes": "MULTI-MODEL PLATFORM. Leonardo's own models are Lucid Origin, Lucid Realism, Phoenix 0.9 and Phoenix 1.0. It also resells third-party models: FLUX (Dev, Kontext pro, Flux.2 Kontext Pro, Schnell), Seedream 4.0/4.5, Nano Banana / Nano Banana Pro and GPT Image 1.5 (docs snapshot updated 2026-01-23: https://docs.leonardo.ai/v1.0/docs/list-of-models). The docs name no default model. Benchmarks are credited only for Leonardo's own Lucid Origin, its newest in-house model. Third-party models it hosts (e.g. Nano Banana Pro at AA #11) are not credited."
+    },
+    "scenario": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "Techsy",
+          "url": "https://techsy.io/en/blog/best-ai-game-asset-generators",
+          "date": "2026-10-21",
+          "author": "Mert Batur",
+          "independent": true,
+          "hands_on": false,
+          "model_version": "n/a",
+          "summary": "No hands-on test of Scenario. Labels it best for trained-style 2D game art; it needs a decent reference set to train and costs more than general tools.",
+          "rating": 75,
+          "score_recommended": false,
+          "verified": true,
+          "note": null
+        }
+      ],
+      "users": {
+        "ratings": [
+          {
+            "site": "Trustpilot",
+            "rating": 3.2,
+            "scale": 5,
+            "count": 1,
+            "url": "https://www.trustpilot.com/review/scenario.com",
+            "score": null,
+            "verified": true,
+            "note": "1 review (1-star, account verification/support). Below threshold."
+          },
+          {
+            "site": "Product Hunt",
+            "rating": 5.0,
+            "scale": 5,
+            "count": 3,
+            "url": "https://www.producthunt.com/products/scenario",
+            "score": null,
+            "verified": true,
+            "note": "Below threshold."
+          }
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {
+          "text": "Recommends Flux 2, Z-Image or Qwen Image as custom-training bases; any generated output can be used to train a custom model in one click.",
+          "url": "https://www.scenario.com/features/train",
+          "verified": false
+        }
+      ],
+      "strengths": [
+        "custom style training for a consistent house style (desk-review consensus)"
+      ],
+      "weaknesses": [
+        "needs a reference set to train",
+        "pricier than general 2D tools"
+      ],
+      "examples": [],
+      "notes": "MULTI-MODEL PLATFORM / RESELLER. Scenario makes no base image model of its own. Custom models are LoRA-style trainings on Flux 2, Z-Image, Qwen Image and similar bases. It hosts GPT Image 2/2.5, Nano Banana 2/Pro, Seedream 4.5/5.0 Lite and Retro Diffusion models, among others (Scenario help pages, from search snippets; not opened directly). No benchmark is creditable to Scenario. G2 returned 403. I found no independent hands-on review."
+    },
+    "layer-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {
+            "site": "Trustpilot",
+            "rating": 3.2,
+            "scale": 5,
+            "count": 1,
+            "url": "https://www.trustpilot.com/review/layer.ai",
+            "score": null,
+            "verified": true,
+            "note": "1 review (1-star: cluttered UI, unclear pricing, could not generate on the trial). Below threshold."
+          }
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {
+          "text": "Customer Tripledot says Layer tripled its production speed (customer quote on Layer's own site).",
+          "url": "https://layer.ai/enterprise",
+          "verified": false
+        }
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "B2B studio platform that also hosts multiple models. I did not determine which base models it runs by default. The only third-party coverage found was company profiles, interviews and directories. No independent hands-on review, benchmark or usable rating."
+    },
+    "pixellab": {
+      "benchmarks": [
+        {
+          "source": "Darmstadt University of Applied Sciences pixel-art comparison (Retro Diffusion vs PixelLab), reported by Retro Diffusion's developer on X",
+          "url": "https://x.com/RealAstropulse/article/2098426369747091924",
+          "metric": "pixel-art metrics (shape separation, colour clustering, readability, gradient reduction, palette accuracy, tileability); 120 generations",
+          "value": null,
+          "rank": 2,
+          "out_of": 2,
+          "model_version": "unknown PixelLab model",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": false,
+          "note": "DO NOT SCORE. The paper itself was not found. The only account comes from the competing vendor and could not be opened (X returned 402). It reportedly found Retro Diffusion higher overall, with the biggest gap in shape separation."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "Techsy",
+          "url": "https://techsy.io/en/blog/best-ai-game-asset-generators",
+          "date": "2026-10-21",
+          "author": "Mert Batur",
+          "independent": true,
+          "hands_on": true,
+          "model_version": "PixelLab (current web tool)",
+          "summary": "Tested an 8-frame top-down walk cycle and a 4-direction set. The first six frames held shape and palette; frames 7-8 drifted (belt shift, shadow flicker), fixable quickly in Aseprite. Judged a head start, not final art.",
+          "rating": 70,
+          "score_recommended": true,
+          "verified": true,
+          "note": "Techsy is a custom-software agency. No affiliate disclosure, and links look plain."
+        },
+        {
+          "outlet": "GameDev AI Hub",
+          "url": "https://gamedevaihub.com/retro-diffusion-vs-pixellab/",
+          "date": "2026 (no exact date)",
+          "author": "Adrian",
+          "independent": "unclear",
+          "hands_on": "claimed, no outputs or method shown",
+          "model_version": "n/a",
+          "summary": "Recommends PixelLab for solo devs who need animation and rotations, and Retro Diffusion for the most authentic static sprites.",
+          "rating": 60,
+          "score_recommended": "weak",
+          "verified": true,
+          "note": "A Meshy banner ad on the page carries a ?via= referral parameter."
+        },
+        {
+          "outlet": "Sprite AI blog",
+          "url": "https://www.sprite-ai.art/blog/best-pixel-art-generators-2026",
+          "date": "2026-10-21",
+          "author": "James",
+          "independent": false,
+          "hands_on": true,
+          "model_version": "n/a",
+          "summary": "Has the widest toolset and good rotations. The UI is hard to navigate and animation is not its strongest piece.",
+          "rating": null,
+          "score_recommended": false,
+          "verified": true,
+          "note": "EXCLUDE: competitor (ranks its own Sprite AI first)."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {
+            "site": "Product Hunt",
+            "rating": null,
+            "scale": 5,
+            "count": 0,
+            "url": "https://www.producthunt.com/products/pixellab/reviews",
+            "score": null,
+            "verified": true,
+            "note": "No reviews. Trustpilot profiles (pixellab.ai, www.pixellab.ai) returned 404."
+          }
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {
+          "text": "Generates 4/8-direction rotations, skeleton- and text-driven animations, tilesets, maps and UI elements; offers an Aseprite extension, a Pixelorama-based editor and an API.",
+          "url": "https://www.pixellab.ai/docs",
+          "verified": false
+        }
+      ],
+      "strengths": [
+        "4/8-direction rotations and sprite animation",
+        "holds shape and palette across most frames (Techsy test)"
+      ],
+      "weaknesses": [
+        "animation drifts in later frames; needs a human cleanup pass",
+        "UI navigation (competitor review)"
+      ],
+      "examples": [],
+      "notes": "Every 'best pixel art generator' roundup found is either a desk review (Cinevva, knowara) or written by a competitor (Ludo, Sprite AI, SpriteLab). Cinevva sells game-making tools. No forum, HN or itch.io devlog threads found."
+    },
+    "retro-diffusion": {
+      "benchmarks": [
+        {
+          "source": "Darmstadt University of Applied Sciences pixel-art comparison (Retro Diffusion vs PixelLab), reported by Retro Diffusion's developer on X",
+          "url": "https://x.com/RealAstropulse/article/2098426369747091924",
+          "metric": "pixel-art metrics; 120 generations, palettes 2-256 colours",
+          "value": null,
+          "rank": 1,
+          "out_of": 2,
+          "model_version": "Retro Diffusion's cheapest model (per the vendor's post)",
+          "date_checked": "2026-10-24",
+          "independent": "unclear",
+          "verified": false,
+          "note": "DO NOT SCORE until the paper (reportedly by Chisaki Broschinski) is found. The only account is the vendor's post, which could not be opened."
+        },
+        {
+          "source": "pixel-bench (Retro Diffusion's own open benchmark)",
+          "url": "https://github.com/Retro-Diffusion/pixel-bench",
+          "metric": "pixel-art reconstruction (native size, colour error, grid alignment)",
+          "value": null,
+          "rank": null,
+          "out_of": null,
+          "model_version": null,
+          "date_checked": "2026-10-24",
+          "independent": false,
+          "verified": false,
+          "note": "EXCLUDE: vendor-built, and it measures reconstruction rather than generation."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "GameDev AI Hub",
+          "url": "https://gamedevaihub.com/retro-diffusion-vs-pixellab/",
+          "date": "2026 (no exact date)",
+          "author": "Adrian",
+          "independent": "unclear",
+          "hands_on": "claimed, no outputs or method shown",
+          "model_version": "Aseprite extension and web",
+          "summary": "Picks Retro Diffusion's Aseprite extension for pixel artists who want the most authentic output and no subscription.",
+          "rating": 75,
+          "score_recommended": "weak",
+          "verified": true,
+          "note": null
+        },
+        {
+          "outlet": "Sprite AI blog",
+          "url": "https://www.sprite-ai.art/blog/best-pixel-art-generators-2026",
+          "date": "2026-10-21",
+          "author": "James",
+          "independent": false,
+          "hands_on": true,
+          "model_version": "RD Fast to RD Pro",
+          "summary": "A strong, developer-first product; the web UI is its weakest part.",
+          "rating": null,
+          "score_recommended": false,
+          "verified": true,
+          "note": "EXCLUDE: competitor."
+        }
+      ],
+      "users": {
+        "ratings": [],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {
+          "text": "Models trained with experienced pixel artists for grid-aligned, limited-palette output; also distributed via Replicate, Poe and Scenario.",
+          "url": "https://runware.ai/blog/retro-diffusion-creating-authentic-pixel-art-with-ai-at-scale",
+          "verified": false
+        }
+      ],
+      "strengths": [
+        "authentic grid-aligned, limited-palette output (claimed by desk and competitor reviews)",
+        "pay-once Aseprite extension or cheap per-image web credits"
+      ],
+      "weaknesses": [
+        "web UI is the weakest part (competitor review)"
+      ],
+      "examples": [],
+      "notes": "Trustpilot profile not found (404). The Aseprite extension and the website are different products (per vendor and guides). No HN, forum or itch.io threads found."
+    },
+    "ludo-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {
+            "site": "Trustpilot",
+            "rating": null,
+            "scale": 5,
+            "count": 0,
+            "url": "https://www.trustpilot.com/review/ludo.ai",
+            "score": null,
+            "verified": true,
+            "note": "No reviews."
+          },
+          {
+            "site": "G2",
+            "rating": 5.0,
+            "scale": 5,
+            "count": 1,
+            "url": "https://www.g2.com/sellers/ludo-ai",
+            "score": null,
+            "verified": false,
+            "note": "Taken from a search snippet only; below threshold."
+          }
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {
+          "text": "Sprite Generator turns one sprite into an animation set with pose, sequence and transition tools; 30+ art styles; exports for Unity, Godot, Unreal and GameMaker.",
+          "url": "https://www.gamedeveloper.com/press-release/ludo-ai-upgrades-sprite-generator-with-pose-generator-sequence-and-transition-tools-and-updated-export-options",
+          "verified": false
+        }
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Ludo publishes many 'best X' comparison pages that rank Ludo first (e.g. https://ludo.ai/compare/best-ai-pixel-art-generators). These are vendor content; exclude them. Its Trustpilot description now calls Ludo 'an AI game asset studio', so it is less ideation-focused than before. No independent hands-on review found."
+    },
+    "runway": {
+      "benchmarks": [
+        {
+          "source": "LMArena (arena.ai) text-to-image, via llmreference.com mirror",
+          "url": "https://arena.ai/leaderboard/text-to-image",
+          "mirror_url": "https://www.llmreference.com/benchmark/lmarena-text-to-image",
+          "metric": "Arena score",
+          "value": 1024,
+          "rank": 71,
+          "out_of": 82,
+          "percentile": 13.58,
+          "model_version": "Runway Gen-4 Image",
+          "date_checked": "2026-10-24 (snapshot 2026-10-07)",
+          "independent": true,
+          "verified": false,
+          "note": "Mirror only. I did not confirm that Gen-4 Image is still Runway's default image model."
+        }
+      ],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {
+            "site": "Trustpilot",
+            "rating": 1.2,
+            "scale": 5,
+            "count": 372,
+            "url": "https://www.trustpilot.com/review/runwayml.com",
+            "score": 5,
+            "verified": true,
+            "note": "93% 1-star. Mostly about video generation, credits and billing, not image or concept art. The profile is unclaimed. Low relevance to concept-art."
+          }
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Light pass."
+    },
+    "skybox-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Light pass. Trustpilot blockadelabs.com returned 404. No skybox-specific benchmark exists. Nothing else found before the search budget ran out."
+    },
+    "sloyd": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Light pass. Techsy mentions Sloyd only as a parametric 3D blockout tool, not for 2D. Nothing found on its image or sprite-sheet features."
+    },
+    "unity-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Light pass; nothing researched before the search budget ran out. I did not determine which image model Unity's generators use."
+    },
+    "dreamlands": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Light pass; nothing found. Also has no evidence in 3D (see runbook gaps)."
+    }
+  },
+  "missing_tools": [
+    {
+      "name": "Google Nano Banana (Gemini image models, in Gemini app / AI Studio)",
+      "why": "Nano Banana 2.1 is #4 of 106 on AA text-to-image and #5 of 76 on editing. Every 2026 comparison treats it as one of the big three alongside Midjourney and ChatGPT. Strong character consistency.",
+      "url": "https://artificialanalysis.ai/image/leaderboard/text-to-image"
+    },
+    {
+      "name": "Recraft",
+      "why": "Vector, icon and UI-asset specialist. Recraft V4.1 is on the AA board (#29 of 106). Directly relevant to game icons and UI.",
+      "url": "https://artificialanalysis.ai/image/leaderboard/text-to-image"
+    },
+    {
+      "name": "Adobe Firefly",
+      "why": "Has the strongest licensing position (commercially safe training data), which matters to studios. Covered in 2026 roundups.",
+      "url": "https://www.provimedia.de/en/blog/ai-image-generation-2026-best-tools"
+    },
+    {
+      "name": "Krea",
+      "why": "Real-time canvas plus its own models (Krea 2 Large, AA #24; Krea 3 Ultra in the editing top 5). Popular for concept iteration.",
+      "url": "https://artificialanalysis.ai/image/leaderboard/editing"
+    },
+    {
+      "name": "Ideogram",
+      "why": "Typography specialist (Ideogram 4.0, AA #32), useful for logos and title cards.",
+      "url": "https://artificialanalysis.ai/image/leaderboard/text-to-image"
+    },
+    {
+      "name": "FLUX.2 / ComfyUI (local, open weights)",
+      "why": "Open-weight option for self-hosted LoRA style training. Desk reviews call FLUX.2 [dev] the best open-weight model; it is the base Scenario trains on.",
+      "url": "https://artificialanalysis.ai/image/leaderboard/text-to-image"
+    },
+    {
+      "name": "Sprite AI / Sprixen (pixel-art sprite generators)",
+      "why": "Budget pixel-art competitors that appear in every pixel-art roundup. Unverified quality; Sprite AI wrote its own comparison.",
+      "url": "https://app.cinevva.com/guides/ai-pixel-art-generators"
+    }
+  ],
+  "general_sources": [
+    {
+      "name": "Artificial Analysis text-to-image (AA-Image-T2I v2.1)",
+      "url": "https://artificialanalysis.ai/image/leaderboard/text-to-image",
+      "note": "106 models. Blind pairwise votes ('validated private evaluators'), Elo anchored at FLUX.2 [dev]=1000. Overall board only; no style/category filter. Midjourney is absent (no API)."
+    },
+    {
+      "name": "Artificial Analysis image editing",
+      "url": "https://artificialanalysis.ai/image/leaderboard/editing",
+      "note": "76 models."
+    },
+    {
+      "name": "LMArena text-to-image (arena.ai)",
+      "url": "https://arena.ai/leaderboard/text-to-image",
+      "note": "Returned 403. Figures come from the llmreference.com mirror (snapshot 2026-10-07, 82 entries). Re-check at source before publishing."
+    }
+  ],
+  "caveats": "1) The web search budget ran out partway through, so side tools (Skybox AI, Sloyd, Unity AI, Dreamlands) got almost no research, and I couldn't look for independent hands-on Midjourney V8.x tests from major outlets (Tom's Guide, TechRadar, Creative Bloq) or YouTube same-prompt comparisons. 2) Almost every 2026 'comparison' found is a desk summary built from docs and leaderboards, or comes from a reseller or competitor (Nolvia, Pixmax, NemoVideo, Ludo, Sprite AI, Cinevva). These are recorded with hands_on/independent flags and score_recommended=false. The only scoreable independent hands-on review is Techsy's PixelLab walk-cycle test. 3) Midjourney has no benchmark (absent from both arenas), and its user ratings conflict: Trustpilot 1.7 (billing-driven) vs Product Hunt 4.7 (mostly pre-V8). 4) For ChatGPT, OpenAI hasn't confirmed which GPT Image 2.5 variant it uses; Flare is credited, and Sunburst would give 100 instead of ~99. 5) Leonardo, Scenario and Layer resell third-party models; only Leonardo's own Lucid Origin is credited. Scenario and Layer have no creditable benchmark. 6) LMArena figures are from a third-party mirror, not verified at source. 7) Reddit and X were skipped by instruction. HN had usable threads only for ChatGPT (2 read, partially), below the 3-thread minimum. 8) The PixelLab vs Retro Diffusion academic benchmark is unverified: the paper wasn't found, and the only account comes from Retro Diffusion's developer."
+}

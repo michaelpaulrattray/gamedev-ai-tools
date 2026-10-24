@@ -1,0 +1,244 @@
+{
+  "task": "marketing",
+  "checked": "2026-10-24",
+  "tools": {
+    "runway": {
+      "benchmarks": [
+        {
+          "source": "Artificial Analysis Video Arena (blind pairwise votes, Bradley-Terry Elo)",
+          "url": "https://artificialanalysis.ai/video/leaderboard/text-to-video",
+          "metric": "Elo, AA-Video-T2V-Silent v2.1 (text-to-video, no audio)",
+          "value": 911,
+          "rank": 24,
+          "rank_range": "23-26",
+          "out_of": 32,
+          "percentile": 25.8,
+          "votes": 3081,
+          "model_version": "Runway Gen-4.5 (720p)",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": "Read from the data embedded in the page HTML (the silent table is not rendered without JS). AA notes that Runway's API caps prompts at 1,000 characters, so Gen-4.5 was only generated on the 61% of prompts within that limit. Board #1 is HeyGen Video 1 (1144); Kling 3.0 1080p Pro is the 1000 anchor at #15. Gen-4.5 is absent from the with-audio T2V board (30 models) because it has no native audio."
+        },
+        {
+          "source": "Artificial Analysis Video Arena (blind pairwise votes, Bradley-Terry Elo)",
+          "url": "https://artificialanalysis.ai/video/leaderboard/image-to-video",
+          "metric": "Elo, AA-Video-I2V-Silent v1.0 (image-to-video, no audio)",
+          "value": 1265,
+          "rank": 25,
+          "out_of": 81,
+          "percentile": 70.0,
+          "votes": 3578,
+          "model_version": "Runway Gen-4.5 (720p)",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": "Read from the page's embedded data. This older v1.0 board keeps 81 models including 6 marked not current; excluding those, Gen-4.5 would be 23 of 75 (percentile 70.3). AA says an I2V v2.1 board with a new prompt set is coming soon, which will likely reshuffle ranks. Gen-4.5 is absent from the with-audio I2V v1.1 board (23 models). Older Runway models on the same board: Gen 4 #69, Gen 3 Alpha #74, Gen 3 Alpha Turbo #77."
+        },
+        {
+          "source": "LMArena / arena.ai text-to-video (via gradually.ai snapshot)",
+          "url": "https://www.gradually.ai/en/ai-models/runway-gen-4-5/",
+          "metric": "Elo, LMArena Text to Video",
+          "value": 1225,
+          "rank": 27,
+          "out_of": null,
+          "votes": 48127,
+          "model_version": "Runway Gen-4.5",
+          "date_checked": "2026-09-22 (snapshot date on gradually.ai)",
+          "independent": true,
+          "verified": false,
+          "note": "arena.ai returned 403 (Cloudflare) to every fetch, so this could not be checked at the source. Gradually.ai shows Gen-4.5 as 16th of the 22 models it tracks but records a 'source rank' of 27; the full board size is unknown. Do not score until read at arena.ai."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "UD (ud.hk) Insight blog: Veo 3.1 vs Runway Gen-4.5 vs Kling 3.0",
+          "url": "https://www.ud.hk/en/blogs/insight/article/2026-05-04-ai-video-tools-comparison",
+          "date": "2026-05-04",
+          "author": "UD (Hong Kong digital/AI services company; no individual named)",
+          "independent": true,
+          "summary": "Same six prompts run through Veo 3.1, Gen-4.5 and Kling 3.0. Gen-4.5 was rated the clear winner for camera control, motion brush and character consistency across shots, second for realistic humans (good lighting, stiff arms), and behind Veo on prompt adherence. It also lacks native audio.",
+          "rating": 60,
+          "verified": true,
+          "note": "UD promotes its own AI tool directory and 'AI Battle Staff' service but sells none of these tools. Quality caveats: it repeats a stale claim that Runway is #1 on the Video Arena (not true in May 2026) and cites a third-party 'Pixflow' adherence benchmark we did not verify. No numeric score; the rating is our reading."
+        },
+        {
+          "outlet": "No Film School: first look at Gen-4.5",
+          "url": "https://nofilmschool.com/runway-gen-4-5-video-model",
+          "date": "2026-01-22",
+          "author": "Jourdan Aldredge",
+          "independent": true,
+          "summary": "Not hands-on: summarises Runway's announcement with a skeptical take, saying the visible improvement over earlier versions looks modest.",
+          "rating": null,
+          "verified": true,
+          "note": "Excluded from scoring: no testing."
+        },
+        {
+          "outlet": "Tom's Guide: best AI video generators (200 hours of testing)",
+          "url": "https://www.tomsguide.com/features/5-best-ai-video-generators-tested-and-compared",
+          "date": "2025-07-18 (last updated)",
+          "author": "Amanda Caswell, Ryan Morrison",
+          "independent": true,
+          "summary": "Same-prompt roundup. Veo 3 was best overall and Runway was 'Best All-Rounder', but the Runway text still describes Gen-3 Alpha.",
+          "rating": null,
+          "verified": true,
+          "note": "Excluded from scoring: it covers Gen-3/Gen-4-era models, not Gen-4.5. Standard publisher affiliate disclosure."
+        },
+        {
+          "outlet": "AI Monk (Substack): I tested 11 AI video generators",
+          "url": "https://ainutpam.substack.com/p/which-ai-video-generator-looks-the",
+          "date": "2026-03-06",
+          "author": "AI Monk",
+          "independent": false,
+          "summary": "Lists Runway as best for motion and stylised work but not always the most realistic. Gives no prompt, model versions or method.",
+          "rating": null,
+          "verified": true,
+          "note": "Excluded: every entry links to the same undisclosed commercial URL (knowlab.in), and the method can't be verified."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot (runwayml.com)", "rating": 1.2, "scale": 5, "count": 372, "url": "https://www.trustpilot.com/review/runwayml.com", "verified": true, "note": "93% one-star, 214 reviews in the last 12 months. The profile is unclaimed and has no invited reviews. Mostly billing, credit and refund complaints, then output failures (black renders, repeated errors) and bot-only support. Strong billing skew."},
+          {"platform": "Product Hunt (runwayml)", "rating": 4.4, "scale": 5, "count": 19, "url": "https://www.producthunt.com/products/runwayml/reviews", "verified": true, "note": "Under 25 reviews, so not scorable. Most reviews are 1-3 years old."},
+          {"platform": "G2", "rating": null, "scale": 5, "count": null, "url": "https://www.g2.com/products/runway/reviews", "verified": false, "note": "403 to our fetcher."}
+        ],
+        "mentions": [],
+        "sampled": 1,
+        "note": "The HN threads on the Gen-4.5 launch (46107738, 46108123) had no comments about output quality. Reddit and X were skipped per instructions."
+      },
+      "vendor_claims": [
+        {"text": "At launch (Dec 2025), Runway said Gen-4.5 was the world's top-rated video model, citing #1 on the Artificial Analysis T2V board at 1,247 Elo as of 30 Nov 2025. That board has since been replaced by v2.1, where Gen-4.5 is 24th of 32 (silent).", "url": "https://nofilmschool.com/runway-gen-4-5-video-model"},
+        {"text": "Runway's app and MCP now also offer third-party models, including Kling 3.0/O3 (Sep 2026) and Seedance 2.5 Draft Mode (Oct 2026), plus Mirelo SFX 2.0 for sound (Oct 2026).", "url": "https://releasebot.io/updates/runwayai/runwayai"}
+      ],
+      "strengths": ["Fine camera and motion control (motion brush, keyframes)", "Character consistency across shots", "Good lighting on human subjects"],
+      "weaknesses": ["No native audio", "Mid-to-low rank on the current AA text-to-video board", "Weaker prompt adherence than Veo 3.1 in one same-prompt test"],
+      "examples": [],
+      "notes": "Default model scored: Runway Gen-4.5 (Runway's own flagship since Dec 2025; image-to-video added Jan 2026). We found no newer Runway video generation model. Aleph 2 is an editing model, and GWM Worlds 2 is a research preview. Runway now also hosts third-party models (Kling, Seedance 2.5), so a Runway user can reach top-ranked models through the same subscription. That isn't captured by scoring Gen-4.5 alone. Independent hands-on reviews of Gen-4.5 from major outlets were not found before our search budget ran out."
+    },
+    "luma-ai": {
+      "benchmarks": [
+        {
+          "source": "Artificial Analysis Video Arena (blind pairwise votes, Bradley-Terry Elo)",
+          "url": "https://artificialanalysis.ai/video/leaderboard/image-to-video",
+          "metric": "Elo, AA-Video-I2V-Silent v1.0 (image-to-video, no audio)",
+          "value": 1215,
+          "rank": 46,
+          "out_of": 81,
+          "percentile": 43.75,
+          "votes": 4055,
+          "model_version": "Ray 3 (released 2025-09-19 per AA)",
+          "date_checked": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "note": "VERSION WARNING: Ray 3 is not Luma's current flagship. Luma's site shows Ray3.2 (9 Jun 2026) as the newest model, and Ray3.14 came out in Jan 2026. Neither is on any AA board, or on the T2V boards at all. Under the runbook's 'current model' rule this should probably not be scored, or only with a note. Same older v1.0 board caveats as Runway."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "Analytics Vidhya: I tried the new Ray3 AI video maker",
+          "url": "https://www.analyticsvidhya.com/blog/2025/09/ray3-ai-video-maker/",
+          "date": "2025-09-22",
+          "author": "Sarthak Dogra",
+          "independent": true,
+          "summary": "Hands-on with four prompts plus image-to-video. The best clip was high quality and followed lighting details, and image animation worked well. Other clips showed objects morphing or vanishing, shaky motion and weak handling of unusual concepts. The verdict was impressive but far from ideal.",
+          "rating": 45,
+          "verified": true,
+          "note": "Covers Ray3, not the current Ray3.2. No affiliate disclosure seen; the page promotes the publisher's own courses."
+        },
+        {
+          "outlet": "Pasquale Pillitteri blog: Luma Dream Machine Ray3 and Ray3.14 review",
+          "url": "https://pasqualepillitteri.it/en/news/4026/luma-dream-machine-ray3-review-2026",
+          "date": "2026-06-02 (updated 2026-08-01)",
+          "author": "Pasquale Pillitteri",
+          "independent": true,
+          "summary": "Not hands-on: built from Luma material. It calls Dream Machine fast and suited to atmospheric footage but not the most complete generator, and notes there is no native audio in any version.",
+          "rating": null,
+          "verified": true,
+          "note": "Excluded from scoring: no own tests."
+        },
+        {
+          "outlet": "Tom's Guide: best AI video generators",
+          "url": "https://www.tomsguide.com/features/5-best-ai-video-generators-tested-and-compared",
+          "date": "2025-07-18 (last updated)",
+          "author": "Amanda Caswell, Ryan Morrison",
+          "independent": true,
+          "summary": "Luma Dream Machine is listed as 'Best for collaborating with AI', praising realistic output and quick iteration, with occasional artifacts. It covers Ray2.",
+          "rating": null,
+          "verified": true,
+          "note": "Excluded from scoring: covers Ray2, two generations old."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot (lumalabs.ai)", "rating": 1.4, "scale": 5, "count": 71, "url": "https://www.trustpilot.com/review/lumalabs.ai", "verified": true, "note": "86% one-star, 48 reviews in the last 12 months. The profile is unclaimed and has no invited reviews. It covers Luma as a company, not only Dream Machine, and some reviews mention third-party models (Seedance, Veo) used inside Luma. Mostly credits and billing complaints, plus inconsistent output (shape drift, lost character likeness)."},
+          {"platform": "Product Hunt (Luma AI)", "rating": 4.5, "scale": 5, "count": 8, "url": "https://www.producthunt.com/products/luma-ai/reviews", "verified": true, "note": "Under 25 reviews, and the listing mixes the 3D capture app with Dream Machine. Not scorable. The separate 'Luma Dream Machine' listing has 0 reviews."}
+        ],
+        "mentions": [],
+        "sampled": 0,
+        "note": "No usable HN quality threads found (the Ray3 launch posts have 0-1 comments)."
+      },
+      "vendor_claims": [
+        {"text": "Ray3.14 (Jan 2026) claimed native 1080p and about 4x faster, 3x cheaper generation than Ray3.", "url": "https://secure.businesswire.com/news/home/20260126744711/en/Luma-AI-Launches-Ray3.14-Eliminating-Quality-Speed-Cost-Tradeoff-in-Generative-Video"},
+        {"text": "Ray3.2 (9 Jun 2026) is pitched as frame-level control with continuity across cuts. Luma publishes a self-run 'Ray3 Evaluation Report'.", "url": "https://lumalabs.ai/"}
+      ],
+      "strengths": ["Image-to-video animation of a reference image", "Film-like look, with HDR/EXR output on Ray3 (from feature coverage)"],
+      "weaknesses": ["Objects morph or vanish in complex scenes (Ray3)", "No native audio in any Ray version", "Current Ray3.2 has no independent benchmark or review"],
+      "examples": [],
+      "notes": "Default/flagship model: Ray3.2 (9 Jun 2026) per lumalabs.ai. A comparison blog (orcarouter.ai, a reseller, not opened) also says Ray3.2 had no AA arena entry as of 18 Sep 2026, which matches what we saw. All benchmark and review evidence we found is for Ray3 (Sep 2025) or older, so Luma's evidence is effectively stale. Luma's 'Uni' family on AA is an image model, not video."
+    },
+    "layer-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot (layer.ai)", "rating": 3.2, "scale": 5, "count": 1, "url": "https://www.trustpilot.com/review/layer.ai", "verified": true, "note": "A single 1-star review (Aug 2026) about a confusing UI and a card being required before any free generation. Not scorable. The listing doesn't say it is the game-art Layer, though the review content fits."},
+          {"platform": "Product Hunt (Layer AI)", "rating": null, "scale": 5, "count": 0, "url": "https://www.producthunt.com/products/layer-ai/reviews", "verified": true, "note": "This listing is the 2022 'metadata store for production ML' product on the same domain, not today's game-art platform. Not usable."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "No independent evidence found for Layer's marketing-creative use. It uses third-party image/video models, so a benchmark would need to target whichever model a marketing workflow uses by default (not determined)."
+    },
+    "mirelo": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {"ratings": [], "mentions": [], "sampled": 0},
+      "vendor_claims": [
+        {"text": "SFX 2.0 promises synced audio for video and can change the sound while keeping the video's dialogue. The homepage shows no benchmarks or comparisons.", "url": "https://mirelo.ai/"},
+        {"text": "Mirelo SFX 2.0 became available inside Runway MCP on 15 Oct 2026 (paid plans).", "url": "https://releasebot.io/updates/runwayai/runwayai"}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "We found no video-to-audio/SFX arena that includes Mirelo, and no independent review. Trustpilot and Product Hunt pages returned 404. HN has a Show HN (Aug 2025, id 44983812) and a May 2026 post (48191960) with 0-1 comments."
+    },
+    "world-labs-marble": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {"ratings": [], "mentions": [], "sampled": 0},
+      "vendor_claims": [],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Side tool here (camera flythrough videos for trailers). We found no evidence about its flythrough video output specifically. See docs/research/2026-10-24-level.json for Marble's world-generation reviews (design4real, QbitAI) and HN sampling."
+    }
+  },
+  "missing_tools": [
+    {"name": "Kling 3.0 / Kling 3.0 Omni / O3 (Kuaishou)", "url": "https://artificialanalysis.ai/video/leaderboard/text-to-video", "verified": true, "why": "Above Runway Gen-4.5 on every current AA board: silent T2V #15/#17 vs #24, I2V silent v1.0 #16-17 vs #25. The ud.hk same-prompt test rated it best for human motion. It is also available inside Runway."},
+    {"name": "Dreamina Seedance 2.0 / 2.5 (ByteDance)", "url": "https://artificialanalysis.ai/video/leaderboard/text-to-video", "verified": true, "why": "Top 5-9 on AA T2V (with audio and silent) and top 3-7 on I2V with audio. Seedance 2.5 Draft Mode is now in Runway's Agent."},
+    {"name": "Google Veo 3.1 (Flow / Gemini) and Gemini Omni Flash", "url": "https://artificialanalysis.ai/video/leaderboard/image-to-video", "verified": true, "why": "Gemini Omni Flash is #1 on AA I2V silent (1368), and Omni Flash 1.1 is top 10 on T2V/I2V with audio. Veo 3.1 has native audio and was the prompt-adherence leader in ud.hk's test. Veo 3.1 itself sits mid-board on AA v2.1 (#19-21 silent T2V), above Runway Gen-4.5."},
+    {"name": "Wan 3.0 (Alibaba)", "url": "https://artificialanalysis.ai/video/leaderboard/text-to-video", "verified": true, "why": "#1 on AA T2V with audio (1175) and #2 silent (1134)."},
+    {"name": "MiniMax H3 / Hailuo", "url": "https://artificialanalysis.ai/video/leaderboard/text-to-video", "verified": true, "why": "Top 4 on AA T2V (both boards) and #1 on I2V with audio (H3 768p, 1140)."},
+    {"name": "HeyGen Video 1", "url": "https://artificialanalysis.ai/video/leaderboard/text-to-video", "verified": true, "why": "#1 on AA T2V silent (1144) and #3 with audio. Released Oct 2026."},
+    {"name": "OpenAI Sora 2 / Sora 2 Pro", "url": "https://www.gradually.ai/en/ai-models/runway-gen-4-5/", "verified": false, "why": "On LMArena T2V above Gen-4.5 per a gradually.ai snapshot, but two blogs claim OpenAI shut Sora down in spring 2026 (unverified). Check availability before listing."}
+  ],
+  "general_sources": [
+    {"name": "Artificial Analysis video leaderboards", "url": "https://artificialanalysis.ai/video/leaderboard/text-to-video", "note": "Boards: T2V v2.1 with audio (30 models), T2V-Silent v2.1 (32), I2V v1.1 with audio (23), I2V-Silent v1.0 (81, older prompt set; v2.1 'coming soon'). Silent tables only appear in the page's embedded JSON (Next.js flight data), which we parsed from the raw HTML on 2026-10-24. Kling 3.0 1080p Pro is the Elo anchor (1000) on the v2.x boards and Wan 2.1 14B on I2V v1.0. The old URL https://artificialanalysis.ai/text-to-video returns 404."},
+    {"name": "LMArena (arena.ai) video boards", "url": "https://arena.ai/leaderboard/text-to-video", "note": "lmarena.ai redirects to arena.ai, which returned 403 (Cloudflare) to WebFetch and curl. Not verified."}
+  ],
+  "caveats": "1) Runway Gen-4.5 and Luma Ray models are absent from all with-audio AA boards because neither has native audio. Only the silent boards include Runway, and Luma appears only on the older I2V-Silent v1.0 board with Ray 3. 2) Luma's current flagship Ray3.2 (Jun 2026) and Ray3.14 (Jan 2026) have no independent benchmark or hands-on review that we found, so Luma's evidence is stale. 3) LMArena could not be read (403). The Runway figure from gradually.ai is unverified. 4) Our WebSearch budget (shared across the session) ran out partway through. We did not complete searches for independent Gen-4.5 hands-on reviews from major outlets, YouTube same-prompt comparisons, or Layer/Mirelo coverage, so absence of evidence here is partly a search-budget gap. 5) Many 2026 'Runway vs Kling vs Veo' pages are vendor (HeyGen, PixVerse, Picsart, Megaton), reseller/API (CometAPI, orcarouter) or affiliate sites, and were not used. 6) Trustpilot scores for Runway and Luma are dominated by billing and credit complaints on unclaimed profiles. 7) Reddit and X were skipped per instructions."
+}

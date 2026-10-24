@@ -1,0 +1,129 @@
+{
+  "task": "level",
+  "checked": "2026-10-24",
+  "tools": {
+    "world-labs-marble": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "design4real blog: World Labs Marble in practical testing",
+          "url": "https://design4real.de/en/world-labs-marble-practical-test/",
+          "date": "2026-09-26",
+          "author": "Clarence Dadson (CEO of design4real, a Munich VR/AR/3D-scanning agency)",
+          "independent": true,
+          "summary": "Hands-on in browser, VR headset and game engines. Worlds look striking at the centre but blur toward the edges, and the convincing walkable area is small. Paid splat exports carry the same blur, and the splat-derived meshes were poor. In Unity/Unreal, splats were GPU-heavy and mixing them with meshes caused depth and collision problems. Judged good for concept work and early experiments, not production or real-time.",
+          "rating": 45,
+          "verified": true,
+          "note": "No numeric score; the rating is our reading. The model version isn't stated (likely Marble 1.1, given the date). The agency sells VR/3D services and has no stated link to World Labs."
+        },
+        {
+          "outlet": "QbitAI (量子位), syndicated on Sohu",
+          "url": "https://m.sohu.com/a/1007297931_610300",
+          "date": "2026-04-09",
+          "author": "梦瑶 (Mengyao)",
+          "independent": true,
+          "summary": "Same input image (a Minecraft-style render) through Marble 1.1 and 1.1-Plus. 1.1 produced a navigable world in about 3-5 minutes with a faithful reproduction, little noise and fuller lighting. 1.1-Plus gave a wider world but took twice as long and looked noticeably softer. The author recommends 1.1.",
+          "rating": 75,
+          "verified": true,
+          "note": "Short single-image test in Chinese, a news-style hands-on with no game-engine export tested. It compares only against Marble's own models."
+        },
+        {
+          "outlet": "Tech Insider: Genie 3 vs Marble vs NVIDIA Cosmos",
+          "url": "https://tech-insider.org/genie-3-vs-marble-vs-nvidia-cosmos-world-models-2026/",
+          "date": "2026-09-04 (updated 2026-09-20)",
+          "author": "Marcus Chen",
+          "independent": true,
+          "summary": "Calls Marble the most production-ready option thanks to exportable splats and a free tier, but says every comparison point is still demo-based or vendor-reported.",
+          "rating": null,
+          "verified": true,
+          "note": "Excluded from scoring: not hands-on."
+        }
+      ],
+      "users": {
+        "ratings": [],
+        "mentions": [
+          {"source": "Hacker News (Marble launch thread)", "url": "https://news.ycombinator.com/item?id=45902732", "date": "2025-11 (approx.)", "sentiment": "pos", "note": "pedalpete: impressed by how the point cloud fills into a full scene.", "version_if_known": "Marble 1.0", "verified": true},
+          {"source": "Hacker News (Marble launch thread)", "url": "https://news.ycombinator.com/item?id=45902732", "date": "2025-11 (approx.)", "sentiment": "pos", "note": "the_real_cher: calls the results amazing.", "version_if_known": "Marble 1.0", "verified": true},
+          {"source": "Hacker News (Marble launch thread)", "url": "https://news.ycombinator.com/item?id=45902732", "date": "2025-11 (approx.)", "sentiment": "mixed", "note": "thetoon: promising, but the generated area is small and splat artifacts show at the edges.", "version_if_known": "Marble 1.0", "verified": true},
+          {"source": "Hacker News (Marble launch thread)", "url": "https://news.ycombinator.com/item?id=45902732", "date": "2025-11 (approx.)", "sentiment": "mixed", "note": "embedding-shape: interiors look and walk well; exteriors are weak.", "version_if_known": "Marble 1.0", "verified": true},
+          {"source": "Hacker News (Marble launch thread)", "url": "https://news.ycombinator.com/item?id=45902732", "date": "2025-11 (approx.)", "sentiment": "neg", "note": "xg15: expected more walkability; the scene falls apart once you move.", "version_if_known": "Marble 1.0", "verified": true},
+          {"source": "Hacker News (Marble launch thread)", "url": "https://news.ycombinator.com/item?id=45902732", "date": "2025-11 (approx.)", "sentiment": "neg", "note": "alyxya: perspective skews geometry; feels artificial compared with video models.", "version_if_known": "Marble 1.0", "verified": true},
+          {"source": "Hacker News (Marble launch thread)", "url": "https://news.ycombinator.com/item?id=45902732", "date": "2025-11 (approx.)", "sentiment": "neg", "note": "ganelonhb: dismisses the output as slop.", "version_if_known": "Marble 1.0", "verified": true}
+        ],
+        "sampled": 7,
+        "counts": {"pos": 2, "mixed": 2, "neg": 3},
+        "note": "All 7 mentions come from one HN thread at launch (Nov 2025, Marble 1.0, before Marble 1.1 in Apr 2026). Comments only about future potential (lightcrafter, MarsIronPI) or the technique (kkukshtel) were left out as not about output quality. A second HN thread (45528320, a Labubu game using Marble worlds) had no quality opinions. No review-site rating pages found (Trustpilot and Product Hunt slugs returned 404)."
+      },
+      "vendor_claims": [
+        {"text": "Marble 1.1 (Apr 2026) became the default, with claimed better lighting/contrast and fewer artifacts at the same 1,500 credits per world. 1.1 Plus expands world size for extra credits.", "url": "https://radiancefields.com/world-labs-releases-marble-1.1-and-marble-1.1-plus"},
+        {"text": "Exports full (2M) and 500k Gaussian splats (PLY/SPZ) plus collider and high-quality GLB meshes. Unity and Unreal splat plugin guides are in the docs.", "url": "https://docs.worldlabs.ai/marble/export/specs"}
+      ],
+      "strengths": ["Fast single-image to navigable world", "Faithful to the input image, with good lighting (1.1)", "Splat/mesh export with engine plugin paths"],
+      "weaknesses": ["Small convincing area; blurs away from the centre", "Splat-derived meshes are poor", "Splats are GPU-heavy and awkward to mix with meshes in engines"],
+      "examples": [],
+      "notes": "No benchmark covers Marble: it isn't on WorldScore (checked leaderboard.csv in the HF space, updated 2026-09-10) or 3D Arena (object models only). Current models: Marble 1.1 (default) and 1.1 Plus, released Apr 2026. Sketchfab search for Marble-made models found none."
+    },
+    "hunyuanworld": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [],
+        "mentions": [
+          {"source": "Hacker News (Tencent Releases Hunyuan World Model)", "url": "https://news.ycombinator.com/item?id=44706578", "date": "2025-07-29", "sentiment": "mixed", "note": "xinayder: demo controls look staged; custom formats don't import into map editors like Hammer or TrenchBroom.", "version_if_known": "HunyuanWorld 1.0", "verified": true},
+          {"source": "Hacker News (Tencent Releases Hunyuan World Model)", "url": "https://news.ycombinator.com/item?id=44706578", "date": "2025-07-28", "sentiment": "pos", "note": "josemanuel: surprised by how far the tech has come.", "version_if_known": "HunyuanWorld 1.0", "verified": true}
+        ],
+        "sampled": 2,
+        "note": "Below the 3-mention minimum, so not scorable. GitHub repo: 3.0k stars, 267 forks; an issues search for 'quality' returned only #22 (a request for higher-resolution panoramas)."
+      },
+      "vendor_claims": [
+        {"text": "README (Jul 2025) claims it beats Diffusion360, MVDiffusion, PanFusion, LayerPano3D, Director3D, WonderJourney and DimensionX on BRISQUE, NIQE, Q-Align and CLIP for panorama and world generation. These are self-reported, with no protocol details.", "url": "https://github.com/Tencent-Hunyuan/HunyuanWorld-1.0"}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "HunyuanWorld 1.0 (26 Jul 2025) has been superseded by Tencent's own HY-WorldPlay/HunyuanWorld-1.5 (Dec 2025) and HY-World-2.0 (16 Apr 2026, github.com/Tencent-Hunyuan/HY-World-2.0), per the 1.0 README. Tencent's HunyuanWorld-Voyager (a separate RGB-D video model) leads WorldScore's 3D group at 77.62 static, but under the runbook that is a different model and must not be scored for 1.0. HunyuanWorld 1.0 itself is not on WorldScore. Academic comparisons that include 1.0 as a baseline are by competing model makers (excluded by rule). A Sketchfab 'sci-fi room 1' (alexhuang0771, CC BY) says it was made with Tencent's hosted 'Hunyuan 3D interactive world generation', which is not the open 1.0 weights, so it was not used. Consider relisting as HY-World 2.0."
+    },
+    "dreamlands": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {"ratings": [], "mentions": [], "sampled": 0},
+      "vendor_claims": [
+        {"text": "Generates style-consistent concept art, then 3D props, true-scale wall/door/window kits and whole buildings from a floor plan. The showcase is a Georgian estate with 334 props, built 'in a single day', exported to Unreal.", "url": "https://dreamlands.ai/"},
+        {"text": "Live on Google Cloud Marketplace for studios (28 Mar 2026). A self-serve plan for indie/solo users is behind a waitlist, with a preview announced 25 May 2026.", "url": "https://dreamlands.ai/blog"}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "No independent evidence: no benchmarks, reviews, ratings or community threads found. Its site names no customers, founders or press coverage. Timeline per its blog: GCP Marketplace Mar 2026, preview May 2026 (the 'Oct 2026 launch' in our brief may be the self-serve opening; not confirmed)."
+    },
+    "ludus-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {"platform": "Product Hunt (Ludus AI)", "rating": null, "scale": 5, "count": 0, "url": "https://www.producthunt.com/products/ludus-ai/reviews", "verified": true, "note": "Launched about a year ago; no reviews."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {"text": "Places generated 3D models, materials, Niagara effects and sounds into the project with collision. It also claims PCG graph generation and rule-based scatter, plus a demo of 'dressing' a greybox hangar. Testimonials on the site don't mention level building.", "url": "https://ludusengine.com/"}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "No independent evidence on its level-building side. StraySpark has a Ludus-related post (ai-unreal-engine-data-policies-aura-ludus-epic-cloud-2026), but StraySpark sells competing Unreal MCP tooling and the post is about data policies, so it was not used."
+    }
+  },
+  "missing_tools": [
+    {"name": "Tencent HY-World 2.0", "url": "https://github.com/Tencent-Hunyuan/HY-World-2.0", "verified": false, "why": "Tencent's current open world model (Apr 2026), which supersedes the HunyuanWorld 1.0 we list. Linked from the 1.0 README; the repo itself was not opened."},
+    {"name": "Google DeepMind Genie 3 / Project Genie", "url": "https://www.strayspark.studio/blog/genie-3-world-model-vs-game-engines-2026", "verified": true, "why": "The most-discussed interactive world model in 2026 coverage (StraySpark, Tech Insider), though it generates real-time video rather than exportable level geometry. Probably a 'notable, not engine-ready' mention."},
+    {"name": "FlashWorld (open source)", "url": "https://huggingface.co/spaces/Howieeeee/WorldScore_Leaderboard", "verified": true, "why": "Open 3DGS world generator (5-10 s on one GPU) with an independent WorldScore entry (70.85 static, Oct 2025). The newer top WorldScore entries (UniWorld-View 85.53, WorldScape-0.2 MoE 85.13, World Dreamer 84.52) are research models and self-submitted."},
+    {"name": "Runway GWM Worlds 2", "url": "https://releasebot.io/updates/runwayai/runwayai", "verified": true, "why": "Real-time interactive worlds research preview (Sep 2026). Not yet a level tool; worth watching."}
+  ],
+  "general_sources": [
+    {"name": "WorldScore leaderboard (Stanford, ICCV 2025)", "url": "https://huggingface.co/spaces/Howieeeee/WorldScore_Leaderboard", "data_url": "https://huggingface.co/spaces/Howieeeee/WorldScore_Leaderboard/resolve/main/leaderboard.csv", "note": "Last updated 2026-09-10. It has 35 entries (21 video, 9 3D, 5 4D). None of our four tools is on it. Most 2026 entries were 'Sampled by / Evaluated by' their own teams, which isn't blind or independent."},
+    {"name": "3D Arena", "url": "https://huggingface.co/spaces/3d-arena/3d-arena", "note": "Object-generation boards only; no scene/world board."}
+  ],
+  "caveats": "1) We found no independent benchmark that includes Marble, HunyuanWorld 1.0, Dreamlands or Ludus AI. WorldScore covers only research/open models, and its newer rows are self-evaluated. All benchmark arrays are empty. 2) Only Marble has independent hands-on reviews (2 scored). HunyuanWorld 1.0 has none that we found, and its community sample is below the minimum. 3) Our WebSearch budget (shared across the session) ran out partway through this job. We could not search for YouTube hands-on tests, 80.lv/CG Channel/UploadVR coverage of Marble, HunyuanWorld hands-on posts, or Dreamlands launch coverage. Gaps partly reflect that, not only absence of evidence. 4) Marble's community sample is a single launch-week HN thread on Marble 1.0. 5) Reddit and X were skipped per instructions. 6) Ludus AI is a side tool here; its level features aren't covered by anything independent."
+}

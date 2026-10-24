@@ -1,0 +1,132 @@
+{
+  "task": "npc",
+  "checked": "2026-10-24",
+  "tools": {
+    "convai": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "StraySpark blog: 'Setting Up AI-Powered NPCs in Unreal Engine with MCP Automation'",
+          "url": "https://www.strayspark.studio/blog/ai-npcs-unreal-engine-mcp-automation",
+          "date": "2026-03-23",
+          "author": "StraySpark (studio; no individual named)",
+          "independent": true,
+          "summary": "Compares Inworld, Convai and NVIDIA ACE for UE5 NPCs. Convai is recommended for open-world and simulation games because of environment awareness, with 300-800 ms responses 'in our testing', but its Unreal plugin is called less polished than Inworld's.",
+          "rating": 60,
+          "verified": true,
+          "note": "Testing method not described. StraySpark sells its own unrelated UE MCP tools; no stake in Convai and no affiliate links in the article."
+        },
+        {
+          "outlet": "Zekai: 'Convai Review (2026): AI NPCs for Unreal & Unity Games'",
+          "url": "https://zekaiwork.com/ai-tools/convai/",
+          "date": "2026-06 (last reviewed); updated 2026-08-06",
+          "author": "Zekai Editorial Team",
+          "independent": "unclear",
+          "summary": "Editorial score 7.7/10 (ease 7.6, accuracy 8.0, value 7.4). Calls it a powerful, accessible way to build dynamic NPCs with Unreal/Unity integration and spatial awareness; cons are unclear pricing, cloud dependence and possible latency.",
+          "rating": 75,
+          "verified": true,
+          "note": "Says it did 'independent testing' of the no-code editor and assessed Unreal plugin docs; hands-on depth is limited. Site discloses some affiliate links and paid placement ('placement, never a score'). Score with care or exclude."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": null, "scale": 5, "count": 0, "url": "https://www.trustpilot.com/review/convai.com", "verified": true, "score": null, "note": "No Trustpilot page (404)."},
+          {"platform": "G2 / Capterra / Product Hunt", "rating": null, "scale": 5, "count": null, "url": null, "verified": false, "score": null, "note": "No Convai listing found (Product Hunt /products/convai returns 404; search returned only similarly named companies)."}
+        ],
+        "mentions": [
+          {"source": "Convai forum: 'Troubleshooting latency issues across all characters'", "url": "https://forum.convai.com/t/troubleshooting-latency-issues-across-all-characters/5958", "date": "2026-03-18", "sentiment": "neg", "note": "UE dev saw 8-13 s responses on all characters; switching LLM got ~6 s, still too slow."},
+          {"source": "Convai forum: 'Experiencing response latency'", "url": "https://forum.convai.com/t/experiencing-response-latency/6168", "date": "2026-05-12", "sentiment": "mixed", "note": "Quest 2 / Unity, 4-6 s latency; much better after switching to GPT-Realtime 1.5."},
+          {"source": "Convai forum: 'ConvAI fails to load when updating from UE 5.8 to 5.8.1'", "url": "https://forum.convai.com/t/convai-fails-to-load-when-updating-from-ue-5-8-to-5-8-1/6436", "date": "2026-07-30", "sentiment": "neg", "note": "Plugin did not support the UE point release; staff confirmed."},
+          {"source": "Convai forum: 'Unreal Engine - DLL errrors'", "url": "https://forum.convai.com/t/unreal-engine-dll-errrors/6052", "date": "2026-04-10", "sentiment": "neg", "note": "Works in editor but packaging fails (plugin 4.0.0 beta)."},
+          {"source": "Convai forum: 'Character Stops Speaking Before Completing Long Responses'", "url": "https://forum.convai.com/t/character-stops-speaking-before-completing-long-responses/6585", "date": "2026-09-28", "sentiment": "neg", "note": "Unity SDK 4.6.0, core flow broken; 17 posts."},
+          {"source": "Convai forum: 'Context not retained between turns when using Knowledge Bank'", "url": "https://forum.convai.com/t/context-not-retained-between-turns-when-using-knowledge-bank/6552", "date": "2026-09-07", "sentiment": "mixed", "note": "Memory/context bug; staff fixed it server-side within ~2 weeks."},
+          {"source": "Convai forum: 'Lipsync gets off sync and stops before the end of the audio'", "url": "https://forum.convai.com/t/lipsync-gets-off-sync-and-stops-before-the-end-of-the-audio/6532", "date": "2026-08-31", "sentiment": "neg", "note": "Unity SDK 4.5.0; a second team reproduced it on macOS and Quest."},
+          {"source": "Convai forum: 'I can't get the actions to work in any version'", "url": "https://forum.convai.com/t/i-cant-get-the-actions-to-work-in-any-version/6597", "date": "2026-10-07", "sentiment": "mixed", "note": "UE 5.6, plugin 4.0 beta.31; staff traced it to action configuration."},
+          {"source": "Convai forum: 'Happy with convai'", "url": "https://forum.convai.com/t/happy-with-convai/4864", "date": "2025-08-10", "sentiment": "pos", "note": "UE project upgraded 5.4 to 5.6 with everything still working."},
+          {"source": "Convai forum: 'High Response Latency with Convai in Unreal Engine 5 (Indie Plan)'", "url": "https://forum.convai.com/t/high-response-latency-with-convai-in-unreal-engine-5-indie-plan-how-to-optimize/4271", "date": "2025-06-13", "sentiment": "neg", "note": "One project replied in ~1 s, the dev's own was much slower; no resolution posted."}
+        ],
+        "sampled": 10,
+        "aggregate": {"source": "Community threads (10 read, Convai developer forum)", "url": "https://forum.convai.com/t/troubleshooting-latency-issues-across-all-characters/5958", "detail": "1 positive, 3 mixed, 6 negative", "score": 25},
+        "note": "Strong skew: this is Convai's own support forum, where people post when something breaks. Unreal/Unity/Godot forum searches found no independent Convai threads. A Unity Discussions reply recommending Convai (https://discussions.unity.com/t/npc-voices-recommendations/1700729) was written by someone who says 'we provide' Convai's plugin, so it is excluded."
+      },
+      "vendor_claims": [
+        {"text": "Updated Unreal plugin on Fab claims sub-200 ms conversational latency over WebRTC, plus NeuroSync facial animation and hands-free voice.", "url": "https://convai.com/blog/quick-setup-guide-conversational-ai-unreal-engine-convai-fab-plugin"},
+        {"text": "Voices from Google Cloud, Azure, OpenAI or ElevenLabs.", "url": "https://docs.convai.com/api-docs/convai-playground/character-customization/language-and-speech"}
+      ],
+      "strengths": [
+        "Quickest route to a talking 3D character with Unreal/Unity plugins",
+        "Characters can perceive the scene and trigger actions",
+        "Active development (SDK repos updated weekly)"
+      ],
+      "weaknesses": [
+        "Response latency of several seconds reported in 2026",
+        "Plugin breakage on engine updates and when packaging",
+        "Lip-sync and long-response bugs in recent SDKs"
+      ],
+      "examples": [],
+      "notes": "Desk-research comparisons (not hands-on, so not scored): Tech Insider (https://tech-insider.org/inworld-ai-vs-convai-vs-nvidia-ace-2026/, 2026-10-18) calls Convai the shortest path to a finished talking 3D character; Cinevva (https://app.cinevva.com/guides/ai-npcs-dialogue, 2026-07-17) calls it the most straightforward on-ramp, Indie plan $29/mo ($19 yearly) for 3,000 interactions. Convai's pricing page did not render for our fetcher, so those prices are second-hand. A Scribehow page titled 'Convai Review 2026 ... held back by a latency problem' could not be opened (401). No shipped commercial game using Convai was verified. GitHub: Conv-AI/Convai-UnrealEngine-SDK-V4 pushed 2026-10-22."
+    },
+    "charisma-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {"platform": "G2", "rating": null, "scale": 5, "count": 0, "url": "https://www.g2.com/sellers/charisma", "verified": false, "score": null, "note": "Search snippet said 0 reviews; G2 blocks our fetcher."},
+          {"platform": "Product Hunt", "rating": null, "scale": 5, "count": null, "url": "https://www.producthunt.com/products/charisma-ai/reviews", "verified": true, "score": null, "note": "404, no listing at that address."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {"text": "Homepage now reads 'Immersive conversational AI for online training and campaigns'; sections are Training & Development and Brand. Logos: Warner Bros, Sky, BBC, DreamWorks, Oxford University, Epic MegaGrant. Games appear only as a 'Puss in Boots minigame' image.", "url": "https://charisma.ai/"},
+        {"text": "PRO pay-as-you-go $5 per 50,000 credits (~200 experience minutes) with SDK publishing to web, VR or game engines; Enterprise aimed at Training & Development or Marketing.", "url": "https://charisma.ai/pricing"}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "No independent evidence found (no reviews, ratings or community threads). Objective signals: Charisma's Unity and Unreal SDK repos were last pushed in September 2025 (charisma-ai/charisma-sdk-unreal 2025-09-08, charisma-sdk-unity 2025-09-19; checked via the GitHub API on 2026-10-24), and the product has repositioned toward corporate training and brand campaigns. Recommend moving it from 'main' to 'side' in npc, or flagging it as not game-focused. Caveat: the web-search budget ran out before a second pass for Charisma (e.g. indie/IF dev blogs)."
+    },
+    "inworld-ai": {
+      "benchmarks": [],
+      "reviews": [
+        {
+          "outlet": "StraySpark blog: 'Setting Up AI-Powered NPCs in Unreal Engine with MCP Automation'",
+          "url": "https://www.strayspark.studio/blog/ai-npcs-unreal-engine-mcp-automation",
+          "date": "2026-03-23",
+          "author": "StraySpark",
+          "independent": true,
+          "summary": "Recommends Inworld as the place to start prototyping and the best fit for story-driven RPG/adventure NPCs, with a more polished Unreal plugin than Convai, but slower responses (about 0.5-1.5 s).",
+          "rating": 75,
+          "verified": true,
+          "note": "No test method described. Inworld has since retired its legacy Character Studio in favour of Unity AI Runtime / Unreal Agent Runtime SDKs with Character templates (retirement date not stated), so this review may describe a workflow that no longer exists. Re-check before scoring."
+        }
+      ],
+      "users": {"ratings": [], "mentions": [], "sampled": 0, "note": "No recent independent NPC-use threads found (engine-forum Discourse searches returned nothing relevant; Reddit/X done separately). Trustpilot (4 reviews) and Product Hunt (7) are below the threshold; see voice file."},
+      "vendor_claims": [
+        {"text": "Legacy Character Studio retired; developers should rebuild with the Unity AI Runtime SDK or Unreal Agent Runtime SDK, which ship Character templates (dialogue, emotion, voice, lip-sync).", "url": "https://docs.inworld.ai/character-studio-deprecation.md"},
+        {"text": "Docs home now lists only two products, Voice (TTS/STT/Realtime API) and Inference (model router); no game-NPC product on the landing page.", "url": "https://docs.inworld.ai/docs/introduction"},
+        {"text": "Realtime TTS-2 page has a 'Games and media' solution and a Latitude (Voyage) testimonial.", "url": "https://inworld.ai/blog/realtime-tts-2"}
+      ],
+      "strengths": [
+        "Strong, cheap TTS layer (see voice job benchmarks)",
+        "Unity/Unreal Character templates for building in-engine",
+        "Was rated the more polished Unreal plugin (StraySpark, Mar 2026)"
+      ],
+      "weaknesses": [
+        "Stepped back from turnkey NPC studio to B2B voice/inference infrastructure",
+        "Legacy Character Studio retired; more engineering needed now",
+        "Little recent independent NPC feedback"
+      ],
+      "examples": [],
+      "notes": "Desk research (not scored): Cinevva (https://app.cinevva.com/guides/ai-npcs-dialogue) says Inworld has largely stepped back from being a plug-and-play NPC studio and is heavier for solo devs; Tech Insider (https://tech-insider.org/inworld-ai-vs-convai-vs-nvidia-ace-2026/) calls it the stronger choice for studios that want to own character design and buy voice/model serving underneath, and cites Latitude's Voyage (open beta) as a voice customer via Inworld's own case study. GitHub: most Inworld runtime demo repos were archived in July 2026; active repos are TTS/API examples."
+    }
+  },
+  "videos": [],
+  "missing_tools": [
+    {"name": "NVIDIA ACE (Audio2Face, Riva, on-device SLMs)", "url": "https://developer.nvidia.com/ace", "why": "Only option built for on-device NPC inference with no per-conversation fee; used in shipped or live titles inZOI (Smart Zoi, early access Mar 2025), NARAKA: BLADEPOINT mobile PC (China) and PUBG Ally (beta June 2026). Needs RTX GPUs.", "source": "https://tech-insider.org/inworld-ai-vs-convai-vs-nvidia-ace-2026/"},
+    {"name": "Player2", "url": "https://player2.game/", "why": "Free AI API for game NPCs and mods (no API keys for players); positions itself for indie devs and modders. Linked in Cinevva's NPC guide.", "source": "https://player2.game/"},
+    {"name": "LLM for Unity (undreamai/LLMUnity)", "url": "https://github.com/undreamai/LLMUnity", "why": "Open-source local-LLM character framework for Unity, ~1.7k GitHub stars; no cloud costs or latency from a server round trip.", "source": "https://github.com/undreamai/LLMUnity"},
+    {"name": "Roll-your-own with an LLM API or a local model (Ollama, WebLLM)", "url": null, "why": "Cinevva's guide lists this as a main route for indie devs; it is how several shipped titles (e.g. Suck Up!) work.", "source": "https://app.cinevva.com/guides/ai-npcs-dialogue"}
+  ],
+  "caveats": "There are no benchmarks for NPC platforms. Independent hands-on reviews are scarce: the one usable comparison (StraySpark) gives no method, and Zekai's independence is unclear. Community evidence for Convai comes only from its own support forum (negative skew). Charisma and Inworld have no community sample. Web-search budget (shared across agents) ran out mid-run, so Charisma and Inworld-NPC searches were cut short; G2/Capterra blocked. Reddit/X skipped by instruction. Convai's pricing page did not render for our fetcher. Hacker News 'Convai' hits are about an unrelated company (Convai Innovations / Laya)."
+}

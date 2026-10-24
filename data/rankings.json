@@ -44,10 +44,7 @@
         "sources": [{ "label": "AA instrumental leaderboard", "url": "https://artificialanalysis.ai/music/leaderboard/instrumental" }]
       }
     ],
-    "labels": { "suno": "Top pick" },
-    "notes": {
-      "udio": "Udio isn't on Artificial Analysis's music leaderboards."
-    }
+    "labels": { "suno": "Top pick" }
   },
   "voice": {
     "checked": "2026-10-17",

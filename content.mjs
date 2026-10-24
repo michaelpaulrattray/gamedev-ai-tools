@@ -262,7 +262,7 @@ export const NEWS = [
 
 // Comparison pairs: rendered only from data/tools.json fields (no scores).
 export const COMPARE = [
-  ['meshy', 'tripo'], ['hyper3d-rodin', 'meshy'], ['suno', 'udio'], ['aiva', 'mubert'], ['cursor', 'github-copilot'], ['cursor', 'windsurf'],
+  ['meshy', 'tripo'], ['hyper3d-rodin', 'meshy'], ['suno', 'mureka'], ['aiva', 'mubert'], ['cursor', 'github-copilot'], ['cursor', 'windsurf'],
   ['elevenlabs', 'inworld-ai'], ['convai', 'inworld-ai'], ['cascadeur', 'deepmotion'], ['crowdin', 'gridly'], ['modl-ai', 'nunu-ai'],
   ['runway', 'luma-ai'], ['pixellab', 'retro-diffusion'], ['scenario', 'layer-ai'], ['chatgpt', 'midjourney'], ['leonardo-ai', 'midjourney'],
 ];

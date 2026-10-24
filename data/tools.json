@@ -935,41 +935,6 @@
   }
  },
  {
-  "slug": "udio",
-  "name": "Udio",
-  "url": "https://www.udio.com/",
-  "tasks": [
-   "audio"
-  ],
-  "engines": [
-   "any"
-  ],
-  "pricingModel": "freemium",
-  "summary": "AI music generation and remixing app.",
-  "pricing": "Free US$0 (10 credits/day, 100/month). Standard US$10/month (US$8 billed annually). Pro US$30/month (US$24 billed annually).",
-  "pricingSource": "https://www.udio.com/pricing",
-  "commercial": "no",
-  "license": "Current Terms of Service list exploiting the Services or any Output for any commercial purpose among prohibited uses. Not suitable for shipping in commercial games under these terms.",
-  "licenseSource": "https://www.udio.com/terms-of-service",
-  "lastChecked": "2026-10-22",
-  "verdict": "For personal music experiments only; its current terms prohibit commercial use of output, so it isn't suitable for shipped games.",
-  "bestFor": "Personal music experiments only (not for commercial games)",
-  "free": "yes",
-  "freeTier": "10 credits/day, 100/month",
-  "exportFormats": "unverified",
-  "revenue": "unverified",
-  "api": {
-   "status": "no",
-   "note": "Help centre says there is no public API",
-   "source": "https://help.udio.com/en/articles/10756277-udio-public-api"
-  },
-  "mcp": {
-   "status": "none-found",
-   "note": "No official MCP server found",
-   "source": ""
-  }
- },
- {
   "slug": "aiva",
   "name": "AIVA",
   "url": "https://www.aiva.ai/",
@@ -1763,6 +1728,41 @@
    "status": "unverified",
    "note": "Runs Claude Code, Codex, Gemini CLI and GitHub Copilot inside the editor through MCP",
    "source": "https://www.gamedevcore.com/solutions/unreal-engine-ai-assistant"
+  }
+ },
+ {
+  "slug": "mureka",
+  "name": "Mureka",
+  "url": "https://www.mureka.ai/",
+  "tasks": [
+   "audio"
+  ],
+  "engines": [
+   "any"
+  ],
+  "pricingModel": "freemium",
+  "summary": "AI music generator (Skywork AI) for full songs and instrumentals, with reference-track generation, remixing, stem splitting and a self-serve music API.",
+  "pricing": "Free: 4 songs per day on the free model, MP3 downloads. Pro US$10/month billed monthly, or US$96/year (US$8/month) billed yearly: 5,000 Gold/month (up to 500 songs), advanced models, MP3 + WAV. Premier US$30/month, or US$288/year (US$24/month) billed yearly: 20,000 Gold/month (up to 2,000 songs), stems (up to 12), MIDI and DAW session downloads.",
+  "pricingSource": "https://www.mureka.ai/subscribe",
+  "commercial": "paid-only",
+  "license": "Subscribe page: Pro and Premier include \"Full commercial rights for all songs (new & past creations)\", so songs made on the free plan become commercially usable once you subscribe. The free plan's comparison table does not include commercial rights.",
+  "licenseSource": "https://www.mureka.ai/subscribe",
+  "lastChecked": "2026-10-24",
+  "verdict": "For game soundtracks and menu music with stems and MIDI on Premier; commercial rights need a paid plan, and they also cover songs you made before upgrading.",
+  "bestFor": "Game music with stems and MIDI export on a paid plan",
+  "free": "yes",
+  "freeTier": "4 songs/day on the free model; MP3 only; no commercial rights",
+  "exportFormats": "MP3 (all plans); WAV (Pro and Premier); stems, MIDI and DAW session (Premier)",
+  "revenue": "unverified",
+  "api": {
+   "status": "yes",
+   "note": "Self-serve API platform with API keys, pricing and documentation for music and speech generation",
+   "source": "https://platform.mureka.ai/"
+  },
+  "mcp": {
+   "status": "official",
+   "note": "The API platform lists an official MCP server",
+   "source": "https://platform.mureka.ai/"
   }
  }
 ]

@@ -1,0 +1,330 @@
+{
+  "task": "voice",
+  "checked": "2026-10-24",
+  "scoring_policy_note": "The caller asked us to score the model each service uses by default (its current flagship). ElevenLabs' docs name eleven_v4 as flagship (highest quality) and eleven_v4_turbo as flagship real-time model; no API default is stated. Inworld's docs name inworld-tts-2 (Realtime TTS-2) as 'flagship and production default'; TTS-1/TTS-1 Max were discontinued 2026-06-15 and TTS 1.5 Max/Mini are deprecated. Each benchmark item below has use_for_score true/false. Boards where a service's flagship is missing are recorded for context with use_for_score false and the would-be score in alt_score.",
+  "tools": {
+    "elevenlabs": {
+      "benchmarks": [
+        {
+          "source": "Artificial Analysis - Provider Voice Arena Leaderboard (blind preference votes, each provider's own voices)",
+          "url": "https://artificialanalysis.ai/text-to-speech/leaderboard",
+          "board": "Provider Voice leaderboard (Speech Arena Elo)",
+          "model": "Eleven v4 Turbo (eleven_v4_turbo)",
+          "rank": 1,
+          "board_size": 98,
+          "value": "Elo 1336 (2,085 samples, rank range 1-2). Eleven v4 (eleven_v4) is #2, Elo 1332, 2,384 samples, range 1-2.",
+          "date": "2026-10-24 (read today; page shows no last-updated stamp)",
+          "independent": true,
+          "verified": true,
+          "score": 100.0,
+          "use_for_score": true,
+          "note": "v4 and v4 Turbo are statistically tied (overlapping 1-2 rank range). Using Eleven v4 #2 instead would give 98.97. Older ElevenLabs models: v3 Conversational #14, Eleven v3 #21, Turbo v2.5 #42, Multilingual v2 #44, Flash v2.5 #50."
+        },
+        {
+          "source": "Artificial Analysis - Controlled Voice Leaderboard (same 8 cloned voices, 4 US / 4 UK, for every model)",
+          "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/controlled-voice",
+          "board": "Controlled Voice leaderboard (Elo)",
+          "model": "Eleven v4 Turbo",
+          "rank": 4,
+          "board_size": 46,
+          "value": "Elo 1161 (2,691 samples). Eleven v4 #5, Elo 1159. #1-2 are HeyGen Voice Turbo / HeyGen Voice (1198 / 1196), #3 Qwen-Audio-3.1-TTS-Plus 1181.",
+          "date": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "score": 93.33,
+          "use_for_score": true,
+          "note": "This board removes the advantage of a provider's hand-picked stock voices, so it is closer to a 'custom character voice' test."
+        },
+        {
+          "source": "Coval TTS benchmarks (live streaming time-to-first-audio and WER, auto-refreshed)",
+          "url": "https://benchmarks.coval.ai/tts",
+          "board": "TTS latency leaderboard, sorted by time to first audio (TTFA)",
+          "model": "ElevenLabs Eleven v4 Turbo",
+          "rank": 12,
+          "board_size": 28,
+          "value": "181 ms TTFA, 1.8% WER. Flash v2.5 is #13 at 203 ms, 2.1% WER. Eleven v4 (non-Turbo) is not on the board.",
+          "date": "2026-10-24 snapshot (live board; sample counts ~96 per model suggest a short rolling window)",
+          "independent": "unclear",
+          "verified": true,
+          "score": 59.26,
+          "use_for_score": true,
+          "note": "Coval is a voice-agent evaluation company; no vendor relationships disclosed either way. Measures latency only, which matters for live NPC dialogue but not for pre-rendered voice lines. Its July 2026 blog put Inworld TTS-2 at 196 ms and ElevenLabs Flash v2.5 at 202 ms (https://www.coval.ai/blog/tts-latency-benchmark-2026/)."
+        },
+        {
+          "source": "Vapi Humanness Index (blind A/B votes, one cloned conversational voice on every model, human recording = 100)",
+          "url": "https://humannessindex.vapi.ai/",
+          "board": "Humanness Index",
+          "model": "Eleven v3 (previous-generation; Eleven v4 is not on this board)",
+          "rank": 1,
+          "board_size": 21,
+          "value": "Humanness 98, rating 1285, 602 votes, likely rank #1-4. Turbo v2 is 10th listed (77). Measured latency for v3: 758 ms.",
+          "date": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "score": null,
+          "alt_score": 100.0,
+          "use_for_score": false,
+          "note": "Not scored under the flagship-only policy because Eleven v4 is absent. Built by Vapi, a voice-agent platform that integrates many TTS vendors; the page says it is independent of Vapi's product. Rankings are labelled provisional."
+        },
+        {
+          "source": "TTS Arena V2 (Hugging Face, TTS-AGI; blind A/B votes)",
+          "url": "https://tts-agi-tts-arena-v2.hf.space/leaderboard",
+          "board": "TTS leaderboard (data from https://tts-agi-tts-arena-v2.hf.space/api/leaderboard?type=tts)",
+          "model": "Eleven Multilingual v2 (best-placed ElevenLabs model; Eleven v4 is registered in the arena code but has no leaderboard row yet)",
+          "rank": 20,
+          "board_size": 42,
+          "value": "Elo 1500 +/-23, win rate 51.7%, 1,173 votes. Eleven Flash v2.5 #21, Turbo v2.5 #23, Eleven v3 #27 (1498, 609 votes).",
+          "date": "2026-10-24 (space last deployed 2026-10-24)",
+          "independent": true,
+          "verified": true,
+          "score": null,
+          "alt_score": 53.66,
+          "use_for_score": false,
+          "note": "Board size 42 = 43 rows minus Vocu V3.0, suspended for 'vote manipulation'. Not scored because the flagship (v4) has no row; Multilingual v2 is 2+ generations old. Several top rows are 'preliminary' with ~155 votes. Re-check weekly: eleven_v4 is wired into the arena's ElevenLabs adapter (packages/providers/elevenlabs/src/index.ts) so it should appear."
+        }
+      ],
+      "reviews": [
+        {
+          "outlet": "Provimedia blog: 'AI Voices 2026: The 10 Best Voice Generator Tools Tested'",
+          "url": "https://www.provimedia.de/en/blog/best-ai-voice-generators-2026",
+          "date": "2026-05-10 (footer says last updated 2026-10-24)",
+          "author": "Alexander Weipprecht",
+          "independent": "unclear",
+          "summary": "Ten-task benchmark set (radio spot, tutorial, cloning, real-time bot) scored on naturalness, emotion, languages, latency and price. ElevenLabs v3 ranked first and is called the benchmark for audiobooks, spots and tutorials. Run sizes and scoring weights are not described.",
+          "rating": 90,
+          "verified": true,
+          "note": "Covers Eleven v3, not v4. No affiliate links seen, but Provimedia is an agency whose call to action says it builds audio pipelines. Not game-specific."
+        },
+        {
+          "outlet": "note.com blog (Japanese): 'Can you create game character voices with AI? I actually tried ElevenLabs'",
+          "url": "https://note.com/novel_stoat2736/n/n4a083835798f?hl=en",
+          "date": "2026-08-16",
+          "author": "修勢 (solo game-dev / AI blogger)",
+          "independent": false,
+          "summary": "Game-specific test of Eleven v3 with audio tags for normal talk, battle shouts, anger, sadness and whispers. Emotional range was clearly audible and normal speech natural, but fictional proper nouns were often misread, intense lines broke pronunciation, and timing still sounded AI. Recommends regenerating and picking takes.",
+          "rating": 60,
+          "verified": true,
+          "note": "Excluded from scoring: the article states it contains ElevenLabs affiliate links. Eleven v3, free plan."
+        },
+        {
+          "outlet": "DevOpsCube: 'ElevenLabs Review 2026: Is the Voice Quality Worth Paying For?'",
+          "url": "https://devopscube.com/elevenlabs-review/",
+          "date": "2026-04-24",
+          "author": "Aljin Vijayan",
+          "independent": false,
+          "summary": "Team uses it for YouTube voiceovers and trained a Professional Voice Clone on ~2 hours of audio. Realistic voices and good cloning; v3 gave less control than Multilingual v2 and sometimes sounded off; credits and higher tiers get expensive.",
+          "rating": 75,
+          "verified": true,
+          "note": "Excluded from scoring: ElevenLabs links carry ref=devopscube.com and a discount referral link. Not game-specific."
+        }
+      ],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 3.0, "scale": 5, "count": 1205, "url": "https://www.trustpilot.com/review/elevenlabs.io", "verified": true, "score": 50.0, "note": "Distribution 47% 5-star / 39% 1-star. Company invites reviews. Complaints are mostly billing/credits and support; quality comments are mixed. Covers all ElevenLabs products, not only TTS."},
+          {"platform": "Product Hunt", "rating": 4.9, "scale": 5, "count": 221, "url": "https://www.producthunt.com/products/elevenlabs/reviews", "verified": true, "score": 97.5, "note": "Many reviews are from founders/makers using the API (skews positive); dates spread over ~3 years. Complaints: long-form inconsistency, mispronounced numbers/abbreviations, confusing credit pricing."},
+          {"platform": "G2", "rating": 4.5, "scale": 5, "count": 1155, "url": "https://www.g2.com/products/elevenlabsio/reviews", "verified": false, "score": null, "note": "Figure from search-result summaries only; G2 returned 403. Do not score."},
+          {"platform": "Capterra", "rating": null, "scale": 5, "count": null, "url": "https://www.capterra.com/p/10013392/ElevenLabs/reviews/", "verified": false, "score": null, "note": "403 to our fetcher."}
+        ],
+        "mentions": [
+          {"source": "Unity Discussions: 'NPC voices, recommendations?'", "url": "https://discussions.unity.com/t/npc-voices-recommendations/1700729", "date": "2025-12-18 to 2026-04-21", "sentiment": "mixed", "note": "Several devs say ElevenLabs is the only/best decent option for pre-recorded NPC lines; others say AI voices still sound flat and would rather ship text. OP reported ElevenLabs sign-up erroring. The last reply (recommending Convai) is from someone who says 'we provide' Convai's Unity plugin, so it is excluded."}
+        ],
+        "sampled": 1,
+        "aggregate": null,
+        "note": "Fewer than 3 independent game-dev threads found (Reddit/X are sampled separately; web-search budget ran out mid-run). No community aggregate."
+      },
+      "vendor_claims": [
+        {"text": "Eleven v4 / v4 Turbo released 2026-09-28; claims ~75% blind preference over Cartesia Sonic 3.6, Inworld TTS-2 and two Gemini TTS models in its own tests; v4 Turbo ~100 ms median inference, ~150 ms to first speech; 90+ languages; instant clones from ~10 s of audio.", "url": "https://elevenlabs.io/blog/eleven-v4"},
+        {"text": "Docs: eleven_v4 is the flagship highest-quality model; eleven_v4_turbo the flagship real-time model (~100 ms inference); Flash v2.5 ~75 ms; Turbo v2/v2.5 deprecated.", "url": "https://elevenlabs.io/docs/models"}
+      ],
+      "strengths": [
+        "Top of Artificial Analysis blind-vote boards with v4 / v4 Turbo",
+        "Wide emotional range via audio tags (anger, whispers, shouts)",
+        "Strong voice cloning and large voice library"
+      ],
+      "weaknesses": [
+        "Misreads invented names; intense lines can break pronunciation",
+        "Credit-based pricing gets expensive; billing complaints on Trustpilot",
+        "Mid-pack on measured streaming latency (Coval #12 of 28)"
+      ],
+      "examples": [],
+      "notes": "Evidence covers Eleven v4 / v4 Turbo for benchmarks; all opened hands-on reviews tested Eleven v3 or Multilingual v2 (pre-v4). No independent same-script game-voice test of v4 found yet. StraySpark's 'AI voice acting for indie games' post (https://www.strayspark.studio/blog/ai-voice-acting-indie-games-elevenlabs-2026, 2026-04-22) calls ElevenLabs v3 the market leader but describes no hands-on testing, so it is not listed as a review. Cinevva's guide (https://app.cinevva.com/guides/ai-voice-acting-games, 2026-07-17) calls it the default for game dialogue but is desk research by a company selling a game builder."
+    },
+    "inworld-ai": {
+      "benchmarks": [
+        {
+          "source": "Artificial Analysis - Provider Voice Arena Leaderboard",
+          "url": "https://artificialanalysis.ai/text-to-speech/leaderboard",
+          "board": "Provider Voice leaderboard (Speech Arena Elo)",
+          "model": "Realtime TTS-2 (inworld-tts-2)",
+          "rank": 6,
+          "board_size": 98,
+          "value": "Elo 1270 (2,254 samples, rank range 5-7). Realtime TTS-2 Flash #13, Elo 1219.",
+          "date": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "score": 94.85,
+          "use_for_score": true
+        },
+        {
+          "source": "Artificial Analysis - Controlled Voice Leaderboard",
+          "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/controlled-voice",
+          "board": "Controlled Voice leaderboard (Elo)",
+          "model": "Realtime TTS-2",
+          "rank": 7,
+          "board_size": 46,
+          "value": "Elo 1148 (3,231 samples). TTS-2 Flash #15, Elo 1065.",
+          "date": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "score": 86.67,
+          "use_for_score": true
+        },
+        {
+          "source": "Coval TTS benchmarks (live streaming TTFA)",
+          "url": "https://benchmarks.coval.ai/tts",
+          "board": "TTS latency leaderboard, sorted by TTFA",
+          "model": "Realtime TTS-2 Flash (inworld-tts-2-flash)",
+          "rank": 2,
+          "board_size": 28,
+          "value": "62 ms TTFA, 1.7% WER. Realtime TTS-2 (flagship) is #11: 157 ms mean / 154 ms p50, 1.5% WER.",
+          "date": "2026-10-24 snapshot",
+          "independent": "unclear",
+          "verified": true,
+          "score": 96.3,
+          "use_for_score": true,
+          "note": "Runbook rule 'best current model the service runs' picks Flash (#2). If the flagship-only rule is applied strictly, use TTS-2 #11 = 62.96 instead."
+        },
+        {
+          "source": "Vapi Humanness Index",
+          "url": "https://humannessindex.vapi.ai/models/inworld-tts-2",
+          "board": "Humanness Index",
+          "model": "Realtime TTS-2",
+          "rank": 12,
+          "board_size": 21,
+          "value": "Humanness 71, likely rank #10-17, 1,098 blind votes, standings as of 2026-10-24 10:19 UTC. Measured latency 288 ms (Vapi, 50 trials, June 2026). Deprecated TTS-1.5-max sits higher (80, #7-12).",
+          "date": "2026-10-24",
+          "independent": "unclear",
+          "verified": true,
+          "score": 45.0,
+          "use_for_score": true,
+          "note": "Flagship is present here, ElevenLabs' is not, so applying flagship-only would score this board for Inworld only. Decide consistently; see ElevenLabs entry (alt_score 100 for Eleven v3)."
+        },
+        {
+          "source": "TTS Arena V2 (Hugging Face)",
+          "url": "https://tts-agi-tts-arena-v2.hf.space/leaderboard",
+          "board": "TTS leaderboard",
+          "model": "'Inworld TTS MAX' = inworld-tts-1-max; 'Inworld TTS' = inworld-tts-1; 'Inworld TTS 1.5 MAX' = inworld-tts-1.5-max (per the arena's adapter packages/providers/inworld/src/index.ts)",
+          "rank": 5,
+          "board_size": 42,
+          "value": "TTS-1 Max #5 (Elo 1548, 1,505 votes); TTS-1 #6 (1532, 1,984 votes); TTS 1.5 Max #17 (1510, 672 votes). No TTS-2 row.",
+          "date": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "score": null,
+          "alt_score": 90.24,
+          "use_for_score": false,
+          "note": "Not scored: these model IDs were discontinued 2026-06-15 and Inworld says requests are now auto-routed to newer models, so recent votes may be for an unknown newer model. Old model, so excluded."
+        }
+      ],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {"platform": "Trustpilot", "rating": 3.3, "scale": 5, "count": 4, "url": "https://www.trustpilot.com/review/inworld.ai", "verified": true, "score": null, "note": "Under 25 reviews; not scorable. 2 x 5-star (voice quality), 2 x 1-star (account lockout, slow support)."},
+          {"platform": "Product Hunt", "rating": 5.0, "scale": 5, "count": 7, "url": "https://www.producthunt.com/products/inworld-ai/reviews", "verified": true, "score": null, "note": "Under 25 reviews; not scorable."}
+        ],
+        "mentions": [
+          {"source": "Hacker News: 'Show HN: Inworld TTS'", "url": "https://news.ycombinator.com/item?id=44389265", "date": "2025-06-26", "sentiment": "mixed", "note": "Mostly praise, but a commenter pointed out at least 5 brand-new accounts praising it across Inworld submissions and asked for leaderboard evidence. Treat as unreliable; also covers TTS-1, not TTS-2."}
+        ],
+        "sampled": 1,
+        "aggregate": null
+      },
+      "vendor_claims": [
+        {"text": "Realtime TTS-2 GA 2026-08-31 (preview 2026-05-05); 100+ languages, natural-language voice direction and inline [laugh]/[sigh] tags; sub-200 ms median time to first audio; 'Games and media' solution with Latitude testimonial.", "url": "https://inworld.ai/blog/realtime-tts-2"},
+        {"text": "Docs: TTS-2 is 'flagship, top-ranked' with 100 ms P90 server-side TTFB; TTS-2 Flash 20 ms P90; TTS-1/TTS-1 Max discontinued 2026-06-15; 1.5 Max/Mini deprecated.", "url": "https://docs.inworld.ai/docs/tts/tts-models"},
+        {"text": "Pricing per 1M characters: TTS-2 $25 on free On-Demand tier down to $12.50 on Growth (as low as $5 enterprise); Flash $15 down to $7.", "url": "https://inworld.ai/pricing"}
+      ],
+      "strengths": [
+        "Top-10 on both Artificial Analysis blind boards with TTS-2",
+        "TTS-2 Flash among the fastest measured (Coval 62 ms TTFA)",
+        "Cheaper per character than ElevenLabs list prices"
+      ],
+      "weaknesses": [
+        "Mid-table on the cloned-voice Humanness Index (#12 of 21)",
+        "No independent hands-on reviews found",
+        "Fast model churn: TTS-1 and 1.5 retired within a year"
+      ],
+      "examples": [],
+      "notes": "Only independent evidence is benchmarks. itechguides (https://www.itechguides.com/products/inworld-tts/) gives 7.2/10 but did no hands-on testing and sells placement, so excluded. Stork.ai and ElevenLabs/Inworld comparison pages are AI-generated or vendor-run."
+    },
+    "convai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {"ratings": [], "mentions": [], "sampled": 0},
+      "vendor_claims": [
+        {"text": "Character voices come from third-party providers: Google Cloud, Microsoft Azure, OpenAI and ElevenLabs. No default provider is named.", "url": "https://docs.convai.com/api-docs/convai-playground/character-customization/language-and-speech"}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Convai has no TTS model of its own, so there is nothing to benchmark; voice quality depends on which provider the developer picks. Its forum shows users asking for ElevenLabs v4 Turbo (not yet integrated as of 2026-10-14: https://forum.convai.com/t/feature-request-elevenlabs-v4-turbo-integration/6600) and a German-voice correctness complaint (https://forum.convai.com/t/user-reporting-that-the-german-dialect-is-not-correct/6574). Better evaluated in the npc job; consider removing it from voice or keeping it with no voice score."
+    },
+    "charisma-ai": {
+      "benchmarks": [],
+      "reviews": [],
+      "users": {"ratings": [], "mentions": [], "sampled": 0},
+      "vendor_claims": [
+        {"text": "Pricing page lists an AI voice library and custom AI voice integration (PRO, $5 per 50,000 credits ~ 200 experience minutes) and premium AI voices (Enterprise). TTS provider not named.", "url": "https://charisma.ai/pricing"}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "No evidence found. Charisma now positions itself as 'immersive conversational AI for online training and campaigns' (https://charisma.ai/), not a game-voice tool. TTS provider unknown. Web-search budget ran out before a deeper search."
+    },
+    "gridly": {
+      "benchmarks": [
+        {
+          "source": "Artificial Analysis - Provider Voice Arena Leaderboard",
+          "url": "https://artificialanalysis.ai/text-to-speech/leaderboard",
+          "board": "Provider Voice leaderboard",
+          "model": "Amazon Polly Neural (the engine behind Gridly's 'Amazon Text To Speech (Standard/Neural)' automation)",
+          "rank": 92,
+          "board_size": 98,
+          "value": "Elo 897. Polly Standard is #98 (last, Elo 831).",
+          "date": "2026-10-24",
+          "independent": true,
+          "verified": true,
+          "score": 6.19,
+          "use_for_score": false,
+          "note": "Recorded for context only. Gridly's help article (https://help.gridly.com/en/7512578726301-automation-action-amazon-text-to-speech-standard-neural-) documents only Amazon TTS and uses 2022 screenshots; the homepage lists 'Text to speech' under Automation without naming a provider. Scoring a localisation platform on a third-party engine is debatable; we recommend not giving Gridly a voice bench score unless the team agrees."
+        }
+      ],
+      "reviews": [],
+      "users": {
+        "ratings": [
+          {"platform": "G2", "rating": 4.7, "scale": 5, "count": 50, "url": "https://www.g2.com/products/gridly/reviews", "verified": false, "score": null, "note": "Search snippets disagree (4.7/50 vs 4.8/34); G2 returned 403. Reviews are about localisation, not voice. Do not score."}
+        ],
+        "mentions": [],
+        "sampled": 0
+      },
+      "vendor_claims": [
+        {"text": "Homepage: 'Text to speech' automation to 'speed up your video production with AI-generated voiceover files'; game customers named include tinyBuild, 11 bit studios, Hi-Rez, Game Science, Belka Games.", "url": "https://www.gridly.com/"}
+      ],
+      "strengths": [],
+      "weaknesses": [],
+      "examples": [],
+      "notes": "Light pass. Gridly is a localisation content platform; voice is a small automation (placeholder/validation VO), not a character-voice tool. Probably belongs only in localisation."
+    }
+  },
+  "videos": [],
+  "missing_tools": [
+    {"name": "Cartesia (Sonic 3.6)", "url": "https://cartesia.ai/", "why": "#4 of 98 on the Artificial Analysis provider board and #6 of 46 on controlled voice; real-time focused; a common pick for voice agents.", "source": "https://artificialanalysis.ai/text-to-speech/leaderboard"},
+    {"name": "Alibaba Qwen-Audio-3.1-TTS-Plus", "url": null, "why": "#3 on both Artificial Analysis boards, ahead of Inworld.", "source": "https://artificialanalysis.ai/text-to-speech/leaderboard/controlled-voice"},
+    {"name": "Google Gemini 3.8 Flash TTS", "url": null, "why": "#5 of 98 on the AA provider board; cheap API.", "source": "https://artificialanalysis.ai/text-to-speech/leaderboard"},
+    {"name": "Fish Audio (Drama 3 / S2.1 Pro, open-weight S-series)", "url": "https://fish.audio/", "why": "Drama 3 Preview #9 on the AA provider board; offers open weights for self-hosting.", "source": "https://artificialanalysis.ai/text-to-speech/leaderboard"},
+    {"name": "Speechify Simba 3.2", "url": null, "why": "#2 on Vapi Humanness Index (97) and #10 on AA provider board.", "source": "https://humannessindex.vapi.ai/"},
+    {"name": "Resemble AI / Chatterbox (MIT open source)", "url": "https://www.resemble.ai/", "why": "Cinevva's game-voice guide recommends Chatterbox for creatures/characters thanks to its 'exaggeration' control; free to self-host.", "source": "https://app.cinevva.com/guides/ai-voice-acting-games"},
+    {"name": "Local runtime TTS: Kokoro, Piper", "url": null, "why": "Run on CPU at runtime with no per-line fees; Kokoro is commercially shippable. Useful for games that generate lines on the player's machine.", "source": "https://app.cinevva.com/guides/ai-voice-acting-games"},
+    {"name": "xVASynth", "url": null, "why": "Described as the community standard for custom NPC lines in Skyrim-style modding.", "source": "https://app.cinevva.com/guides/ai-voice-acting-games"}
+  ],
+  "caveats": "Web-search budget (shared across agents) ran out partway through, so Charisma/Convai voice details and extra review discovery were cut short. Only WebFetch of known URLs was possible afterwards. G2 and Capterra returned 403 everywhere. Reddit/X skipped by instruction. No independent hands-on review of Eleven v4 or Inworld TTS-2 exists yet that we could find; most 'tested' articles are affiliate or SEO pages. TTS Arena V2 lacks both services' current flagships. Replica Studios is reported shut down (Unity thread) and Play.ht reportedly shut down (Cinevva), so neither should be added."
+}
