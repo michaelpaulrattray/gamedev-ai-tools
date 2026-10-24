@@ -359,30 +359,81 @@ const HOME_SUB = `What's new, the best tool for each job, what it costs and how 
 // Tier 1: tools with independent quality evidence, in the order given in rankings.json (each needs a why + source).
 // Tier 2: every other tool in the category, ordered by the game-dev fit score below. Sponsors/affiliates never affect either.
 const RANKINGS = readJson('data/rankings.json', {});
-const FIT_COM = { yes: 3, 'paid-only': 2, restricted: 1 };
+// Game-dev fit (0-100), from facts on vendor pages. Specialising in the job counts most; licence terms are a small part.
 const FIT_ENGINES = ['godot', 'unity', 'unreal'];
-const fitScore = (t, key) => (FIT_COM[t.commercial] || 0) + FIT_ENGINES.filter(e => t.engines.includes(e)).length
-  + (t.api.status === 'yes' ? 1 : 0) + (t.mcp.status === 'official' ? 1 : 0) + (t.tasks[0] === key ? 2 : 0) + (t.free === 'yes' ? 0.5 : 0);
-const FIT_COM_TEXT = { yes: 'commercial use allowed', 'paid-only': 'commercial use on paid plans', restricted: 'commercial use restricted', no: 'commercial use not allowed', unverified: 'commercial terms not stated by vendor', 'n-a': 'doesn\'t make shippable assets' };
-function fitWhy(t, note) {
+const FIT_FREE = { yes: 12, trial: 6 };
+const FIT_COM = { yes: 12, 'paid-only': 8, restricted: 4 };
+const fitScore = (t, key) => (t.tasks[0] === key ? 40 : 0) + 8 * FIT_ENGINES.filter(e => t.engines.includes(e)).length
+  + (t.api.status === 'yes' ? 8 : 0) + (t.mcp.status === 'official' ? 4 : 0) + (FIT_FREE[t.free] || 0) + (FIT_COM[t.commercial] || 0);
+function fitWhy(t, key, note) {
   const eng = FIT_ENGINES.filter(e => t.engines.includes(e)).map(e => ENGINES[e]);
-  const parts = [FIT_COM_TEXT[t.commercial] || FIT_COM_TEXT.unverified, eng.length ? `${eng.join(', ')} ${eng.length === 1 ? 'integration' : 'integrations'}` : 'no engine integration stated', [t.api.status === 'yes' ? 'API' : '', t.mcp.status === 'official' ? 'official MCP server' : ''].filter(Boolean).join(' and ')].filter(Boolean);
-  return `No independent quality tests found. Ranked on game-dev fit: ${parts.join('; ')}.${note ? ' ' + note : ''}`;
+  const parts = [t.tasks[0] === key ? `built for ${TASKS[key].label.toLowerCase()}` : `${TASKS[key].label.toLowerCase()} is a side feature`,
+    eng.length ? `${eng.join(', ')} ${eng.length === 1 ? 'integration' : 'integrations'}` : 'no engine integration stated',
+    [t.api.status === 'yes' ? 'API' : '', t.mcp.status === 'official' ? 'official MCP server' : ''].filter(Boolean).join(' and '),
+    { yes: 'free plan', trial: 'free trial', no: 'paid only' }[t.free] || ''].filter(Boolean);
+  return `Not enough independent evidence yet. Ranked on game-dev fit: ${parts.join('; ')}.${note ? ' ' + note : ''}`;
+}
+// Evidence-based scores (data/evidence/<task>.json). Each tool's score blends independent benchmarks, expert reviews and
+// user reports with game-dev fit; a tool needs 2+ kinds of independent evidence to be ranked with confidence.
+const EVIDENCE = fs.existsSync('data/evidence') ? Object.fromEntries(fs.readdirSync('data/evidence').filter(f => f.endsWith('.json')).map(f => [f.slice(0, -5), JSON.parse(fs.readFileSync(`data/evidence/${f}`, 'utf8'))])) : {};
+const SIGNALS = [['bench', 'Benchmarks', 0.35], ['reviews', 'Expert reviews', 0.25], ['users', 'User reports', 0.25], ['fit', 'Game-dev fit', 0.15]];
+const TIE = 3; // scores this close are a tie (joint rank)
+const avg = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : null;
+function evidenceRows(key, list) {
+  const E = EVIDENCE[key];
+  const rows = list.map(t => {
+    const e = (E.tools && E.tools[t.slug]) || {};
+    const items = k => (e[k] || []).filter(x => x && typeof x.score === 'number' && x.url);
+    const sig = { bench: avg(items('bench').map(x => x.score)), reviews: avg(items('reviews').map(x => x.score)), users: avg(items('users').map(x => x.score)), fit: Math.min(100, fitScore(t, key)) };
+    const kinds = ['bench', 'reviews', 'users'].filter(k => sig[k] !== null).length;
+    const used = SIGNALS.filter(([k]) => sig[k] !== null), w = used.reduce((a, [, , x]) => a + x, 0);
+    const score = Math.round(used.reduce((a, [k, , x]) => a + sig[k] * x, 0) / w);
+    const conf = kinds >= 2 ? 'confident' : kinds === 1 ? 'provisional' : 'fit';
+    const sources = ['bench', 'reviews', 'users'].flatMap(k => items(k).map(x => ({ url: x.url, label: x.source, kind: k, detail: x.detail || x.summary || '' })));
+    return { t, score, sig, conf, kinds, sources, strengths: e.strengths || [], weaknesses: e.weaknesses || [], vendorClaims: e.vendorClaims || [], examples: e.examples || [], verdict: e.verdict || '' };
+  });
+  const tierN = { confident: 0, provisional: 1, fit: 2 };
+  rows.sort((a, b) => tierN[a.conf] - tierN[b.conf] || b.score - a.score || a.t.name.localeCompare(b.t.name));
+  // Rank numbers: within the confident tier, a score within TIE points of the previous row's shares its rank.
+  rows.forEach((r, i) => {
+    const p = rows[i - 1];
+    r.n = p && r.conf === 'confident' && p.conf === 'confident' && p.score - r.score <= TIE ? p.n : i + 1;
+    r.tier = r.conf === 'confident' ? 'evidence' : 'fit';
+    r.why = r.verdict || (r.conf === 'fit' ? fitWhy(r.t, key) : `Score ${r.score}/100 from ${r.kinds} kind${r.kinds === 1 ? '' : 's'} of independent evidence plus game-dev fit.`);
+  });
+  const joint = rows.filter(r => r.n === 1).length > 1;
+  rows.forEach(r => { r.label = (E.labels && E.labels[r.t.slug]) || (r.n === 1 && r.conf === 'confident' ? (joint ? 'Joint top pick' : 'Top pick') : ''); });
+  return rows;
 }
 const RANKED = {};
 for (const key of Object.keys(TASKS)) {
-  const R = RANKINGS[key] || {}, list = tools.filter(t => t.tasks.includes(key));
-  const ev = R && Array.isArray(R.evidence) ? R.evidence.filter(e => e && e.why && Array.isArray(e.sources) && e.sources.some(s => s.url) && list.some(t => t.slug === e.tool)) : [];
+  const list = tools.filter(t => t.tasks.includes(key));
   if (list.length < 2) continue; // nothing to rank
-  // No evidence yet: the whole category is ranked on game-dev fit (and the page says so).
+  if (EVIDENCE[key]) {
+    const rows = evidenceRows(key, list);
+    RANKED[key] = { checked: EVIDENCE[key].checked || CHECKED, rows, nEvidence: rows.filter(r => r.tier === 'evidence').length, v2: true };
+    continue;
+  }
+  // Older categories (data/rankings.json): independent tests first, then game-dev fit.
+  const R = RANKINGS[key] || {};
+  const ev = R && Array.isArray(R.evidence) ? R.evidence.filter(e => e && e.why && Array.isArray(e.sources) && e.sources.some(s => s.url) && list.some(t => t.slug === e.tool)) : [];
   const evSlugs = ev.map(e => e.tool);
   const rest = list.filter(t => !evSlugs.includes(t.slug)).sort((a, b) => fitScore(b, key) - fitScore(a, key) || a.name.localeCompare(b.name));
   const rows = [...ev.map(e => ({ t: bySlug[e.tool], tier: 'evidence', why: e.why, sources: e.sources.filter(s => s.url) })),
-    ...rest.map(t => ({ t, tier: 'fit', why: fitWhy(t, R.notes && R.notes[t.slug]), sources: [] }))];
+    ...rest.map(t => ({ t, tier: 'fit', why: fitWhy(t, key, R.notes && R.notes[t.slug]), sources: [] }))];
   rows.forEach((r, i) => { r.n = i + 1; r.label = (R.labels && R.labels[r.t.slug]) || ''; });
   RANKED[key] = { checked: R.checked || CHECKED, rows, nEvidence: ev.length };
 }
 const rankOf = (slug, key) => { const R = RANKED[key]; const r = R && R.rows.find(x => x.t.slug === slug); return r || null; };
+// Category rank card body for evidence-scored rows: score, the four signals, strengths/watch-outs, sources on demand.
+const CONF_TXT = { confident: 'Ranked on independent evidence', provisional: 'Provisional: one kind of evidence', fit: 'Not enough evidence yet: game-dev fit only' };
+const srcListV2 = r => `<ul class="src-list">${r.sources.map(x => `<li><a href="${esc(x.url)}" rel="noopener nofollow" target="_blank">${esc(x.label)}</a>${x.detail ? ` <span>${esc(x.detail)}</span>` : ''}</li>`).join('')}</ul>`;
+const rankNoteV2 = r => `<p class="rank-line"><span class="rank-n">#${r.n}</span>${r.label ? badge(r.label, 'accent') : ''}<span class="rank-score"><b>${r.score}</b>/100</span></p>
+<p class="rank-conf rc-${r.conf}">${CONF_TXT[r.conf]}</p>
+<ul class="rank-sig">${SIGNALS.map(([k, l]) => `<li${r.sig[k] === null ? ' class="is-none"' : ''}><span>${l}</span><span class="rs-track"><span style="width:${r.sig[k] === null ? 0 : Math.round(r.sig[k])}%"></span></span><b>${r.sig[k] === null ? '–' : Math.round(r.sig[k])}</b></li>`).join('')}</ul>
+${r.strengths.length ? `<p class="rank-pros">${r.strengths.slice(0, 3).map(x => `<span>${esc(x)}</span>`).join('')}</p>` : ''}${r.weaknesses.length ? `<p class="rank-cons"><b>Watch out:</b> ${esc(r.weaknesses.slice(0, 2).join('; '))}</p>` : ''}
+${r.sources.length ? `<details class="rank-src above"><summary>${r.sources.length} ${r.sources.length === 1 ? 'source' : 'sources'}</summary>${srcListV2(r)}</details>` : `<p class="rank-why">${esc(r.why)}</p>`}
+`;
 const rankSources = r => r.sources.map(s => `<a class="src" href="${esc(s.url)}" rel="noopener nofollow" target="_blank">${esc(s.label || 'source')}</a>`).join(' ');
 
 // ---------- Tool pages ----------
@@ -569,7 +620,7 @@ ${catTable(list, RANKED[key])}<p class="cat-empty" hidden>No tools match these f
 ${list.length > 1 ? `<div class="cmp-row" style="margin-top:6px"><span>Compare side by side:</span>${cp.map(cmpChip).join('')}<a class="chip c-muted" href="${L(`/compare/?task=${key}`)}">Pick any two →</a></div>` : ''}
 ${GUIDES.filter(g => g.task === key).map(g => `<section class="rel-guide" aria-label="Related guide">${linkCard({ href: L(`/guides/${g.slug}/`), title: g.title, kicker: 'Related workflow guide', desc: esc(g.outcome), media: artImg(guideArtPage(g)), foot: flowStrip(g, { max: 4 }), cls: 'feature', h: 'h2' })}</section>`).join('\n')}
 ${RANKED[key] ? `<h2 class="sub-h">Why each tool ranks where it does</h2>
-<div class="grid ranked-cards">${RANKED[key].rows.map(r => toolCard(r.t, { attrs: `${catAttrs(r.t)} data-rank="${r.n}" data-alpha="${list.indexOf(r.t)}"`, note: `<p class="rank-line"><span class="rank-n">#${r.n}</span>${r.label ? badge(r.label, 'accent') : ''}<span class="rank-tier">${r.tier === 'evidence' ? 'Independent tests' : 'Game-dev fit'}</span></p><p class="rank-why">${esc(r.why)} ${rankSources(r)}</p>\n` })).join('\n')}` : `<h2 class="sub-h">Verdicts</h2>
+<div class="grid ranked-cards">${RANKED[key].rows.map(r => toolCard(r.t, { attrs: `${catAttrs(r.t)} data-rank="${r.n}" data-alpha="${list.indexOf(r.t)}"`, note: r.sig ? rankNoteV2(r) : `<p class="rank-line"><span class="rank-n">#${r.n}</span>${r.label ? badge(r.label, 'accent') : ''}<span class="rank-tier">${r.tier === 'evidence' ? 'Independent tests' : 'Game-dev fit'}</span></p><p class="rank-why">${esc(r.why)} ${rankSources(r)}</p>\n` })).join('\n')}` : `<h2 class="sub-h">Verdicts</h2>
 <div class="grid">${list.map(t => toolCard(t, { attrs: catAttrs(t) })).join('\n')}`}
 ${sponsorCard({ booking: SPONSORS.get(`category:${c.page}`) })}</div>
 ${newsletterBlock()}`,
@@ -1002,6 +1053,82 @@ ${r ? `<a class="glance-rank" href="${L(`/category/${TASKS[k].page}/`)}"><b>#${r
 </dl>
 <p class="glance-cta">${visitBtn(t)}<a class="btn-ghost" href="${toolUrl(t)}">Full listing</a></p>${t.affiliateUrl ? `<small class="aff-note">${esc(AFFILIATE_NOTE)}</small>` : ''}
 </article>`; };
+// ---- Visual comparison (v2): matchup header, "pick X if", score bars, real-world results, short at-a-glance rows ----
+const priceFrom = t => { const m = (t.pricing || '').match(/US\$\s?(\d+(?:\.\d+)?)\s*(?:\/|per\s)\s*(?:seat\/)?(?:month|mo)\b/i); return m ? { v: +m[1], txt: `US$${m[1]}/mo` } : { v: null, txt: isNsv(t.pricingModel) ? 'Not stated' : PRICING[t.pricingModel] }; };
+const FREE_RANK = { yes: 2, trial: 1, no: 0 }, COM_RANK = { yes: 3, 'paid-only': 2, restricted: 1, no: 0 };
+const COM_SHORT = { yes: 'Allowed', 'paid-only': 'Paid plans only', restricted: 'Restricted', no: 'Not allowed', unverified: 'Not stated', 'n-a': 'Not applicable' };
+const bigEngines = t => FIT_ENGINES.filter(e => t.engines.includes(e));
+const better = (a, b, hi = true) => a === null || b === null || a === b ? '' : (a > b) === hi ? 'a' : 'b';
+function glanceRows(A, B) {
+  const pA = priceFrom(A), pB = priceFrom(B);
+  const auto = t => [t.api.status === 'yes' ? 'API' : '', t.mcp.status === 'official' ? 'MCP' : ''].filter(Boolean).join(' + ') || 'None';
+  const autoN = t => (t.api.status === 'yes' ? 1 : 0) + (t.mcp.status === 'official' ? 1 : 0);
+  const eng = t => bigEngines(t).map(e => ENGINES[e]).join(' · ') || 'File export only';
+  return [
+    ['Paid plans from', pA.txt, pB.txt, better(pA.v, pB.v, false)],
+    ['Free plan', isNsv(A.free) ? 'Not stated' : FREE[A.free], isNsv(B.free) ? 'Not stated' : FREE[B.free], better(FREE_RANK[A.free] ?? null, FREE_RANK[B.free] ?? null)],
+    ['Engine plugins', eng(A), eng(B), better(bigEngines(A).length, bigEngines(B).length)],
+    ['API / MCP', auto(A), auto(B), better(autoN(A), autoN(B))],
+    ['Commercial use', COM_SHORT[A.commercial] || NSV_TEXT, COM_SHORT[B.commercial] || NSV_TEXT, better(COM_RANK[A.commercial] ?? null, COM_RANK[B.commercial] ?? null)],
+  ];
+}
+const bar = (v, win) => v === null ? '<span class="sb-none">No data</span>' : `<span class="sb-track"><span class="sb-fill${win ? ' is-win' : ''}" style="width:${Math.max(4, Math.round(v))}%"></span></span><b class="sb-v">${Math.round(v)}</b>`;
+function scoreBars(rA, rB) {
+  return SIGNALS.map(([k, label]) => { const a = rA.sig[k], b = rB.sig[k], w = better(a, b);
+    return `<div class="sb-row"><span class="sb-label">${label}</span><div class="sb-pair"><div class="sb-side">${bar(a, w === 'a')}</div><div class="sb-side">${bar(b, w === 'b')}</div></div></div>`; }).join('');
+}
+const srcList = r => r.sources.length ? `<ul class="src-list">${r.sources.map(x => `<li><a href="${esc(x.url)}" rel="noopener nofollow" target="_blank">${esc(x.label)}</a>${x.detail ? ` <span>${esc(x.detail)}</span>` : ''}</li>`).join('')}</ul>` : '<p class="note">No independent sources yet.</p>';
+// Embeds load only on click (no third-party requests until the visitor asks).
+function exampleEmbed(x) {
+  if (x.type === 'sketchfab' && x.uid) return `<figure class="ex"><button type="button" class="ex-load" data-src="https://sketchfab.com/models/${esc(x.uid)}/embed?autostart=1&amp;ui_theme=dark" aria-label="Load 3D model: ${esc(x.title)}"><span class="ex-play">3D</span><span>Load interactive model</span></button><figcaption><a href="${esc(x.url)}" rel="noopener nofollow" target="_blank">${esc(x.title)}</a> by ${esc(x.author)} on Sketchfab${x.licence ? ` · ${esc(x.licence)}` : ''}</figcaption></figure>`;
+  if (x.type === 'youtube' && x.id) return `<figure class="ex"><button type="button" class="ex-load ex-yt" style="background-image:url(https://i.ytimg.com/vi/${esc(x.id)}/hqdefault.jpg)" data-src="https://www.youtube-nocookie.com/embed/${esc(x.id)}?autoplay=1${x.start ? `&amp;start=${+x.start}` : ''}" aria-label="Play video: ${esc(x.title)}"><span class="ex-play">▶</span></button><figcaption><a href="${esc(x.url)}" rel="noopener nofollow" target="_blank">${esc(x.title)}</a> · ${esc(x.channel)}</figcaption></figure>`;
+  return '';
+}
+const EX_JS = `<script>document.addEventListener('click',function(e){var b=e.target.closest('.ex-load');if(!b)return;var f=document.createElement('iframe');f.src=b.dataset.src;f.title=b.getAttribute('aria-label');f.allow='autoplay; fullscreen; xr-spatial-tracking';f.setAttribute('allowfullscreen','');f.loading='lazy';b.replaceWith(f);});</script>`;
+function matchup(A, B, k) {
+  const rA = k && rankOf(A.slug, k), rB = k && rankOf(B.slug, k), v2 = rA && rB && rA.sig && rB.sig;
+  const side = (t, r) => `<div class="mu-side"><a class="mu-logo" href="${toolUrl(t)}">${logo(t, 72, true)}</a><h2><a href="${toolUrl(t)}">${esc(t.name)}</a></h2>
+${r ? `<a class="mu-rank" href="${L(`/category/${TASKS[k].page}/`)}">#${r.n} in ${esc(TASKS[k].label)}</a>` : `<span class="mu-rank">${esc(TASKS[t.tasks[0]].label)}</span>`}
+${v2 ? `<div class="mu-score" style="--s:${r.score}"><b>${r.score}</b><small>/100</small></div><span class="mu-conf">${r.conf === 'confident' ? `${r.kinds} kinds of independent evidence` : r.conf === 'provisional' ? 'Provisional: limited evidence' : 'Not enough evidence yet'}</span>` : ''}
+<p class="mu-cta">${visitBtn(t, { label: `Try ${t.name}` })}</p></div>`;
+  let verdict = '';
+  if (rA && rB) {
+    const tie = rA.n === rB.n, best = rA.n <= rB.n ? rA : rB, other = best === rA ? rB : rA;
+    verdict = tie ? `Too close to call: both are joint #${rA.n} in ${esc(TASKS[k].label)}. Pick on the strengths below.`
+      : v2 ? `<b>${esc(best.t.name)}</b> edges it for most game devs (${best.score} vs ${other.score}), but it's closer than the ranks suggest on some signals.`
+      : `<b>${esc(best.t.name)}</b> ranks higher in ${esc(TASKS[k].label)} (#${best.n} vs #${other.n}).`;
+    if (v2 && !tie && best.score - other.score >= 10) verdict = `<b>${esc(best.t.name)}</b> is the stronger pick for most game devs (${best.score} vs ${other.score}).`;
+  }
+  return `<section class="matchup" aria-label="${esc(A.name)} vs ${esc(B.name)}"><div class="mu-grid">${side(A, rA)}<span class="mu-vs" aria-hidden="true">VS</span>${side(B, rB)}</div>${verdict ? `<p class="mu-verdict">${verdict} <a href="${L('/how-we-rank/')}">How we score</a></p>` : ''}</section>`;
+}
+function pickIf(A, B, k) {
+  const r = t => k && rankOf(t.slug, k);
+  const card = t => { const x = r(t), pros = x && x.strengths && x.strengths.length ? x.strengths : [t.bestFor], cons = x && x.weaknesses && x.weaknesses.length ? x.weaknesses : [];
+    return `<div class="pick-if"><h3>${logo(t, 28)}Pick ${esc(t.name)} if you want</h3><ul class="pi-pros">${pros.slice(0, 3).map(p => `<li>${esc(p)}</li>`).join('')}</ul>${cons.length ? `<p class="pi-cons"><b>Watch out:</b> ${esc(cons.slice(0, 2).join('; '))}</p>` : ''}</div>`; };
+  return `<section class="pick-pair" aria-label="Which to pick">${card(A)}${card(B)}</section>`;
+}
+function scoresSection(A, B, k) {
+  const rA = k && rankOf(A.slug, k), rB = k && rankOf(B.slug, k);
+  if (!rA || !rB || !rA.sig || !rB.sig) return '';
+  return `<section class="cmp-sec" aria-labelledby="sc-h"><div class="cmp-sec-h"><h2 id="sc-h">How they score</h2><p>Each signal is out of 100. Higher wins.</p></div>
+<div class="sb"><div class="sb-row sb-head"><span></span><div class="sb-pair"><span>${logo(A, 22)}${esc(A.name)}</span><span>${logo(B, 22)}${esc(B.name)}</span></div></div>${scoreBars(rA, rB)}</div>
+<details class="cmp-src"><summary>See all ${rA.sources.length + rB.sources.length} sources</summary><div class="src-pair"><div><h3>${esc(A.name)}</h3>${srcList(rA)}</div><div><h3>${esc(B.name)}</h3>${srcList(rB)}</div></div>
+${[...rA.vendorClaims, ...rB.vendorClaims].length ? `<p class="note"><b>Vendor claims (not scored):</b> ${[...rA.vendorClaims.map(c => [A, c]), ...rB.vendorClaims.map(c => [B, c])].map(([t, c]) => `${esc(t.name)}: ${esc(c.text)} <a class="src" href="${esc(c.url)}" rel="noopener nofollow" target="_blank">source</a>`).join(' · ')}</p>` : ''}</details></section>`;
+}
+function examplesSection(A, B, k) {
+  const E = k && EVIDENCE[k]; if (!E) return '';
+  const ex = t => ((E.tools[t.slug] || {}).examples || []).slice(0, 2);
+  const shared = (E.videos || []).filter(v => v.tools && v.tools.includes(A.slug) && v.tools.includes(B.slug)).slice(0, 1);
+  if (!ex(A).length && !ex(B).length && !shared.length) return '';
+  return `<section class="cmp-sec" aria-labelledby="ex-h"><div class="cmp-sec-h"><h2 id="ex-h">Real-world results</h2><p>Made by other people with each tool. Click to load.</p></div>
+${shared.map(v => `<div class="ex-shared">${exampleEmbed({ ...v, type: 'youtube' })}</div>`).join('')}
+<div class="ex-pair"><div><h3>${logo(A, 22)}${esc(A.name)}</h3>${ex(A).map(exampleEmbed).join('') || '<p class="note">No public examples yet.</p>'}</div><div><h3>${logo(B, 22)}${esc(B.name)}</h3>${ex(B).map(exampleEmbed).join('') || '<p class="note">No public examples yet.</p>'}</div></div></section>`;
+}
+function glanceSection(A, B) {
+  return `<section class="cmp-sec" aria-labelledby="ag-h"><div class="cmp-sec-h"><h2 id="ag-h">At a glance</h2></div>
+<div class="ag" role="table" aria-label="Key facts"><div class="ag-row ag-head" role="row"><span role="columnheader"></span><span role="columnheader">${logo(A, 22)}${esc(A.name)}</span><span role="columnheader">${logo(B, 22)}${esc(B.name)}</span></div>
+${glanceRows(A, B).map(([h, a, b, w]) => `<div class="ag-row" role="row"><span role="rowheader">${h}</span><span role="cell"${w === 'a' ? ' class="is-win"' : ''}>${esc(a)}</span><span role="cell"${w === 'b' ? ' class="is-win"' : ''}>${esc(b)}</span></div>`).join('')}</div></section>`;
+}
 // Indexing: curated pairs always; generated pairs too, unless they're thin, i.e. at least THIN_NSV "Not stated by vendor" cells
 // (more than any curated pair has). Thin pairs stay noindex and out of the sitemap.
 const THIN_NSV = 7, THIN_PAIRS = [];
@@ -1022,21 +1149,24 @@ for (const [a, b, curated] of ALL_PAIRS) {
       crumbsLd([['All tools', '/'], ['Comparisons', '/compare/'], [`${A.name} vs ${B.name}`, p]]),
     ] : [],
     body: `<nav class="crumbs"><a href="${L('/')}">All tools</a> › <a href="${L('/compare/')}">Comparisons</a> › ${esc(A.name)} vs ${esc(B.name)}</nav>
-<h1 class="page-h">${esc(A.name)} vs ${esc(B.name)}</h1>
-<p class="page-sub">Facts from each vendor's published pages, checked ${timeEl(CHECKED)}. <a href="${L(`/compare/?task=${pairTask(A, B)}`)}">Compare different tools →</a></p>
-${(() => { const k = pairTask(A, B), rA = rankOf(A.slug, k), rB = rankOf(B.slug, k); if (!rA || !rB) return ''; const best = rA.n < rB.n ? rA : rB, other = best === rA ? rB : rA; return `<section class="card cmp-verdict" aria-labelledby="cv-h"><h2 id="cv-h">Our ranking</h2><p>In ${esc(TASKS[k].label)}, <b>${esc(best.t.name)}</b> ranks <b>#${best.n}</b> and ${esc(other.t.name)} ranks #${other.n}. ${esc(best.why)} ${rankSources(best)}</p><p class="cmp-verdict-foot"><a href="${L(`/category/${TASKS[k].page}/`)}">Full ranking: ${esc(TASKS[k].label)}</a> · <a href="${L('/how-we-rank/')}">How we rank</a></p></section>`; })()}
-<div class="glance-pair">${glance(A, pairTask(A, B))}<span class="glance-vs" aria-hidden="true">vs</span>${glance(B, pairTask(A, B))}</div>
-<section class="card bottom-line" aria-labelledby="bl-h"><h2 id="bl-h">Bottom line for game devs</h2><ul>${bottomLine(A, B).map(s => `<li>${s}</li>`).join('')}</ul></section>
-<div class="vs-toolbar"><h2 class="sub-h">Full comparison</h2>${nDiff ? `<button type="button" class="chip" id="only-diff" aria-pressed="false">Show only differences (${nDiff})</button>` : ''}</div>
+<h1 class="page-h cmp-h1">${esc(A.name)} vs ${esc(B.name)}</h1>
+<p class="page-sub">${esc(TASKS[pairTask(A, B)].label)} · checked ${timeEl(CHECKED)} · <a href="${L(`/compare/?task=${pairTask(A, B)}`)}">Compare different tools</a></p>
+${matchup(A, B, pairTask(A, B))}
+${pickIf(A, B, pairTask(A, B))}
+${scoresSection(A, B, pairTask(A, B))}
+${examplesSection(A, B, pairTask(A, B))}
+${glanceSection(A, B)}
+<details class="cmp-more"><summary>Full comparison: every fact, with sources</summary>
+<div class="vs-toolbar">${nDiff ? `<button type="button" class="chip" id="only-diff" aria-pressed="false">Show only differences (${nDiff})</button>` : ''}</div>
 <div class="vs-grid" id="vs-grid" role="table" aria-label="${esc(A.name)} vs ${esc(B.name)}">
 <div class="vs-row vs-head" role="row"><div role="columnheader" class="vs-label">Tool</div>${head(A)}${head(B)}</div>
 ${rows.map(r => `<div class="vs-row${r.cls}" role="row"><div role="rowheader" class="vs-label">${r.h}${r.cls === ' is-diff' ? '<span class="diff-dot" title="Differs">●</span>' : ''}</div><div role="cell">${r.fn(A)}</div><div role="cell">${r.fn(B)}</div></div>`).join('\n')}
-<div class="vs-row vs-cta" role="row"><div role="rowheader" class="vs-label">Try it</div><div role="cell">${visitBtn(A)}</div><div role="cell">${visitBtn(B)}</div></div>
 </div>
-<p class="note">Rows marked ● differ between the two tools. Licence badges: green = commercial use allowed (including any free plan or trial), amber = paid plans only, restricted, or allowed but with no free plan, red = not allowed, grey = not stated by vendor or not applicable. Read the vendor's current terms before you ship.${A.affiliateUrl || B.affiliateUrl ? ` ${esc(AFFILIATE_NOTE)}` : ''}</p>`,
-    scripts: nDiff ? `<script>(function(){var b=document.getElementById('only-diff'),g=document.getElementById('vs-grid');b.addEventListener('click',function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on?'true':'false');g.classList.toggle('diff-only',on);});})();</script>` : '',
+<p class="note">Rows marked ● differ between the two tools. Licence badges: green = commercial use allowed (including any free plan or trial), amber = paid plans only, restricted, or allowed but with no free plan, red = not allowed, grey = not stated by vendor or not applicable. Read the vendor's current terms before you ship.</p></details>${A.affiliateUrl || B.affiliateUrl ? `<p class="note">${esc(AFFILIATE_NOTE)}</p>` : ''}`,
+    scripts: EX_JS + (nDiff ? `<script>(function(){var b=document.getElementById('only-diff'),g=document.getElementById('vs-grid');b.addEventListener('click',function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on?'true':'false');g.classList.toggle('diff-only',on);});})();</script>` : ''),
   });
-  const html = mk(true), nNsv = (html.match(/class="nsv"/g) || []).length;
+  // Thinness is counted on the fact table (+ commercial/free per tool, as the old glance cards showed them), so layout changes can't shift it.
+  const html = mk(true), nNsv = (rows.map(r => r.fn(A) + r.fn(B)).join('').match(/class="nsv"/g) || []).length + [A, B].reduce((n, t) => n + isNsv(t.commercial) + isNsv(t.free), 0);
   const indexed = curated || nNsv < THIN_NSV;
   if (!indexed) THIN_PAIRS.push(p);
   page(p, indexed ? html : mk(false), { sitemap: indexed });
@@ -1069,24 +1199,36 @@ ${SPONSOR_OFFERS.map(spCard).join('\n')}
 // ---------- How we rank ----------
 page('/how-we-rank/', layout({
   title: `How we rank AI tools for game devs | ${SITE.name}`,
-  description: 'How we rank AI tools in each category: independent quality tests first, then a published game-dev fit score. Sponsors and affiliate links never change a rank.',
+  description: 'How we rank AI tools for game devs: independent benchmarks, expert reviews and real user reports, blended into one score with every source linked. Sponsors never change a rank.',
   pathname: '/how-we-rank/',
   jsonld: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'How we rank AI tools for game devs', url: URL_('/how-we-rank/'), publisher: ORG }],
   body: `<h1 class="page-h">How we rank</h1>
-<p class="page-sub">Each category is ranked in two steps. Every rank shows its reason and its sources, so you can check it.</p>
+<p class="page-sub">No single test tells you which AI tool is best. So each tool's score blends several independent kinds of evidence, and every rank shows its working and links every source.</p>
 <div class="prose">
-<section class="card"><span class="kicker">Step 1</span><h2>Independent quality tests</h2><p>If a tool appears in independent quality testing, it's ranked first, in the order that evidence shows. We use public blind-vote leaderboards (for example <a href="https://huggingface.co/spaces/3d-arena/3d-arena" rel="noopener nofollow" target="_blank">3D Arena</a> for 3D models), public benchmarks and reputable published reviews. We link every source and show the date we checked it. We only use results for the model the tool's service actually runs, not an older or different model from the same company, and only when the evidence genuinely compares tools in that category. A tool isn't moved up just because it was the only one tested. Results we found but didn't use are noted on the page.</p></section>
-<section class="card"><span class="kicker">Step 2</span><h2>Game-dev fit, for tools without independent tests</h2><p>Tools without independent tests are ranked after those that have them, by a fit score built only from facts on each vendor's own pages:</p><ul>
-<li><b>Commercial use:</b> allowed (3 points), paid plans only (2), restricted (1), not stated (0).</li>
-<li><b>Engines:</b> 1 point each for a stated Godot, Unity or Unreal integration.</li>
-<li><b>Automation:</b> 1 point for a public API, 1 for an official MCP server.</li>
-<li><b>Focus:</b> 2 points if this category is the tool's main job.</li>
-<li><b>Free plan:</b> half a point, as a tie-breaker.</li></ul>
-<p>Ties are broken alphabetically. Categories with no independent tests at all are ranked entirely this way, and the page says so.</p></section>
-<section class="card"><span class="kicker">Always</span><h2>What never changes a rank</h2><ul>
-<li>Sponsorship, affiliate commissions and vendor requests never change a rank, a verdict or a listing.</li>
-<li>If there's no evidence, we say so. We don't guess.</li>
-<li>Rankings are re-checked monthly. Spotted something out of date? Email <a href="${mailto('Ranking correction')}">${EMAIL}</a> with a link.</li></ul></section>
+<section class="card"><span class="kicker">The score</span><h2>Four signals, one score out of 100</h2>
+<ul>
+<li><b>Benchmarks (35%):</b> independent blind-vote leaderboards and measured tests, such as <a href="https://huggingface.co/spaces/3d-arena/3d-arena" rel="noopener nofollow" target="_blank">3D Arena</a> for 3D models. A tool's position is converted to 0-100 by where it sits on that leaderboard.</li>
+<li><b>Expert reviews (25%):</b> hands-on reviews and side-by-side tests from independent outlets and creators. Each is rated 0-100 on what it actually found.</li>
+<li><b>User reports (25%):</b> what game devs and artists say after using the tool: ratings on review sites, plus a sample of recent community threads scored positive, mixed or negative. We say how many we read.</li>
+<li><b>Game-dev fit (15%):</b> facts from the vendor's own pages. Whether the job is the tool's specialty counts most, then engine plugins, API, free plan and price, and commercial-use terms.</li>
+</ul>
+<p>If a tool has no evidence of one kind, the other signals are re-weighted rather than counting it as zero, and the page shows a dash.</p></section>
+<section class="card"><span class="kicker">Confidence</span><h2>Ranked, provisional, or not enough evidence</h2>
+<ul>
+<li><b>Ranked on independent evidence:</b> at least two of benchmarks, reviews and user reports. These tools are ranked first.</li>
+<li><b>Provisional:</b> only one kind of independent evidence so far.</li>
+<li><b>Not enough evidence yet:</b> ranked on game-dev fit only, after everything else.</li>
+<li><b>Ties:</b> tools within ${TIE} points of each other share a rank (for example joint #1), and the comparison page says what each is better at.</li>
+</ul></section>
+<section class="card"><span class="kicker">Honesty rules</span><h2>What counts and what doesn't</h2>
+<ul>
+<li>Vendors' own tests and preference claims are shown as vendor claims, never scored.</li>
+<li>We only use results for the model a tool's service actually runs today, not an older or different model from the same company.</li>
+<li>Real-world examples on comparison pages are other people's public work, embedded or linked with credit, never copied.</li>
+<li>Sponsorship, affiliate commissions and vendor requests never change a score, a rank or a verdict.</li>
+<li>Evidence is re-checked monthly and leaderboards more often. Spotted something out of date or missing? Email <a href="${mailto('Ranking correction')}">${EMAIL}</a> with a link.</li>
+</ul></section>
+<section class="card"><span class="kicker">Rolling out</span><h2>Categories still on the older method</h2><p>${Object.keys(EVIDENCE).length ? `${Object.keys(EVIDENCE).map(k => `<a href="${L(`/category/${TASKS[k].page}/`)}">${esc(TASKS[k].label)}</a>`).join(', ')} ${Object.keys(EVIDENCE).length === 1 ? 'uses' : 'use'} the scoring above. ` : ''}The other categories are being moved over. Until then they rank tools with independent quality tests first, then the rest by game-dev fit alone.</p></section>
 </div>`,
 }));
 
