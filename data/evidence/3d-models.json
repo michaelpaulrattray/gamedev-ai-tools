@@ -57,6 +57,12 @@
      "url": "https://news.ycombinator.com/item?id=50094084",
      "detail": "4 positive, 7 mixed, 4 negative",
      "score": 50.0
+    },
+    {
+     "source": "X posts (16 read)",
+     "url": "https://x.com/Anima_Labs/status/2113926591990444360",
+     "detail": "8 positive, 6 mixed, 2 negative",
+     "score": 68.8
     }
    ],
    "vendorClaims": [
@@ -134,6 +140,12 @@
      "url": "https://news.ycombinator.com/item?id=49897498",
      "detail": "4 positive, 2 mixed, 4 negative",
      "score": 50.0
+    },
+    {
+     "source": "X posts (22 read)",
+     "url": "https://x.com/luccacerf/status/2102478608274989225",
+     "detail": "10 positive, 6 mixed, 6 negative",
+     "score": 59.1
     }
    ],
    "vendorClaims": [
@@ -204,6 +216,12 @@
      "url": "https://news.ycombinator.com/item?id=47161689",
      "detail": "4 positive, 2 mixed, 1 negative",
      "score": 71.4
+    },
+    {
+     "source": "X posts (10 read)",
+     "url": "https://x.com/motorsep/status/2112959340667928917",
+     "detail": "6 positive, 4 mixed, 0 negative",
+     "score": 80.0
     }
    ],
    "vendorClaims": [
@@ -267,6 +285,12 @@
      "url": "https://news.ycombinator.com/item?id=50072357",
      "detail": "4 positive, 4 mixed, 2 negative",
      "score": 60.0
+    },
+    {
+     "source": "X posts (3 read)",
+     "url": "https://x.com/Stefan_3D_AI/status/2050542201625842076",
+     "detail": "2 positive, 1 mixed, 0 negative",
+     "score": 83.3
     }
    ],
    "vendorClaims": [

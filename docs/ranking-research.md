@@ -71,7 +71,7 @@ Every item needs a `url` and a numeric `score`, or the build ignores it. Every s
 
 **User reports** (`users`)
 - Review-site ratings (Trustpilot, G2, Capterra, Product Hunt, Steam): only with **25+ reviews**, and only for the product we list (not a separate mobile app; not the whole company's other products). Score = `(rating - 1) / 4 * 100` on a 5-point scale.
-- Community threads (Reddit, Hacker News, Blender Artists, Unity/Unreal/Godot forums, Discord summaries in public posts): sample recent threads that discuss output quality. Need **3+**. Positive 100, mixed 50, negative 0; ignore neutral; add one aggregate item with the counts.
+- Community posts: **X (Twitter) is the main source** (Reddit blocks our fetchers). Sample 10-15 recent posts per tool from real users talking about their own results, via the logged-in browser (Claude in Chrome) with searches like `"tripo" (3d OR mesh OR topology) lang:en -from:<vendor>`. Exclude vendor and staff accounts, posts with referral or invite codes, "50 AI tools" listicles and bots. Add Hacker News and Unity/Unreal/Godot/Blender forum threads where relevant. Need **3+** usable posts. Positive 100, mixed 50, negative 0; ignore neutral; add one aggregate item per platform with the counts (e.g. `X posts (12 read)`). X sampling is read-only: never like, reply, post or follow.
 - Note known skews in `detail` or the raw notes (e.g. Trustpilot dominated by billing complaints, or a burst of invited reviews).
 
 **Vendor claims** are recorded in `vendorClaims` and shown on comparison pages, but never scored.
@@ -130,7 +130,7 @@ Use this as the prompt for a research agent. Replace `<...>`.
 
 ## Access notes
 
-- Reddit blocks most fetchers: try `old.reddit.com`, or rely on other forums and say so in `caveats`.
+- Reddit blocks most fetchers; use X (logged-in browser) instead, plus developer forums. Run one X-sampling agent at a time, in its own browser tab.
 - G2 and Capterra often return 403: don't use snippet-only figures (mark unverified, don't score).
 - YouTube pages often can't be read: list comparison videos as `examples`, but only score a video as a review if you could read its verdict (transcript, description or chapters).
 
@@ -138,4 +138,4 @@ Use this as the prompt for a research agent. Replace `<...>`.
 
 - Animation: add Move.ai and QuickMagic (both rated above our listed video-mocap tools in independent tests). Re-test Rokoko Vision 3.0 when a review appears.
 - 3D models: Thrixel, Dreamlands and Bake3D have no independent evidence yet. Retro Diffusion may not belong in 3D (no 3D feature found).
-- All: no Reddit sampling yet (fetch blocked).
+- All: X sampling replaces Reddit (approved by Mike 2026-10-24).

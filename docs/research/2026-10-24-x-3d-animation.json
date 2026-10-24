@@ -1,0 +1,156 @@
+{
+  "checked": "2026-10-24",
+  "source": "X (Twitter) search via logged-in browser",
+  "tools": {
+    "tripo": {
+      "queries": [
+        "\"tripo\" (3d OR model OR mesh OR topology) lang:en -from:tripoai -from:tripo3d since:2025-10-24 (Top)",
+        "tripo (topology OR retopo OR mesh OR rig) (game OR blender OR unity OR unreal OR godot) lang:en -from:tripoai -from:tripo3d since:2025-10-24 (Latest)",
+        "plus Tripo mentions surfaced by the Meshy, Rodin and Hunyuan3D queries"
+      ],
+      "posts": [
+        {"url": "https://x.com/luccacerf/status/2102478608274989225", "date": "2026-09-22", "author": "luccacerf", "sentiment": "pos", "note": "Tripo P2 mesh plus auto-rig (IK, weights) let them build, dress and animate a character in about 20 minutes with an LLM + Blender MCP.", "compares": null},
+        {"url": "https://x.com/maxt3chno/status/2112481320081256666", "date": "2026-10-20", "author": "maxt3chno", "sentiment": "mixed", "note": "Swapping Meshy/Tripo meshes onto stock animations runs into proportion mismatches and bad hands.", "compares": {"vs": "meshy", "winner": "tie"}},
+        {"url": "https://x.com/maxt3chno/status/2113934291818221665", "date": "2026-10-24", "author": "maxt3chno", "sentiment": "pos", "note": "Shark mesh and rig both made in Tripo, then animated procedurally; presented as a working all-AI pipeline.", "compares": null},
+        {"url": "https://x.com/Anima_Labs/status/2113926591990444360", "date": "2026-10-24", "author": "Anima_Labs", "sentiment": "mixed", "note": "Image-to-3D from 2D art is surprisingly precise with Tripo or Meshy, but not perfect; refining in Blender.", "compares": {"vs": "meshy", "winner": "tie"}},
+        {"url": "https://x.com/saturadev/status/2090949984057446750", "date": "2026-08-21", "author": "saturadev", "sentiment": "neg", "note": "Game dev of 10+ years says Tripo output is low-quality 'slop' and chose not to use it.", "compares": null},
+        {"url": "https://x.com/AiWithBDN/status/2099440298288153066", "date": "2026-09-14", "author": "AiWithBDN", "sentiment": "pos", "note": "Same prompt through GPT Astra 3D and Tripo; Tripo's model needed less work afterwards (Astra is not a listed tool).", "compares": null},
+        {"url": "https://x.com/Stefan_3D_AI/status/2086860435496763583", "date": "2026-08-10", "author": "Stefan_3D_AI", "sentiment": "pos", "note": "After many Tripo P2.0 tests, roughly 95% of the mesh comes out well; some spots still need fixing. Author is an AI-3D content creator.", "compares": null},
+        {"url": "https://x.com/BujarDesign/status/2113430364412899406", "date": "2026-10-23", "author": "BujarDesign", "sentiment": "neg", "note": "Tried both Meshy and Tripo and was equally unimpressed by both.", "compares": {"vs": "meshy", "winner": "tie"}},
+        {"url": "https://x.com/alexsssaint/status/2111375640486113316", "date": "2026-10-17", "author": "alexsssaint", "sentiment": "neg", "note": "Image-to-building mesh from Tripo was poor; LLM-scripted headless Blender modelling did the job instead.", "compares": null},
+        {"url": "https://x.com/SupersocksIntel/status/2110052374467215371", "date": "2026-10-13", "author": "SupersocksIntel", "sentiment": "pos", "note": "Godot game project: models and rigs came from Tripo because the LLM could not rig cleanly.", "compares": null},
+        {"url": "https://x.com/notjazii/status/2109957037799182737", "date": "2026-10-13", "author": "notjazii", "sentiment": "pos", "note": "Made the game's 3D assets in Tripo; its auto-rig was the especially useful part.", "compares": null},
+        {"url": "https://x.com/ShimazuSystems/status/2111814342282740176", "date": "2026-10-18", "author": "ShimazuSystems", "sentiment": "mixed", "note": "Smart Mesh geometry has improved a lot, but textures are still poor; retexture in Blender.", "compares": null},
+        {"url": "https://x.com/TheChosenVictor/status/2112790159653732687", "date": "2026-10-21", "author": "TheChosenVictor", "sentiment": "mixed", "note": "Used Tripo base mesh for a rigged, animated game character; part segmentation needed manual cleanup.", "compares": null},
+        {"url": "https://x.com/aniketjart/status/2113613608462745613", "date": "2026-10-23", "author": "aniketjart", "sentiment": "pos", "note": "Characters for a three.js game come from Tripo with rigs, then animated with an LLM.", "compares": null},
+        {"url": "https://x.com/Bingeljell/status/2109177039534350573", "date": "2026-10-11", "author": "Bingeljell", "sentiment": "pos", "note": "Building an automatic rig/animate pipeline; says Tripo and Meshy both do a good job on the mesh side.", "compares": {"vs": "meshy", "winner": "tie"}},
+        {"url": "https://x.com/keenanisalive/status/2108708528663962033", "date": "2026-10-09", "author": "keenanisalive", "sentiment": "pos", "note": "For organic models, Meshy/Tripo-style generators beat LLM-scripted modelling on speed, cost (~3 min, ~50c) and quality.", "compares": {"vs": "meshy", "winner": "tie"}},
+        {"url": "https://x.com/RisingSunInt_/status/2110969548015128666", "date": "2026-10-16", "author": "RisingSunInt_", "sentiment": "mixed", "note": "Same reference sheet through LLMs, Meshy and Tripo (one shot each); stylised 2D look still hard to reproduce.", "compares": {"vs": "meshy", "winner": "unclear"}},
+        {"url": "https://x.com/saldamico02/status/2111656960902701528", "date": "2026-10-18", "author": "saldamico02", "sentiment": "neg", "note": "Tried Tripo briefly for game models; found it pricier without being better than Meshy.", "compares": {"vs": "meshy", "winner": "meshy"}},
+        {"url": "https://x.com/Stefan_3D_AI/status/2050542201625842076", "date": "2026-05-02", "author": "Stefan_3D_AI", "sentiment": "pos", "note": "Shootout vs open models (Trellis 2, Hunyuan 2.1): paid Tripo 3.1 still saves hours of mesh cleanup.", "compares": {"vs": "hunyuan3d", "winner": "tripo"}},
+        {"url": "https://x.com/motorsep/status/2112959340667928917", "date": "2026-10-21", "author": "motorsep", "sentiment": "neg", "note": "Tripo fails to follow multi-view input properly; Rodin follows the 2D design much more closely.", "compares": {"vs": "hyper3d-rodin", "winner": "hyper3d-rodin"}},
+        {"url": "https://x.com/vasilyonehq/status/2056775405697171471", "date": "2026-05-19", "author": "vasilyonehq", "sentiment": "neg", "note": "Three-way test for Three.js use: Tripo gave a very odd result; Rodin won, Meshy second.", "compares": {"vs": "hyper3d-rodin", "winner": "hyper3d-rodin"}},
+        {"url": "https://x.com/timgrassin/status/2112891907772928424", "date": "2026-10-21", "author": "timgrassin", "sentiment": "mixed", "note": "Photo-to-body test with Tripo, Rodin, Hunyuan3D: shapes OK, but exports came out facing sideways and needed auto-rotation.", "compares": {"vs": "hyper3d-rodin", "winner": "tie"}}
+      ],
+      "excluded_count": 55,
+      "excluded_reasons": "Approximate count. ~12 vendor/platform/competitor posts (Scenario, customuse, Smart Remesh seller, img2threejs author, mint.gg multi-model platform shootouts with no verdict, Tripo CLI/Charakuru launch posts, news recaps); ~14 templated 'here's the smart way to set it up' / 'game artists are cooked' growth threads and listicles (rewind02 x4, zer0point_eth, sorenxet, Octoberry, heyrobinai, mhdfaran, _summer_plays_, techhalla, etc.), which look like a coordinated creator campaign for Smart Mesh P2/CLI; ~30 passing mentions, questions, workflow lists with no verdict, or off-topic (e.g. an artist complaining Tripo used their art in a promo, a licence note)."
+    },
+    "meshy": {
+      "queries": [
+        "meshy (topology OR mesh OR retopo OR rig OR texture) (game OR blender OR unity OR unreal OR godot) lang:en -from:MeshyAI since:2025-10-24 (Top)",
+        "meshy (3d OR model OR mesh) (tried OR using OR used OR results OR quality) lang:en -from:MeshyAI -filter:links since:2025-10-24 (Latest)",
+        "plus Meshy mentions surfaced by the Tripo and Rodin queries"
+      ],
+      "posts": [
+        {"url": "https://x.com/Anima_Labs/status/2113926591990444360", "date": "2026-10-24", "author": "Anima_Labs", "sentiment": "mixed", "note": "Image-to-3D from 2D art is surprisingly precise with Tripo or Meshy, but not perfect; refining in Blender.", "compares": {"vs": "tripo", "winner": "tie"}},
+        {"url": "https://x.com/comics_rick/status/2113215394701889705", "date": "2026-10-22", "author": "comics_rick", "sentiment": "pos", "note": "Impressed by Meshy's texturing of fine detail on a food model (not a game asset).", "compares": null},
+        {"url": "https://x.com/TishToshTesh/status/2112353428538278048", "date": "2026-10-20", "author": "TishToshTesh", "sentiment": "neg", "note": "Retried Meshy for a character; UVs were chaotic, and worse than a few months earlier.", "compares": null},
+        {"url": "https://x.com/OliverHoss/status/2111901351743472033", "date": "2026-10-18", "author": "OliverHoss", "sentiment": "pos", "note": "Hands came out well in image-to-3D when the input image had fingers spread apart.", "compares": null},
+        {"url": "https://x.com/Javimbuilds/status/2111855004051247230", "date": "2026-10-18", "author": "Javimbuilds", "sentiment": "pos", "note": "Main game character went from a 2D reference sheet to a usable 3D model with Meshy plus some Blender cleanup.", "compares": null},
+        {"url": "https://x.com/saldamico02/status/2111656960902701528", "date": "2026-10-18", "author": "saldamico02", "sentiment": "pos", "note": "Meshy has served well for image-to-3D game models; Tripo was pricier and not better.", "compares": {"vs": "tripo", "winner": "meshy"}},
+        {"url": "https://x.com/BujarDesign/status/2113430364412899406", "date": "2026-10-23", "author": "BujarDesign", "sentiment": "neg", "note": "Tried both Meshy and Tripo and was equally unimpressed by both.", "compares": {"vs": "tripo", "winner": "tie"}},
+        {"url": "https://x.com/maxt3chno/status/2112481320081256666", "date": "2026-10-20", "author": "maxt3chno", "sentiment": "mixed", "note": "Swapping Meshy/Tripo meshes onto stock animations runs into proportion mismatches and bad hands.", "compares": {"vs": "tripo", "winner": "tie"}},
+        {"url": "https://x.com/Bingeljell/status/2109177039534350573", "date": "2026-10-11", "author": "Bingeljell", "sentiment": "pos", "note": "Building an automatic rig/animate pipeline; says Tripo and Meshy both do a good job on the mesh side.", "compares": {"vs": "tripo", "winner": "tie"}},
+        {"url": "https://x.com/LouisLsvr/status/2111453334662180870", "date": "2026-10-17", "author": "LouisLsvr", "sentiment": "mixed", "note": "Currently using Meshy but not convinced by it; hasn't found a good mesh-generation MCP.", "compares": null},
+        {"url": "https://x.com/RisingSunInt_/status/2110969548015128666", "date": "2026-10-16", "author": "RisingSunInt_", "sentiment": "mixed", "note": "Same reference sheet through LLMs, Meshy and Tripo (one shot each); stylised 2D look still hard to reproduce.", "compares": {"vs": "tripo", "winner": "unclear"}},
+        {"url": "https://x.com/keenanisalive/status/2108708528663962033", "date": "2026-10-09", "author": "keenanisalive", "sentiment": "pos", "note": "For organic models, Meshy/Tripo-style generators beat LLM-scripted modelling on speed, cost (~3 min, ~50c) and quality.", "compares": {"vs": "tripo", "winner": "tie"}},
+        {"url": "https://x.com/uwu_underground/status/2109689827507720580", "date": "2026-10-12", "author": "uwu_underground", "sentiment": "pos", "note": "Small team starting 2D-to-3D work with Meshy; early experience positive.", "compares": null},
+        {"url": "https://x.com/vasilyonehq/status/2056775405697171471", "date": "2026-05-19", "author": "vasilyonehq", "sentiment": "mixed", "note": "Three-way test: Meshy iterates fastest but missed polygons; Rodin won for Three.js-ready output.", "compares": {"vs": "hyper3d-rodin", "winner": "hyper3d-rodin"}},
+        {"url": "https://x.com/Laure_Michelon/status/2092292834586144873", "date": "2026-08-25", "author": "Laure_Michelon", "sentiment": "pos", "note": "Praises Meshy 7, especially materials, but still defaults to Rodin 2.5.", "compares": {"vs": "hyper3d-rodin", "winner": "hyper3d-rodin"}},
+        {"url": "https://x.com/DavidAriew/status/2105662303572267070", "date": "2026-10-01", "author": "DavidAriew", "sentiment": "mixed", "note": "Meshy has its uses, but uses Rodin for high-detail (~2M poly) sculpted pieces.", "compares": {"vs": "hyper3d-rodin", "winner": "hyper3d-rodin"}}
+      ],
+      "excluded_count": 60,
+      "excluded_reasons": "Approximate count. ~5 posts tied to the Meshy x Hermes Agent plugin / '$1 Pro month' promotion (excluded as campaign-adjacent); ~7 vendor/directory/competitor posts (customuse, top3dai.com directory 'blind test', mint.gg, Scenario, GlobalGPT, an open-source rival app promo); ~5 listicles/hype threads; ~43 passing mentions, 'which is better?' questions, job posts, or comparisons with no stated verdict (e.g. a Vision Pro side-by-side with no conclusion)."
+    },
+    "hyper3d-rodin": {
+      "queries": [
+        "(rodin OR hyper3d) (3d OR mesh OR model) (tripo OR meshy OR blender OR game OR topology OR tried) lang:en -from:deemosai -from:hyper3dai since:2025-10-24 (Top)",
+        "(\"rodin\" OR hyper3d) (mesh OR topology OR model OR gen-2) (tried OR using OR used OR better OR worse OR results) lang:en -from:deemosai -from:hyper3dai -from:DeemosTech since:2025-10-24 (Latest)",
+        "rodin (tripo OR meshy OR hunyuan) lang:en -from:deemosai -from:hyper3dai -from:DeemosTech -from:mintdotgg since:2025-10-24 (Latest)"
+      ],
+      "posts": [
+        {"url": "https://x.com/motorsep/status/2112959340667928917", "date": "2026-10-21", "author": "motorsep", "sentiment": "pos", "note": "Rodin follows the 2D design much more closely than Tripo, which mishandles multi-view input.", "compares": {"vs": "tripo", "winner": "hyper3d-rodin"}},
+        {"url": "https://x.com/vasilyonehq/status/2056775405697171471", "date": "2026-05-19", "author": "vasilyonehq", "sentiment": "pos", "note": "Three-way test: Rodin was the only output usable in Three.js without ~2h of cleanup (vs Meshy and Tripo).", "compares": {"vs": "meshy", "winner": "hyper3d-rodin"}},
+        {"url": "https://x.com/toncijukic/status/2101083082296262807", "date": "2026-09-18", "author": "toncijukic", "sentiment": "mixed", "note": "Suggests Rodin is noticeably better at faithful image replication, though still not ideal; they still model by hand.", "compares": null},
+        {"url": "https://x.com/IggyLux/status/2089784297334906967", "date": "2026-08-18", "author": "IggyLux", "sentiment": "mixed", "note": "Got a poor model from a single still image; says it works but not in one shot.", "compares": null},
+        {"url": "https://x.com/alexfredo87/status/2091019550791782660", "date": "2026-08-22", "author": "alexfredo87", "sentiment": "pos", "note": "Stylised fighting-game-style characters from Rodin 2.5 impressed; generating head and body separately improves quality. Tags the vendor.", "compares": null},
+        {"url": "https://x.com/DavidAriew/status/2105662303572267070", "date": "2026-10-01", "author": "DavidAriew", "sentiment": "pos", "note": "Uses Rodin over Meshy for ornate pieces: handles sculpted detail better and allows ~2M-poly output.", "compares": {"vs": "meshy", "winner": "hyper3d-rodin"}},
+        {"url": "https://x.com/Laure_Michelon/status/2092292834586144873", "date": "2026-08-25", "author": "Laure_Michelon", "sentiment": "pos", "note": "Despite liking Meshy 7's materials, still defaults to Rodin 2.5.", "compares": {"vs": "meshy", "winner": "hyper3d-rodin"}},
+        {"url": "https://x.com/ramgendeploy/status/2099908182256521374", "date": "2026-09-15", "author": "ramgendeploy", "sentiment": "pos", "note": "Rodin 2.5 fast via fal gives good results at ~$0.10/model; textures sometimes need touch-up.", "compares": null},
+        {"url": "https://x.com/timgrassin/status/2112891907772928424", "date": "2026-10-21", "author": "timgrassin", "sentiment": "mixed", "note": "Photo-to-body test with Tripo, Rodin, Hunyuan3D: shapes OK, but exports faced sideways and needed auto-rotation.", "compares": {"vs": "tripo", "winner": "tie"}},
+        {"url": "https://x.com/patch_gg/status/2110798266753597750", "date": "2026-10-15", "author": "patch_gg", "sentiment": "mixed", "note": "Speed-only benchmark (avg of 5): Rodin ~184 s, slower than Tripo P2 (~105 s) and Meshy 7.1 (~153 s).", "compares": {"vs": "tripo", "winner": "tripo"}}
+      ],
+      "excluded_count": 80,
+      "excluded_reasons": "Approximate count. ~30 posts from an apparently coordinated creator campaign for Hyper3D Rodin MCP in Codex/GPT and WorldGen (clustered on 2026-09-07..09-22, near-identical 'Astra calls Rodin MCP' framing, at least one with an explicit creator-plan referral link); ~15 vendor/competitor/aggregator posts (DeemosTech, mint.gg shootouts, Hi3D, FloyoAI, GlobalGPT, NanoGPT, Scenario, apprater, privateerai, KaiMeierAI listicle, a 'best quality' ranking that tags the vendor); ~35 passing mentions, hashtag-only posts, an Upwork 'earn $200' hype post, and unrelated 'Rodin' matches."
+    },
+    "hunyuan3d": {
+      "queries": [
+        "hunyuan3d lang:en -from:TencentHunyuan since:2025-10-24 (Top)",
+        "(hunyuan3d OR \"hunyuan 3d\" OR \"hunyuan 2.1\" OR \"hunyuan3d-2\") (local OR comfyui OR mesh OR tried OR results OR topology) lang:en -from:TencentHunyuan since:2025-10-24 (Latest)"
+      ],
+      "posts": [
+        {"url": "https://x.com/Stefan_3D_AI/status/2050542201625842076", "date": "2026-05-02", "author": "Stefan_3D_AI", "sentiment": "mixed", "note": "OPEN WEIGHTS 2.1: free models improving fast, but paid Tripo 3.1 still saves hours of mesh cleanup on hard-surface.", "compares": {"vs": "tripo", "winner": "tripo"}},
+        {"url": "https://x.com/cherry_mx_reds/status/2105530881331056734", "date": "2026-10-01", "author": "cherry_mx_reds", "sentiment": "pos", "note": "OPEN WEIGHTS Hunyuan3D-2 on a local RTX 3080: front/side/back views to a character mesh in ~90 s, far better than scripted Blender.", "compares": null},
+        {"url": "https://x.com/gabu3d_pl/status/2104172867957227825", "date": "2026-09-27", "author": "gabu3d_pl", "sentiment": "pos", "note": "OPEN WEIGHTS 2.1 run locally through ComfyUI to generate textured assets end-to-end for a scene; calls it great.", "compares": null},
+        {"url": "https://x.com/PawelJLisowski/status/2111475237946573256", "date": "2026-10-17", "author": "PawelJLisowski", "sentiment": "neg", "note": "OPEN WEIGHTS licence: warns the Hunyuan3D licence does not cover the EU, so check before building on it (usage, not quality).", "compares": null},
+        {"url": "https://x.com/ramgendeploy/status/2098511376234741849", "date": "2026-09-11", "author": "ramgendeploy", "sentiment": "mixed", "note": "VERSION UNSPECIFIED (via fal): pretty good, but ~1M-triangle output must be decimated to ~20k for use.", "compares": null},
+        {"url": "https://x.com/RisingSunInt_/status/2109455512127578334", "date": "2026-10-12", "author": "RisingSunInt_", "sentiment": "mixed", "note": "VERSION UNSPECIFIED: one-shot result from a reference sheet alongside Tripo; concludes 3D artists are not replaced yet.", "compares": {"vs": "tripo", "winner": "unclear"}},
+        {"url": "https://x.com/timgrassin/status/2112891907772928424", "date": "2026-10-21", "author": "timgrassin", "sentiment": "mixed", "note": "VERSION UNSPECIFIED: photo-to-body test with Tripo/Rodin/Hunyuan3D; OK shapes but sideways-facing exports.", "compares": {"vs": "tripo", "winner": "tie"}},
+        {"url": "https://x.com/leverngroyper/status/2094368727974453746", "date": "2026-08-31", "author": "leverngroyper", "sentiment": "pos", "note": "VERSION UNSPECIFIED: reports high-quality meshes from 2D pictures, used for 3D printing/casting (not games).", "compares": null},
+        {"url": "https://x.com/DilumSanjaya/status/2005322431821684739", "date": "2025-12-28", "author": "DilumSanjaya", "sentiment": "pos", "note": "TENCENT HOSTED (likely 3.x, not confirmed): first-generation results with zero retries were impressive.", "compares": null}
+      ],
+      "excluded_count": 65,
+      "excluded_reasons": "Approximate count. ~15 release/news reposts and aggregator accounts (Hunyuan3D-Buffalo, Hunyuan3D-Part on Scenario, WorldClaw, '#1 best image-to-3D' hype); ~8 posts about other Hunyuan products (world/video models) rather than Hunyuan3D; ~6 listicles/stack threads (incl. Rosebud_AI vendor); mint.gg/FloyoAI/top3dai platform comparisons with no clear verdict; ~35 passing mentions, VRAM spec notes, and workflow lists without an opinion. Only 3 kept posts clearly concern the open-weights 2.x models; 1 likely concerns Tencent's hosted 3.x; the rest do not say which version."
+    },
+    "sloyd": {
+      "queries": [
+        "sloyd lang:en -from:sloyd_ai -from:sloydai -from:sloyd since:2025-10-24 (Latest)",
+        "(sloyd OR sloyd.ai) (3d OR model OR game OR asset) lang:en -from:sloyd_ai -from:Edesberg -from:a_latner since:2025-10-24 (Top)",
+        "sloyd (3d OR roblox OR \"low poly\" OR mesh OR tried OR using) lang:en -from:SloydAi -from:Edesberg -from:a_latner -from:top3dai since:2025-10-24 (Top)"
+      ],
+      "posts": [],
+      "excluded_count": 100,
+      "excluded_reasons": "Approximate count. No qualifying real-user experience posts found. Results were dominated by the vendor (@SloydAi), a co-founder (@a_latner, credited as such in another post; many of his unrelated posts matched) and an apparent staff/partner account (@Edesberg, announcing Sloyd features); the rest were '10 AI tools' listicles (several near-identical), Grok replies, directory recaps (top3dai), woodworking posts using 'sloyd' in its craft sense, and one bare recommendation with no stated experience."
+    },
+    "cascadeur": {
+      "queries": [
+        "cascadeur (animation OR animating OR autoposing OR physics OR mocap OR tried OR using) lang:en -from:cascadeur_soft -from:Cascadeur -from:cascadeur_app since:2025-10-24 (Top)",
+        "cascadeur lang:en -from:cascadeur3d -from:EugeneDyabin -from:3DxDEV7 -from:unity3dvfx -filter:replies since:2025-10-24 (Latest)",
+        "cascadeur (love OR hate OR better OR worse OR struggle OR clunky OR amazing OR impressed OR annoying OR bug OR crash) lang:en -from:cascadeur3d -from:EugeneDyabin -from:3DxDEV7 -from:unity3dvfx since:2025-10-24 (Top)"
+      ],
+      "posts": [
+        {"url": "https://x.com/GameDevFromRed/status/2112725783303082024", "date": "2026-10-21", "author": "GameDevFromRed", "sentiment": "pos", "note": "Indie dev says Cascadeur transformed the animation work on their game (shows a revolver takedown).", "compares": null},
+        {"url": "https://x.com/phaeton_game/status/2112520097088917713", "date": "2026-10-20", "author": "phaeton_game", "sentiment": "pos", "note": "Finalised a character animation pipeline from Cascadeur into an idTech4.5-based engine for their game.", "compares": null},
+        {"url": "https://x.com/nazimadakli/status/2111160333217800466", "date": "2026-10-16", "author": "nazimadakli", "sentiment": "mixed", "note": "In LLM-driven animation comparisons, Cascadeur's AI in-betweening worked poorly; without it, results roughly matched Blender.", "compares": null},
+        {"url": "https://x.com/CAUTI0NED/status/2108523806855721058", "date": "2026-10-09", "author": "CAUTI0NED", "sentiment": "pos", "note": "Passing remark that Cascadeur's approach to posing is genuinely useful.", "compares": null},
+        {"url": "https://x.com/virtualfilmer/status/2044769196027121806", "date": "2026-04-16", "author": "virtualfilmer", "sentiment": "pos", "note": "Long-time user bought Pro (via an indie discount) and is pleased with recent advances.", "compares": null},
+        {"url": "https://x.com/GameCharacterAI/status/2079159888723533841", "date": "2026-07-20", "author": "GameCharacterAI", "sentiment": "pos", "note": "Animating their own game characters; Cascadeur made it faster and better-looking than by hand.", "compares": null},
+        {"url": "https://x.com/MR3Dev/status/2048751841861656816", "date": "2026-04-27", "author": "MR3Dev", "sentiment": "pos", "note": "3D artist calls most 3D gen-AI tools unusable for games, naming Cascadeur as an exception.", "compares": null},
+        {"url": "https://x.com/carlosedubarret/status/2000892668713271605", "date": "2025-12-16", "author": "carlosedubarret", "sentiment": "pos", "note": "Says Cascadeur's in-betweening is much better than StableMotion (unlisted). Author builds a Cascadeur-Blender bridge and is friendly with the team.", "compares": null},
+        {"url": "https://x.com/meleeps/status/2109228801150345472", "date": "2026-10-11", "author": "meleeps", "sentiment": "pos", "note": "Dismisses another tool as a worse version of Cascadeur (implicit endorsement; thin evidence).", "compares": null}
+      ],
+      "excluded_count": 95,
+      "excluded_reasons": "Approximate count. Vendor (@cascadeur3d) and founder/CEO (@EugeneDyabin) posts; repost-hype accounts recycling the same 'MIND-BLOWING' clip (@3DxDEV7, @unity3dvfx); tutorial/creator posts tagging the vendor (TheRoyalSkies, hyunjoonshim); one post with a ?ref= referral link; ~40 WIP/showcase posts that only hashtag Cascadeur without a verdict; Maya MetaBridge plugin promos; posts about an LLM agent's performance in Cascadeur rather than Cascadeur itself; one ambiguous snipe about AI-interpolated Cascadeur animation (left out as unclear)."
+    },
+    "deepmotion": {
+      "queries": [
+        "(deepmotion OR \"animate 3d\" OR saymotion) lang:en -from:DeepMotionInc -from:deepmotion since:2025-10-24 (Top)",
+        "(deepmotion OR saymotion) lang:en -from:DeepMotionInc -from:deepmotion since:2025-10-24 (Latest)",
+        "deepmotion (mocap OR animation OR jitter OR foot OR tried OR used OR using) lang:en -from:DeepMotionInc -from:aimocap -from:Viggle_PINOC -viggle since:2025-10-24 (Top)"
+      ],
+      "posts": [],
+      "excluded_count": 60,
+      "excluded_reasons": "Approximate count. No qualifying real-user experience posts found in the last 12 months. ~9 near-identical posts amplifying Viggle JST-2's launch benchmarks against DeepMotion (competitor marketing); competitor-vendor comparisons (aimocap, Viggle PINOC); several Grok replies and listicles naming DeepMotion; one-line recommendations without experience; the phrase 'animate 3D' produced many false positives."
+    },
+    "rokoko-vision": {
+      "queries": [
+        "(\"rokoko vision\" OR (rokoko (video OR webcam OR \"ai mocap\" OR markerless))) lang:en -from:RokokoMotion -from:rokoko since:2025-10-24 (Latest)",
+        "rokoko (mocap OR \"motion capture\") (free OR video OR camera OR phone OR tried) lang:en -from:hellorokoko -from:RokokoMotion -smartsuit -glove -gloves since:2025-10-24 (Top)"
+      ],
+      "posts": [],
+      "excluded_count": 35,
+      "excluded_reasons": "Approximate count. No qualifying posts about Rokoko Vision output quality. Results were Smartsuit/Smartglove hardware posts and robotics uses, a TouchDesigner tutorial (ImmersiveHq), a competitor benchmark (Viggle PINOC), Grok replies listing Rokoko Vision as an option, and two pipeline mentions with no verdict."
+    }
+  },
+  "caveats": "1) X search is algorithmic and login-personalised; Top/Latest tabs surface different slices, so this is a sample, not a census. 2) Heavy paid/creator marketing is visible for almost every tool (Tripo Smart Mesh P2/CLI 'smart way to set it up' threads, Hyper3D Rodin MCP/WorldGen creator wave in Sept 2026, Meshy x Hermes Agent $1 promo, Viggle's launch amplification). Obvious campaign posts were excluded, but some kept posts may still be undisclosed partnerships (e.g. Stefan_3D_AI, maxt3chno, alexfredo87 tags the vendor). 3) Several kept posts mention two tools together without preferring one; those are recorded as 'tie'. Some posts appear under more than one tool when they discuss both. 4) Notes are based on the text visible in search results; long posts collapsed behind 'Show more' were read only as far as shown (one thread was opened in full). 5) Excluded counts are approximate tallies of posts reviewed across overlapping queries, not exact. 6) Sloyd, DeepMotion and Rokoko Vision yielded zero qualifying real-user posts in the 12-month window; absence on X is itself a weak signal of low organic adoption among X-active devs, not evidence about quality. 7) Hunyuan3D posts mostly do not state the version; tagged per post as OPEN WEIGHTS / TENCENT HOSTED / VERSION UNSPECIFIED. 8) Many recent posts are about LLM + Blender MCP workflows where the 3D generator is one step; sentiment recorded only for the listed tool. 9) No posts were liked, replied to or otherwise interacted with; no login wall, rate limit or CAPTCHA was encountered. 10) The coordinator briefly navigated this agent's tab mid-run; the URL was re-checked before every extraction and all data was collected from the intended search pages."
+}
