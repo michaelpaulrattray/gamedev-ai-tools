@@ -662,7 +662,7 @@ function hubCard(key) {
 <h3><a class="card-link" href="${L(`/category/${c.page}/`)}">${esc(c.label)}</a></h3>
 <p class="card-desc">${esc(CAT_BLURB[key] || '')}</p>
 ${lead ? `<div class="hub-top"><span class="hub-n">#1</span>${logo(lead.t, 32)}<span class="hub-top-txt"><b>${esc(lead.t.name)}</b><small>${esc(lead.label || (lead.tier === 'evidence' ? 'Best on independent tests' : 'Best fit for game devs'))}</small></span></div>` : ''}
-<div class="hub-next">${top.slice(lead ? 1 : 0).map((r, i) => `<span class="hub-mini" title="${esc(r.t.name)}">${R ? `<em>#${i + 2}</em>` : ''}${logo(r.t, 22)}${esc(r.t.name)}</span>`).join('')}</div>
+<div class="hub-next">${top.slice(lead ? 1 : 0).map((r, i) => `<span class="hub-mini" title="${esc(r.t.name)}">${R ? `<em>#${r.n || i + 2}</em>` : ''}${logo(r.t, 22)}${esc(r.t.name)}</span>`).join('')}</div>
 <div class="hub-foot">${R ? `<span class="hub-basis${R.nEvidence ? ' is-ev' : ''}">${R.nEvidence ? 'Independent tests' : 'Ranked on features'}</span>` : ''}<span class="hub-links">${gs.length ? `<a class="above" href="${L(`/guides/${gs[0].slug}/`)}">Guide</a>` : ''}${ps.length ? `<a class="above" href="${L(`/compare/?task=${key}`)}">Compare</a>` : ''}</span></div>
 </article>`;
 }
@@ -675,7 +675,7 @@ page('/category/', layout({
   body: `<h1 class="page-h">The best AI tool for every part of your game</h1>
 <p class="page-sub">${Object.keys(TASKS).length} categories, each ranked: independent quality tests first where they exist, then fit for game devs. <a href="${L('/how-we-rank/')}">How we rank</a></p>
 ${topPicks.length ? `<section class="hub-picks" aria-labelledby="picks-h"><div class="sec-head"><h2 id="picks-h">Top picks backed by independent tests</h2></div>
-<div class="picks-row">${topPicks.map(({ k, r, joint }) => `<a class="pick" href="${L(`/category/${TASKS[k].page}/`)}">${logo(r.t, 40)}<span class="pick-txt"><small>${esc(TASKS[k].label)}</small><b>${esc(joint ? `${r.t.name} / ${joint.t.name}` : r.t.name)}</b></span><span class="pick-n">${joint ? 'Joint #1' : '#1'}</span></a>`).join('')}</div></section>` : ''}
+<div class="uh-picks">${topPicks.map(({ k, r, joint }) => `<a class="uh-pick" href="${L(`/category/${TASKS[k].page}/`)}"><span class="uh-pick-logos">${logo(r.t, 44)}${joint ? logo(joint.t, 44) : ''}</span><span class="uh-pick-cat">${esc(TASKS[k].label)}</span><b>${esc(joint ? `${r.t.name} & ${joint.t.name}` : r.t.name)}</b><span class="uh-rank">${joint ? 'Joint #1' : '#1'}</span></a>`).join('')}</div></section>` : ''}
 ${CAT_GROUPS.map(gr => `<section class="hub-group" aria-labelledby="hg-${gr.keys[0]}"><div class="sec-head"><h2 id="hg-${gr.keys[0]}">${esc(gr.h)}</h2><p>${esc(gr.sub)}</p></div>
 <div class="grid hub-grid">${gr.keys.map(hubCard).join('\n')}</div></section>`).join('\n')}
 ${newsletterBlock()}`,

@@ -1020,3 +1020,5 @@ a.mu-rank:hover{color:var(--text);border-color:var(--accent)}
 .rank-src summary{cursor:pointer;color:var(--accent)}
 .rank-src .src-list{margin-top:6px}
 .ex-yt{background-size:cover!important;background-repeat:no-repeat!important;background-position:center!important}
+/* top-pick cards: room for long category labels and joint names */
+.uh-pick b{text-wrap:balance}
