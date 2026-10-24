@@ -1,0 +1,204 @@
+{
+  "checked": "2026-10-24",
+  "source": "X (Twitter) search via logged-in browser",
+  "tools": {
+    "midjourney": {
+      "job": "concept art, game art, sprites, character design",
+      "queries": [
+        "\"midjourney\" (\"concept art\" OR \"game art\" OR sprites OR \"character design\") lang:en -from:midjourney since:2025-10-24 [top]",
+        "midjourney (gamedev OR \"indie game\" OR \"game assets\" OR sprites OR indiedev) lang:en -from:midjourney since:2025-10-24 [top]",
+        "midjourney (\"my game\" OR \"game art\" OR \"pixel art\" OR \"concept art\") lang:en -from:midjourney since:2025-10-24 [live]"
+      ],
+      "posts": [
+        {
+          "url": "https://x.com/zer0point_eth/status/2113605583173533890",
+          "date": "2026-10-23",
+          "author": "@zer0point_eth",
+          "sentiment": "neg",
+          "note": "Says Midjourney is a poor fit for pixel-art game assets because it ignores resolution and breaks the pixel grid; thread then pitches an LLM-driven pipeline (engagement-style thread).",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/ferroustitan/status/1992931738805580055",
+          "date": "2025-11-24",
+          "author": "@ferroustitan",
+          "sentiment": "neg",
+          "note": "Tried Midjourney for game assets but could not hold a consistent camera angle, so most output was unusable.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/Marijenburg/status/2083876431122100303",
+          "date": "2026-08-02",
+          "author": "@Marijenburg",
+          "sentiment": "mixed",
+          "note": "Shipped an itch.io game (2K+ downloads) with Midjourney placeholder art; always planned to reskin it with their own artist's concept art.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/moderntwelve/status/2097443028625424790",
+          "date": "2026-09-08",
+          "author": "@moderntwelve",
+          "sentiment": "pos",
+          "note": "Midjourney art fed into a Godot 2D platformer (code by a ChatGPT model) that turned into a real game.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/Vigilant940/status/2096367858615976340",
+          "date": "2026-09-05",
+          "author": "@Vigilant940",
+          "sentiment": "pos",
+          "note": "Solo UE5 story game progress (UI, character inspect, combat) using Midjourney and Wan for visuals; ongoing #gamedev series.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/0xInk_/status/2113137433248419919",
+          "date": "2026-10-22",
+          "author": "@0xInk_",
+          "sentiment": "pos",
+          "note": "AI artist who uses Midjourney for all concept art; rates it best for concept art, Seedream better for realism.",
+          "compares": {
+            "vs": "Seedream (not listed)",
+            "winner": "midjourney for concept art"
+          }
+        },
+        {
+          "url": "https://x.com/ProperPrompter/status/2093019912138596782",
+          "date": "2026-08-27",
+          "author": "@ProperPrompter",
+          "sentiment": "pos",
+          "note": "Opinion that no other model matches Midjourney for character design.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/airina_xyz/status/2111276770980942156",
+          "date": "2026-10-17",
+          "author": "@airina_xyz",
+          "sentiment": "pos",
+          "note": "Running series of character concept art made in Midjourney Draft mode for fast iteration.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/AceGordon/status/2111283166048891129",
+          "date": "2026-10-17",
+          "author": "@AceGordon",
+          "sentiment": "mixed",
+          "note": "Calls their own Midjourney concept art questionable; most of the work was manual editing and splicing.",
+          "compares": null
+        }
+      ],
+      "excluded_count": 80,
+      "excluded_reasons": "Approximate count of unique scanned results. Majority were prompt/--sref sharing accounts, AI-video showcases unrelated to games, 'top N AI tools' listicles, creator-program posts (#DreaminaCPP, freepik tags), unrelated tweets matched on 'journey', and a critic post (@jnvcia) mocking 'Midjourney-concept-art look' in indie games (not own use)."
+    },
+    "chatgpt": {
+      "job": "game art, concept art, sprites (image generation only)",
+      "queries": [
+        "(\"gpt image\" OR \"gpt-image\" OR \"chatgpt image\" OR \"chatgpt images\") (sprites OR \"sprite sheet\" OR \"game art\" OR \"game assets\" OR gamedev OR \"concept art\") lang:en -from:OpenAI -from:ChatGPTapp since:2025-10-24 [top]",
+        "(chatgpt OR \"gpt image\" OR \"gpt-image\") (\"pixel art\" OR sprite OR sprites) (game OR gamedev OR indiedev) lang:en -from:OpenAI -from:ChatGPTapp since:2025-10-24 [live]"
+      ],
+      "posts": [
+        {
+          "url": "https://x.com/VibeCreAI/status/2050062519222329605",
+          "date": "2026-05-01",
+          "author": "@VibeCreAI",
+          "sentiment": "pos",
+          "note": "Replaced every tile, prop and sky in their game environment (106 assets) in one day with GPT Image 2, wired in by Codex.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/orcdev/status/2098161885757505957",
+          "date": "2026-09-10",
+          "author": "@orcdev",
+          "sentiment": "pos",
+          "note": "Uses GPT Image 2 for concept art as step one of their 3D asset pipeline (then Meshy, then Blender cleanup) for their game.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/owenyuwono/status/2100590873025314983",
+          "date": "2026-09-17",
+          "author": "@owenyuwono",
+          "sentiment": "pos",
+          "note": "Character concept art from ChatGPT's built-in image gen (no API key) as the first step of an image-to-3D mesh workflow.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/0kncn/status/2098136555260989806",
+          "date": "2026-09-10",
+          "author": "@0kncn",
+          "sentiment": "pos",
+          "note": "Shares 4x4 pixel-art sprite sheet animations (idle, fire, portal, fountain) made with GPT-Image 2.5; prompt-sharing account.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/FranciAnjinho/status/2111525216497111171",
+          "date": "2026-10-17",
+          "author": "@FranciAnjinho",
+          "sentiment": "mixed",
+          "note": "Cyberpunk pixel game: GPT image models make building facades and signs, but everything is remapped to a fixed palette and reworked by hand.",
+          "compares": {
+            "vs": "pixellab",
+            "winner": "split: PixelLab for characters/animation, GPT image for facades/signs"
+          }
+        },
+        {
+          "url": "https://x.com/intocryptoast/status/2105752632992338129",
+          "date": "2026-10-01",
+          "author": "@intocryptoast",
+          "sentiment": "pos",
+          "note": "Latest ChatGPT image gen makes game sprites with transparent backgrounds; says specialist image tools used to be needed for this.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/zaiphirion/status/2104171908661125581",
+          "date": "2026-09-27",
+          "author": "@zaiphirion",
+          "sentiment": "neg",
+          "note": "Tried ChatGPT to save time/money on game assets; found it cannot keep art consistent and cannot animate.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/nossesteve/status/2102857824342528293",
+          "date": "2026-09-23",
+          "author": "@nossesteve",
+          "sentiment": "pos",
+          "note": "Browser survivor-style game whose sprites were generated by GPT Image 2.5 (another model did the cutting).",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/alexfredo87/status/2101320348553642032",
+          "date": "2026-09-19",
+          "author": "@alexfredo87",
+          "sentiment": "pos",
+          "note": "Used GPT Image 2.5 for all sprites in a quickly assembled game, with an OpenAI coding model for programming.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/gliang9/status/2099865018254913718",
+          "date": "2026-09-15",
+          "author": "@gliang9",
+          "sentiment": "mixed",
+          "note": "Batch-made sprite action sheets with GPT Image 2.5; says it looks solid but still needs polish in places.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/HeroRodz/status/2105872900809011270",
+          "date": "2026-10-02",
+          "author": "@HeroRodz",
+          "sentiment": "pos",
+          "note": "Generated illustrations and sprite sheets with ChatGPT, then had Claude animate them.",
+          "compares": null
+        },
+        {
+          "url": "https://x.com/cezikmertcan/status/2113565102980878767",
+          "date": "2026-10-23",
+          "author": "@cezikmertcan",
+          "sentiment": "pos",
+          "note": "2.5D FPS with 2D sprite-sheet characters; ChatGPT handles pixel-art texturing on Blender-made models.",
+          "compares": null
+        }
+      ],
+      "excluded_count": 48,
+      "excluded_reasons": "Approximate. Vendor/reseller promos (Blyth AI, Atlas Cloud, Higgsfield, Deevid, Ima Studio, PixVerse, happycapy, ComfyUI, @ChatGPT itself), a Retro Diffusion founder (@RealAstropulse) calling GPT image bad at pixel art (competitor vendor), news about Epic's art team (not own use), possible OpenAI-staff showcase, posts about coding not image gen, and unrelated chatter."
+    }
+  },
+  "caveats": "PARTIAL RUN: only midjourney and chatgpt were sampled. After 5 searches, X search began returning \"Something went wrong. Try reloading.\" for every query (including a plain 'suno soundtrack game' test) and still failed after ~90 seconds of waiting, which looks like a search rate limit; per instructions the run stopped there. leonardo-ai and all later tools have no data (two Leonardo queries returned zero results because of the same error, not because there are no posts). Samples are small and non-random (X Top and Latest tabs, a few dozen results scanned per query, filtered by hand). Sentiment is about the named tool for the named job only. excluded_count values are approximate counts of unique scanned results not kept. X search surfaces AI-art/AI-video creator and prompt-sharing accounts far more than working game devs. Notes are paraphrases, not quotes."
+}

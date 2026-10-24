@@ -96,5 +96,21 @@
   "notes": {
    "hunyuanworld": "Tencent has replaced HunyuanWorld 1.0 with HY-World 2.0 (Apr 2026)."
   }
+ },
+ "concept-art": {
+  "x_posts": {
+   "midjourney": {
+    "pos": 5,
+    "mixed": 2,
+    "neg": 2,
+    "url": "https://x.com/zer0point_eth/status/2113605583173533890"
+   },
+   "chatgpt": {
+    "pos": 9,
+    "mixed": 2,
+    "neg": 1,
+    "url": "https://x.com/VibeCreAI/status/2050062519222329605"
+   }
+  }
  }
 }

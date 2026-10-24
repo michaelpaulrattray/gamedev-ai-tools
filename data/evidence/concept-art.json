@@ -25,6 +25,12 @@
      "url": "https://www.producthunt.com/products/midjourney/reviews",
      "detail": "4.7/5 from 81 reviews",
      "score": 92.5
+    },
+    {
+     "source": "X posts (9 read)",
+     "url": "https://x.com/zer0point_eth/status/2113605583173533890",
+     "detail": "5 positive, 2 mixed, 2 negative",
+     "score": 66.7
     }
    ],
    "vendorClaims": [
@@ -68,7 +74,14 @@
      "score": 60
     }
    ],
-   "users": [],
+   "users": [
+    {
+     "source": "X posts (12 read)",
+     "url": "https://x.com/VibeCreAI/status/2050062519222329605",
+     "detail": "9 positive, 2 mixed, 1 negative",
+     "score": 83.3
+    }
+   ],
    "vendorClaims": [
     {
      "text": "Images 2.5 (2026-09-08) claims up to 50% lower latency than Images 2.0, with better lighting, textures and subject preservation; it adds Sketch, Templates and comment-based edits (as reported by press).",
